@@ -1,119 +1,44 @@
-<!DOCTYPE html>
-<html lang="hi">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Gitalk.in - Online Shopping</title>
-  <meta name="description" content="Gitalk.in - Online Shopping Store">
-
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Gitalk.in">
+<title>Gitalk.in</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<header><div class="wrap nav">
+<a class="brand" href="#home"><img src="assets/logo.svg">Gitalk<span>.in</span></a>
+<button id="menu">☰</button>
+<nav id="links"><a href="#home">Home</a><a href="#about">About</a><a href="#gallery">Gallery</a><a href="#upload">Upload</a><a href="#payment">Payment</a><a href="#contact">Contact</a></nav>
+</div></header>
 
-<header>
-  <div class="logo">
-    <a href="index.html">Gitalk<span>.in</span></a>
-  </div>
+<main>
+<section id="home" class="hero"><div class="wrap hero-grid">
+<div><b class="tag">WELCOME TO GITALK.IN</b><h1>Connect. Share. <em>Pay with ease.</em></h1>
+<p>A modern, mobile-friendly website for your photos, videos, contact details and UPI payments.</p>
+<div class="buttons"><a class="btn primary" href="#upload">Upload Photo / Video</a><a class="btn" href="#payment">Pay via UPI</a></div></div>
+<div class="hero-card"><img src="assets/hero.svg" alt="Gitalk.in"></div>
+</div></section>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#products">Products</a>
-    <a href="#contact">Contact</a>
-    <button onclick="showCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
-  </nav>
-</header>
+<section id="about"><div class="wrap"><b class="tag">ABOUT</b><h2>Make Gitalk.in your own</h2><p class="muted">Replace this introduction with your own business or personal information.</p>
+<div class="cards"><article><strong>📸</strong><h3>Photo Gallery</h3><p>Show your favourite photos in a responsive gallery.</p></article><article><strong>🎬</strong><h3>Video Sharing</h3><p>Select videos and preview them in the browser.</p></article><article><strong>💳</strong><h3>UPI Payment</h3><p>Let visitors pay using your UPI ID.</p></article></div></div></section>
 
-<section id="home" class="hero">
-  <div>
-    <h1>Welcome to Gitalk.in 🛍️</h1>
-    <p>Best Products • Best Price • Easy Ordering</p>
-    <a href="#products" class="shopBtn">Shop Now</a>
-  </div>
-</section>
+<section id="gallery" class="soft"><div class="wrap"><b class="tag">GALLERY</b><h2>Your Photos</h2><p class="muted">Replace the three sample images in <code>assets/gallery/</code> with your own photos.</p>
+<div class="gallery"><img src="assets/gallery/photo-1.svg"><img src="assets/gallery/photo-2.svg"><img src="assets/gallery/photo-3.svg"></div></div></section>
 
-<section class="searchBox">
-  <input
-    type="text"
-    id="search"
-    placeholder="🔍 Product search करें..."
-    onkeyup="searchProducts()"
-  >
-</section>
+<section id="upload"><div class="wrap narrow"><b class="tag">UPLOAD</b><h2>Upload Photo or Video</h2>
+<div class="upload"><label for="media"><span>⬆️</span><b>Choose Photos / Videos</b><small>Images and videos</small></label><input id="media" type="file" accept="image/*,video/*" multiple><div id="preview"></div>
+<p class="note">This static version previews selected files only. Permanent visitor uploads require a storage/backend service.</p></div></div></section>
 
-<section id="products">
-  <h2>🛍️ Our Products</h2>
+<section id="payment" class="soft"><div class="wrap pay-grid"><div><b class="tag">PAYMENT</b><h2>Pay via UPI</h2><p>UPI ID: <strong>8940270189@nye</strong></p><p class="muted">Enter an amount and tap Pay.</p></div>
+<div class="paybox"><label>Amount (₹)</label><input id="amount" type="number" min="1" step="1" placeholder="100"><button id="pay" class="btn primary">Pay via UPI</button><small>Verify the recipient name and amount in your UPI app before paying.</small></div></div></section>
 
-  <div class="products" id="productList">
-
-    <div class="product" data-name="T Shirt">
-      <div class="productImg">👕</div>
-      <h3>Premium T-Shirt</h3>
-      <p>₹499</p>
-      <button onclick="addToCart('Premium T-Shirt',499)">
-        Add to Cart
-      </button>
-    </div>
-
-    <div class="product" data-name="Shoes">
-      <div class="productImg">👟</div>
-      <h3>Sports Shoes</h3>
-      <p>₹999</p>
-      <button onclick="addToCart('Sports Shoes',999)">
-        Add to Cart
-      </button>
-    </div>
-
-    <div class="product" data-name="Watch">
-      <div class="productImg">⌚</div>
-      <h3>Smart Watch</h3>
-      <p>₹1,499</p>
-      <button onclick="addToCart('Smart Watch',1499)">
-        Add to Cart
-      </button>
-    </div>
-
-    <div class="product" data-name="Headphones">
-      <div class="productImg">🎧</div>
-      <h3>Wireless Headphones</h3>
-      <p>₹799</p>
-      <button onclick="addToCart('Wireless Headphones',799)">
-        Add to Cart
-      </button>
-    </div>
-
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <h2>📞 Contact Us</h2>
-  <p>WhatsApp पर Order करने के लिए Cart में जाएँ।</p>
-</section>
-
-<div id="cartModal" class="modal">
-  <div class="cartBox">
-
-    <button class="close" onclick="closeCart()">✕</button>
-
-    <h2>🛒 Your Cart</h2>
-
-    <div id="cartItems"></div>
-
-    <h3>Total: ₹<span id="cartTotal">0</span></h3>
-
-    <button class="whatsapp" onclick="orderWhatsApp()">
-      📲 WhatsApp से Order करें
-    </button>
-
-  </div>
-</div>
-
-<footer>
-  <p>© 2026 Gitalk.in | All Rights Reserved</p>
-</footer>
-
+<section id="contact"><div class="wrap contact"><div><b class="tag">CONTACT</b><h2>Get in touch</h2><p class="muted">Replace the placeholders below with your real contact details.</p></div>
+<div class="contactbox"><p>📞 <b>Phone:</b> <a href="tel:+910000000000">+91 XXXXXXXXXX</a></p><p>💬 <b>WhatsApp:</b> <a href="https://wa.me/910000000000">Chat on WhatsApp</a></p><p>✉️ <b>Email:</b> <a href="mailto:your@email.com">your@email.com</a></p><p>📍 <b>Address:</b> Your address here</p></div></div></section>
+</main>
+<footer><div class="wrap"><span>© <span id="year"></span> Gitalk.in</span><span>Made with ❤️</span></div></footer>
 <script src="script.js"></script>
-
-</body>
-</html>
+</body></html>
