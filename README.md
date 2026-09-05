@@ -1,6 +1,6 @@
 # Gitalk.in
 
-Responsive Amazon-affiliate style homepage for JORA M / Gitalk.in.
+Responsive Amazon-affiliate style homepage for JORAM / Gitalk.in.
 
 Contact: navyaaitech@gmail.com
 UPI: 8940270189@nye
