@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JORAM | Explore • Travel • Flowers • Booking</title>
+
+<style>
+:root{
+  --bg:#f5f8ff;
+  --card:#ffffff;
+  --text:#10204a;
+  --muted:#667085;
+  --primary:#0756d6;
+  --secondary:#00a9ff;
+  --accent:#ff7a00;
+  --green:#18a957;
+  --border:#e4e9f2;
+  --shadow:0 12px 35px rgba(20,40,90,.10);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.3s;
+}
+
+body.dark{
+  --bg:#07111f;
+  --card:#101d30;
+  --text:#f4f7ff;
+  --muted:#aab5c7;
+  --border:#26364e;
+  --shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+
+body.dark header{
+  background:rgba(7,17,31,.94);
+}
+
+.navbar{
+  max-width:1250px;
+  margin:auto;
+  padding:10px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:900;
+  font-size:22px;
+}
+
+.logo img{
+  width:95px;
+  height:60px;
+  object-fit:contain;
+}
+
+.logo span{
+  color:var(--primary);
+}
+
+nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:700;
+}
+
+nav a:hover{
+  color:var(--primary);
+}
+
+.nav-tools{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* HERO */
+
+.hero{
+  max-width:1250px;
+  margin:25px auto;
+  padding:35px 22px;
+}
+
+.hero-box{
+  min-height:410px;
+  border-radius:30px;
+  padding:55px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,#003fba,#00a9ff 55%,#18a957);
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.hero-content{
+  max-width:650px;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 15px;
+  border-radius:30px;
+  background:rgba(255,255,255,.18);
+  margin-bottom:18px;
+  font-weight:bold;
+}
+
+.hero h1{
+  font-size:clamp(38px,6vw,70px);
+  line-height:1;
+  margin-bottom:20px;
+}
+
+.hero p{
+  font-size:18px;
+  line-height:1.7;
+  opacity:.94;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:25px;
+}
+
+.btn{
+  display:inline-block;
+  padding:13px 20px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  text-decoration:none;
+  font-weight:800;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-white{
+  background:white;
+  color:#0756d6;
+}
+
+.btn-orange{
+  background:#ff7a00;
+  color:white;
+}
+
+.btn-blue{
+  background:var(--primary);
+  color:white;
+}
+
+.btn-green{
+  background:var(--green);
+  color:white;
+}
+
+.hero-logo{
+  width:min(390px,40%);
+  max-height:280px;
+  object-fit:contain;
+  filter:drop-shadow(0 15px 20px rgba(0,0,0,.2));
+}
+
+/* SEARCH */
+
+.tools{
+  max-width:1250px;
+  margin:auto;
+  padding:0 22px;
+}
+
+.search-area{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.search-area input{
+  flex:1;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  font-size:16px;
+  outline:none;
+}
+
+.categories{
+  display:flex;
+  gap:9px;
+  overflow:auto;
+  padding-bottom:15px;
+}
+
+.category{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  padding:10px 17px;
+  border-radius:30px;
+  cursor:pointer;
+}
+
+.category.active,
+.category:hover{
+  background:var(--primary);
+  color:white;
+}
+
+/* SECTIONS */
+
+section{
+  max-width:1250px;
+  margin:60px auto;
+  padding:0 22px;
+}
+
+.section-title{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.section-title h2{
+  font-size:32px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+/* PRODUCTS */
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.product{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:.25s;
+}
+
+.product:hover{
+  transform:translateY(-6px);
+}
+
+.product-image{
+  height:230px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eef5ff;
+  position:relative;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:20px;
+}
+
+.product-image .placeholder{
+  text-align:center;
+  color:#667085;
+  font-weight:bold;
+  padding:20px;
+}
+
+.heart{
+  position:absolute;
+  right:12px;
+  top:12px;
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:50%;
+  background:white;
+  cursor:pointer;
+  font-size:20px;
+  box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.heart.active{
+  color:#ff2454;
+}
+
+.product-info{
+  padding:20px;
+}
+
+.product-info small{
+  color:var(--primary);
+  font-weight:bold;
+}
+
+.product-info h3{
+  margin:8px 0;
+}
+
+.product-info p{
+  color:var(--muted);
+  line-height:1.5;
+  margin-bottom:15px;
+}
+
+.product-buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.product-buttons .btn{
+  flex:1;
+  text-align:center;
+}
+
+/* FEATURES */
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+
+.feature-icon{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.feature p{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+/* TOOLS */
+
+.tool-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.tool{
+  padding:25px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.tool h3{
+  margin-bottom:10px;
+}
+
+.tool p{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* CONTACT */
+
+.contact{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:25px;
+  padding:35px;
+  box-shadow:var(--shadow);
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.contact-info{
+  line-height:2;
+}
+
+.contact-info a{
+  color:var(--primary);
+  font-weight:bold;
+}
+
+form{
+  display:grid;
+  gap:12px;
+}
+
+form input,
+form textarea{
+  width:100%;
+  padding:14px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  border-radius:12px;
+  font:inherit;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+/* FOOTER */
+
+footer{
+  background:#06142b;
+  color:white;
+  padding:45px 22px;
+  margin-top:60px;
+}
+
+.footer-inner{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:35px;
+}
+
+.footer-inner h3{
+  margin-bottom:12px;
+}
+
+.footer-inner p,
+.footer-inner a{
+  color:#b9c5d9;
+  line-height:1.8;
+  text-decoration:none;
+}
+
+.copyright{
+  max-width:1250px;
+  margin:35px auto 0;
+  padding-top:20px;
+  border-top:1px solid #29405f;
+  color:#9eabc0;
+}
+
+/* CART */
+
+.cart-panel{
+  position:fixed;
+  right:-400px;
+  top:0;
+  width:370px;
+  max-width:90%;
+  height:100%;
+  background:var(--card);
+  z-index:2000;
+  box-shadow:-10px 0 30px rgba(0,0,0,.2);
+  padding:25px;
+  transition:.3s;
+  overflow:auto;
+}
+
+.cart-panel.open{
+  right:0;
+}
+
+.cart-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.cart-item{
+  padding:15px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:1500;
+  display:none;
+}
+
+.overlay.show{
+  display:block;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+  nav{
+    display:none;
+  }
+
+  .hero-box{
+    padding:35px 25px;
+  }
+
+  .hero-logo{
+    display:none;
+  }
+
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .features{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .tool-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer-inner{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:600px){
+  .navbar{
+    padding:7px 12px;
+  }
+
+  .logo img{
+    width:72px;
+  }
+
+  .logo{
+    font-size:18px;
+  }
+
+  .hero{
+    padding:12px;
+  }
+
+  .hero-box{
+    border-radius:22px;
+    padding:30px 20px;
+  }
+
+  .products,
+  .features,
+  .tool-grid,
+  .contact-grid,
+  .footer-inner{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    margin:40px auto;
+  }
+
+  .product-image{
+    height:210px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <div class="navbar">
+
+    <a href="#" class="logo">
+      <img src="1000403215.png" alt="Gitalk.in Logo">
+      <span>JORAM</span>
+    </a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#tools">Tools</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-tools">
+      <button class="icon-btn" onclick="toggleDark()" title="Dark Mode">🌙</button>
+      <button class="icon-btn" onclick="openCart()" title="Cart">🛒</button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- HERO -->
+
+<div class="hero" id="home">
+  <div class="hero-box">
+
+    <div class="hero-content">
+
+      <span class="badge">🌍 Welcome to JORAM</span>
+
+      <h1>
+        Explore.<br>
+        Discover.<br>
+        Enjoy.
+      </h1>
+
+      <p>
+        Your smart destination for products, travel,
+        flowers, bookings and useful online tools.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#products" class="btn btn-white">
+          🛍️ Explore Products
+        </a>
+
+        <a href="#tools" class="btn btn-orange">
+          🧰 Open Tools
+        </a>
+      </div>
+
+    </div>
+
+    <img
+      src="1000403215.png"
+      class="hero-logo"
+      alt="Gitalk.in"
+    >
+
+  </div>
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="tools">
+
+  <div class="search-area">
+    <input
+      id="search"
+      type="search"
+      placeholder="🔍 Search JORAM products..."
+      oninput="searchProducts()"
+    >
+  </div>
+
+  <div class="categories">
+
+    <button class="category active"
+      onclick="filterProducts('all',this)">
+      All
+    </button>
+
+    <button class="category"
+      onclick="filterProducts('electronics',this)">
+      📱 Electronics
+    </button>
+
+    <button class="category"
+      onclick="filterProducts('travel',this)">
+      ✈️ Travel
+    </button>
+
+    <button class="category"
+      onclick="filterProducts('home',this)">
+      🏠 Home
+    </button>
+
+    <button class="category"
+      onclick="filterProducts('fashion',this)">
+      👕 Fashion
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<section id="products">
+
+  <div class="section-title">
+    <div>
+      <h2>🔥 Featured Products</h2>
+      <p>Discover products through JORAM</p>
+    </div>
+  </div>
+
+  <div class="products" id="productList">
+
+
+    <!-- PRODUCT 1 -->
+
+    <article class="product"
+      data-category="electronics"
+      data-name="Featured Amazon Product 1">
+
+      <div class="product-image">
+
+        <!-- Replace this image URL with the real product image -->
+
+        <img
+          src="https://via.placeholder.com/600x500?text=JORAM+PRODUCT+1"
+          alt="JORAM Product 1"
+        >
+
+        <button
+          class="heart"
+          onclick="toggleHeart(this)">
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-info">
+
+        <small>ELECTRONICS</small>
+
+        <h3>Featured Product 1</h3>
+
+        <p>
+          Discover this selected product through JORAM.
+        </p>
+
+        <div class="product-buttons">
+
+          <a
+            class="btn btn-orange"
+            href="https://link.amazon/B0ihgukwM"
+            target="_blank">
+            View on Amazon
+          </a>
+
+          <button
+            class="btn btn-blue"
+            onclick="addCart('Featured Product 1')">
+            🛒 Add
+          </button>
+
+        </div>
+
+      </div>
+    </article>
+
+
+    <!-- PRODUCT 2 -->
+
+    <article class="product"
+      data-category="home"
+      data-name="Featured Amazon Product 2">
+
+      <div class="product-image">
+
+        <img
+          src="https://via.placeholder.com/600x500?text=JORAM+PRODUCT+2"
+          alt="JORAM Product 2"
+        >
+
+        <button
+          class="heart"
+          onclick="toggleHeart(this)">
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-info">
+
+        <small>HOME</small>
+
+        <h3>Featured Product 2</h3>
+
+        <p>
+          Another useful product selected for JORAM visitors.
+        </p>
+
+        <div class="product-buttons">
+
+          <a
+            class="btn btn-orange"
+            href="https://link.amazon/B00hJy1Sk"
+            target="_blank">
+            View on Amazon
+          </a>
+
+          <button
+            class="btn btn-blue"
+            onclick="addCart('Featured Product 2')">
+            🛒 Add
+          </button>
+
+        </div>
+
+      </div>
+    </article>
+
+
+    <!-- PRODUCT 3 -->
+
+    <article class="product"
+      data-category="travel"
+      data-name="Featured Amazon Product 3">
+
+      <div class="product-image">
+
+        <img
+          src="https://via.placeholder.com/600x500?text=JORAM+PRODUCT+3"
+          alt="JORAM Product 3"
+        >
+
+        <button
+          class="heart"
+          onclick="toggleHeart(this)">
+          ♡
+        </button>
+
+      </div>
+
+      <div class="product-info">
+
+        <small>TRAVEL</small>
+
+        <h3>Featured Product 3</h3>
+
+        <p>
+          A travel-friendly selection from JORAM.
+        </p>
+
+        <div class="product-buttons">
+
+          <a
+            class="btn btn-orange"
+            href="https://link.amazon/B07UkxFz2"
+            target="_blank">
+            View on Amazon
+          </a>
+
+          <button
+            class="btn btn-blue"
+            onclick="addCart('Featured Product 3')">
+            🛒 Add
+          </button>
+
+        </div>
+
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section>
+
+  <div class="section-title">
+    <div>
+      <h2>✨ JORAM Features</h2>
+      <p>More than a simple product website</p>
+    </div>
+  </div>
+
+  <div class="features">
+
+    <div class="feature">
+      <div class="feature-icon">🔍</div>
+      <h3>Smart Search</h3>
+      <p>Find products quickly.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">❤️</div>
+      <h3>Wishlist</h3>
+      <p>Save your favorite products.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🛒</div>
+      <h3>Shopping Cart</h3>
+      <p>Collect products in one place.</p>
+    </div>
+
+    <div class="feature">
+      <div class="feature-icon">🌙</div>
+      <h3>Dark Mode</h3>
+      <p>Comfortable browsing at night.</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TOOLS -->
+
+<section id="tools">
+
+  <div class="section-title">
+    <div>
+      <h2>🧰 JORAM Smart Tools</h2>
+      <p>Useful tools built directly into the website</p>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+
+    <div class="tool">
+      <h3>💱 Currency Converter</h3>
+      <p>
+        Quickly compare currencies for travel and shopping.
+      </p>
+      <br>
+      <button
+        class="btn btn-blue"
+        onclick="currencyTool()">
+        Open Converter
+      </button>
+    </div>
+
+    <div class="tool">
+      <h3>🧮 Quick Calculator</h3>
+      <p>
+        Use your browser's calculator for quick calculations.
+      </p>
+      <br>
+      <button
+        class="btn btn-green"
+        onclick="calculatorTool()">
+        Calculate
+      </button>
+    </div>
+
+    <div class="tool">
+      <h3>📋 Product Compare</h3>
+      <p>
+        Add products to your cart and compare your choices.
+      </p>
+      <br>
+      <button
+        class="btn btn-orange"
+        onclick="openCart()">
+        Compare
+      </button>
+    </div>
+
+    <div class="tool">
+      <h3>📤 Share JORAM</h3>
+      <p>
+        Share JORAM with your friends and family.
+      </p>
+      <br>
+      <button
+        class="btn btn-blue"
+        onclick="shareJORAM()">
+        Share
+      </button>
+    </div>
+
+    <div class="tool">
+      <h3>✈️ Travel Ideas</h3>
+      <p>
+        Explore destinations, travel products and useful resources.
+      </p>
+      <br>
+      <a href="#contact" class="btn btn-green">
+        Explore
+      </a>
+    </div>
+
+    <div class="tool">
+      <h3>🌸 Flowers & Gifts</h3>
+      <p>
+        Create a dedicated section later for flowers and gifts.
+      </p>
+      <br>
+      <a href="#contact" class="btn btn-orange">
+        Contact JORAM
+      </a>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+  <div class="contact">
+
+    <div class="section-title">
+      <div>
+        <h2>💌 Contact JORAM</h2>
+        <p>We would love to hear from you</p>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+
+        <h3>JORAM</h3>
+
+        <p>
+          🌍 Explore • ✈️ Travel • 🌸 Flowers • 📅 Booking
+        </p>
+
+        <p>
+          📧 Email:
+          <a href="mailto:navyaaitech@gmail.com">
+            navyaaitech@gmail.com
+          </a>
+        </p>
+
+        <p>
+          💙 Discover more with JORAM.
+        </p>
+
+      </div>
+
+      <form onsubmit="sendEmail(event)">
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Your name"
+          required
+        >
+
+        <input
+          id="email"
+          type="email"
+          placeholder="Your email"
+          required
+        >
+
+        <textarea
+          id="message"
+          placeholder="Your message"
+          required></textarea>
+
+        <button class="btn btn-blue" type="submit">
+          📩 Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+      <h3>JORAM</h3>
+      <p>
+        Explore • Travel • Flowers • Booking
+      </p>
+      <p>
+        A smart destination for discovering products
+        and useful online tools.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <p><a href="#home">Home</a></p>
+      <p><a href="#products">Products</a></p>
+      <p><a href="#tools">Tools</a></p>
+      <p><a href="#contact">Contact</a></p>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <p>
+        <a href="mailto:navyaaitech@gmail.com">
+          navyaaitech@gmail.com
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 JORAM. All Rights Reserved.
+  </div>
+
+</footer>
+
+
+<!-- CART -->
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<div class="cart-panel" id="cartPanel">
+
+  <div class="cart-head">
+    <h2>🛒 JORAM Cart</h2>
+
+    <button
+      class="icon-btn"
+      onclick="closeCart()">
+      ✕
+    </button>
+  </div>
+
+  <div id="cartItems">
+    <p style="color:var(--muted)">
+      Your cart is empty.
+    </p>
+  </div>
+
+</div>
+
+
+<script>
+
+let cart = [];
+
+
+/* DARK MODE */
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+  localStorage.setItem(
+    "joramDark",
+    document.body.classList.contains("dark")
+  );
+
+}
+
+if(localStorage.getItem("joramDark") === "true"){
+  document.body.classList.add("dark");
+}
+
+
+/* WISHLIST */
+
+function toggleHeart(button){
+
+  button.classList.toggle("active");
+
+  if(button.classList.contains("active")){
+    button.innerHTML="♥";
+  }else{
+    button.innerHTML="♡";
+  }
+
+}
+
+
+/* CART */
+
+function addCart(name){
+
+  cart.push(name);
+
+  updateCart();
+
+  openCart();
+
+}
+
+function updateCart(){
+
+  const box=document.getElementById("cartItems");
+
+  if(cart.length===0){
+
+    box.innerHTML=
+      `<p style="color:var(--muted)">
+        Your cart is empty.
+      </p>`;
+
+    return;
+  }
+
+  box.innerHTML=cart.map((item,index)=>`
+
+    <div class="cart-item">
+
+      <strong>${item}</strong>
+
+      <br><br>
+
+      <button
+        class="btn btn-orange"
+        onclick="removeCart(${index})">
+        Remove
+      </button>
+
+    </div>
+
+  `).join("");
+
+}
+
+function removeCart(index){
+
+  cart.splice(index,1);
+
+  updateCart();
+
+}
+
+function 
