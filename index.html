@@ -1,44 +1,212 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Gitalk.in">
-<title>Gitalk.in</title>
-<link rel="icon" href="assets/logo.svg">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header><div class="wrap nav">
-<a class="brand" href="#home"><img src="assets/logo.svg">Gitalk<span>.in</span></a>
-<button id="menu">☰</button>
-<nav id="links"><a href="#home">Home</a><a href="#about">About</a><a href="#gallery">Gallery</a><a href="#upload">Upload</a><a href="#payment">Payment</a><a href="#contact">Contact</a></nav>
-</div></header>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Gitalk.in — Explore, Travel, Flowers, Booking and handpicked Amazon products.">
+<title>Gitalk.in | JORA M</title><link rel="icon" href="assets/logo.png"><link rel="stylesheet" href="style.css">
+</head><body>
+<div class="top">✨ Welcome to Gitalk.in • Explore • Travel • Flowers • Booking</div>
+<header><a class="logo" href="#home"><img src="assets/logo.png" alt="Gitalk.in"></a>
+<div class="search"><input id="q" placeholder="Search products..."><button>⌕</button></div>
+<div class="contact"><b>JORA M</b><small>navyaaitech@gmail.com</small></div>
+<div class="icons">♙ Account &nbsp; ♡ Wishlist &nbsp; 🛒 Cart</div></header>
+<nav><a class="cat" href="#products">☰ All Categories</a><a href="#home">Home</a><a href="#products">Products</a><a href="#deals">Amazon Deals</a><a href="#gallery">Gallery</a><a href="#youtube">YouTube</a><a href="#about">About Us</a><a href="#contact">Contact Us</a></nav>
 
-<main>
-<section id="home" class="hero"><div class="wrap hero-grid">
-<div><b class="tag">WELCOME TO GITALK.IN</b><h1>Connect. Share. <em>Pay with ease.</em></h1>
-<p>A modern, mobile-friendly website for your photos, videos, contact details and UPI payments.</p>
-<div class="buttons"><a class="btn primary" href="#upload">Upload Photo / Video</a><a class="btn" href="#payment">Pay via UPI</a></div></div>
-<div class="hero-card"><img src="assets/hero.svg" alt="Gitalk.in"></div>
-</div></section>
+<main id="home">
+<section class="hero"><div><label>GITALK.IN • SHOPPING & DISCOVERY</label>
+<h1>REFRESH<br>YOUR <i>EVERYDAY</i></h1><p>Discover handpicked products, useful finds and Amazon deals — all in one beautiful place.</p>
+<a class="btn" href="#products">SHOP NOW</a></div><div class="hero-logo"><img src="assets/logo.png" alt=""></div>
+<aside><b>🚚 Easy Shopping</b><small>Handpicked links</small><b>↩ Amazon Checkout</b><small>Buy securely on Amazon</small><b>🛡 Trusted Links</b><small>Direct product pages</small><b>★ Best Finds</b><small>Curated by JORA</small></aside></section>
 
-<section id="about"><div class="wrap"><b class="tag">ABOUT</b><h2>Make Gitalk.in your own</h2><p class="muted">Replace this introduction with your own business or personal information.</p>
-<div class="cards"><article><strong>📸</strong><h3>Photo Gallery</h3><p>Show your favourite photos in a responsive gallery.</p></article><article><strong>🎬</strong><h3>Video Sharing</h3><p>Select videos and preview them in the browser.</p></article><article><strong>💳</strong><h3>UPI Payment</h3><p>Let visitors pay using your UPI ID.</p></article></div></div></section>
+<section class="cats">
+<a href="#products"><span>🏠</span><b>Home Decor</b></a><a href="#products"><span>🪑</span><b>Furniture</b></a><a href="#products"><span>🍳</span><b>Kitchen</b></a><a href="#products"><span>🧺</span><b>Textiles</b></a><a href="#products"><span>💡</span><b>Decor</b></a><a href="#products"><span>🎧</span><b>Electronics</b></a><a href="#products"><span>✈️</span><b>Travel</b></a><a href="#products"><span>📚</span><b>Books</b></a><a href="#products"><span>•••</span><b>More</b></a>
+</section>
 
-<section id="gallery" class="soft"><div class="wrap"><b class="tag">GALLERY</b><h2>Your Photos</h2><p class="muted">Replace the three sample images in <code>assets/gallery/</code> with your own photos.</p>
-<div class="gallery"><img src="assets/gallery/photo-1.svg"><img src="assets/gallery/photo-2.svg"><img src="assets/gallery/photo-3.svg"></div></div></section>
+<section id="deals" class="promos">
+<div><b>SUMMER PICKS</b><small>Useful finds for every season</small><a href="#products">Shop Now</a></div>
+<div><b>NEW ARRIVALS</b><small>Fresh discoveries for you</small><a href="#products">Shop Now</a></div>
+<div><b>BEST FINDS</b><small>Customer-favourite picks</small><a href="#products">Explore</a></div>
+<div class="upi"><b>PAY VIA UPI</b><small>8940270189@nye</small><button id="upi">Pay Now</button></div>
+</section>
 
-<section id="upload"><div class="wrap narrow"><b class="tag">UPLOAD</b><h2>Upload Photo or Video</h2>
-<div class="upload"><label for="media"><span>⬆️</span><b>Choose Photos / Videos</b><small>Images and videos</small></label><input id="media" type="file" accept="image/*,video/*" multiple><div id="preview"></div>
-<p class="note">This static version previews selected files only. Permanent visitor uploads require a storage/backend service.</p></div></div></section>
+<section id="products" class="section"><div class="heading"><div><h2>FEATURED PRODUCTS</h2><p>Handpicked Amazon recommendations</p></div><span id="count"></span></div>
+<div id="grid">
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 01</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0ihgukwM</small>
+  <a href="https://link.amazon/B0ihgukwM" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
 
-<section id="payment" class="soft"><div class="wrap pay-grid"><div><b class="tag">PAYMENT</b><h2>Pay via UPI</h2><p>UPI ID: <strong>8940270189@nye</strong></p><p class="muted">Enter an amount and tap Pay.</p></div>
-<div class="paybox"><label>Amount (₹)</label><input id="amount" type="number" min="1" step="1" placeholder="100"><button id="pay" class="btn primary">Pay via UPI</button><small>Verify the recipient name and amount in your UPI app before paying.</small></div></div></section>
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 02</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B00hJy1Sk</small>
+  <a href="https://link.amazon/B00hJy1Sk" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
 
-<section id="contact"><div class="wrap contact"><div><b class="tag">CONTACT</b><h2>Get in touch</h2><p class="muted">Replace the placeholders below with your real contact details.</p></div>
-<div class="contactbox"><p>📞 <b>Phone:</b> <a href="tel:+910000000000">+91 XXXXXXXXXX</a></p><p>💬 <b>WhatsApp:</b> <a href="https://wa.me/910000000000">Chat on WhatsApp</a></p><p>✉️ <b>Email:</b> <a href="mailto:your@email.com">your@email.com</a></p><p>📍 <b>Address:</b> Your address here</p></div></div></section>
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 03</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B07UkxFz2</small>
+  <a href="https://link.amazon/B07UkxFz2" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 04</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B00JSrcZe</small>
+  <a href="https://link.amazon/B00JSrcZe" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 05</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B043zOhI3</small>
+  <a href="https://link.amazon/B043zOhI3" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 06</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B07aC5WLy</small>
+  <a href="https://link.amazon/B07aC5WLy" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 07</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0eFHSkSN</small>
+  <a href="https://link.amazon/B0eFHSkSN" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 08</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0j0fHdEt</small>
+  <a href="https://link.amazon/B0j0fHdEt" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 09</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0eZM7ijB</small>
+  <a href="https://link.amazon/B0eZM7ijB" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 10</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0iQKv4dW</small>
+  <a href="https://link.amazon/B0iQKv4dW" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 11</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B04Mc7Qyj</small>
+  <a href="https://link.amazon/B04Mc7Qyj" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 12</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0iTHpo3O</small>
+  <a href="https://link.amazon/B0iTHpo3O" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 13</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0eDt5gGW</small>
+  <a href="https://link.amazon/B0eDt5gGW" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 14</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0iwYM9iD</small>
+  <a href="https://link.amazon/B0iwYM9iD" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 15</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0gwooGuU</small>
+  <a href="https://link.amazon/B0gwooGuU" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 16</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0dFUYYM7</small>
+  <a href="https://link.amazon/B0dFUYYM7" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 17</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B025uRRgl</small>
+  <a href="https://link.amazon/B025uRRgl" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 18</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B0dCHUMbn</small>
+  <a href="https://link.amazon/B0dCHUMbn" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 19</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B06k3jy9b</small>
+  <a href="https://link.amazon/B06k3jy9b" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 20</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B05Ihsulr</small>
+  <a href="https://link.amazon/B05Ihsulr" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article>
+
+<article class="product">
+  <div class="pimg"><span>A</span><button>♡</button></div>
+  <h3>Amazon Pick 21</h3>
+  <p>Handpicked Amazon find. Check Amazon for current photos, specifications, reviews, availability and price.</p>
+  <small>ASIN: B06z0Rygv</small>
+  <a href="https://link.amazon/B06z0Rygv" target="_blank" rel="nofollow sponsored noopener">🛒 Buy on Amazon</a>
+</article></div>
+<p class="note">Affiliate disclosure: Gitalk.in may earn a commission from qualifying purchases through affiliate links. Prices, availability, images and specifications may change on Amazon.</p></section>
+
+<section id="gallery" class="section blocks"><div class="block"><h2>GALLERY</h2><p>Explore the Gitalk.in brand</p><img class="gallerylogo" src="assets/logo.png" alt="Gitalk.in logo"></div>
+<div id="youtube" class="block"><h2>YOUTUBE CHANNEL</h2><p>Videos, ideas & product discoveries</p><a class="video" href="https://www.youtube.com/" target="_blank">▶ <b>Watch on YouTube</b><small>Add your channel URL later in index.html</small></a></div></section>
+
+<section class="section blocks three"><div class="block"><h2>OUR LOCATION</h2><p>Google Maps</p><div class="map">📍<b>Gitalk.in — JORA M</b><small>Add your exact location to this map link.</small></div><a class="outline" href="https://www.google.com/maps/search/?api=1&query=Gitalk.in" target="_blank">Open Google Maps →</a></div>
+<div class="block"><h2>CONNECT WITH US</h2><p>Social media</p><div class="social"><a href="https://www.facebook.com/" target="_blank">🔵 Facebook</a><a href="https://www.instagram.com/" target="_blank">📸 Instagram</a><a href="https://www.youtube.com/" target="_blank">▶️ YouTube</a><a href="mailto:navyaaitech@gmail.com">✉️ Email</a></div></div>
+<div id="about" class="block"><h2>ABOUT GITALK.IN</h2><p>Gitalk.in brings shopping inspiration, travel, flowers, booking ideas and useful online discoveries together.</p><p><b>JORA M</b><br><a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></p></div></section>
+
+<section id="contact" class="contactbox"><div><label>CONTACT</label><h2>Have a question?</h2><p>Reach JORA M at navyaaitech@gmail.com</p></div><a class="light" href="mailto:navyaaitech@gmail.com?subject=Gitalk.in%20Contact">Email JORA →</a></section>
 </main>
-<footer><div class="wrap"><span>© <span id="year"></span> Gitalk.in</span><span>Made with ❤️</span></div></footer>
-<script src="script.js"></script>
-</body></html>
+<footer><div><b>🛡 SAFE SHOPPING</b><b>↩ EASY RETURNS</b><b>🚚 AMAZON DELIVERY</b><b>💬 CUSTOMER SUPPORT</b></div><small>© 2026 Gitalk.in | JORA M | All Rights Reserved</small></footer>
+<script src="script.js"></script></body></html>
