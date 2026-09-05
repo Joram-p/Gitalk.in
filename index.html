@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gitalk.in - Online Shopping</title>
+  <meta name="description" content="Gitalk.in - Online Shopping Store">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo">
+    <a href="index.html">Gitalk<span>.in</span></a>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#contact">Contact</a>
+    <button onclick="showCart()">🛒 Cart (<span id="cartCount">0</span>)</button>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div>
+    <h1>Welcome to Gitalk.in 🛍️</h1>
+    <p>Best Products • Best Price • Easy Ordering</p>
+    <a href="#products" class="shopBtn">Shop Now</a>
+  </div>
+</section>
+
+<section class="searchBox">
+  <input
+    type="text"
+    id="search"
+    placeholder="🔍 Product search करें..."
+    onkeyup="searchProducts()"
+  >
+</section>
+
+<section id="products">
+  <h2>🛍️ Our Products</h2>
+
+  <div class="products" id="productList">
+
+    <div class="product" data-name="T Shirt">
+      <div class="productImg">👕</div>
+      <h3>Premium T-Shirt</h3>
+      <p>₹499</p>
+      <button onclick="addToCart('Premium T-Shirt',499)">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="product" data-name="Shoes">
+      <div class="productImg">👟</div>
+      <h3>Sports Shoes</h3>
+      <p>₹999</p>
+      <button onclick="addToCart('Sports Shoes',999)">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="product" data-name="Watch">
+      <div class="productImg">⌚</div>
+      <h3>Smart Watch</h3>
+      <p>₹1,499</p>
+      <button onclick="addToCart('Smart Watch',1499)">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="product" data-name="Headphones">
+      <div class="productImg">🎧</div>
+      <h3>Wireless Headphones</h3>
+      <p>₹799</p>
+      <button onclick="addToCart('Wireless Headphones',799)">
+        Add to Cart
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>📞 Contact Us</h2>
+  <p>WhatsApp पर Order करने के लिए Cart में जाएँ।</p>
+</section>
+
+<div id="cartModal" class="modal">
+  <div class="cartBox">
+
+    <button class="close" onclick="closeCart()">✕</button>
+
+    <h2>🛒 Your Cart</h2>
+
+    <div id="cartItems"></div>
+
+    <h3>Total: ₹<span id="cartTotal">0</span></h3>
+
+    <button class="whatsapp" onclick="orderWhatsApp()">
+      📲 WhatsApp से Order करें
+    </button>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Gitalk.in | All Rights Reserved</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
