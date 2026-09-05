@@ -1,17 +1,26 @@
-JORAM AI FUTURE WEBSITE
-========================
-Open index.html in a modern browser.
+JORAM REAL WEB HUB
+=================
+
+Open index.html.
 
 Included:
-- JORAM branding and uploaded Gitalk.in logo
-- AI Future hero section and local AI demo
-- Smart Cloud, Travel, Flowers & Gifts, Product, Business and Creative services
-- Future tools: calculator, currency helper, share
-- Responsive mobile/desktop layout
-- Dark mode
-- Contact form using navyaaitech@gmail.com
-- Local SVG illustrations, so the site works without external image URLs
+- JORAM + uploaded Gitalk.in logo
+- AI assistant demo
+- Services: AI, travel/booking, flowers/gifts, business, products, creative
+- Photo gallery with local demo artwork and browser photo preview
+- Video-gallery-ready layout
+- OpenStreetMap map with place search
+- News section with local demo content and refresh function
+- Calculator, currency helper, sharing and dark mode
+- Contact form to navyaaitech@gmail.com
 
-To connect real AI:
-Replace the askAI() demo with your preferred secure AI backend/API.
-Do not put private API keys directly into public browser JavaScript.
+PRODUCTION / REAL LIVE DATA
+---------------------------
+AI: connect a secure server-side AI API. Never expose a private API key in browser JS.
+News: connect a news provider such as NewsAPI, GNews, or an RSS backend through your server.
+Booking: connect the booking provider/API you choose.
+Maps: OpenStreetMap is included. For geocoding/search at scale, use a proper geocoding service and follow its usage policy.
+
+PHOTOS / VIDEOS
+---------------
+Replace files in assets/ or add your own images. For videos, add HTML <video controls> blocks using local MP4/WebM files.
