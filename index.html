@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="JORAM - Explore, Travel, Flowers and Booking.">
+  <title>JORAM | Explore • Travel • Flowers • Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="images/joram-logo.png" alt="JORAM logo">
+  </div>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <nav id="nav">
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#booking">Booking</a>
+    <a href="#news">News</a>
+    <a href="#social">Social</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">WELCOME TO JORAM</span>
+    <h1>Explore. Travel. Discover.</h1>
+    <p>A modern place for travel ideas, experiences, flowers, bookings and helpful online services.</p>
+    <div class="actions">
+      <a class="btn primary" href="#booking">Book Now</a>
+      <a class="btn secondary" href="#services">Explore Services</a>
+    </div>
+    <div class="quick">
+      <span>✈️ Travel</span><span>🌺 Flowers</span><span>📅 Booking</span><span>🤖 AI Help</span>
+    </div>
+  </div>
+</section>
+
+<section class="search-area">
+  <input id="siteSearch" type="search" placeholder="Search JORAM services, travel, flowers..." oninput="searchSite()">
+  <div id="searchResult"></div>
+</section>
+
+<section id="services" class="section">
+  <div class="heading">
+    <span class="eyebrow">WHAT WE OFFER</span>
+    <h2>JORAM Services</h2>
+    <p>Start with these sections and replace the sample content with your real services.</p>
+  </div>
+  <div class="cards">
+    <article class="card searchable"><div class="icon">✈️</div><h3>Travel & Explore</h3><p>Travel ideas, destinations, tours and trip information.</p><a href="#booking">Plan a trip →</a></article>
+    <article class="card searchable"><div class="icon">🌺</div><h3>Flowers</h3><p>Showcase flowers, gifts, arrangements and seasonal collections.</p><a href="#gallery">View gallery →</a></article>
+    <article class="card searchable"><div class="icon">📅</div><h3>Booking</h3><p>Let visitors send a booking or enquiry request online.</p><a href="#booking">Make enquiry →</a></article>
+    <article class="card searchable"><div class="icon">🤖</div><h3>AI Future</h3><p>An AI-style helper area for recommendations and customer questions.</p><a href="#ai">Try AI Help →</a></article>
+    <article class="card searchable"><div class="icon">🛍️</div><h3>Products & Links</h3><p>Add product links, affiliate links or your own online store.</p><a href="#products">View products →</a></article>
+    <article class="card searchable"><div class="icon">📍</div><h3>Location</h3><p>Help customers find you using Google Maps.</p><a href="#contact">Find us →</a></article>
+  </div>
+</section>
+
+<section id="ai" class="section alt">
+  <div class="ai-box">
+    <div>
+      <span class="eyebrow">JORAM FUTURE</span>
+      <h2>🤖 JORAM AI Helper</h2>
+      <p>Type what you need and the demo assistant will suggest a section of the website.</p>
+    </div>
+    <div class="ai-chat">
+      <input id="aiInput" placeholder="Example: I want a travel plan">
+      <button class="btn primary" onclick="aiHelp()">Ask JORAM AI</button>
+      <p id="aiAnswer" class="answer">Your AI-style helper is ready.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="section">
+  <div class="heading"><span class="eyebrow">VISUAL JOURNEY</span><h2>Photo Gallery</h2></div>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1000&q=80" alt="Mountain travel">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Beach travel">
+    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=80" alt="Flowers">
+    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=80" alt="Travel landscape">
+  </div>
+</section>
+
+<section id="products" class="section alt">
+  <div class="heading"><span class="eyebrow">ONLINE OPPORTUNITY</span><h2>Products & Useful Links</h2><p>Add your own products or affiliate links here.</p></div>
+  <div class="link-grid">
+    <a class="link-card" href="#" onclick="demoLink(event)">🛒 Product Link 1</a>
+    <a class="link-card" href="#" onclick="demoLink(event)">🎁 Product Link 2</a>
+    <a class="link-card" href="#" onclick="demoLink(event)">🌍 Travel Link</a>
+  </div>
+</section>
+
+<section id="booking" class="section">
+  <div class="heading"><span class="eyebrow">GET STARTED</span><h2>Booking / Enquiry</h2><p>This form opens an email draft using the details entered.</p></div>
+  <form class="form" onsubmit="sendBooking(event)">
+    <input id="name" required placeholder="Your name">
+    <input id="email" type="email" required placeholder="Your email">
+    <select id="service"><option>Travel</option><option>Flowers</option><option>Booking</option><option>Other</option></select>
+    <input id="date" type="date">
+    <textarea id="message" rows="5" placeholder="Tell us what you need"></textarea>
+    <button class="btn primary" type="submit">Send Enquiry</button>
+  </form>
+</section>
+
+<section id="news" class="section alt">
+  <div class="heading"><span class="eyebrow">UPDATES</span><h2>JORAM News</h2><p>Add your own announcements, travel stories and updates here.</p></div>
+  <div class="news-grid">
+    <article class="news"><small>UPDATE</small><h3>Welcome to JORAM</h3><p>Your first news card. Replace this text with your latest update.</p></article>
+    <article class="news"><small>TRAVEL</small><h3>New destination ideas</h3><p>Share destination guides, tips and special offers.</p></article>
+    <article class="news"><small>FLOWERS</small><h3>Seasonal collection</h3><p>Show your newest flowers and gift arrangements.</p></article>
+  </div>
+</section>
+
+
+<section id="social" class="section">
+  <div class="heading">
+    <span class="eyebrow">CONNECT WITH JORAM</span>
+    <h2>YouTube, News & Social Media</h2>
+    <p>Follow JORAM for travel stories, news, updates, videos and new services.</p>
+  </div>
+  <div class="social-grid">
+    <a class="social-card" href="#" onclick="demoLink(event)">▶️ <strong>JORAM YouTube</strong><span>News & videos</span></a>
+    <a class="social-card" href="#" onclick="demoLink(event)">📰 <strong>JORAM News</strong><span>Latest updates</span></a>
+    <a class="social-card" href="#" onclick="demoLink(event)">📸 <strong>Instagram</strong><span>Photos & reels</span></a>
+    <a class="social-card" href="#" onclick="demoLink(event)">📘 <strong>Facebook</strong><span>Community & updates</span></a>
+    <a class="social-card" href="#" onclick="demoLink(event)">𝕏 <strong>Social Updates</strong><span>Short updates</span></a>
+    <a class="social-card" href="#" onclick="demoLink(event)">💬 <strong>WhatsApp</strong><span>Contact JORAM</span></a>
+  </div>
+  <p class="note">The social buttons are ready. Replace each <code>#</code> link with your actual YouTube/channel and social-media URLs.</p>
+</section>
+
+<section id="contact" class="section contact">
+  <div>
+    <span class="eyebrow">CONTACT JORAM</span>
+    <h2>Let's connect</h2>
+    <p>Replace the sample contact details below with your real business information.</p>
+    <p>📧 <a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></p>
+    <p>📱 <a href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp: +91 XXXXXXXXXX</a></p>
+    <a class="btn primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India">Open Google Maps</a>
+  </div>
+  <div class="map">
+    <iframe src="https://www.google.com/maps?q=Jodhpur%2C%20Rajasthan%2C%20India&output=embed" loading="lazy" title="JORAM map"></iframe>
+  </div>
+</section>
+</main>
+
+<footer>
+  <img src="images/joram-logo.png" alt="JORAM">
+  <p>© <span id="year"></span> JORAM. Explore • Travel • Flowers • Booking.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
