@@ -1,159 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="JORAM - Explore, Travel, Flowers and Booking.">
-  <title>JORAM | Explore • Travel • Flowers • Booking</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="JORAM - AI, News, Social Media and Digital Services">
+<title>JORAM | Gallery</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#07111f;color:#fff;line-height:1.6}
+header{position:sticky;top:0;z-index:20;background:rgba(7,17,31,.94);backdrop-filter:blur(10px);border-bottom:1px solid #20344c}
+.nav{max-width:1150px;margin:auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:30px;font-weight:900;letter-spacing:3px;color:#19bfff}
+.logo span{color:#fff}
+nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:600}
+nav a:hover{color:#19bfff}
+.hero{min-height:60vh;display:grid;place-items:center;text-align:center;padding:70px 20px;background:radial-gradient(circle at top,#0d4260,#07111f 65%)}
+.hero h1{font-size:clamp(42px,8vw,78px);line-height:1;margin-bottom:18px}
+.hero h1 span{color:#19bfff}
+.hero p{max-width:700px;margin:auto;color:#c8d7e6;font-size:19px}
+.btn{display:inline-block;margin-top:28px;background:#19bfff;color:#00121d;text-decoration:none;font-weight:800;padding:13px 24px;border-radius:30px}
+section{max-width:1150px;margin:auto;padding:65px 20px}
+.title{text-align:center;margin-bottom:35px}
+.title h2{font-size:40px}
+.title p{color:#9fb2c5;margin-top:7px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{position:relative;overflow:hidden;border-radius:18px;background:#102033;border:1px solid #20344c;cursor:pointer;min-height:280px}
+.card img{width:100%;height:330px;object-fit:cover;display:block;transition:.4s}
+.card:hover img{transform:scale(1.06)}
+.caption{position:absolute;bottom:0;left:0;right:0;padding:35px 18px 16px;background:linear-gradient(transparent,rgba(0,0,0,.9))}
+.caption h3{font-size:19px}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.service{padding:25px;border-radius:16px;background:#0d1c2e;border:1px solid #20344c}
+.service b{color:#19bfff;font-size:21px}
+.service p{color:#aebdca;margin-top:8px}
+footer{text-align:center;padding:35px 20px;background:#040b13;color:#8ea0b1}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:100;align-items:center;justify-content:center;padding:20px}
+#lightbox.show{display:flex}
+#lightbox img{max-width:95%;max-height:88vh;border-radius:12px}
+.close{position:absolute;top:15px;right:25px;font-size:42px;cursor:pointer;color:#fff}
+@media(max-width:700px){nav a{margin-left:8px;font-size:13px}.hero{min-height:52vh}.card img{height:300px}}
+</style>
 </head>
 <body>
-<header class="topbar">
-  <div class="brand">
-    <img src="images/joram-logo.png" alt="JORAM logo">
+
+<header>
+  <div class="nav">
+    <div class="logo">JORAM<span>.</span></div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
-  <button class="menu-btn" onclick="toggleMenu()">☰</button>
-  <nav id="nav">
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#booking">Booking</a>
-    <a href="#news">News</a>
-    <a href="#social">Social</a>
-    <a href="#contact">Contact</a>
-  </nav>
 </header>
 
 <main>
-<section id="home" class="hero">
-  <div class="hero-content">
-    <span class="eyebrow">WELCOME TO JORAM</span>
-    <h1>Explore. Travel. Discover.</h1>
-    <p>A modern place for travel ideas, experiences, flowers, bookings and helpful online services.</p>
-    <div class="actions">
-      <a class="btn primary" href="#booking">Book Now</a>
-      <a class="btn secondary" href="#services">Explore Services</a>
-    </div>
-    <div class="quick">
-      <span>✈️ Travel</span><span>🌺 Flowers</span><span>📅 Booking</span><span>🤖 AI Help</span>
-    </div>
-  </div>
-</section>
-
-<section class="search-area">
-  <input id="siteSearch" type="search" placeholder="Search JORAM services, travel, flowers..." oninput="searchSite()">
-  <div id="searchResult"></div>
-</section>
-
-<section id="services" class="section">
-  <div class="heading">
-    <span class="eyebrow">WHAT WE OFFER</span>
-    <h2>JORAM Services</h2>
-    <p>Start with these sections and replace the sample content with your real services.</p>
-  </div>
-  <div class="cards">
-    <article class="card searchable"><div class="icon">✈️</div><h3>Travel & Explore</h3><p>Travel ideas, destinations, tours and trip information.</p><a href="#booking">Plan a trip →</a></article>
-    <article class="card searchable"><div class="icon">🌺</div><h3>Flowers</h3><p>Showcase flowers, gifts, arrangements and seasonal collections.</p><a href="#gallery">View gallery →</a></article>
-    <article class="card searchable"><div class="icon">📅</div><h3>Booking</h3><p>Let visitors send a booking or enquiry request online.</p><a href="#booking">Make enquiry →</a></article>
-    <article class="card searchable"><div class="icon">🤖</div><h3>AI Future</h3><p>An AI-style helper area for recommendations and customer questions.</p><a href="#ai">Try AI Help →</a></article>
-    <article class="card searchable"><div class="icon">🛍️</div><h3>Products & Links</h3><p>Add product links, affiliate links or your own online store.</p><a href="#products">View products →</a></article>
-    <article class="card searchable"><div class="icon">📍</div><h3>Location</h3><p>Help customers find you using Google Maps.</p><a href="#contact">Find us →</a></article>
-  </div>
-</section>
-
-<section id="ai" class="section alt">
-  <div class="ai-box">
-    <div>
-      <span class="eyebrow">JORAM FUTURE</span>
-      <h2>🤖 JORAM AI Helper</h2>
-      <p>Type what you need and the demo assistant will suggest a section of the website.</p>
-    </div>
-    <div class="ai-chat">
-      <input id="aiInput" placeholder="Example: I want a travel plan">
-      <button class="btn primary" onclick="aiHelp()">Ask JORAM AI</button>
-      <p id="aiAnswer" class="answer">Your AI-style helper is ready.</p>
-    </div>
-  </div>
-</section>
-
-<section id="gallery" class="section">
-  <div class="heading"><span class="eyebrow">VISUAL JOURNEY</span><h2>Photo Gallery</h2></div>
-  <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1000&q=80" alt="Mountain travel">
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80" alt="Beach travel">
-    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1000&q=80" alt="Flowers">
-    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1000&q=80" alt="Travel landscape">
-  </div>
-</section>
-
-<section id="products" class="section alt">
-  <div class="heading"><span class="eyebrow">ONLINE OPPORTUNITY</span><h2>Products & Useful Links</h2><p>Add your own products or affiliate links here.</p></div>
-  <div class="link-grid">
-    <a class="link-card" href="#" onclick="demoLink(event)">🛒 Product Link 1</a>
-    <a class="link-card" href="#" onclick="demoLink(event)">🎁 Product Link 2</a>
-    <a class="link-card" href="#" onclick="demoLink(event)">🌍 Travel Link</a>
-  </div>
-</section>
-
-<section id="booking" class="section">
-  <div class="heading"><span class="eyebrow">GET STARTED</span><h2>Booking / Enquiry</h2><p>This form opens an email draft using the details entered.</p></div>
-  <form class="form" onsubmit="sendBooking(event)">
-    <input id="name" required placeholder="Your name">
-    <input id="email" type="email" required placeholder="Your email">
-    <select id="service"><option>Travel</option><option>Flowers</option><option>Booking</option><option>Other</option></select>
-    <input id="date" type="date">
-    <textarea id="message" rows="5" placeholder="Tell us what you need"></textarea>
-    <button class="btn primary" type="submit">Send Enquiry</button>
-  </form>
-</section>
-
-<section id="news" class="section alt">
-  <div class="heading"><span class="eyebrow">UPDATES</span><h2>JORAM News</h2><p>Add your own announcements, travel stories and updates here.</p></div>
-  <div class="news-grid">
-    <article class="news"><small>UPDATE</small><h3>Welcome to JORAM</h3><p>Your first news card. Replace this text with your latest update.</p></article>
-    <article class="news"><small>TRAVEL</small><h3>New destination ideas</h3><p>Share destination guides, tips and special offers.</p></article>
-    <article class="news"><small>FLOWERS</small><h3>Seasonal collection</h3><p>Show your newest flowers and gift arrangements.</p></article>
-  </div>
-</section>
-
-
-<section id="social" class="section">
-  <div class="heading">
-    <span class="eyebrow">CONNECT WITH JORAM</span>
-    <h2>YouTube, News & Social Media</h2>
-    <p>Follow JORAM for travel stories, news, updates, videos and new services.</p>
-  </div>
-  <div class="social-grid">
-    <a class="social-card" href="#" onclick="demoLink(event)">▶️ <strong>JORAM YouTube</strong><span>News & videos</span></a>
-    <a class="social-card" href="#" onclick="demoLink(event)">📰 <strong>JORAM News</strong><span>Latest updates</span></a>
-    <a class="social-card" href="#" onclick="demoLink(event)">📸 <strong>Instagram</strong><span>Photos & reels</span></a>
-    <a class="social-card" href="#" onclick="demoLink(event)">📘 <strong>Facebook</strong><span>Community & updates</span></a>
-    <a class="social-card" href="#" onclick="demoLink(event)">𝕏 <strong>Social Updates</strong><span>Short updates</span></a>
-    <a class="social-card" href="#" onclick="demoLink(event)">💬 <strong>WhatsApp</strong><span>Contact JORAM</span></a>
-  </div>
-  <p class="note">The social buttons are ready. Replace each <code>#</code> link with your actual YouTube/channel and social-media URLs.</p>
-</section>
-
-<section id="contact" class="section contact">
+<section class="hero" id="home">
   <div>
-    <span class="eyebrow">CONTACT JORAM</span>
-    <h2>Let's connect</h2>
-    <p>Replace the sample contact details below with your real business information.</p>
-    <p>📧 <a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></p>
-    <p>📱 <a href="https://wa.me/91XXXXXXXXXX" target="_blank">WhatsApp: +91 XXXXXXXXXX</a></p>
-    <a class="btn primary" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India">Open Google Maps</a>
+    <h1>Welcome to <span>JORAM</span></h1>
+    <p>AI • Digital Services • News • Social Media • Creative Content</p>
+    <a class="btn" href="#gallery">View Gallery</a>
   </div>
-  <div class="map">
-    <iframe src="https://www.google.com/maps?q=Jodhpur%2C%20Rajasthan%2C%20India&output=embed" loading="lazy" title="JORAM map"></iframe>
+</section>
+
+<section id="gallery">
+  <div class="title">
+    <h2>My Gallery</h2>
+    <p>Photos, profile images and creative work</p>
+  </div>
+
+  <div class="gallery">
+    <!-- Your uploaded photo -->
+    <div class="card" onclick="openLightbox('1000032257.png')">
+      <img src="1000032257.png" alt="JORAM profile photo">
+      <div class="caption">
+        <h3>JORAM Profile</h3>
+        <p>Founder / Digital Creator</p>
+      </div>
+    </div>
+
+    <!-- Add more gallery images by copying this card -->
+    <div class="card" onclick="openLightbox('1000032257.png')">
+      <img src="1000032257.png" alt="JORAM featured image">
+      <div class="caption"><h3>Featured</h3><p>JORAM Digital Media</p></div>
+    </div>
+
+    <div class="card" onclick="openLightbox('1000032257.png')">
+      <img src="1000032257.png" alt="JORAM gallery image">
+      <div class="caption"><h3>Creative</h3><p>News & Social Media</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="title">
+    <h2>Our Services</h2>
+    <p>Build your digital presence with JORAM</p>
+  </div>
+  <div class="services">
+    <div class="service"><b>🤖 AI Services</b><p>AI tools, automation and future technology solutions.</p></div>
+    <div class="service"><b>📰 News</b><p>News publishing and digital news content.</p></div>
+    <div class="service"><b>📱 Social Media</b><p>Social media pages, content and promotion.</p></div>
+    <div class="service"><b>🌐 Websites</b><p>Modern responsive websites and landing pages.</p></div>
+    <div class="service"><b>🎥 Video Gallery</b><p>Showcase videos, reels and creative media.</p></div>
+    <div class="service"><b>📸 Photo Gallery</b><p>Beautiful image galleries with full-screen viewing.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="title">
+    <h2>Contact JORAM</h2>
+    <p>Email: navyaaitech@gmail.com</p>
+    <p>Jodhpur, Rajasthan, India</p>
   </div>
 </section>
 </main>
 
-<footer>
-  <img src="images/joram-logo.png" alt="JORAM">
-  <p>© <span id="year"></span> JORAM. Explore • Travel • Flowers • Booking.</p>
-</footer>
+<footer>© 2026 JORAM. All rights reserved.</footer>
 
-<script src="script.js"></script>
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="close">&times;</span>
+  <img id="lightboxImg" src="" alt="Full size gallery image" onclick="event.stopPropagation()">
+</div>
+
+<script>
+function openLightbox(src){
+  document.getElementById('lightboxImg').src=src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('show');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape') closeLightbox();
+});
+</script>
 </body>
 </html>
