@@ -1,4 +1,4 @@
-JORAM PROFESSIONAL WEBSITE
+JORAM
 
 Business: JORAM
 Email: navyaaitech@gmail.com
