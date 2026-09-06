@@ -58,7 +58,7 @@
   <article class="service searchable"><span class="service-icon">📰</span><h3>Live News</h3><p>Refreshable news feed with links to current headlines and stories.</p><a href="#news">Open news →</a></article>
   <article class="service searchable"><span class="service-icon">🎥</span><h3>Video & YouTube</h3><p>Build a video gallery and connect your YouTube channel.</p><a href="#videos">Watch section →</a></article>
   <article class="service searchable"><span class="service-icon">📅</span><h3>Booking</h3><p>Simple enquiry form for travel, flowers and future services.</p><a href="#booking">Send enquiry →</a></article>
-  <article class="service searchable"><span class="service-icon">🤖</span><h3>AI Future</h3><p>A smart helper interface for visitors and recommendations.</p><a href="#ai">Try assistant →</a></article>
+  <article class="service searchable"><span class="service-icon">🤖</span><h3>AI Future</h3><p>A smart helper interface for visitors and recommendations.</p><a href="#https://docs.google.com/videos/d/1f0I3TVoqf36_wPUgNGbAgroA12vvuLa_AJuoydqKul8/edit?pli=1&scene=id.p#scene=id.p">Try assistant →</a></article>
  </div>
 </div>
 </section>
@@ -72,7 +72,7 @@
 
 <section id="gallery" class="section">
 <div class="container">
- <div class="section-head"><span class="kicker">YOUR PHOTOGRAPHY</span><h2>Photo Gallery</h2><p>Your uploaded images are included in this professional gallery.</p></div>
+ <div class="section-head"><span class="kicker">JORAM PHOTOGRAPHY</span><h2>Photo Gallery</h2><p>Your uploaded images are included in this professional gallery.</p></div>
  <div class="gallery">
   <figure><img src="images/flower-pink.jpg" alt="Pink flowers and leaves"><figcaption>Pink flower story</figcaption></figure>
   <figure><img src="images/flower-red.jpg" alt="Red flower"><figcaption>Red bloom</figcaption></figure>
@@ -142,7 +142,335 @@
 </div>
 </section>
 </main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top 100 Music Player</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-color: #1db954;
+            --text-color: #ffffff;
+            --text-secondary: #b3b3b3;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar / Playlist Area */
+        .sidebar {
+            width: 380px;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #282828;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #282828;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .update-badge {
+            font-size: 0.75rem;
+            background-color: var(--primary-color);
+            color: black;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        .playlist-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .track-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 5px;
+        }
+
+        .track-item:hover {
+            background-color: #282828;
+        }
+
+        .track-item.active {
+            background-color: #333333;
+            color: var(--primary-color);
+        }
+
+        .track-rank {
+            width: 30px;
+            font-weight: bold;
+            color: var(--text-secondary);
+        }
+
+        .track-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            margin-right: 15px;
+            background-color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .track-info {
+            flex: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .track-title {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .track-artist {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Content / Player Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8)), var(--surface-color);
+            padding: 40px;
+        }
+
+        .now-playing-card {
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .album-art-large {
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            background-color: #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .current-title {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .current-artist {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        /* Player Controls */
+        .controls-container {
+            width: 100%;
+        }
+
+        .progress-bar-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .time-stamp {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            width: 45px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 4px;
+            background-color: #535353;
+            border-radius: 2px;
+            cursor: pointer;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .control-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: color 0.2s, transform 0.1s;
+        }
+
+        .btn:hover {
+            color: var(--primary-color);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-play-pause {
+            font-size: 3rem;
+            background-color: var(--text-color);
+            color: black;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-play-pause:hover {
+            background-color: #ffffff;
+            color: black;
+            transform: scale(1.05);
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Playlist section -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Top 100 Hits</h2>
+            <span class="update-badge" id="update-date">Updated Today</span>
+        </div>
+        <div class="playlist-container" id="playlist">
+            <!-- JavaScript will populate the 100 tracks here -->
+        </div>
+    </div>
+
+    <!-- Main Player Display section -->
+    <div class="main-content">
+        <div class="now-playing-card">
+            <div class="album-art-large" id="large-art">🎵</div>
+            <h1 class="current-title" id="current-title">Select a track</h1>
+            <p class="current-artist" id="current-artist">From the playlist</p>
+
+            <div class="controls-container">
+                <div class="progress-bar-container">
+                    <span class="time-stamp" id="current-time">0:00</span>
+                    <div class="progress-bar" id="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <span class="time-stamp" id="total-duration">0:00</span>
+                </div>
+
+                <div class="control-buttons">
+                    <button class="btn" id="btn-shuffle" title="Shuffle">🔀</button>
+                    <button class="btn" id="btn-prev" title="Previous">⏮</button>
+                    <button class="btn btn-play-pause" id="btn-play" title="Play/Pause">▶</button>
+                    <button class="btn" id="btn-next" title="Next">⏭</button>
+                    <button class="btn" id="btn-repeat" title="Repeat">🔁</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden HTML5 Audio Component -->
+    <audio id="audio-element"></audio>
+
+    <script>
+        // DOM Elements
+        const playlistContainer = document.getElementById('playlist');
+        const audio = document.getElementById('audio-element');
+        const playBtn = document.getElementById('btn-play');
+        const prevBtn = document.getElementById('btn-prev');
+        const nextBtn = document.getElementById('btn-next');
+        const shuffleBtn = document.getElementById('btn-shuffle');
+        const repeatBtn = document.getElementById('btn-repeat');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const currentTimeEl = document.getElementById('current-time');
+        const totalDurationEl = document.getElementById('total-duration');
+        const currentTitleEl = document.getElementById('current-title');
+        const currentArtistEl = document.getElementById('current-artist');
+        const largeArtEl = document.getElementById('large-art');
+        const updateDateEl = document.getElementById('update-date');
+
+        // State Variables
+        let trackList = [];
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let isShuffle = false;
+        let isRepeat = false;
+
+        // Auto-set the latest update timestamp
+        const options = { month: 'short', day: 'numeric', year: 'numeric' };
+        updateDateEl.innerText = `Updated: ${new Date().toLocaleDateString('en-US', options)}`;
+
+        // Generation Strategy: Dynamically simulate 100 real-looking charting tracks
+        function generateTop100Data() {
+            const genres = ['Pop', 'Hip Hop', 'Rock', 'R&B', 'Electronic', 'Indie', 'Latin'];
+            const artists = ['The Weeknd', 'Taylor Swift', 'Drake', 'Billie Eilish', 'Bad Bunny', 'Post Malone', 'SZA', 'Ed Sheeran', 'Dua Lipa', 'Harry Styles', 'Bruno Mars', 'Kendrick Lamar', 'Olivia Rodrigo', 'Justin Bieber'];
+            const songNouns = ['Heart', 'Night', 'Love', 'Light', 'Dream', 'Shadow', 'Memory', 'Sky', 'Line', 'Fire', 'Running', 'Dance'];
+						
 <footer><div class="container footer-inner"><img src="images/joram-logo.png" alt="JORAM"><div>© <span id="year"></span> JORAM • Explore • Travel • Flowers • News</div><a href="#home">Back to top ↑</a></div></footer>
 <div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightboxImg" alt=""></div>
 <script src="script.js"></script>
