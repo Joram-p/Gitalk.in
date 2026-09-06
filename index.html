@@ -1,478 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="JORAM — Explore, Travel, Flowers, News, Media and Booking. Jodhpur, Rajasthan, India.">
-<title>JORAM | Explore • Travel • Flowers • News</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="breaking"><div class="container ticker"><span>🔴 LIVE</span><strong>JORAM NEWS</strong><div id="tickerText">Loading live headlines…</div><time id="clock"></time></div></div>
-
-<header class="nav">
-  <div class="container nav-inner">
-    <a class="logo" href="#home"><img src="images/joram-logo.png" alt="JORAM logo"></a>
-    <button class="hamb" onclick="toggleNav()">☰</button>
-    <nav id="nav">
-      <a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a>
-      <a href="#news">Live News</a><a href="#tools">Tools</a><a href="#booking">Booking</a><a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="home">
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="kicker">JORAM • JODHPUR • RAJASTHAN</span>
-      <h1>Explore the world.<br><em>Share the story.</em></h1>
-      <p class="lead">A professional digital home for travel, flowers, news, media, bookings and future online services.</p>
-      <div class="hero-buttons"><a class="btn primary" href="#gallery">Explore Gallery</a><a class="btn ghost" href="#news">Read Live News ↗</a></div>
-      <div class="stats"><div><b>✈️</b><span>Travel</span></div><div><b>🌺</b><span>Flowers</span></div><div><b>📰</b><span>News</span></div><div><b>🎥</b><span>Media</span></div></div>
-    </div>
-    <div class="hero-card">
-      <div class="hero-card-top"><span>Featured</span><span>JORAM</span></div>
-      <img src="images/flower-pair.jpg" alt="JORAM flower photography">
-      <div class="hero-card-bottom"><div><small>PHOTO STORY</small><h3>Nature • Beauty • Discovery</h3></div><a href="#gallery">View →</a></div>
-    </div>
-  </div>
-</section>
-
-<section class="section search-section">
- <div class="container">
-  <div class="search"><span>⌕</span><input id="searchBox" oninput="siteSearch()" placeholder="Search JORAM services, flowers, news, travel…"><span id="searchCount"></span></div>
- </div>
-</section>
-
-<section id="services" class="section">
-<div class="container">
- <div class="section-head"><span class="kicker">DISCOVER JORAM</span><h2>One platform, many possibilities.</h2><p>Designed to grow with your ideas, audience and online business.</p></div>
- <div class="service-grid">
-  <article class="service searchable"><span class="service-icon">✈️</span><h3>Travel & Explore</h3><p>Destinations, travel stories, guides and trip enquiries.</p><a href="#booking">Plan a journey →</a></article>
-  <article class="service searchable"><span class="service-icon">🌺</span><h3>Flowers & Nature</h3><p>Showcase your original flower photography and nature stories.</p><a href="#gallery">Open collection →</a></article>
-  <article class="service searchable"><span class="service-icon">📰</span><h3>Live News</h3><p>Refreshable news feed with links to current headlines and stories.</p><a href="#news">Open news →</a></article>
-  <article class="service searchable"><span class="service-icon">🎥</span><h3>Video & YouTube</h3><p>Build a video gallery and connect your YouTube channel.</p><a href="#videos">Watch section →</a></article>
-  <article class="service searchable"><span class="service-icon">📅</span><h3>Booking</h3><p>Simple enquiry form for travel, flowers and future services.</p><a href="#booking">Send enquiry →</a></article>
-  <article class="service searchable"><span class="service-icon">🤖</span><h3>AI Future</h3><p>A smart helper interface for visitors and recommendations.</p><a href="#https://docs.google.com/videos/d/1f0I3TVoqf36_wPUgNGbAgroA12vvuLa_AJuoydqKul8/edit?pli=1&scene=id.p#scene=id.p">Try assistant →</a></article>
- </div>
-</div>
-</section>
-
-<section id="ai" class="section dark-section">
-<div class="container ai-grid">
- <div><span class="kicker">JORAM FUTURE</span><h2>Smart help, instantly.</h2><p>Ask the demo JORAM assistant about travel, flowers, news, booking or contact.</p></div>
- <div class="ai-panel"><div class="ai-input"><input id="aiInput" placeholder="Ask: Where can I book a trip?"><button onclick="aiHelp()">Ask AI</button></div><div id="aiAnswer">Hello! I’m ready to help you explore JORAM.</div></div>
-</div>
-</section>
-
-<section id="gallery" class="section">
-<div class="container">
- <div class="section-head"><span class="kicker">JORAM PHOTOGRAPHY</span><h2>Photo Gallery</h2><p>Your uploaded images are included in this professional gallery.</p></div>
- <div class="gallery">
-  <figure><img src="images/flower-pink.jpg" alt="Pink flowers and leaves"><figcaption>Pink flower story</figcaption></figure>
-  <figure><img src="images/flower-red.jpg" alt="Red flower"><figcaption>Red bloom</figcaption></figure>
-  <figure><img src="images/flower-white-1.jpg" alt="White flower"><figcaption>White flower</figcaption></figure>
-  <figure><img src="images/flower-closeup-1.jpg" alt="Flower close-up"><figcaption>Macro detail</figcaption></figure>
-  <figure><img src="images/flower-closeup-2.jpg" alt="Flower close-up"><figcaption>Nature close-up</figcaption></figure>
-  <figure><img src="images/flower-white-2.jpg" alt="White and pink flower"><figcaption>Soft colours</figcaption></figure>
-  <figure><img src="images/flower-detail.jpg" alt="Flower detail"><figcaption>Botanical detail</figcaption></figure>
-  <figure><img src="images/joram-profile.png" alt="JORAM profile photo"><figcaption>JORAM profile</figcaption></figure>
- </div>
-</div>
-</section>
-
-<section id="videos" class="section alt">
-<div class="container">
- <div class="section-head"><span class="kicker">VIDEO GALLERY</span><h2>Watch & Share</h2><p>Add your YouTube videos or upload MP4 files into the <b>videos</b> folder.</p></div>
- <div class="video-grid">
-  <div class="video-card"><div class="video-placeholder">▶</div><h3>JORAM YouTube</h3><p>Connect your channel here.</p><a class="btn primary" href="https://www.youtube.com/results?search_query=JORAM+Jodhpur" target="_blank">Find JORAM on YouTube</a></div>
-  <div class="video-card"><div class="video-placeholder">🎥</div><h3>Your next video</h3><p>Replace this card with your own YouTube embed or local video.</p><code>&lt;video controls&gt;...&lt;/video&gt;</code></div>
-  <div class="video-card"><div class="video-placeholder">📺</div><h3>News videos</h3><p>Use this space for your news and travel video stories.</p><a class="btn ghost-dark" href="#news">Go to News</a></div>
- </div>
-</div>
-</section>
-
-<section id="news" class="section">
-<div class="container">
- <div class="section-head news-head"><div><span class="kicker">LIVE NEWS</span><h2>Latest headlines</h2><p>News cards try to refresh from a public RSS feed in your browser.</p></div><button class="btn primary" onclick="loadNews()">↻ Refresh News</button></div>
- <div id="newsGrid" class="news-grid"><div class="loading">Loading current headlines…</div></div>
- <div class="news-fallback"><a target="_blank" href="https://news.google.com/">Open Google News ↗</a> <a target="_blank" href="https://news.google.com/search?q=Jodhpur%20Rajasthan">Jodhpur News ↗</a></div>
-</div>
-</section>
-
-<section id="tools" class="section alt">
-<div class="container">
- <div class="section-head"><span class="kicker">USEFUL TOOLS</span><h2>JORAM Travel Desk</h2><p>Small interactive tools for visitors.</p></div>
- <div class="tools-grid">
-  <div class="tool"><h3>🕐 Live Time</h3><div id="bigClock" class="big-number">--:--:--</div><p>Local device time</p></div>
-  <div class="tool"><h3>🌤️ Weather</h3><div id="weather" class="tool-result">Jodhpur weather loading…</div><button class="small-btn" onclick="getWeather(true)">Refresh weather</button></div>
-  <div class="tool"><h3>💱 Quick Converter</h3><div class="convert"><input id="inr" type="number" value="1000"><select id="rate"><option value="0.0108">USD</option><option value="0.0092">EUR</option><option value="0.0085">GBP</option></select><button onclick="convertMoney()">Convert</button></div><div id="conversion" class="tool-result">≈ result</div><small>Indicative calculator; update rates for live FX.</small></div>
-  <div class="tool"><h3>📍 Jodhpur Map</h3><p>Open JORAM’s location search.</p><a class="small-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India">Open Map</a></div>
- </div>
-</div>
-</section>
-
-<section id="booking" class="section">
-<div class="container narrow">
- <div class="section-head"><span class="kicker">CONTACT JORAM</span><h2>Booking & Enquiry</h2><p>Send your request by email.</p></div>
- <form onsubmit="sendBooking(event)" class="form">
-  <div class="two"><input id="name" required placeholder="Your name"><input id="email" required type="email" placeholder="Your email"></div>
-  <div class="two"><select id="service"><option>Travel & Explore</option><option>Flowers & Nature</option><option>News / Media</option><option>Website / Digital</option><option>Other</option></select><input id="date" type="date"></div>
-  <textarea id="message" rows="6" placeholder="Tell JORAM what you need…"></textarea>
-  <button class="btn primary" type="submit">Send to JORAM →</button>
- </form>
-</div>
-</section>
-
-<section id="contact" class="section dark-section">
-<div class="container contact-grid">
- <div><span class="kicker">JORAM</span><h2>Stay connected.</h2><p>Jodhpur, Rajasthan, India</p><p>📧 <a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></p><a class="btn primary" href="mailto:navyaaitech@gmail.com">Email JORAM</a></div>
- <div class="socials">
-  <h3>YouTube & Social Media</h3>
-  <a href="https://www.youtube.com/results?search_query=JORAM+Jodhpur" target="_blank">▶️ YouTube</a>
-  <a href="https://www.instagram.com/" target="_blank">📸 Instagram</a>
-  <a href="https://www.facebook.com/" target="_blank">📘 Facebook</a>
-  <a href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India" target="_blank">📍 Jodhpur Map</a>
- </div>
-</div>
-</section>
-</main>
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 100 Music Player</title>
+    <title>Gitalk.in | Joram E-Services Portal</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --primary-color: #1db954;
-            --text-color: #ffffff;
-            --text-secondary: #b3b3b3;
+            --primary: #1a73e8;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --accent: #ff6f00;
+            --border: #dadce0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             display: flex;
-            height: 100vh;
-            overflow: hidden;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
         }
 
-        /* Sidebar / Playlist Area */
-        .sidebar {
-            width: 380px;
-            background-color: #000000;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #282828;
-        }
-
-        .sidebar-header {
-            padding: 20px;
-            border-bottom: 1px solid #282828;
-        }
-
-        .sidebar-header h2 {
+        .logo {
             font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .update-badge {
-            font-size: 0.75rem;
-            background-color: var(--primary-color);
-            color: black;
-            padding: 3px 8px;
-            border-radius: 12px;
             font-weight: bold;
+            color: var(--primary);
         }
 
-        .playlist-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 10px;
-        }
-
-        .track-item {
+        .nav-links {
             display: flex;
-            align-items: center;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-bottom: 5px;
+            list-style: none;
+            gap: 1.5rem;
         }
 
-        .track-item:hover {
-            background-color: #282828;
-        }
-
-        .track-item.active {
-            background-color: #333333;
-            color: var(--primary-color);
-        }
-
-        .track-rank {
-            width: 30px;
-            font-weight: bold;
-            color: var(--text-secondary);
-        }
-
-        .track-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            margin-right: 15px;
-            background-color: #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .track-info {
-            flex: 1;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-
-        .track-title {
-            font-size: 0.95rem;
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
             font-weight: 500;
+            transition: color 0.3s;
         }
 
-        .track-artist {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        /* Main Content / Player Area */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8)), var(--surface-color);
-            padding: 40px;
+        /* Layout Grid */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
         }
 
-        .now-playing-card {
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .album-art-large {
-            width: 300px;
-            height: 300px;
+        /* Full Width Section */
+        .full-width {
+            grid-column: span 12;
+            background: #fff;
+            padding: 1.5rem;
             border-radius: 8px;
-            margin: 0 auto 30px auto;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            background-color: #444;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Half Width Section */
+        .half-width {
+            grid-column: span 6;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        /* Search Bar */
+        .search-box {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
+            margin-top: 0.5rem;
         }
 
-        .current-title {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-
-        .current-artist {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-        }
-
-        /* Player Controls */
-        .controls-container {
-            width: 100%;
-        }
-
-        .progress-bar-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .time-stamp {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            width: 45px;
-        }
-
-        .progress-bar {
+        .search-box input {
             flex: 1;
-            height: 4px;
-            background-color: #535353;
-            border-radius: 2px;
-            cursor: pointer;
-            margin: 0 10px;
-            position: relative;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 4px 0 0 4px;
+            outline: none;
         }
 
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        .control-buttons {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .btn {
-            background: none;
+        .search-box button {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
             border: none;
-            color: var(--text-color);
+            border-radius: 0 4px 4px 0;
             cursor: pointer;
-            font-size: 1.5rem;
-            transition: color 0.2s, transform 0.1s;
         }
 
-        .btn:hover {
-            color: var(--primary-color);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        .btn-play-pause {
-            font-size: 3rem;
-            background-color: var(--text-color);
-            color: black;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
+        /* News Ticker */
+        .news-ticker {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #fff;
+            border-left: 4px solid var(--accent);
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
         }
 
-        .btn-play-pause:hover {
-            background-color: #ffffff;
-            color: black;
-            transform: scale(1.05);
+        .news-label {
+            font-weight: bold;
+            color: var(--accent);
+            margin-right: 1rem;
+            white-space: nowrap;
         }
 
-        /* Scrollbar styles */
-        ::-webkit-scrollbar {
-            width: 8px;
+        /* Grid Items (Services/Shop/Gallery) */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
         }
-        ::-webkit-scrollbar-track {
-            background: #000;
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #555;
+
+        .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
             border-radius: 4px;
+            margin-bottom: 0.5rem;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #777;
+
+        /* Video & Maps Responsive Embeds */
+        .responsive-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        .responsive-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .half-width {
+                grid-column: span 12;
+            }
+            .nav-links {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar Playlist section -->
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>Top 100 Hits</h2>
-            <span class="update-badge" id="update-date">Updated Today</span>
-        </div>
-        <div class="playlist-container" id="playlist">
-            <!-- JavaScript will populate the 100 tracks here -->
-        </div>
-    </div>
+    <nav>
+        <div class="logo">Gitalk.in</div>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#shop">Shopping</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Main Player Display section -->
-    <div class="main-content">
-        <div class="now-playing-card">
-            <div class="album-art-large" id="large-art">🎵</div>
-            <h1 class="current-title" id="current-title">Select a track</h1>
-            <p class="current-artist" id="current-artist">From the playlist</p>
+    <div class="container">
 
-            <div class="controls-container">
-                <div class="progress-bar-container">
-                    <span class="time-stamp" id="current-time">0:00</span>
-                    <div class="progress-bar" id="progress-bar">
-                        <div class="progress-fill" id="progress-fill"></div>
-                    </div>
-                    <span class="time-stamp" id="total-duration">0:00</span>
+        <div class="full-width">
+            <strong class="section-title">Google Search</strong>
+            <form action="https://www.google.com/search" method="get" target="_blank" class="search-box">
+                <input type="text" name="q" placeholder="Search the web with Google..." required>
+                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </form>
+        </div>
+
+        <div class="full-width" id="news">
+            <div class="news-ticker">
+                <span class="news-label">ENGLISH LATEST:</span>
+                <marquee behavior="scroll" direction="left">Joram E-Services expanded digital tools platform | Latest technology and shopping updates live on Gitalk.in</marquee>
+            </div>
+            <div class="news-ticker">
+                <span class="news-label">हिंदी ताज़ा ख़बर:</span>
+                <marquee behavior="scroll" direction="left">जोराम ई-सर्विसेज: आपकी सभी डिजिटल सेवाओं और ई-कॉमर्स की एक जगह | जोधपुर में सेवाएं उपलब्ध।</marquee>
+            </div>
+        </div>
+
+        <div class="full-width" id="services">
+            <strong class="section-title">JORAM E-Services</strong>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fa-solid fa-headset"></i>
+                    <h4>Online Services</h4>
+                    <p>Digital consulting & IT solutions.</p>
                 </div>
-
-                <div class="control-buttons">
-                    <button class="btn" id="btn-shuffle" title="Shuffle">🔀</button>
-                    <button class="btn" id="btn-prev" title="Previous">⏮</button>
-                    <button class="btn btn-play-pause" id="btn-play" title="Play/Pause">▶</button>
-                    <button class="btn" id="btn-next" title="Next">⏭</button>
-                    <button class="btn" id="btn-repeat" title="Repeat">🔁</button>
+                <div class="card">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <h4>Documentation</h4>
+                    <p>Online applications & processing.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <h4>Tech Support</h4>
+                    <p>Hardware and software assistance.</p>
                 </div>
             </div>
         </div>
+
+        <div class="half-width" id="tools">
+            <strong class="section-title">Web Tools</strong>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h4>Calculators</h4>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-code"></i>
+                    <h4>Dev Tools</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="half-width" id="shop">
+            <strong class="section-title">Shopping Portal</strong>
+            <div class="card-grid">
+                <div class="card">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <h4>Tech Store</h4>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-tags"></i>
+                    <h4>Deals</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="half-width">
+            <strong class="section-title">Featured Videos</strong>
+            <div class="responsive-embed">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="half-width">
+            <strong class="section-title">Google Images Gallery</strong>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="https://picsum.photos/200/150?random=1" alt="Gallery Image 1">
+                    <small>Latest Updates</small>
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/200/150?random=2" alt="Gallery Image 2">
+                    <small>Tech Center</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="half-width">
+            <strong class="section-title">Location (Jodhpur, Rajasthan)</strong>
+            <div class="responsive-embed">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114480.60533283344!2d72.95543163351911!3d26.27042296434863!2m3!1f0!0!f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418c4eaa06ccb9%3A0x8114ea5b0ea1abb2!2sJodhpur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="half-width" id="contact">
+            <strong class="section-title">Contact & Connect</strong>
+            <p><strong>Provider:</strong> JORAM E Services</p>
+            <p><strong>Email:</strong> navyaaitech@gmail.com</p>
+            <p><strong>Address:</strong> Jodhpur, Rajasthan, India</p>
+
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Hidden HTML5 Audio Component -->
-    <audio id="audio-element"></audio>
+    <footer>
+        <p>JORAM@gitalk.in</p>
+    </footer>
 
-    <script>
-        // DOM Elements
-        const playlistContainer = document.getElementById('playlist');
-        const audio = document.getElementById('audio-element');
-        const playBtn = document.getElementById('btn-play');
-        const prevBtn = document.getElementById('btn-prev');
-        const nextBtn = document.getElementById('btn-next');
-        const shuffleBtn = document.getElementById('btn-shuffle');
-        const repeatBtn = document.getElementById('btn-repeat');
-        const progressBar = document.getElementById('progress-bar');
-        const progressFill = document.getElementById('progress-fill');
-        const currentTimeEl = document.getElementById('current-time');
-        const totalDurationEl = document.getElementById('total-duration');
-        const currentTitleEl = document.getElementById('current-title');
-        const currentArtistEl = document.getElementById('current-artist');
-        const largeArtEl = document.getElementById('large-art');
-        const updateDateEl = document.getElementById('update-date');
-
-        // State Variables
-        let trackList = [];
-        let currentTrackIndex = 0;
-        let isPlaying = false;
-        let isShuffle = false;
-        let isRepeat = false;
-
-        // Auto-set the latest update timestamp
-        const options = { month: 'short', day: 'numeric', year: 'numeric' };
-        updateDateEl.innerText = `Updated: ${new Date().toLocaleDateString('en-US', options)}`;
-
-        // Generation Strategy: Dynamically simulate 100 real-looking charting tracks
-        function generateTop100Data() {
-            const genres = ['Pop', 'Hip Hop', 'Rock', 'R&B', 'Electronic', 'Indie', 'Latin'];
-            const artists = ['The Weeknd', 'Taylor Swift', 'Drake', 'Billie Eilish', 'Bad Bunny', 'Post Malone', 'SZA', 'Ed Sheeran', 'Dua Lipa', 'Harry Styles', 'Bruno Mars', 'Kendrick Lamar', 'Olivia Rodrigo', 'Justin Bieber'];
-            const songNouns = ['Heart', 'Night', 'Love', 'Light', 'Dream', 'Shadow', 'Memory', 'Sky', 'Line', 'Fire', 'Running', 'Dance'];
-						
-<footer><div class="container footer-inner"><img src="images/joram-logo.png" alt="JORAM"><div>© <span id="year"></span> JORAM • Explore • Travel • Flowers • News</div><a href="#home">Back to top ↑</a></div></footer>
-<div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightboxImg" alt=""></div>
-<script src="script.js"></script>
 </body>
 </html>
+
