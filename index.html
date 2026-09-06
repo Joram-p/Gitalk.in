@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="JORAM — Explore, Travel, Flowers, News, Media and Booking. Jodhpur, Rajasthan, India.">
+<title>JORAM | Explore • Travel • Flowers • News</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="breaking"><div class="container ticker"><span>🔴 LIVE</span><strong>JORAM NEWS</strong><div id="tickerText">Loading live headlines…</div><time id="clock"></time></div></div>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#home"><img src="images/joram-logo.png" alt="JORAM logo"></a>
+    <button class="hamb" onclick="toggleNav()">☰</button>
+    <nav id="nav">
+      <a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a>
+      <a href="#news">Live News</a><a href="#tools">Tools</a><a href="#booking">Booking</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="kicker">JORAM • JODHPUR • RAJASTHAN</span>
+      <h1>Explore the world.<br><em>Share the story.</em></h1>
+      <p class="lead">A professional digital home for travel, flowers, news, media, bookings and future online services.</p>
+      <div class="hero-buttons"><a class="btn primary" href="#gallery">Explore Gallery</a><a class="btn ghost" href="#news">Read Live News ↗</a></div>
+      <div class="stats"><div><b>✈️</b><span>Travel</span></div><div><b>🌺</b><span>Flowers</span></div><div><b>📰</b><span>News</span></div><div><b>🎥</b><span>Media</span></div></div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-top"><span>Featured</span><span>JORAM</span></div>
+      <img src="images/flower-pair.jpg" alt="JORAM flower photography">
+      <div class="hero-card-bottom"><div><small>PHOTO STORY</small><h3>Nature • Beauty • Discovery</h3></div><a href="#gallery">View →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section search-section">
+ <div class="container">
+  <div class="search"><span>⌕</span><input id="searchBox" oninput="siteSearch()" placeholder="Search JORAM services, flowers, news, travel…"><span id="searchCount"></span></div>
+ </div>
+</section>
+
+<section id="services" class="section">
+<div class="container">
+ <div class="section-head"><span class="kicker">DISCOVER JORAM</span><h2>One platform, many possibilities.</h2><p>Designed to grow with your ideas, audience and online business.</p></div>
+ <div class="service-grid">
+  <article class="service searchable"><span class="service-icon">✈️</span><h3>Travel & Explore</h3><p>Destinations, travel stories, guides and trip enquiries.</p><a href="#booking">Plan a journey →</a></article>
+  <article class="service searchable"><span class="service-icon">🌺</span><h3>Flowers & Nature</h3><p>Showcase your original flower photography and nature stories.</p><a href="#gallery">Open collection →</a></article>
+  <article class="service searchable"><span class="service-icon">📰</span><h3>Live News</h3><p>Refreshable news feed with links to current headlines and stories.</p><a href="#news">Open news →</a></article>
+  <article class="service searchable"><span class="service-icon">🎥</span><h3>Video & YouTube</h3><p>Build a video gallery and connect your YouTube channel.</p><a href="#videos">Watch section →</a></article>
+  <article class="service searchable"><span class="service-icon">📅</span><h3>Booking</h3><p>Simple enquiry form for travel, flowers and future services.</p><a href="#booking">Send enquiry →</a></article>
+  <article class="service searchable"><span class="service-icon">🤖</span><h3>AI Future</h3><p>A smart helper interface for visitors and recommendations.</p><a href="#ai">Try assistant →</a></article>
+ </div>
+</div>
+</section>
+
+<section id="ai" class="section dark-section">
+<div class="container ai-grid">
+ <div><span class="kicker">JORAM FUTURE</span><h2>Smart help, instantly.</h2><p>Ask the demo JORAM assistant about travel, flowers, news, booking or contact.</p></div>
+ <div class="ai-panel"><div class="ai-input"><input id="aiInput" placeholder="Ask: Where can I book a trip?"><button onclick="aiHelp()">Ask AI</button></div><div id="aiAnswer">Hello! I’m ready to help you explore JORAM.</div></div>
+</div>
+</section>
+
+<section id="gallery" class="section">
+<div class="container">
+ <div class="section-head"><span class="kicker">YOUR PHOTOGRAPHY</span><h2>Photo Gallery</h2><p>Your uploaded images are included in this professional gallery.</p></div>
+ <div class="gallery">
+  <figure><img src="images/flower-pink.jpg" alt="Pink flowers and leaves"><figcaption>Pink flower story</figcaption></figure>
+  <figure><img src="images/flower-red.jpg" alt="Red flower"><figcaption>Red bloom</figcaption></figure>
+  <figure><img src="images/flower-white-1.jpg" alt="White flower"><figcaption>White flower</figcaption></figure>
+  <figure><img src="images/flower-closeup-1.jpg" alt="Flower close-up"><figcaption>Macro detail</figcaption></figure>
+  <figure><img src="images/flower-closeup-2.jpg" alt="Flower close-up"><figcaption>Nature close-up</figcaption></figure>
+  <figure><img src="images/flower-white-2.jpg" alt="White and pink flower"><figcaption>Soft colours</figcaption></figure>
+  <figure><img src="images/flower-detail.jpg" alt="Flower detail"><figcaption>Botanical detail</figcaption></figure>
+  <figure><img src="images/joram-profile.png" alt="JORAM profile photo"><figcaption>JORAM profile</figcaption></figure>
+ </div>
+</div>
+</section>
+
+<section id="videos" class="section alt">
+<div class="container">
+ <div class="section-head"><span class="kicker">VIDEO GALLERY</span><h2>Watch & Share</h2><p>Add your YouTube videos or upload MP4 files into the <b>videos</b> folder.</p></div>
+ <div class="video-grid">
+  <div class="video-card"><div class="video-placeholder">▶</div><h3>JORAM YouTube</h3><p>Connect your channel here.</p><a class="btn primary" href="https://www.youtube.com/results?search_query=JORAM+Jodhpur" target="_blank">Find JORAM on YouTube</a></div>
+  <div class="video-card"><div class="video-placeholder">🎥</div><h3>Your next video</h3><p>Replace this card with your own YouTube embed or local video.</p><code>&lt;video controls&gt;...&lt;/video&gt;</code></div>
+  <div class="video-card"><div class="video-placeholder">📺</div><h3>News videos</h3><p>Use this space for your news and travel video stories.</p><a class="btn ghost-dark" href="#news">Go to News</a></div>
+ </div>
+</div>
+</section>
+
+<section id="news" class="section">
+<div class="container">
+ <div class="section-head news-head"><div><span class="kicker">LIVE NEWS</span><h2>Latest headlines</h2><p>News cards try to refresh from a public RSS feed in your browser.</p></div><button class="btn primary" onclick="loadNews()">↻ Refresh News</button></div>
+ <div id="newsGrid" class="news-grid"><div class="loading">Loading current headlines…</div></div>
+ <div class="news-fallback"><a target="_blank" href="https://news.google.com/">Open Google News ↗</a> <a target="_blank" href="https://news.google.com/search?q=Jodhpur%20Rajasthan">Jodhpur News ↗</a></div>
+</div>
+</section>
+
+<section id="tools" class="section alt">
+<div class="container">
+ <div class="section-head"><span class="kicker">USEFUL TOOLS</span><h2>JORAM Travel Desk</h2><p>Small interactive tools for visitors.</p></div>
+ <div class="tools-grid">
+  <div class="tool"><h3>🕐 Live Time</h3><div id="bigClock" class="big-number">--:--:--</div><p>Local device time</p></div>
+  <div class="tool"><h3>🌤️ Weather</h3><div id="weather" class="tool-result">Jodhpur weather loading…</div><button class="small-btn" onclick="getWeather(true)">Refresh weather</button></div>
+  <div class="tool"><h3>💱 Quick Converter</h3><div class="convert"><input id="inr" type="number" value="1000"><select id="rate"><option value="0.0108">USD</option><option value="0.0092">EUR</option><option value="0.0085">GBP</option></select><button onclick="convertMoney()">Convert</button></div><div id="conversion" class="tool-result">≈ result</div><small>Indicative calculator; update rates for live FX.</small></div>
+  <div class="tool"><h3>📍 Jodhpur Map</h3><p>Open JORAM’s location search.</p><a class="small-btn" target="_blank" href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India">Open Map</a></div>
+ </div>
+</div>
+</section>
+
+<section id="booking" class="section">
+<div class="container narrow">
+ <div class="section-head"><span class="kicker">CONTACT JORAM</span><h2>Booking & Enquiry</h2><p>Send your request by email.</p></div>
+ <form onsubmit="sendBooking(event)" class="form">
+  <div class="two"><input id="name" required placeholder="Your name"><input id="email" required type="email" placeholder="Your email"></div>
+  <div class="two"><select id="service"><option>Travel & Explore</option><option>Flowers & Nature</option><option>News / Media</option><option>Website / Digital</option><option>Other</option></select><input id="date" type="date"></div>
+  <textarea id="message" rows="6" placeholder="Tell JORAM what you need…"></textarea>
+  <button class="btn primary" type="submit">Send to JORAM →</button>
+ </form>
+</div>
+</section>
+
+<section id="contact" class="section dark-section">
+<div class="container contact-grid">
+ <div><span class="kicker">JORAM</span><h2>Stay connected.</h2><p>Jodhpur, Rajasthan, India</p><p>📧 <a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></p><a class="btn primary" href="mailto:navyaaitech@gmail.com">Email JORAM</a></div>
+ <div class="socials">
+  <h3>YouTube & Social Media</h3>
+  <a href="https://www.youtube.com/results?search_query=JORAM+Jodhpur" target="_blank">▶️ YouTube</a>
+  <a href="https://www.instagram.com/" target="_blank">📸 Instagram</a>
+  <a href="https://www.facebook.com/" target="_blank">📘 Facebook</a>
+  <a href="https://www.google.com/maps/search/?api=1&query=Jodhpur%2C%20Rajasthan%2C%20India" target="_blank">📍 Jodhpur Map</a>
+ </div>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer-inner"><img src="images/joram-logo.png" alt="JORAM"><div>© <span id="year"></span> JORAM • Explore • Travel • Flowers • News</div><a href="#home">Back to top ↑</a></div></footer>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()"><img id="lightboxImg" alt=""></div>
+<script src="script.js"></script>
+</body>
+</html>
