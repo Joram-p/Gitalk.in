@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="JORAM — premium travel, flowers, products, news and media affiliate experience.">
+<title>JORAM — Explore • Shop • Discover</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ticker"><div id="tickerText">🔴 LIVE • JORAM News & Media — Welcome to the premium Rajasthan experience</div><button id="refreshNews">Refresh</button></div>
+<header class="nav">
+  <a class="brand" href="#home"><span>J</span> JORAM</a>
+  <button class="menu" id="menuBtn">☰</button>
+  <nav id="navLinks">
+    <a href="#home">Home</a><a href="#shop">Shop</a><a href="#travel">Travel</a><a href="#flowers">Flowers</a>
+    <a href="#explore">Explore</a><a href="#news">News</a><a href="#videos">Media</a><a href="#about">About</a><a href="#contact">Contact</a>
+  </nav>
+  <button class="search-btn" id="searchBtn">⌕</button>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">PREMIUM DIGITAL JOURNAL • RAJASTHAN</p>
+    <h1>Explore beautifully.<br><em>Shop intelligently.</em></h1>
+    <p>Travel inspiration, curated products, flowers, local stories, news and media — brought together by JORAM.</p>
+    <div class="actions"><a class="btn primary" href="#shop">Explore Shop</a><a class="btn ghost" href="#travel">Discover Jodhpur</a></div>
+  </div>
+  <div class="hero-art"><div class="sun"></div><div class="fort">JORAM</div></div>
+</section>
+
+<section class="stats">
+  <div><b>10</b><span>Curated pages</span></div><div><b>30+</b><span>Affiliate slots</span></div><div><b>∞</b><span>Stories & ideas</span></div><div><b>24/7</b><span>Digital access</span></div>
+</section>
+
+<section class="section" id="shop">
+  <div class="section-head"><div><p class="eyebrow">AFFILIATE MARKETPLACE</p><h2>Shop the JORAM edit</h2></div><input id="productSearch" class="input" placeholder="Search products…"></div>
+  <div class="chips" id="categoryChips"></div><div class="product-grid" id="products"></div>
+</section>
+
+<section class="section split" id="travel">
+  <div><p class="eyebrow">TRAVEL</p><h2>Rajasthan, from your screen to your next adventure.</h2><p>Build your itinerary around forts, blue-city streets, desert landscapes, culture and unforgettable food.</p><a class="btn primary" href="#explore">Explore destinations</a></div>
+  <div class="feature-card travel-card"><span>📍 JODHPUR</span><h3>The Blue City</h3><p>Mehrangarh • Old City • Jaswant Thada • Markets</p></div>
+</section>
+
+<section class="section" id="flowers">
+  <div class="section-head"><div><p class="eyebrow">YOUR GALLERY</p><h2>Flowers in focus</h2></div><p class="muted">Replace these placeholders with your own photographs.</p></div>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<section class="section split" id="explore">
+  <div class="map-card"><iframe title="Jodhpur map" src="https://www.google.com/maps?q=Jodhpur%20Rajasthan&output=embed" loading="lazy"></iframe></div>
+  <div><p class="eyebrow">EXPLORE JODHPUR</p><h2>Plan your route.</h2><p>Use the live map to discover Jodhpur and build your own Rajasthan story.</p>
+  <div class="mini-list"><span>🏰 Mehrangarh Fort</span><span>💙 Blue City</span><span>🌅 Jaswant Thada</span><span>🛍️ Local Markets</span></div></div>
+</section>
+
+<section class="section" id="news">
+  <div class="section-head"><div><p class="eyebrow">NEWS & MEDIA</p><h2>Fresh from Rajasthan</h2></div><button class="btn ghost" id="openNews">Open news links</button></div>
+  <div class="news-grid" id="newsGrid"></div>
+</section>
+
+<section class="section" id="videos">
+  <div class="section-head"><div><p class="eyebrow">VIDEO GALLERY</p><h2>Watch & explore</h2></div></div>
+  <div class="video-grid">
+    <article class="video-card"><div class="video-placeholder">▶</div><h3>Discover Jodhpur</h3><p>Replace this card with your YouTube video ID.</p></article>
+    <article class="video-card"><div class="video-placeholder">▶</div><h3>Rajasthan Travel</h3><p>Add your favourite travel video.</p></article>
+    <article class="video-card"><div class="video-placeholder">▶</div><h3>Flower Stories</h3><p>Showcase your photography journey.</p></article>
+  </div>
+</section>
+
+<section class="section ai-section"><div><p class="eyebrow">JORAM AI</p><h2>Your digital guide.</h2><p>Ask about products, travel ideas or how to use this website.</p></div><button class="btn primary" id="aiOpen">Ask JORAM AI</button></section>
+
+<section class="section tools">
+  <div class="tool"><span>🌤️</span><h3>Weather</h3><p id="weather">Jodhpur — connect a weather API for live data.</p></div>
+  <div class="tool"><span>🕐</span><h3>Live clock</h3><p id="clock">--:--:--</p></div>
+  <div class="tool"><span>💱</span><h3>Currency</h3><div class="currency"><input id="amount" type="number" value="1"><select id="from"><option>USD</option><option>EUR</option><option>GBP</option><option>INR</option></select><span>→</span><select id="to"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option></select></div><p id="conversion">1 USD ≈ 83 INR*</p></div>
+</section>
+
+<section class="section split about" id="about">
+  <div class="profile"><div class="profile-placeholder">YOUR<br>PHOTO</div></div>
+  <div><p class="eyebrow">ABOUT JORAM</p><h2>A premium home for your ideas.</h2><p>Use this section for your profile, story, social links and brand introduction. Your uploaded profile photograph can replace the placeholder.</p><a class="btn ghost" href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a></div>
+</section>
+
+<section class="section contact" id="contact">
+  <div><p class="eyebrow">BOOKING / ENQUIRY</p><h2>Let's create the next story.</h2><p>Send an enquiry directly from the site.</p></div>
+  <form id="enquiry"><input required placeholder="Your name"><input required type="email" placeholder="Email address"><select><option>Travel enquiry</option><option>Affiliate partnership</option><option>Photography / Gallery</option><option>General enquiry</option></select><textarea required placeholder="Tell us what you need…"></textarea><button class="btn primary">Send enquiry</button></form>
+</section>
+</main>
+
+<footer><div class="brand"><span>J</span> JORAM</div><p>Travel • Explore • Flowers • News • Media • Affiliate</p><p>© <span id="year"></span> JORAM. Affiliate links may earn a commission.</p></footer>
+
+<div class="modal" id="searchModal"><div class="modal-box"><button class="close">×</button><h2>Search JORAM</h2><input id="globalSearch" class="input" autofocus placeholder="Search shop, travel, flowers, news…"><div id="searchResults"></div></div></div>
+<div class="modal" id="lightbox"><button class="close">×</button><img id="lightboxImg" alt=""></div>
+<div class="modal" id="aiModal"><div class="modal-box ai-box"><button class="close">×</button><h2>🤖 JORAM AI</h2><div id="chat"><div class="bubble">Hello! I'm the JORAM assistant. Ask me about shopping, travel, flowers or this website.</div></div><form id="chatForm"><input id="chatInput" placeholder="Ask JORAM…"><button class="btn primary">Send</button></form></div></div>
+
+<script src="script.js"></script>
+</body></html>
