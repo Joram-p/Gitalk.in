@@ -1,29 +1,16 @@
-# JORAM Premium Affiliate Website
+# Gitalk.in Affiliate HTML + CSS
 
-Open `index.html` in a browser. No build system is required.
+Files:
+- index.html — complete responsive affiliate-style storefront
+- style.css — responsive premium ecommerce styling
+- assets/logo.png — supplied Gitalk.in logo
 
-## Included
-- Responsive premium UI/UX
-- 10-section/page-style experience: Home, Shop, Travel, Flowers, Explore, News, Media, AI, About, Contact
-- 30 products: 6 groups × 5 products
-- Affiliate CTA placeholders
-- Product search + category filtering
-- Flower gallery + lightbox
-- Jodhpur Google Maps embed
-- Live India clock
-- Currency calculator
-- News links and refreshable ticker
-- JORAM AI-style demo assistant
-- Booking/enquiry UI
-- Mobile navigation
+The 21 unique Amazon destinations supplied in the conversation are included exactly as outbound links.
+Duplicate ASIN links were removed.
 
-## Customize
-1. Replace `YOUR PHOTO` with your profile image.
-2. Replace the flower image URLs in `script.js` with your own photographs.
-3. Replace each Amazon placeholder URL with your actual affiliate URL.
-4. Add your YouTube video IDs in the video section.
-5. Connect the enquiry form to Formspree, Netlify Forms, your backend, or email service.
-6. For true live weather/news/currency, connect approved APIs and keep API keys server-side where required.
-
-## Important
-The demo uses public Unsplash images and generic Amazon India destination links. These are placeholders, not your personal affiliate links.
+Important:
+- The product cards intentionally do not invent Amazon product names, prices or product photos.
+- Replace the generic product titles with verified Amazon/Associates catalog data when available.
+- If you have an Amazon Associates tracking ID, use your Associates-generated URLs for proper attribution.
+- Replace the placeholder YouTube, Instagram and Facebook URLs with your real profiles.
+- UPI button uses: 8940270189@nye
