@@ -17,11 +17,12 @@
       font-family: Arial, sans-serif;
       background: #f0f2f5;
       color: #222;
+      padding-bottom: 70px;
     }
 
-    button {
+    button,
+    label {
       cursor: pointer;
-      border: none;
     }
 
     /* HEADER */
@@ -42,11 +43,26 @@
       font-weight: bold;
     }
 
+    .headerRight {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     #userEmail {
-      font-size: 12px;
-      max-width: 150px;
+      font-size: 13px;
+      max-width: 180px;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #logoutBtn {
+      background: white;
+      color: #1877f2;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: bold;
     }
 
     /* AUTH */
@@ -55,22 +71,22 @@
       margin: 50px auto;
       background: white;
       padding: 25px;
-      border-radius: 12px;
+      border-radius: 14px;
       box-shadow: 0 2px 10px #ccc;
     }
 
     #authSection h2 {
       text-align: center;
-      margin-bottom: 20px;
       color: #1877f2;
+      margin-bottom: 20px;
     }
 
     #authSection input {
       width: 100%;
       padding: 13px;
-      margin: 8px 0;
+      margin: 7px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 9px;
       font-size: 15px;
     }
 
@@ -79,22 +95,23 @@
       padding: 13px;
       background: #1877f2;
       color: white;
-      border-radius: 8px;
+      border-radius: 9px;
       margin-top: 10px;
       font-size: 16px;
       font-weight: bold;
     }
 
     #authMessage {
-      margin-top: 12px;
       text-align: center;
+      margin-top: 12px;
       font-size: 14px;
+      word-break: break-word;
     }
 
     .switchAuth {
       text-align: center;
-      margin-top: 15px;
       color: #1877f2;
+      margin-top: 16px;
       cursor: pointer;
     }
 
@@ -104,126 +121,177 @@
       max-width: 650px;
       margin: auto;
       padding: 15px;
-      padding-bottom: 80px;
     }
 
     /* CREATE POST */
     .createPost {
       background: white;
       padding: 15px;
-      border-radius: 12px;
+      border-radius: 14px;
       margin-bottom: 15px;
-      box-shadow: 0 1px 4px #ccc;
+      box-shadow: 0 1px 5px #ccc;
     }
 
-    .createPost textarea {
+    #postText {
       width: 100%;
-      min-height: 90px;
-      padding: 12px;
+      min-height: 110px;
       resize: vertical;
+      padding: 13px;
       border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 15px;
+      border-radius: 11px;
+      font-size: 17px;
+      outline: none;
     }
 
-    .postButtons {
+    #postText:focus {
+      border-color: #1877f2;
+    }
+
+    .mediaButtons {
       display: flex;
-      gap: 8px;
-      margin-top: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
     }
 
-    .postButtons button {
+    .mediaButton {
       flex: 1;
-      min-width: 120px;
-      padding: 11px;
-      border-radius: 8px;
+      padding: 13px;
       background: #f0f2f5;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
       font-weight: bold;
     }
 
-    .postBtn {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      background: #1877f2 !important;
-      color: white;
-      border-radius: 8px;
-      font-size: 16px;
+    .mediaButton:active {
+      background: #dfe3e8;
     }
 
-    /* POST */
+    .createBtn {
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      background: #1877f2;
+      color: white;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    #uploadStatus {
+      display: none;
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      background: #eef5ff;
+      color: #1877f2;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* POSTS */
     .post {
       background: white;
-      border-radius: 12px;
-      margin-bottom: 15px;
+      border-radius: 14px;
       padding: 15px;
-      box-shadow: 0 1px 4px #ccc;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 5px #ccc;
     }
 
     .postHeader {
-      font-weight: bold;
-      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .postUser {
       color: #1877f2;
+      font-weight: bold;
+    }
+
+    .postDate {
+      color: #777;
+      font-size: 12px;
     }
 
     .postText {
-      margin-bottom: 10px;
       white-space: pre-wrap;
       word-break: break-word;
+      margin-bottom: 10px;
+      font-size: 16px;
     }
 
     .post img {
       width: 100%;
-      max-height: 500px;
-      object-fit: cover;
+      max-height: 600px;
+      object-fit: contain;
       border-radius: 10px;
-      margin-top: 8px;
+      background: #000;
+      display: block;
     }
 
     .post video {
       width: 100%;
-      max-height: 500px;
+      max-height: 600px;
       border-radius: 10px;
-      margin-top: 8px;
       background: #000;
+      display: block;
     }
 
     .postActions {
       display: flex;
       gap: 8px;
       margin-top: 12px;
-      border-top: 1px solid #eee;
       padding-top: 10px;
+      border-top: 1px solid #eee;
     }
 
     .postActions button {
       flex: 1;
-      padding: 9px;
+      padding: 10px 5px;
       background: #f0f2f5;
-      border-radius: 7px;
+      border-radius: 8px;
       font-weight: bold;
+      font-size: 14px;
     }
 
+    .postActions button.liked {
+      color: #1877f2;
+    }
+
+    /* COMMENTS */
     .comments {
       margin-top: 10px;
     }
 
     .comment {
       background: #f0f2f5;
-      padding: 8px;
-      margin-top: 5px;
       border-radius: 8px;
+      padding: 9px;
+      margin-top: 6px;
       font-size: 14px;
+    }
+
+    .commentUser {
+      font-weight: bold;
+      color: #1877f2;
+    }
+
+    .emptyFeed {
+      background: white;
+      padding: 35px 15px;
+      text-align: center;
+      border-radius: 14px;
+      color: #777;
     }
 
     /* BOTTOM NAV */
     .bottomNav {
       position: fixed;
-      bottom: 0;
       left: 0;
       right: 0;
-      height: 58px;
+      bottom: 0;
+      height: 62px;
       background: white;
       border-top: 1px solid #ddd;
       display: flex;
@@ -234,32 +302,18 @@
 
     .bottomNav button {
       background: none;
-      font-size: 13px;
       color: #555;
+      font-size: 13px;
     }
 
-    /* LOGOUT */
-    #logoutBtn {
-      background: white;
-      color: #1877f2;
-      padding: 7px 10px;
-      border-radius: 7px;
-      font-weight: bold;
+    .bottomNav span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 2px;
     }
 
-    /* STATUS */
-    #uploadStatus {
-      margin-top: 10px;
-      padding: 8px;
-      text-align: center;
-      font-size: 14px;
-      display: none;
-    }
-
+    /* MOBILE */
     @media (max-width: 600px) {
-      #appSection {
-        padding: 10px;
-      }
 
       header {
         padding: 10px;
@@ -267,6 +321,18 @@
 
       .logo {
         font-size: 22px;
+      }
+
+      #userEmail {
+        max-width: 120px;
+      }
+
+      #appSection {
+        padding: 10px;
+      }
+
+      .post {
+        padding: 12px;
       }
     }
   </style>
@@ -276,21 +342,34 @@
 
 <!-- HEADER -->
 <header>
-  <div class="logo">Gitalk.in</div>
 
-  <div>
+  <div class="logo">
+    Gitalk.in
+  </div>
+
+  <div class="headerRight">
+
     <span id="userEmail"></span>
-    <button id="logoutBtn" onclick="logout()" style="display:none;">
+
+    <button
+      id="logoutBtn"
+      onclick="logout()"
+      style="display:none;"
+    >
       Logout
     </button>
+
   </div>
+
 </header>
 
 
 <!-- LOGIN / SIGNUP -->
 <section id="authSection">
 
-  <h2 id="authTitle">Login to Gitalk</h2>
+  <h2 id="authTitle">
+    Login to Gitalk
+  </h2>
 
   <input
     type="email"
@@ -306,13 +385,21 @@
     autocomplete="current-password"
   >
 
-  <button class="authBtn" id="authButton" onclick="login()">
+  <button
+    class="authBtn"
+    id="authButton"
+    onclick="login()"
+  >
     Login
   </button>
 
   <div id="authMessage"></div>
 
-  <div class="switchAuth" onclick="toggleAuth()">
+  <div
+    class="switchAuth"
+    id="switchAuth"
+    onclick="toggleAuth()"
+  >
     Create new account
   </div>
 
@@ -330,21 +417,28 @@
       placeholder="What's on your mind?"
     ></textarea>
 
-    <!-- PHOTO / VIDEO BUTTONS -->
-    <div class="postButtons">
 
-      <button onclick="selectPhoto()">
+    <!-- PHOTO / VIDEO -->
+    <div class="mediaButtons">
+
+      <label
+        for="photoInput"
+        class="mediaButton"
+      >
         📷 Photo
-      </button>
+      </label>
 
-      <button onclick="selectVideo()">
+      <label
+        for="videoInput"
+        class="mediaButton"
+      >
         🎥 Video
-      </button>
+      </label>
 
     </div>
 
 
-    <!-- HIDDEN PHOTO INPUT -->
+    <!-- PHOTO INPUT -->
     <input
       type="file"
       id="photoInput"
@@ -354,7 +448,7 @@
     >
 
 
-    <!-- HIDDEN VIDEO INPUT -->
+    <!-- VIDEO INPUT -->
     <input
       type="file"
       id="videoInput"
@@ -364,13 +458,13 @@
     >
 
 
-    <!-- UPLOAD STATUS -->
+    <!-- STATUS -->
     <div id="uploadStatus"></div>
 
 
-    <!-- TEXT POST -->
+    <!-- CREATE TEXT POST -->
     <button
-      class="postBtn"
+      class="createBtn"
       onclick="createPost()"
     >
       ➕ Create Post
@@ -382,14 +476,8 @@
   <!-- FEED -->
   <div id="feed">
 
-    <div class="post">
-      <div class="postHeader">
-        Gitalk Social
-      </div>
-
-      <div class="postText">
-        Welcome to Gitalk Social ❤️
-      </div>
+    <div class="emptyFeed">
+      Loading Gitalk Social...
     </div>
 
   </div>
@@ -401,301 +489,35 @@
 <div class="bottomNav">
 
   <button onclick="goHome()">
-    🏠<br>Home
+    <span>🏠</span>
+    Home
   </button>
 
   <button onclick="goProfile()">
-    👤<br>Profile
+    <span>👤</span>
+    Profile
   </button>
 
   <button onclick="goFriends()">
-    👥<br>Friends
+    <span>👥</span>
+    Friends
   </button>
 
   <button onclick="goMessages()">
-    💬<br>Messages
+    <span>💬</span>
+    Messages
   </button>
 
   <button onclick="goSettings()">
-    ⚙️<br>Settings
+    <span>⚙️</span>
+    Settings
   </button>
 
 </div>
 
 
-<!-- FIREBASE -->
-<script type="module">
-
-  import {
-    initializeApp
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-  import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-  import {
-    getFirestore,
-    doc,
-    setDoc,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
-  /* FIREBASE CONFIG */
-
-  const firebaseConfig = {
-
-    apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
-
-    authDomain: "gitalk-social-3a85a.firebaseapp.com",
-
-    projectId: "gitalk-social-3a85a",
-
-    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
-
-    messagingSenderId: "553434284005",
-
-    appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
-
-  };
-
-
-  /* INITIALIZE */
-
-  const app = initializeApp(firebaseConfig);
-
-  const auth = getAuth(app);
-
-  const db = getFirestore(app);
-
-
-  /* AUTH MODE */
-
-  let signupMode = false;
-
-
-  window.toggleAuth = function() {
-
-    signupMode = !signupMode;
-
-    const title = document.getElementById("authTitle");
-    const button = document.getElementById("authButton");
-    const switchText = document.querySelector(".switchAuth");
-
-    document.getElementById("authMessage").innerText = "";
-
-    if (signupMode) {
-
-      title.innerText = "Create Gitalk Account";
-
-      button.innerText = "Sign Up";
-
-      button.onclick = signup;
-
-      switchText.innerText = "Already have an account? Login";
-
-    } else {
-
-      title.innerText = "Login to Gitalk";
-
-      button.innerText = "Login";
-
-      button.onclick = login;
-
-      switchText.innerText = "Create new account";
-
-    }
-
-  };
-
-
-  /* SIGNUP */
-
-  window.signup = async function() {
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const password =
-      document.getElementById("password").value;
-
-
-    if (!email || !password) {
-
-      showAuthMessage("Email और password डालें.");
-
-      return;
-    }
-
-
-    if (password.length < 6) {
-
-      showAuthMessage("Password कम से कम 6 characters का होना चाहिए.");
-
-      return;
-    }
-
-
-    try {
-
-      showAuthMessage("Account बनाया जा रहा है...");
-
-      const userCredential =
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-      const user = userCredential.user;
-
-
-      /* USER PROFILE */
-
-      await setDoc(
-        doc(db, "users", user.uid),
-        {
-          uid: user.uid,
-          email: user.email,
-          displayName: "Gitalk User",
-          photoURL: "",
-          createdAt: serverTimestamp()
-        }
-      );
-
-
-      showAuthMessage("Account successfully created ❤️");
-
-    } catch (error) {
-
-      showAuthMessage(
-        "Error: " + error.message
-      );
-
-    }
-
-  };
-
-
-  /* LOGIN */
-
-  window.login = async function() {
-
-    const email =
-      document.getElementById("email").value.trim();
-
-    const password =
-      document.getElementById("password").value;
-
-
-    if (!email || !password) {
-
-      showAuthMessage("Email और password डालें.");
-
-      return;
-    }
-
-
-    try {
-
-      showAuthMessage("Login हो रहा है...");
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      showAuthMessage("Login successful ❤️");
-
-    } catch (error) {
-
-      showAuthMessage(
-        "Login Error: " + error.message
-      );
-
-    }
-
-  };
-
-
-  /* LOGOUT */
-
-  window.logout = async function() {
-
-    try {
-
-      await signOut(auth);
-
-    } catch (error) {
-
-      alert(error.message);
-
-    }
-
-  };
-
-
-  /* AUTH STATE */
-
-  onAuthStateChanged(auth, function(user) {
-
-    const authSection =
-      document.getElementById("authSection");
-
-    const appSection =
-      document.getElementById("appSection");
-
-    const logoutBtn =
-      document.getElementById("logoutBtn");
-
-    const userEmail =
-      document.getElementById("userEmail");
-
-
-    if (user) {
-
-      authSection.style.display = "none";
-
-      appSection.style.display = "block";
-
-      logoutBtn.style.display = "inline-block";
-
-      userEmail.innerText = user.email;
-
-    } else {
-
-      authSection.style.display = "block";
-
-      appSection.style.display = "none";
-
-      logoutBtn.style.display = "none";
-
-      userEmail.innerText = "";
-
-    }
-
-  });
-
-
-  function showAuthMessage(message) {
-
-    document.getElementById(
-      "authMessage"
-    ).innerText = message;
-
-  }
-
-</script>
-
-
-<!-- MAIN SCRIPT -->
+<!-- ONLY ONE JAVASCRIPT FILE -->
 <script type="module" src="script.js"></script>
 
 </body>
-     </html>
+</html>
