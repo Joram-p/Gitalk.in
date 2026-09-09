@@ -501,14 +501,29 @@ window.showLogin = function () {
 
     <div class="post-actions">
 
-        <button onclick="addPhoto()">
-            📷 Photo
-        </button>
+        <button onclick="selectPhoto()">
+    📷 Photo
+</button>
 
+<button onclick="selectVideo()">
+    🎥 Video
+</button>
 
-        <button onclick="addVideo()">
-            🎥 Video
-        </button>
+<input
+    type="file"
+    id="photoInput"
+    accept="image/*"
+    style="display:none;"
+    onchange="handlePhoto(event)"
+>
+
+<input
+    type="file"
+    id="videoInput"
+    accept="video/*"
+    style="display:none;"
+    onchange="handleVideo(event)"
+>
 
 
         <button onclick="createPost()">
