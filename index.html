@@ -1,1055 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
+  <title>Gitalk.in - Social Media</title>
 
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+  <meta
+    name="description"
+    content="Gitalk.in - Connect, Share and Enjoy"
+  >
 
-<title>Gitalk.in - Social Media</title>
-
-<meta
-  name="description"
-  content="Gitalk.in Social Media - Connect, Share and Enjoy"
-/>
-
-
-<style>
-
-/* =========================
-   RESET
-========================= */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-  background:#f4f5f7;
-  color:#222;
-  transition:.3s;
-}
-
-button,
-input,
-textarea{
-  font-family:inherit;
-}
-
-
-/* =========================
-   AUTH PAGE
-========================= */
-
-#authPage{
-
-  min-height:100vh;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff,
-      #ffe8ee
-    );
-
-}
-
-
-.authBox{
-
-  width:100%;
-
-  max-width:420px;
-
-  background:#fff;
-
-  padding:30px;
-
-  border-radius:24px;
-
-  box-shadow:
-    0 10px 35px rgba(0,0,0,.12);
-
-}
-
-
-.authLogo{
-
-  text-align:center;
-
-  font-size:34px;
-
-  font-weight:bold;
-
-  color:#ff0050;
-
-  margin-bottom:8px;
-
-}
-
-
-.authSubtitle{
-
-  text-align:center;
-
-  color:#777;
-
-  margin-bottom:25px;
-
-}
-
-
-.authBox h2{
-
-  margin-bottom:15px;
-
-}
-
-
-.authBox input{
-
-  width:100%;
-
-  padding:14px;
-
-  margin-bottom:12px;
-
-  border:1px solid #ddd;
-
-  border-radius:12px;
-
-  font-size:15px;
-
-  outline:none;
-
-}
-
-
-.authBox input:focus{
-
-  border-color:#ff0050;
-
-}
-
-
-.mainBtn{
-
-  width:100%;
-
-  border:0;
-
-  padding:14px;
-
-  background:#ff0050;
-
-  color:#fff;
-
-  border-radius:25px;
-
-  font-size:16px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-
-.mainBtn:hover{
-
-  background:#e60046;
-
-}
-
-
-.switchText{
-
-  text-align:center;
-
-  margin-top:18px;
-
-  color:#777;
-
-}
-
-
-.switchText button{
-
-  border:0;
-
-  background:none;
-
-  color:#ff0050;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-}
-
-
-/* =========================
-   APP
-========================= */
-
-#appPage{
-
-  display:none;
-
-  min-height:100vh;
-
-  padding-bottom:80px;
-
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header{
-
-  height:68px;
-
-  background:#fff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  padding:0 18px;
-
-  position:sticky;
-
-  top:0;
-
-  z-index:1000;
-
-  box-shadow:
-    0 2px 10px rgba(0,0,0,.08);
-
-}
-
-
-.logo{
-
-  color:#ff0050;
-
-  font-size:26px;
-
-  font-weight:bold;
-
-}
-
-
-.headerRight{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-}
-
-
-.userEmail{
-
-  font-size:13px;
-
-  color:#777;
-
-  max-width:190px;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-
-  white-space:nowrap;
-
-}
-
-
-.logoutBtn{
-
-  border:0;
-
-  background:#333;
-
-  color:white;
-
-  padding:10px 16px;
-
-  border-radius:25px;
-
-  cursor:pointer;
-
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.container{
-
-  width:100%;
-
-  max-width:700px;
-
-  margin:auto;
-
-  padding:15px;
-
-}
-
-
-.page{
-
-  display:none;
-
-}
-
-
-.page.active{
-
-  display:block;
-
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.card{
-
-  background:#fff;
-
-  border-radius:20px;
-
-  padding:20px;
-
-  margin-bottom:15px;
-
-  box-shadow:
-    0 3px 12px rgba(0,0,0,.07);
-
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-.profileCard{
-
-  text-align:center;
-
-}
-
-
-.profilePhoto{
-
-  width:120px;
-
-  height:120px;
-
-  object-fit:cover;
-
-  border-radius:50%;
-
-  border:4px solid #ff0050;
-
-  background:#eee;
-
-}
-
-
-.profileCard h2{
-
-  margin-top:12px;
-
-  font-size:25px;
-
-}
-
-
-.profileUsername{
-
-  color:#ff0050;
-
-  margin-top:5px;
-
-}
-
-
-.profileBio{
-
-  color:#777;
-
-  margin-top:8px;
-
-  line-height:1.5;
-
-}
-
-
-.profileLocation{
-
-  color:#777;
-
-  margin-top:8px;
-
-}
-
-
-.profileWebsite{
-
-  display:inline-block;
-
-  color:#1677ff;
-
-  margin-top:8px;
-
-  text-decoration:none;
-
-}
-
-
-.profileButtons{
-
-  margin-top:15px;
-
-  display:flex;
-
-  justify-content:center;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-
-}
-
-
-.actionBtn{
-
-  border:0;
-
-  padding:11px 18px;
-
-  border-radius:25px;
-
-  background:#ff0050;
-
-  color:#fff;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
-}
-
-
-.actionBtn.secondary{
-
-  background:#eee;
-
-  color:#333;
-
-}
-
-
-/* =========================
-   CREATE POST
-========================= */
-
-.postTextarea{
-
-  width:100%;
-
-  min-height:100px;
-
-  resize:none;
-
-  border:1px solid #ddd;
-
-  border-radius:14px;
-
-  padding:14px;
-
-  font-size:15px;
-
-  outline:none;
-
-}
-
-
-.postTextarea:focus{
-
-  border-color:#ff0050;
-
-}
-
-
-/* =========================
-   FORM
-========================= */
-
-.formGroup{
-
-  margin-bottom:16px;
-
-}
-
-
-.formGroup label{
-
-  display:block;
-
-  margin-bottom:7px;
-
-  font-weight:bold;
-
-}
-
-
-.formGroup input,
-.formGroup textarea,
-.formGroup select{
-
-  width:100%;
-
-  padding:13px;
-
-  border:1px solid #ddd;
-
-  border-radius:12px;
-
-  outline:none;
-
-  font-size:15px;
-
-}
-
-
-.formGroup textarea{
-
-  min-height:100px;
-
-  resize:vertical;
-
-}
-
-
-/* =========================
-   PROFILE UPLOAD
-========================= */
-
-.uploadArea{
-
-  text-align:center;
-
-  padding:10px 0 20px;
-
-}
-
-
-.editPhoto{
-
-  width:125px;
-
-  height:125px;
-
-  object-fit:cover;
-
-  border-radius:50%;
-
-  border:4px solid #ff0050;
-
-  display:block;
-
-  margin:auto;
-
-  background:#eee;
-
-}
-
-
-.uploadButton{
-
-  display:inline-block;
-
-  margin-top:15px;
-
-  padding:11px 20px;
-
-  background:#ff0050;
-
-  color:#fff;
-
-  border-radius:25px;
-
-  cursor:pointer;
-
-  font-weight:bold;
-
-}
-
-
-#profileImageInput{
-
-  display:none;
-
-}
-
-
-#uploadStatus{
-
-  margin-top:10px;
-
-  font-size:13px;
-
-  color:#777;
-
-}
-
-
-/* =========================
-   SETTINGS
-========================= */
-
-.settingsTitle{
-
-  margin-bottom:20px;
-
-}
-
-
-.setting{
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  padding:16px 5px;
-
-  border-bottom:1px solid #eee;
-
-}
-
-
-.setting:last-child{
-
-  border-bottom:0;
-
-}
-
-
-.settingText{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-}
-
-
-.settingIcon{
-
-  font-size:23px;
-
-}
-
-
-.settingText small{
-
-  display:block;
-
-  color:#888;
-
-  margin-top:4px;
-
-}
-
-
-/* =========================
-   TOGGLE
-========================= */
-
-.switch{
-
-  position:relative;
-
-  width:48px;
-
-  height:26px;
-
-}
-
-
-.switch input{
-
-  display:none;
-
-}
-
-
-.slider{
-
-  position:absolute;
-
-  inset:0;
-
-  background:#ccc;
-
-  border-radius:30px;
-
-  cursor:pointer;
-
-}
-
-
-.slider:before{
-
-  content:"";
-
-  position:absolute;
-
-  width:20px;
-
-  height:20px;
-
-  top:3px;
-
-  left:3px;
-
-  background:#fff;
-
-  border-radius:50%;
-
-  transition:.3s;
-
-}
-
-
-.switch input:checked + .slider{
-
-  background:#ff0050;
-
-}
-
-
-.switch input:checked + .slider:before{
-
-  transform:translateX(22px);
-
-}
-
-
-/* =========================
-   BOTTOM NAV
-========================= */
-
-.bottomNav{
-
-  position:fixed;
-
-  left:0;
-
-  right:0;
-
-  bottom:0;
-
-  height:68px;
-
-  background:#fff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-around;
-
-  box-shadow:
-    0 -3px 12px rgba(0,0,0,.1);
-
-  z-index:2000;
-
-}
-
-
-.bottomNav button{
-
-  border:0;
-
-  background:none;
-
-  cursor:pointer;
-
-  font-size:13px;
-
-  color:#333;
-
-}
-
-
-.bottomNav button div{
-
-  font-size:22px;
-
-  margin-bottom:3px;
-
-}
-
-
-/* =========================
-   DARK MODE
-========================= */
-
-body.dark{
-
-  background:#111;
-
-  color:#fff;
-
-}
-
-
-body.dark header,
-body.dark .card,
-body.dark .bottomNav{
-
-  background:#1e1e1e;
-
-  color:#fff;
-
-}
-
-
-body.dark input,
-body.dark textarea,
-body.dark select{
-
-  background:#292929;
-
-  color:#fff;
-
-  border-color:#444;
-
-}
-
-
-body.dark .actionBtn.secondary{
-
-  background:#333;
-
-  color:#fff;
-
-}
-
-
-body.dark .setting{
-
-  border-color:#333;
-
-}
-
-
-body.dark .bottomNav button{
-
-  color:#fff;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px){
-
-  header{
-
-    padding:0 12px;
-
-  }
-
-  .logo{
-
-    font-size:23px;
-
-  }
-
-  .userEmail{
-
-    display:none;
-
-  }
-
-  .container{
-
-    padding:10px;
-
-  }
-
-  .authBox{
-
-    padding:25px 20px;
-
-  }
-
-}
-
-</style>
-
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     AUTH SECTION
+===================================================== -->
 
-<!-- ==================================================
-     LOGIN / SIGNUP
-================================================== -->
+<section id="authSection">
 
-<div id="authPage">
-
-  <div class="authBox">
-
-    <div class="authLogo">
-      Gitalk.in
-    </div>
-
-    <div class="authSubtitle">
-      Connect • Share • Enjoy ❤️
-    </div>
-
-
-    <!-- LOGIN -->
-
-    <div id="loginBox">
-
-      <h2>
-        🔐 Login
-      </h2>
-
-      <input
-        id="loginEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-      >
-
-      <input
-        id="loginPassword"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password"
-      >
-
-      <button
-        class="mainBtn"
-        onclick="login()"
-      >
-        Login
-      </button>
-
-      <div class="switchText">
-
-        Don't have an account?
-
-        <button onclick="showSignup()">
-          Create Account
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- SIGNUP -->
+  <div style="text-align:center;margin-bottom:25px;">
 
     <div
-      id="signupBox"
-      style="display:none;"
+      style="
+        font-size:36px;
+        font-weight:800;
+        color:#1877f2;
+        margin-bottom:5px;
+      "
+    >
+      Gitalk.in ❤️
+    </div>
+
+    <p style="color:#65676b;">
+      Connect • Share • Enjoy
+    </p>
+
+  </div>
+
+
+  <!-- LOGIN -->
+
+  <div id="loginBox">
+
+    <h2>🔐 Login</h2>
+
+    <input
+      id="loginEmail"
+      type="email"
+      placeholder="Email address"
+      autocomplete="email"
     >
 
-      <h2>
-        ❤️ Create Account
-      </h2>
+    <input
+      id="loginPassword"
+      type="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    >
 
-      <input
-        id="signupName"
-        type="text"
-        placeholder="Your Name"
-      >
+    <button
+      class="authBtn"
+      onclick="login()"
+    >
+      Login
+    </button>
 
-      <input
-        id="signupEmail"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-      >
-
-      <input
-        id="signupPassword"
-        type="password"
-        placeholder="Password - minimum 6 characters"
-        autocomplete="new-password"
-      >
-
-      <button
-        class="mainBtn"
-        onclick="signup()"
-      >
-        Create Account
-      </button>
-
-      <div class="switchText">
-
-        Already have an account?
-
-        <button onclick="showLogin()">
-          Login
-        </button>
-
-      </div>
-
+    <div
+      class="switchAuth"
+      onclick="showSignup()"
+    >
+      Create New Account
     </div>
 
   </div>
 
-</div>
+
+  <!-- SIGNUP -->
+
+  <div
+    id="signupBox"
+    style="display:none;"
+  >
+
+    <h2>❤️ Create Account</h2>
+
+    <input
+      id="signupName"
+      type="text"
+      placeholder="Your name"
+      maxlength="50"
+    >
+
+    <input
+      id="signupEmail"
+      type="email"
+      placeholder="Email address"
+      autocomplete="email"
+    >
+
+    <input
+      id="signupPassword"
+      type="password"
+      placeholder="Password - minimum 6 characters"
+      autocomplete="new-password"
+    >
+
+    <button
+      class="authBtn"
+      onclick="signup()"
+    >
+      Create Account
+    </button>
+
+    <div
+      class="switchAuth"
+      onclick="showLogin()"
+    >
+      Already have an account? Login
+    </div>
+
+  </div>
+
+
+  <div id="authMessage"></div>
+
+</section>
 
 
 
-<!-- ==================================================
+<!-- =====================================================
      MAIN APP
-================================================== -->
+===================================================== -->
 
-<div id="appPage">
+<section id="appSection">
 
 
   <!-- HEADER -->
@@ -1062,13 +149,10 @@ body.dark .bottomNav button{
 
     <div class="headerRight">
 
-      <span
-        id="userEmail"
-        class="userEmail"
-      ></span>
+      <span id="userEmail"></span>
 
       <button
-        class="logoutBtn"
+        id="logoutBtn"
         onclick="logout()"
       >
         Logout
@@ -1080,615 +164,645 @@ body.dark .bottomNav button{
 
 
 
-  <main class="container">
+  <!-- ===================================================
+       HOME / FEED
+  =================================================== -->
+
+  <div id="homePage" class="appPage">
+
+    <!-- CREATE POST -->
+
+    <div class="createPost">
+
+      <h3 style="margin-bottom:12px;">
+        📝 Create Post
+      </h3>
+
+      <textarea
+        id="postText"
+        placeholder="What's on your mind?"
+        maxlength="5000"
+      ></textarea>
 
 
-    <!-- ==================================================
-         HOME
-    ================================================== -->
+      <!-- MEDIA BUTTONS -->
 
-    <section
-      id="homePage"
-      class="page active"
-    >
+      <div class="mediaButtons">
 
-      <div class="card profileCard">
-
-        <img
-          id="homePhoto"
-          class="profilePhoto"
-          src="https://via.placeholder.com/150"
-          alt="Profile Photo"
+        <label
+          class="mediaButton"
+          for="photoInput"
         >
+          📷 Photo
+        </label>
 
-        <h2 id="homeName">
-          Gitalk User
-        </h2>
-
-        <div
-          id="homeUsername"
-          class="profileUsername"
+        <label
+          class="mediaButton"
+          for="videoInput"
         >
-          @username
-        </div>
-
-        <div
-          id="homeBio"
-          class="profileBio"
-        >
-          Welcome to Gitalk Social ❤️
-        </div>
-
-        <div class="profileButtons">
-
-          <button
-            class="actionBtn"
-            onclick="showPage('profilePage')"
-          >
-            👤 My Profile
-          </button>
-
-          <button
-            class="actionBtn secondary"
-            onclick="showPage('editPage')"
-          >
-            ✏️ Edit Profile
-          </button>
-
-        </div>
+          🎥 Video
+        </label>
 
       </div>
 
 
-      <div class="card">
+      <input
+        id="photoInput"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        onchange="handlePhotoSelect(event)"
+      >
 
-        <h3>
-          📝 Create Post
-        </h3>
+      <input
+        id="videoInput"
+        type="file"
+        accept="video/mp4,video/webm,video/quicktime"
+        onchange="handleVideoSelect(event)"
+      >
 
-        <br>
 
-        <textarea
-          class="postTextarea"
-          placeholder="What's on your mind?"
-        ></textarea>
+      <!-- UPLOAD STATUS -->
 
-        <br><br>
+      <div id="uploadStatus"></div>
+
+
+      <!-- POST BUTTON -->
+
+      <button
+        class="createBtn"
+        onclick="createPost()"
+      >
+        🚀 Post
+      </button>
+
+    </div>
+
+
+
+    <!-- FEED -->
+
+    <div id="feed">
+
+      <div class="emptyFeed">
+
+        <h3>🌟 Welcome to Gitalk.in</h3>
+
+        <p>
+          Login करके अपनी पहली post बनाइए।
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- ===================================================
+       PROFILE PAGE
+  =================================================== -->
+
+  <div
+    id="profilePage"
+    class="appPage"
+    style="display:none;"
+  >
+
+    <div class="card profileCard">
+
+      <img
+        id="profilePhoto"
+        class="profilePhoto"
+        src="https://via.placeholder.com/150"
+        alt="Profile Photo"
+      >
+
+      <h2 id="profilePageName">
+        Gitalk User
+      </h2>
+
+      <div
+        id="profilePageUsername"
+        class="profileUsername"
+      >
+        @username
+      </div>
+
+      <div
+        id="profilePageBio"
+        class="profileBio"
+      >
+        Welcome to Gitalk Social ❤️
+      </div>
+
+      <div
+        id="profilePageLocation"
+        class="profileLocation"
+      >
+        📍 India
+      </div>
+
+      <a
+        id="profilePageWebsite"
+        class="profileWebsite"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="display:none;"
+      ></a>
+
+
+      <div class="profileButtons">
 
         <button
           class="actionBtn"
-          onclick="comingSoon()"
+          onclick="showPage('editPage')"
         >
-          Post
+          ✏️ Edit Profile
         </button>
 
       </div>
 
-    </section>
+    </div>
+
+
+    <!-- ACCOUNT STATS -->
+
+    <div class="card">
+
+      <h3>
+        📊 My Account
+      </h3>
+
+      <br>
+
+      <p>
+        👥 Followers:
+        <b id="followersCount">0</b>
+      </p>
+
+      <br>
+
+      <p>
+        ❤️ Likes:
+        <b id="likesCount">0</b>
+      </p>
+
+      <br>
+
+      <p>
+        📝 Posts:
+        <b id="postsCount">0</b>
+      </p>
+
+    </div>
+
+  </div>
 
 
 
-    <!-- ==================================================
-         PROFILE
-    ================================================== -->
+  <!-- ===================================================
+       EDIT PROFILE
+  =================================================== -->
 
-    <section
-      id="profilePage"
-      class="page"
-    >
+  <div
+    id="editPage"
+    class="appPage"
+    style="display:none;"
+  >
 
-      <div class="card profileCard">
+    <div class="card">
+
+      <h2>
+        ✏️ Edit Profile
+      </h2>
+
+      <br>
+
+
+      <!-- PROFILE PHOTO -->
+
+      <div class="uploadArea">
 
         <img
-          id="profilePhoto"
-          class="profilePhoto"
+          id="editProfilePhoto"
+          class="editPhoto"
           src="https://via.placeholder.com/150"
           alt="Profile Photo"
         >
 
-        <h2 id="profilePageName">
-          Gitalk User
-        </h2>
-
-        <div
-          id="profilePageUsername"
-          class="profileUsername"
+        <label
+          for="profileImageInput"
+          class="uploadButton"
         >
-          @username
-        </div>
+          📷 Upload Profile Photo
+        </label>
 
-        <div
-          id="profilePageBio"
-          class="profileBio"
+        <input
+          id="profileImageInput"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          onchange="previewProfileImage(event)"
         >
-          Welcome to Gitalk Social ❤️
-        </div>
 
-        <div
-          id="profilePageLocation"
-          class="profileLocation"
-        >
-          📍 India
-        </div>
-
-        <a
-          id="profilePageWebsite"
-          class="profileWebsite"
-          href="#"
-          target="_blank"
-          style="display:none;"
-        >
-        </a>
-
-        <div class="profileButtons">
-
-          <button
-            class="actionBtn"
-            onclick="showPage('editPage')"
-          >
-            ✏️ Edit Profile
-          </button>
-
-        </div>
+        <div id="profileUploadStatus"></div>
 
       </div>
 
 
-      <div class="card">
+      <!-- NAME -->
 
-        <h3>
-          📊 My Account
-        </h3>
+      <div class="formGroup">
 
-        <br>
+        <label for="nameInput">
+          Name
+        </label>
 
-        <p>
-          👥 Followers:
-          <b>0</b>
-        </p>
-
-        <br>
-
-        <p>
-          ❤️ Likes:
-          <b>0</b>
-        </p>
-
-        <br>
-
-        <p>
-          📝 Posts:
-          <b>0</b>
-        </p>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- ==================================================
-         EDIT PROFILE
-    ================================================== -->
-
-    <section
-      id="editPage"
-      class="page"
-    >
-
-      <div class="card">
-
-        <h2>
-          ✏️ Edit Profile
-        </h2>
-
-        <br>
-
-
-        <!-- PHOTO -->
-
-        <div class="uploadArea">
-
-          <img
-            id="editProfilePhoto"
-            class="editPhoto"
-            src="https://via.placeholder.com/150"
-            alt="Profile Photo"
-          >
-
-          <label
-            for="profileImageInput"
-            class="uploadButton"
-          >
-            📷 Upload Profile Photo
-          </label>
-
-          <input
-            id="profileImageInput"
-            type="file"
-            accept="image/jpeg,image/png,image/webp"
-            onchange="previewProfileImage(event)"
-          >
-
-          <div id="uploadStatus"></div>
-
-        </div>
-
-
-        <!-- NAME -->
-
-        <div class="formGroup">
-
-          <label>
-            Name
-          </label>
-
-          <input
-            id="nameInput"
-            type="text"
-            placeholder="Your name"
-            maxlength="50"
-          >
-
-        </div>
-
-
-        <!-- USERNAME -->
-
-        <div class="formGroup">
-
-          <label>
-            Username
-          </label>
-
-          <input
-            id="usernameInput"
-            type="text"
-            placeholder="@username"
-            maxlength="30"
-          >
-
-        </div>
-
-
-        <!-- BIO -->
-
-        <div class="formGroup">
-
-          <label>
-            Bio
-          </label>
-
-          <textarea
-            id="bioInput"
-            placeholder="Tell people about yourself..."
-            maxlength="200"
-          ></textarea>
-
-        </div>
-
-
-        <!-- LOCATION -->
-
-        <div class="formGroup">
-
-          <label>
-            Location
-          </label>
-
-          <input
-            id="locationInput"
-            type="text"
-            placeholder="City / Country"
-            maxlength="80"
-          >
-
-        </div>
-
-
-        <!-- WEBSITE -->
-
-        <div class="formGroup">
-
-          <label>
-            Website
-          </label>
-
-          <input
-            id="websiteInput"
-            type="url"
-            placeholder="https://example.com"
-          >
-
-        </div>
-
-
-        <button
-          class="mainBtn"
-          onclick="saveFirebaseProfile()"
+        <input
+          id="nameInput"
+          type="text"
+          placeholder="Your name"
+          maxlength="50"
         >
-          💾 Save Profile
-        </button>
 
       </div>
 
-    </section>
+
+      <!-- USERNAME -->
+
+      <div class="formGroup">
+
+        <label for="usernameInput">
+          Username
+        </label>
+
+        <input
+          id="usernameInput"
+          type="text"
+          placeholder="@username"
+          maxlength="30"
+        >
+
+      </div>
+
+
+      <!-- BIO -->
+
+      <div class="formGroup">
+
+        <label for="bioInput">
+          Bio
+        </label>
+
+        <textarea
+          id="bioInput"
+          placeholder="Tell people about yourself..."
+          maxlength="200"
+        ></textarea>
+
+      </div>
+
+
+      <!-- LOCATION -->
+
+      <div class="formGroup">
+
+        <label for="locationInput">
+          Location
+        </label>
+
+        <input
+          id="locationInput"
+          type="text"
+          placeholder="City / Country"
+          maxlength="80"
+        >
+
+      </div>
+
+
+      <!-- WEBSITE -->
+
+      <div class="formGroup">
+
+        <label for="websiteInput">
+          Website
+        </label>
+
+        <input
+          id="websiteInput"
+          type="url"
+          placeholder="https://example.com"
+        >
+
+      </div>
+
+
+      <button
+        class="authBtn"
+        onclick="saveFirebaseProfile()"
+      >
+        💾 Save Profile
+      </button>
+
+    </div>
+
+  </div>
 
 
 
-    <!-- ==================================================
-         SETTINGS
-    ================================================== -->
+  <!-- ===================================================
+       SETTINGS
+  =================================================== -->
 
-    <section
-      id="settingsPage"
-      class="page"
-    >
+  <div
+    id="settingsPage"
+    class="appPage"
+    style="display:none;"
+  >
 
-      <div class="card">
+    <div class="card">
 
-        <div class="settingsTitle">
+      <h2>
+        ⚙️ Settings
+      </h2>
 
-          <h2>
-            ⚙️ Social Media Settings
-          </h2>
+      <p style="color:#777;margin-top:5px;">
+        Manage your Gitalk account
+      </p>
 
-          <p style="color:#777;margin-top:5px;">
-            Manage your Gitalk account
-          </p>
-
-        </div>
+      <br>
 
 
-        <!-- NOTIFICATIONS -->
+      <!-- NOTIFICATIONS -->
 
-        <div class="setting">
+      <div class="setting">
 
-          <div class="settingText">
+        <div class="settingText">
 
-            <div class="settingIcon">
-              🔔
-            </div>
+          <div class="settingIcon">
+            🔔
+          </div>
 
-            <div>
+          <div>
 
-              <b>
-                Notifications
-              </b>
+            <b>Notifications</b>
 
-              <small>
-                Likes, comments and updates
-              </small>
-
-            </div>
+            <small>
+              Likes, comments and updates
+            </small>
 
           </div>
 
-          <label class="switch">
-
-            <input
-              id="notificationsToggle"
-              type="checkbox"
-              checked
-            >
-
-            <span class="slider"></span>
-
-          </label>
-
         </div>
 
+        <label class="switch">
 
-        <!-- PRIVATE -->
-
-        <div class="setting">
-
-          <div class="settingText">
-
-            <div class="settingIcon">
-              🔒
-            </div>
-
-            <div>
-
-              <b>
-                Private Account
-              </b>
-
-              <small>
-                Control who can see your profile
-              </small>
-
-            </div>
-
-          </div>
-
-          <label class="switch">
-
-            <input
-              id="privateToggle"
-              type="checkbox"
-            >
-
-            <span class="slider"></span>
-
-          </label>
-
-        </div>
-
-
-        <!-- MESSAGES -->
-
-        <div class="setting">
-
-          <div class="settingText">
-
-            <div class="settingIcon">
-              💬
-            </div>
-
-            <div>
-
-              <b>
-                Messages
-              </b>
-
-              <small>
-                Allow users to message you
-              </small>
-
-            </div>
-
-          </div>
-
-          <label class="switch">
-
-            <input
-              id="messagesToggle"
-              type="checkbox"
-              checked
-            >
-
-            <span class="slider"></span>
-
-          </label>
-
-        </div>
-
-
-        <!-- DARK MODE -->
-
-        <div class="setting">
-
-          <div class="settingText">
-
-            <div class="settingIcon">
-              🌙
-            </div>
-
-            <div>
-
-              <b>
-                Dark Mode
-              </b>
-
-              <small>
-                Change website appearance
-              </small>
-
-            </div>
-
-          </div>
-
-          <label class="switch">
-
-            <input
-              id="darkToggle"
-              type="checkbox"
-              onchange="toggleDarkMode()"
-            >
-
-            <span class="slider"></span>
-
-          </label>
-
-        </div>
-
-
-        <!-- LANGUAGE -->
-
-        <div class="setting">
-
-          <div class="settingText">
-
-            <div class="settingIcon">
-              🌐
-            </div>
-
-            <div>
-
-              <b>
-                Language
-              </b>
-
-              <small>
-                Choose language
-              </small>
-
-            </div>
-
-          </div>
-
-          <select
-            id="languageSelect"
-            style="
-              width:auto;
-              padding:8px;
-              border-radius:8px;
-            "
+          <input
+            id="notificationsToggle"
+            type="checkbox"
+            checked
           >
 
-            <option>
-              English
-            </option>
+          <span class="slider"></span>
 
-            <option>
-              Hindi
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- LOGOUT -->
-
-        <br>
-
-        <button
-          class="mainBtn"
-          style="background:#333;"
-          onclick="logout()"
-        >
-          🚪 Logout
-        </button>
+        </label>
 
       </div>
 
-    </section>
+
+      <!-- PRIVATE -->
+
+      <div class="setting">
+
+        <div class="settingText">
+
+          <div class="settingIcon">
+            🔒
+          </div>
+
+          <div>
+
+            <b>Private Account</b>
+
+            <small>
+              Control who can see your profile
+            </small>
+
+          </div>
+
+        </div>
+
+        <label class="switch">
+
+          <input
+            id="privateToggle"
+            type="checkbox"
+          >
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
 
 
-  </main>
+      <!-- MESSAGES -->
+
+      <div class="setting">
+
+        <div class="settingText">
+
+          <div class="settingIcon">
+            💬
+          </div>
+
+          <div>
+
+            <b>Messages</b>
+
+            <small>
+              Allow users to message you
+            </small>
+
+          </div>
+
+        </div>
+
+        <label class="switch">
+
+          <input
+            id="messagesToggle"
+            type="checkbox"
+            checked
+          >
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- DARK MODE -->
+
+      <div class="setting">
+
+        <div class="settingText">
+
+          <div class="settingIcon">
+            🌙
+          </div>
+
+          <div>
+
+            <b>Dark Mode</b>
+
+            <small>
+              Change website appearance
+            </small>
+
+          </div>
+
+        </div>
+
+        <label class="switch">
+
+          <input
+            id="darkToggle"
+            type="checkbox"
+            onchange="toggleDarkMode()"
+          >
+
+          <span class="slider"></span>
+
+        </label>
+
+      </div>
+
+
+      <!-- LANGUAGE -->
+
+      <div class="setting">
+
+        <div class="settingText">
+
+          <div class="settingIcon">
+            🌐
+          </div>
+
+          <div>
+
+            <b>Language</b>
+
+            <small>
+              Choose language
+            </small>
+
+          </div>
+
+        </div>
+
+        <select
+          id="languageSelect"
+          style="
+            width:auto;
+            padding:8px;
+            border-radius:8px;
+          "
+        >
+
+          <option value="English">
+            English
+          </option>
+
+          <option value="Hindi">
+            Hindi
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <br>
+
+      <button
+        class="authBtn"
+        style="background:#333;"
+        onclick="logout()"
+      >
+        🚪 Logout
+      </button>
+
+    </div>
+
+  </div>
 
 
 
-  <!-- ==================================================
-       BOTTOM NAV
-  ================================================== -->
+  <!-- ===================================================
+       BOTTOM NAVIGATION
+  =================================================== -->
 
   <nav class="bottomNav">
 
-    <button
-      onclick="showPage('homePage')"
-    >
+    <button onclick="showPage('homePage')">
 
-      <div>🏠</div>
+      <span>🏠</span>
 
       Home
 
     </button>
 
 
-    <button
-      onclick="showPage('homePage'); focusPost()"
-    >
+    <button onclick="showPage('homePage'); focusPost()">
 
-      <div>➕</div>
+      <span>➕</span>
 
       Create
 
     </button>
 
 
-    <button
- 
+    <button onclick="showPage('profilePage')">
+
+      <span>👤</span>
+
+      Profile
+
+    </button>
+
+
+    <button onclick="showPage('editPage')">
+
+      <span>✏️</span>
+
+      Edit
+
+    </button>
+
+
+    <button onclick="showPage('settingsPage')">
+
+      <span>⚙️</span>
+
+      Settings
+
+    </button>
+
+  </nav>
+
+</section>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script type="module" src="./script.js"></script>
+
+</body>
+  </html>
