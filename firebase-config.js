@@ -7,6 +7,10 @@ import { getAuth } from
 import { getFirestore } from
 "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+import { getStorage } from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
   authDomain: "gitalk-social-3a85a.firebaseapp.com",
@@ -20,9 +24,11 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 export {
   app,
   auth,
-  db
+  db,
+  storage
 };
