@@ -1,3 +1,55 @@
+// PHOTO PICKER
+window.selectPhoto = function () {
+    const input = document.getElementById("photoInput");
+
+    if (!input) {
+        alert("Photo input नहीं मिला!");
+        return;
+    }
+
+    input.click();
+};
+
+
+// VIDEO PICKER
+window.selectVideo = function () {
+    const input = document.getElementById("videoInput");
+
+    if (!input) {
+        alert("Video input नहीं मिला!");
+        return;
+    }
+
+    input.click();
+};
+
+
+// PHOTO SELECTED
+window.handlePhoto = function (event) {
+
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    alert("Photo selected: " + file.name);
+
+};
+
+
+// VIDEO SELECTED
+window.handleVideo = function (event) {
+
+    const file = event.target.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    alert("Video selected: " + file.name);
+
+};
 // ==========================================
 // Gitalk Social
 // Firebase Social App
