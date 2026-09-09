@@ -7,110 +7,525 @@
     <title>Gitalk Social</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
+    <script type="module">
+
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
+
+            authDomain: "gitalk-social-3a85a.firebaseapp.com",
+
+            projectId: "gitalk-social-3a85a",
+
+            storageBucket: "gitalk-social-3a85a.firebasestorage.app",
+
+            messagingSenderId: "553434284005",
+
+            appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
+
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+
+        /* =========================
+           SIGNUP
+        ========================= */
+
+        window.signup = async function () {
+
+            const email =
+                document.getElementById("signupEmail").value.trim();
+
+            const password =
+                document.getElementById("signupPassword").value;
+
+            if (!email || !password) {
+
+                alert("Please enter email and password.");
+
+                return;
+            }
+
+            if (password.length < 6) {
+
+                alert("Password must be at least 6 characters.");
+
+                return;
+            }
+
+
+            try {
+
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+                alert("🎉 Account created successfully!");
+
+            } catch (error) {
+
+                alert("❌ " + error.message);
+
+            }
+
+        };
+
+
+        /* =========================
+           LOGIN
+        ========================= */
+
+        window.login = async function () {
+
+            const email =
+                document.getElementById("loginEmail").value.trim();
+
+            const password =
+                document.getElementById("loginPassword").value;
+
+
+            if (!email || !password) {
+
+                alert("Please enter email and password.");
+
+                return;
+            }
+
+
+            try {
+
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+                alert("💜 Welcome to Gitalk Social!");
+
+            } catch (error) {
+
+                alert("❌ Login failed: " + error.message);
+
+            }
+
+        };
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
+        window.logout = async function () {
+
+            try {
+
+                await signOut(auth);
+
+                alert("You have been logged out.");
+
+            } catch (error) {
+
+                alert(error.message);
+
+            }
+
+        };
+
+
+        /* =========================
+           AUTH STATE
+        ========================= */
+
+        onAuthStateChanged(auth, (user) => {
+
+            const loginBox =
+                document.getElementById("loginBox");
+
+            const signupBox =
+                document.getElementById("signupBox");
+
+            const appBox =
+                document.getElementById("appBox");
+
+            const userEmail =
+                document.getElementById("userEmail");
+
+
+            if (user) {
+
+                loginBox.style.display = "none";
+
+                signupBox.style.display = "none";
+
+                appBox.style.display = "block";
+
+                userEmail.innerText =
+                    user.email;
+
+            } else {
+
+                loginBox.style.display = "block";
+
+                signupBox.style.display = "none";
+
+                appBox.style.display = "none";
+
+            }
+
+        });
+
+
+        /* =========================
+           SWITCH LOGIN / SIGNUP
+        ========================= */
+
+        window.showSignup = function () {
+
+            document.getElementById("loginBox").style.display =
+                "none";
+
+            document.getElementById("signupBox").style.display =
+                "block";
+
+        };
+
+
+        window.showLogin = function () {
+
+            document.getElementById("signupBox").style.display =
+                "none";
+
+            document.getElementById("loginBox").style.display =
+                "block";
+
+        };
+
+
+    </script>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginBox" class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            Gitalk<span>.Social</span>
+        </div>
+
+        <h2>Welcome Back 💜</h2>
+
+        <p>Login to your Gitalk account</p>
+
+
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Email address"
+        >
+
+
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+        >
+
+
+        <button class="main-btn" onclick="login()">
+            🔐 Login
+        </button>
+
+
+        <p class="switch-text">
+            Don't have an account?
+            <button onclick="showSignup()">
+                Create Account
+            </button>
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SIGNUP
+========================= -->
+
+<section
+    id="signupBox"
+    class="auth-container"
+    style="display:none;"
+>
+
+    <div class="auth-card">
+
+        <div class="auth-logo">
+            Gitalk<span>.Social</span>
+        </div>
+
+        <h2>Create Account 🚀</h2>
+
+        <p>Join Gitalk Social</p>
+
+
+        <input
+            type="email"
+            id="signupEmail"
+            placeholder="Email address"
+        >
+
+
+        <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create password"
+        >
+
+
+        <button class="main-btn" onclick="signup()">
+            ✨ Create Account
+        </button>
+
+
+        <p class="switch-text">
+            Already have an account?
+            <button onclick="showLogin()">
+                Login
+            </button>
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SOCIAL APP
+========================= -->
+
+<section id="appBox" style="display:none;">
+
+
 <header class="topbar">
-    <div class="logo">Gitalk<span>.Social</span></div>
+
+    <div class="logo">
+        Gitalk<span>.Social</span>
+    </div>
 
     <div class="top-icons">
-        <button onclick="showMessage('Search')">🔍</button>
-        <button onclick="showMessage('Notifications')">🔔</button>
+
+        <button onclick="showMessage('Search')">
+            🔍
+        </button>
+
+        <button onclick="showMessage('Notifications')">
+            🔔
+        </button>
+
     </div>
+
 </header>
+
+
 
 <main>
 
-    <section class="profile-card">
-        <div class="cover"></div>
 
-        <div class="profile-info">
-            <div class="avatar">G</div>
+<!-- PROFILE -->
 
-            <div>
-                <h2>Gitalk User</h2>
-                <p>@gitalkuser</p>
-            </div>
+<section class="profile-card">
 
-            <button class="edit-btn" onclick="showMessage('Edit Profile')">
-                Edit
-            </button>
-        </div>
-    </section>
+    <div class="cover"></div>
 
+    <div class="profile-info">
 
-    <section class="create-post">
-
-        <div class="post-user">
-            <div class="small-avatar">G</div>
-
-            <input
-                type="text"
-                id="postText"
-                placeholder="What's on your mind?"
-            >
+        <div class="avatar">
+            G
         </div>
 
-        <div class="post-actions">
+        <div>
 
-            <button onclick="addPhoto()">📷 Photo</button>
+            <h2>Gitalk User</h2>
 
-            <button onclick="addVideo()">🎥 Video</button>
-
-            <button onclick="createPost()">➕ Post</button>
-
-        </div>
-
-    </section>
-
-
-    <section id="feed">
-
-        <article class="post">
-
-            <div class="post-header">
-
-                <div class="small-avatar">G</div>
-
-                <div>
-                    <strong>Gitalk User</strong>
-                    <p>Just now</p>
-                </div>
-
-            </div>
-
-            <p class="post-text">
-                Welcome to Gitalk Social! 💜
-                A new place to connect, share and discover.
+            <p id="userEmail">
+                User
             </p>
 
-            <div class="post-image">
-                🌍
-                <span>Welcome to Gitalk</span>
+        </div>
+
+        <button
+            class="edit-btn"
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- CREATE POST -->
+
+<section class="create-post">
+
+    <div class="post-user">
+
+        <div class="small-avatar">
+            G
+        </div>
+
+        <input
+            type="text"
+            id="postText"
+            placeholder="What's on your mind?"
+        >
+
+    </div>
+
+
+    <div class="post-actions">
+
+        <button onclick="addPhoto()">
+            📷 Photo
+        </button>
+
+        <button onclick="addVideo()">
+            🎥 Video
+        </button>
+
+        <button onclick="createPost()">
+            ➕ Post
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- FEED -->
+
+<section id="feed">
+
+    <article class="post">
+
+        <div class="post-header">
+
+            <div class="small-avatar">
+                G
             </div>
 
-            <div class="post-stats">
-                <span id="likeCount">0 Likes</span>
-                <span>0 Comments</span>
-            </div>
+            <div>
 
-            <div class="post-buttons">
+                <strong>
+                    Gitalk Social
+                </strong>
 
-                <button onclick="likePost()">❤️ Like</button>
-
-                <button onclick="commentPost()">💬 Comment</button>
-
-                <button onclick="sharePost()">↗️ Share</button>
+                <p>
+                    Welcome
+                </p>
 
             </div>
 
-        </article>
+        </div>
 
-    </section>
+
+        <p class="post-text">
+
+            🎉 Welcome to Gitalk Social!
+
+            <br><br>
+
+            Connect • Share • Discover 💜
+
+        </p>
+
+
+        <div class="post-image">
+
+            🌍
+
+            <span>
+                Welcome to Gitalk
+            </span>
+
+        </div>
+
+
+        <div class="post-stats">
+
+            <span id="likeCount">
+                0 Likes
+            </span>
+
+            <span>
+                0 Comments
+            </span>
+
+        </div>
+
+
+        <div class="post-buttons">
+
+            <button onclick="likePost()">
+                ❤️ Like
+            </button>
+
+            <button onclick="commentPost()">
+                💬 Comment
+            </button>
+
+            <button onclick="sharePost()">
+                ↗️ Share
+            </button>
+
+        </div>
+
+    </article>
+
+</section>
+
 
 </main>
 
+
+
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
@@ -141,26 +556,12 @@
 
 </nav>
 
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
-    authDomain: "gitalk-social-3a85a.firebaseapp.com",
-    projectId: "gitalk-social-3a85a",
-    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
-    messagingSenderId: "553434284005",
-    appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
-  };
+</section>
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-</script>
+
 <script src="script.js"></script>
+
 
 </body>
 </html>
