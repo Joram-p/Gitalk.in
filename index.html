@@ -1,228 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Gitalk Social</title>
+<title>Gitalk Social</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-    <!-- Firebase -->
-    <script type="module">
+<!-- =========================
+     FIREBASE
+========================= -->
 
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+<script type="module">
 
-        import {
-            getAuth,
-            createUserWithEmailAndPassword,
-            signInWithEmailAndPassword,
-            signOut,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-        const firebaseConfig = {
-
-            apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
-
-            authDomain: "gitalk-social-3a85a.firebaseapp.com",
-
-            projectId: "gitalk-social-3a85a",
-
-            storageBucket: "gitalk-social-3a85a.firebasestorage.app",
-
-            messagingSenderId: "553434284005",
-
-            appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
-
-        };
+import {
+    getFirestore,
+    doc,
+    setDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-        const app = initializeApp(firebaseConfig);
+/* =========================
+   FIREBASE CONFIG
+========================= */
 
-        const auth = getAuth(app);
+const firebaseConfig = {
+
+    apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
+
+    authDomain: "gitalk-social-3a85a.firebaseapp.com",
+
+    projectId: "gitalk-social-3a85a",
+
+    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
+
+    messagingSenderId: "553434284005",
+
+    appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
+
+};
 
 
-        /* =========================
-           SIGNUP
-        ========================= */
+/* =========================
+   INITIALIZE FIREBASE
+========================= */
 
-        window.signup = async function () {
+const app = initializeApp(firebaseConfig);
 
-            const email =
-                document.getElementById("signupEmail").value.trim();
+const auth = getAuth(app);
 
-            const password =
-                document.getElementById("signupPassword").value;
+const db = getFirestore(app);
 
-            if (!email || !password) {
 
-                alert("Please enter email and password.");
+/* =========================
+   SIGNUP
+========================= */
 
-                return;
+window.signup = async function () {
+
+    const email =
+        document.getElementById("signupEmail").value.trim();
+
+    const password =
+        document.getElementById("signupPassword").value;
+
+    if (!email || !password) {
+
+        alert("Please enter email and password.");
+
+        return;
+    }
+
+    if (password.length < 6) {
+
+        alert("Password must be at least 6 characters.");
+
+        return;
+    }
+
+
+    try {
+
+        const userCredential =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+        const user = userCredential.user;
+
+
+        /* SAVE USER IN FIRESTORE */
+
+        await setDoc(
+            doc(db, "users", user.uid),
+            {
+                uid: user.uid,
+                email: user.email,
+                displayName: "Gitalk User",
+                photoURL: "",
+                createdAt: serverTimestamp()
             }
+        );
 
-            if (password.length < 6) {
 
-                alert("Password must be at least 6 characters.");
+        alert("🎉 Account created successfully!");
 
-                return;
-            }
+    } catch (error) {
 
+        console.error(error);
 
-            try {
+        alert("❌ " + error.message);
 
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+    }
 
-                alert("🎉 Account created successfully!");
+};
 
-            } catch (error) {
 
-                alert("❌ " + error.message);
+/* =========================
+   LOGIN
+========================= */
 
-            }
+window.login = async function () {
 
-        };
+    const email =
+        document.getElementById("loginEmail").value.trim();
 
+    const password =
+        document.getElementById("loginPassword").value;
 
-        /* =========================
-           LOGIN
-        ========================= */
 
-        window.login = async function () {
+    if (!email || !password) {
 
-            const email =
-                document.getElementById("loginEmail").value.trim();
+        alert("Please enter email and password.");
 
-            const password =
-                document.getElementById("loginPassword").value;
+        return;
+    }
 
 
-            if (!email || !password) {
+    try {
 
-                alert("Please enter email and password.");
+        await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
 
-                return;
-            }
 
+        alert("💜 Welcome to Gitalk Social!");
 
-            try {
+    } catch (error) {
 
-                await signInWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+        console.error(error);
 
-                alert("💜 Welcome to Gitalk Social!");
+        alert("❌ Login failed: " + error.message);
 
-            } catch (error) {
+    }
 
-                alert("❌ Login failed: " + error.message);
+};
 
-            }
 
-        };
+/* =========================
+   LOGOUT
+========================= */
 
+window.logout = async function () {
 
-        /* =========================
-           LOGOUT
-        ========================= */
+    try {
 
-        window.logout = async function () {
+        await signOut(auth);
 
-            try {
+        alert("You have been logged out.");
 
-                await signOut(auth);
+    } catch (error) {
 
-                alert("You have been logged out.");
+        alert("❌ " + error.message);
 
-            } catch (error) {
+    }
 
-                alert(error.message);
+};
 
-            }
 
-        };
+/* =========================
+   AUTH STATE
+========================= */
 
+onAuthStateChanged(auth, (user) => {
 
-        /* =========================
-           AUTH STATE
-        ========================= */
+    const loginBox =
+        document.getElementById("loginBox");
 
-        onAuthStateChanged(auth, (user) => {
+    const signupBox =
+        document.getElementById("signupBox");
 
-            const loginBox =
-                document.getElementById("loginBox");
+    const appBox =
+        document.getElementById("appBox");
 
-            const signupBox =
-                document.getElementById("signupBox");
+    const userEmail =
+        document.getElementById("userEmail");
 
-            const appBox =
-                document.getElementById("appBox");
 
-            const userEmail =
-                document.getElementById("userEmail");
+    if (user) {
 
+        loginBox.style.display = "none";
 
-            if (user) {
+        signupBox.style.display = "none";
 
-                loginBox.style.display = "none";
+        appBox.style.display = "block";
 
-                signupBox.style.display = "none";
+        userEmail.innerText =
+            user.email || "Gitalk User";
 
-                appBox.style.display = "block";
+    } else {
 
-                userEmail.innerText =
-                    user.email;
+        loginBox.style.display = "block";
 
-            } else {
+        signupBox.style.display = "none";
 
-                loginBox.style.display = "block";
+        appBox.style.display = "none";
 
-                signupBox.style.display = "none";
+    }
 
-                appBox.style.display = "none";
+});
 
-            }
 
-        });
+/* =========================
+   SHOW SIGNUP
+========================= */
 
+window.showSignup = function () {
 
-        /* =========================
-           SWITCH LOGIN / SIGNUP
-        ========================= */
+    document.getElementById("loginBox").style.display =
+        "none";
 
-        window.showSignup = function () {
+    document.getElementById("signupBox").style.display =
+        "block";
 
-            document.getElementById("loginBox").style.display =
-                "none";
+};
 
-            document.getElementById("signupBox").style.display =
-                "block";
 
-        };
+/* =========================
+   SHOW LOGIN
+========================= */
 
+window.showLogin = function () {
 
-        window.showLogin = function () {
+    document.getElementById("signupBox").style.display =
+        "none";
 
-            document.getElementById("signupBox").style.display =
-                "none";
+    document.getElementById("loginBox").style.display =
+        "block";
 
-            document.getElementById("loginBox").style.display =
-                "block";
+};
 
-        };
-
-
-    </script>
+</script>
 
 </head>
 
@@ -261,16 +308,22 @@
         >
 
 
-        <button class="main-btn" onclick="login()">
+        <button
+            class="main-btn"
+            onclick="login()"
+        >
             🔐 Login
         </button>
 
 
         <p class="switch-text">
+
             Don't have an account?
+
             <button onclick="showSignup()">
                 Create Account
             </button>
+
         </p>
 
     </div>
@@ -314,16 +367,22 @@
         >
 
 
-        <button class="main-btn" onclick="signup()">
+        <button
+            class="main-btn"
+            onclick="signup()"
+        >
             ✨ Create Account
         </button>
 
 
         <p class="switch-text">
+
             Already have an account?
+
             <button onclick="showLogin()">
                 Login
             </button>
+
         </p>
 
     </div>
@@ -336,7 +395,10 @@
      SOCIAL APP
 ========================= -->
 
-<section id="appBox" style="display:none;">
+<section
+    id="appBox"
+    style="display:none;"
+>
 
 
 <header class="topbar">
@@ -345,13 +407,19 @@
         Gitalk<span>.Social</span>
     </div>
 
+
     <div class="top-icons">
 
-        <button onclick="showMessage('Search')">
+        <button
+            onclick="showMessage('Search')"
+        >
             🔍
         </button>
 
-        <button onclick="showMessage('Notifications')">
+
+        <button
+            onclick="showMessage('Notifications')"
+        >
             🔔
         </button>
 
@@ -364,11 +432,14 @@
 <main>
 
 
-<!-- PROFILE -->
+<!-- =========================
+     PROFILE
+========================= -->
 
 <section class="profile-card">
 
     <div class="cover"></div>
+
 
     <div class="profile-info">
 
@@ -376,15 +447,20 @@
             G
         </div>
 
+
         <div>
 
-            <h2>Gitalk User</h2>
+            <h2>
+                Gitalk User
+            </h2>
+
 
             <p id="userEmail">
                 User
             </p>
 
         </div>
+
 
         <button
             class="edit-btn"
@@ -399,15 +475,19 @@
 
 
 
-<!-- CREATE POST -->
+<!-- =========================
+     CREATE POST
+========================= -->
 
 <section class="create-post">
+
 
     <div class="post-user">
 
         <div class="small-avatar">
             G
         </div>
+
 
         <input
             type="text"
@@ -418,15 +498,18 @@
     </div>
 
 
+
     <div class="post-actions">
 
         <button onclick="addPhoto()">
             📷 Photo
         </button>
 
+
         <button onclick="addVideo()">
             🎥 Video
         </button>
+
 
         <button onclick="createPost()">
             ➕ Post
@@ -438,85 +521,99 @@
 
 
 
-<!-- FEED -->
+<!-- =========================
+     FEED
+========================= -->
 
 <section id="feed">
 
-    <article class="post">
 
-        <div class="post-header">
+<article class="post">
 
-            <div class="small-avatar">
-                G
-            </div>
 
-            <div>
+    <div class="post-header">
 
-                <strong>
-                    Gitalk Social
-                </strong>
-
-                <p>
-                    Welcome
-                </p>
-
-            </div>
-
+        <div class="small-avatar">
+            G
         </div>
 
 
-        <p class="post-text">
+        <div>
 
-            🎉 Welcome to Gitalk Social!
-
-            <br><br>
-
-            Connect • Share • Discover 💜
-
-        </p>
+            <strong>
+                Gitalk Social
+            </strong>
 
 
-        <div class="post-image">
-
-            🌍
-
-            <span>
-                Welcome to Gitalk
-            </span>
+            <p>
+                Welcome
+            </p>
 
         </div>
 
-
-        <div class="post-stats">
-
-            <span id="likeCount">
-                0 Likes
-            </span>
-
-            <span>
-                0 Comments
-            </span>
-
-        </div>
+    </div>
 
 
-        <div class="post-buttons">
 
-            <button onclick="likePost()">
-                ❤️ Like
-            </button>
+    <p class="post-text">
 
-            <button onclick="commentPost()">
-                💬 Comment
-            </button>
+        🎉 Welcome to Gitalk Social!
 
-            <button onclick="sharePost()">
-                ↗️ Share
-            </button>
+        <br><br>
 
-        </div>
+        Connect • Share • Discover 💜
 
-    </article>
+    </p>
+
+
+
+    <div class="post-image">
+
+        🌍
+
+        <span>
+            Welcome to Gitalk
+        </span>
+
+    </div>
+
+
+
+    <div class="post-stats">
+
+        <span id="likeCount">
+            0 Likes
+        </span>
+
+
+        <span>
+            0 Comments
+        </span>
+
+    </div>
+
+
+
+    <div class="post-buttons">
+
+        <button onclick="likePost()">
+            ❤️ Like
+        </button>
+
+
+        <button onclick="commentPost()">
+            💬 Comment
+        </button>
+
+
+        <button onclick="sharePost()">
+            ↗️ Share
+        </button>
+
+    </div>
+
+
+</article>
 
 </section>
 
@@ -525,40 +622,83 @@
 
 
 
-<!-- BOTTOM NAV -->
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <nav class="bottom-nav">
 
+
     <button onclick="goHome()">
+
         🏠
-        <span>Home</span>
+
+        <span>
+            Home
+        </span>
+
     </button>
 
-    <button onclick="showMessage('Friends')">
+
+    <button
+        onclick="showMessage('Friends')"
+    >
+
         👥
-        <span>Friends</span>
+
+        <span>
+            Friends
+        </span>
+
     </button>
 
-    <button onclick="showMessage('Create')">
+
+    <button
+        onclick="showMessage('Create')"
+    >
+
         ➕
-        <span>Create</span>
+
+        <span>
+            Create
+        </span>
+
     </button>
 
-    <button onclick="showMessage('Messages')">
+
+    <button
+        onclick="showMessage('Messages')"
+    >
+
         💬
-        <span>Chat</span>
+
+        <span>
+            Chat
+        </span>
+
     </button>
 
-    <button onclick="showMessage('Profile')">
+
+    <button
+        onclick="showMessage('Profile')"
+    >
+
         👤
-        <span>Profile</span>
+
+        <span>
+            Profile
+        </span>
+
     </button>
+
 
 </nav>
 
 
 </section>
 
+
+<!-- EXISTING JAVASCRIPT -->
 
 <script src="script.js"></script>
 
