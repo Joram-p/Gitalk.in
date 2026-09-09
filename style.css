@@ -6,7 +6,7 @@
 
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#f1f3f6;
+  background:#f2f4f7;
   color:#222;
 }
 
@@ -20,13 +20,15 @@ button{
 }
 
 
-/* AUTH */
+/* =========================
+   AUTH
+========================= */
 
-.auth-page{
+#authPage{
   min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   padding:20px;
   background:linear-gradient(135deg,#6c2cff,#ff3d81);
 }
@@ -35,10 +37,10 @@ button{
   width:100%;
   max-width:400px;
   background:white;
-  padding:35px 25px;
+  padding:32px 25px;
   border-radius:20px;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
   text-align:center;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
 }
 
 .logo{
@@ -59,17 +61,17 @@ button{
 
 .auth-box p{
   color:#777;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .auth-box input{
   width:100%;
   padding:14px;
-  margin:8px 0;
+  margin:7px 0;
   border:1px solid #ddd;
   border-radius:10px;
-  outline:none;
   font-size:15px;
+  outline:none;
 }
 
 .auth-box input:focus{
@@ -79,12 +81,12 @@ button{
 .auth-box button{
   width:100%;
   padding:14px;
-  margin-top:12px;
+  margin-top:10px;
   border-radius:10px;
   background:#6c2cff;
   color:white;
-  font-size:16px;
   font-weight:bold;
+  font-size:16px;
 }
 
 .switch{
@@ -98,13 +100,15 @@ button{
   cursor:pointer;
 }
 
-.message{
-  margin-top:15px;
+.msg{
+  margin-top:12px;
   font-weight:bold;
 }
 
 
-/* TOP BAR */
+/* =========================
+   HEADER
+========================= */
 
 .topbar{
   height:65px;
@@ -116,7 +120,7 @@ button{
   box-shadow:0 2px 10px rgba(0,0,0,.08);
   position:sticky;
   top:0;
-  z-index:10;
+  z-index:20;
 }
 
 .brand{
@@ -125,36 +129,36 @@ button{
   color:#6c2cff;
 }
 
-.top-actions{
-  display:flex;
-  gap:8px;
-}
-
-.top-actions button{
+.topbar button{
   padding:9px 12px;
   border-radius:8px;
+  margin-left:5px;
   background:#eee;
 }
 
-.top-actions button:last-child{
+#logoutBtn{
   background:#ff3d81;
   color:white;
 }
 
 
-/* CONTAINER */
+/* =========================
+   MAIN
+========================= */
 
 .container{
   width:100%;
   max-width:700px;
   margin:auto;
-  padding:20px 15px 50px;
+  padding:20px 12px 60px;
 }
 
 
-/* USER */
+/* =========================
+   USER CARD
+========================= */
 
-.welcome-card{
+.user-card{
   background:white;
   padding:15px;
   border-radius:15px;
@@ -168,11 +172,11 @@ button{
 .big-avatar{
   background:linear-gradient(135deg,#6c2cff,#ff3d81);
   color:white;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-weight:bold;
-  border-radius:50%;
 }
 
 .avatar{
@@ -181,14 +185,16 @@ button{
   font-size:20px;
 }
 
-.welcome-card small{
+.user-card small{
   display:block;
   color:#777;
   margin-top:4px;
 }
 
 
-/* CREATE POST */
+/* =========================
+   CREATE POST
+========================= */
 
 .create-post{
   background:white;
@@ -197,22 +203,22 @@ button{
   box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.create-post textarea{
+#postText{
   width:100%;
-  min-height:90px;
+  min-height:100px;
+  resize:none;
+  padding:13px;
   border:1px solid #ddd;
   border-radius:10px;
-  padding:12px;
-  resize:none;
   outline:none;
   font-size:15px;
 }
 
 .post-tools{
-  margin-top:12px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
+  margin-top:12px;
 }
 
 .photo-btn{
@@ -220,30 +226,37 @@ button{
   padding:10px 14px;
   border-radius:8px;
   cursor:pointer;
-  color:#444;
 }
 
 .photo-btn input{
   display:none;
 }
 
-.post-tools button{
+#postBtn{
+  padding:10px 22px;
+  border-radius:8px;
   background:#6c2cff;
   color:white;
-  padding:10px 20px;
-  border-radius:8px;
   font-weight:bold;
 }
 
+#postMsg{
+  margin-top:10px;
+  color:#666;
+}
+
 #imagePreview img{
-  max-width:100%;
-  max-height:300px;
-  margin-top:12px;
+  width:100%;
+  max-height:350px;
+  object-fit:cover;
   border-radius:12px;
+  margin-top:12px;
 }
 
 
-/* FEED */
+/* =========================
+   FEED
+========================= */
 
 .feed-title{
   margin:25px 0 12px;
@@ -261,7 +274,6 @@ button{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-bottom:12px;
 }
 
 .post-user{
@@ -271,13 +283,13 @@ button{
 .post-time{
   color:#888;
   font-size:12px;
-  margin-top:3px;
+  margin-top:4px;
 }
 
-.post-content{
-  line-height:1.5;
-  margin-bottom:10px;
+.post-text{
   white-space:pre-wrap;
+  line-height:1.5;
+  margin:13px 0;
 }
 
 .post-image{
@@ -285,48 +297,73 @@ button{
   max-height:500px;
   object-fit:cover;
   border-radius:12px;
-  margin-top:8px;
 }
 
 .post-actions{
   display:flex;
-  gap:8px;
+  gap:7px;
   border-top:1px solid #eee;
-  margin-top:12px;
   padding-top:10px;
+  margin-top:12px;
 }
 
 .post-actions button{
   flex:1;
   padding:10px;
-  background:#f2f2f2;
+  background:#f1f1f1;
   border-radius:8px;
 }
 
-.post-actions button.liked{
+.like.active{
   color:#ff1744;
 }
 
+.comment-box{
+  display:none;
+  margin-top:10px;
+}
 
-/* MODAL */
+.comment-box input{
+  width:100%;
+  padding:10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+.comments{
+  margin-top:10px;
+}
+
+.comment{
+  background:#f5f5f5;
+  padding:8px;
+  border-radius:8px;
+  margin-top:5px;
+  font-size:14px;
+}
+
+
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   padding:20px;
-  z-index:100;
+  z-index:50;
 }
 
 .modal-box{
   background:white;
   width:100%;
   max-width:380px;
-  border-radius:20px;
   padding:30px;
+  border-radius:20px;
   text-align:center;
   position:relative;
 }
@@ -335,50 +372,48 @@ button{
   position:absolute;
   right:15px;
   top:15px;
-  background:#eee;
   width:35px;
   height:35px;
   border-radius:50%;
+  background:#eee;
 }
 
 .big-avatar{
   width:90px;
   height:90px;
-  margin:10px auto 15px;
   font-size:35px;
+  margin:10px auto 15px;
 }
 
-.modal-box button:last-child{
-  margin-top:20px;
+#closeProfile2{
   padding:12px 30px;
+  margin-top:20px;
+  border-radius:8px;
   background:#6c2cff;
   color:white;
-  border-radius:8px;
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:500px){
 
   .topbar{
-    padding:0 12px;
+    padding:0 10px;
   }
 
   .brand{
     font-size:22px;
   }
 
-  .top-actions button{
-    padding:8px;
-  }
-
   .container{
-    padding:12px 10px 40px;
+    padding:12px 9px 50px;
   }
 
-  .auth-box{
-    padding:30px 20px;
+  .topbar button{
+    padding:8px;
   }
 
   }
