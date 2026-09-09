@@ -1,522 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Gitalk.in — curated Amazon finds, travel inspiration, flowers and lifestyle discoveries.">
-  <title>JORAM Gitalk.in — Explore • Travel • Flowers • Shopping</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gitalk Social</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <div class="top-strip">FREE INSPIRATION • CURATED FINDS • EXPLORE MORE</div>
 
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#home" aria-label="Gitalk.in home">
-        <img src="assets/logo.png" alt="Gitalk.in logo">
-      </a>
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="#home">Home</a>
-        <a href="#products">Products</a>
-        <a href="#categories">Categories</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#about">About</a>
-        <a href="#JORAM">Contact</a>
-      </nav>
-      <a class="header-cta" href="#products">Shop Finds</a>
+<header class="topbar">
+    <div class="logo">Gitalk<span>.Social</span></div>
+
+    <div class="top-icons">
+        <button onclick="showMessage('Search')">🔍</button>
+        <button onclick="showMessage('Notifications')">🔔</button>
     </div>
-  </header>
+</header>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="kicker">GITALK.IN • CURATED DISCOVERIES</p>
-        <h1>Explore beautiful finds for <em>everyday living.</em></h1>
-        <p class="hero-text">
-          A clean, premium-style shopping destination for handpicked Amazon discoveries,
-          travel inspiration, flowers and lifestyle ideas.
-        </p>
-        <div class="hero-actions">
-          <a class="primary-btn" href="#products">Explore Products</a>
-          <a class="text-btn" href="#about">Discover Gitalk.in →</a>
+<main>
+
+    <section class="profile-card">
+        <div class="cover"></div>
+
+        <div class="profile-info">
+            <div class="avatar">G</div>
+
+            <div>
+                <h2>Gitalk User</h2>
+                <p>@gitalkuser</p>
+            </div>
+
+            <button class="edit-btn" onclick="showMessage('Edit Profile')">
+                Edit
+            </button>
         </div>
-      </div>
-      <div class="hero-art">
-        <div class="hero-orbit"></div>
-        <div class="hero-card">
-          <span>CURATED</span>
-          <strong>21</strong>
-          <small>Amazon links</small>
-        </div>
-      </div>
     </section>
 
-    <section class="category-bar" id="categories">
-      <a href="#products"><span>⌂</span> Home & Decor</a>
-      <a href="#products"><span>✦</span> Lifestyle</a>
-      <a href="#products"><span>◇</span> Kitchen</a>
-      <a href="#products"><span>♡</span> Fashion</a>
-      <a href="#products"><span>✈</span> Travel</a>
-      <a href="#products"><span>☼</span> Daily Finds</a>
+
+    <section class="create-post">
+
+        <div class="post-user">
+            <div class="small-avatar">G</div>
+
+            <input
+                type="text"
+                id="postText"
+                placeholder="What's on your mind?"
+            >
+        </div>
+
+        <div class="post-actions">
+
+            <button onclick="addPhoto()">📷 Photo</button>
+
+            <button onclick="addVideo()">🎥 Video</button>
+
+            <button onclick="createPost()">➕ Post</button>
+
+        </div>
+
     </section>
 
-    <section class="intro-section">
-      <div>
-        <p class="kicker">SHOP THE EDIT</p>
-        <h2>Handpicked Amazon<br><em>discoveries</em></h2>
-      </div>
-      <p>
-        Each button below opens your supplied Amazon destination. Product names, prices,
-        specifications and images can change, so the live Amazon listing is the source of truth.
-      </p>
+
+    <section id="feed">
+
+        <article class="post">
+
+            <div class="post-header">
+
+                <div class="small-avatar">G</div>
+
+                <div>
+                    <strong>Gitalk User</strong>
+                    <p>Just now</p>
+                </div>
+
+            </div>
+
+            <p class="post-text">
+                Welcome to Gitalk Social! 💜
+                A new place to connect, share and discover.
+            </p>
+
+            <div class="post-image">
+                🌍
+                <span>Welcome to Gitalk</span>
+            </div>
+
+            <div class="post-stats">
+                <span id="likeCount">0 Likes</span>
+                <span>0 Comments</span>
+            </div>
+
+            <div class="post-buttons">
+
+                <button onclick="likePost()">❤️ Like</button>
+
+                <button onclick="commentPost()">💬 Comment</button>
+
+                <button onclick="sharePost()">↗️ Share</button>
+
+            </div>
+
+        </article>
+
     </section>
 
-    <section class="products-section" id="products">
-      <div class="section-head">
-        <div>
-          <p class="kicker">FEATURED COLLECTION</p>
-          <h2>Amazon Picks</h2>
-        </div>
-        <span class="count-badge">21 links</span>
-      </div>
+</main>
 
-      <div class="product-grid">
-        
-      <article class="product-card">
-        <div class="product-visual visual-0">
-          <span class="product-number">01</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 1</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0ihgukwM</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0ihgukwM" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-1">
-          <span class="product-number">02</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 2</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B00hJy1Sk</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B00hJy1Sk" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-2">
-          <span class="product-number">03</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 3</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B07UkxFz2</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B07UkxFz2" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-3">
-          <span class="product-number">04</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 4</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B00JSrcZe</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B00JSrcZe" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-4">
-          <span class="product-number">05</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 5</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B043zOhI3</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B043zOhI3" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-5">
-          <span class="product-number">06</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 6</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B07aC5WLy</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B07aC5WLy" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-0">
-          <span class="product-number">07</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 7</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0eFHSkSN</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0eFHSkSN" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-1">
-          <span class="product-number">08</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 8</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0j0fHdEt</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0j0fHdEt" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-2">
-          <span class="product-number">09</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 9</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0eZM7ijB</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0eZM7ijB" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-3">
-          <span class="product-number">10</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 10</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0iQKv4dW</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0iQKv4dW" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-4">
-          <span class="product-number">11</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 11</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B04Mc7Qyj</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B04Mc7Qyj" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-5">
-          <span class="product-number">12</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 12</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0iTHpo3O</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0iTHpo3O" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-0">
-          <span class="product-number">13</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 13</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0eDt5gGW</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0eDt5gGW" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-1">
-          <span class="product-number">14</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 14</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0iwYM9iD</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0iwYM9iD" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-2">
-          <span class="product-number">15</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 15</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0gwooGuU</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0gwooGuU" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-3">
-          <span class="product-number">16</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 16</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0dFUYYM7</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0dFUYYM7" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-4">
-          <span class="product-number">17</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 17</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B025uRRgl</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B025uRRgl" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-5">
-          <span class="product-number">18</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 18</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B0dCHUMbn</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B0dCHUMbn" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-0">
-          <span class="product-number">19</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 19</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B06k3jy9b</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B06k3jy9b" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-1">
-          <span class="product-number">20</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 20</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B05Ihsulr</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B05Ihsulr" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      <article class="product-card">
-        <div class="product-visual visual-2">
-          <span class="product-number">21</span>
-          <span class="amazon-mark">A</span>
-          <span class="visual-label">AMAZON FIND</span>
-        </div>
-        <div class="product-info">
-          <div class="eyebrow">Handpicked • Amazon</div>
-          <h3>Featured Amazon Product 21</h3>
-          <p>Explore the latest details, customer reviews, availability and current price on Amazon.</p>
-          <div class="product-meta"><span>ASIN</span><strong>B06z0Rygv</strong></div>
-          <a class="buy-btn" href="https://link.amazon/B06z0Rygv" target="_blank" rel="nofollow sponsored noopener">
-            View on Amazon <span>↗</span>
-          </a>
-        </div>
-      </article>
-    
-      </div>
-    </section>
 
-    <section class="promo-grid">
-      <div class="promo promo-dark">
-        <p class="kicker">GITALK.IN</p>
-        <h3>Explore.<br>Travel.<br>Bloom.</h3>
-        <p>Ideas and discoveries made for curious minds.</p>
-      </div>
-      <div class="promo promo-light">
-        <p class="kicker">UPI PAYMENT</p>
-        <h3>Support Gitalk.in</h3>
-        <p>UPI ID: <strong>8940270189@nye</strong></p>
-        <a href="upi://pay?pa=8940270189@nye&pn=Gitalk.in&cu=INR" class="primary-btn">Pay with UPI</a>
-      </div>
-      <div class="promo promo-image">
-        <p class="kicker">FLOWER GALLERY</p>
-        <h3>Little moments,<br>beautifully found.</h3>
-        <a href="#gallery" class="text-btn">View gallery →</a>
-      </div>
-    </section>
+<nav class="bottom-nav">
 
-    <section class="gallery-section" id="gallery">
-      <div class="section-head">
-        <div>
-          <p class="kicker">VISUAL JOURNAL</p>
-          <h2>Gitalk Gallery</h2>
-        </div>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-tile tile-one"><span>EXPLORE</span></div>
-        <div class="gallery-tile tile-two"><span>TRAVEL</span></div>
-        <div class="gallery-tile tile-three"><span>FLOWERS</span></div>
-        <div class="gallery-tile tile-four"><span>DISCOVER</span></div>
-      </div>
-    </section>
+    <button onclick="goHome()">
+        🏠
+        <span>Home</span>
+    </button>
 
-    <section class="about-section" id="about">
-      <div>
-        <p class="kicker">ABOUT GITALK.IN</p>
-        <h2>A small corner for <em>big discoveries.</em></h2>
-      </div>
-      <div class="about-copy">
-        <p>
-          Gitalk.in brings together shopping inspiration, travel, flowers, booking ideas and
-          useful online discoveries in one simple destination.
-        </p>
-        <p>
-          
-        </p>
-      </div>
-    </section>
+    <button onclick="showMessage('Friends')">
+        👥
+        <span>Friends</span>
+    </button>
 
-    <section class="contact-section" id="contact">
-      <div class="contact-card">
-        <div>
-          <p class="kicker">GET IN TOUCH</p>
-          <h2>JORAM</h2>
-          <a href="mailto:navyaaitech@gmail.com">navyaaitech@gmail.com</a>
-        </div>
-        <div class="contact-links">
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube ↗</a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook ↗</a>
-        </div>
-      </div>
-    </section>
-  </main>
+    <button onclick="showMessage('Create')">
+        ➕
+        <span>Create</span>
+    </button>
 
-  <footer class="site-footer">
-    <div>
-      <img src="assets/logo.png" alt="Gitalk.in">
-      <p>EXPLORE • TRAVEL • FLOWERS • BOOKING</p>
-    </div>
-    <div class="footer-note">
-      <p>Affiliate disclosure: Gitalk.in may earn a commission from qualifying purchases.</p>
-      <p>© 2026 Gitalk.in. All rights reserved.</p>
-    </div>
-  </footer>
+    <button onclick="showMessage('Messages')">
+        💬
+        <span>Chat</span>
+    </button>
+
+    <button onclick="showMessage('Profile')">
+        👤
+        <span>Profile</span>
+    </button>
+
+</nav>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
