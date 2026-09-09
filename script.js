@@ -1,562 +1,384 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f4f6f8;
-  color: #222;
-  min-height: 100vh;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f1f3f6;
+  color:#222;
 }
 
-button,
-input,
-textarea {
-  font-family: inherit;
+button{
+  border:0;
+  cursor:pointer;
 }
 
-button {
-  cursor: pointer;
+.hidden{
+  display:none!important;
 }
 
 
-/* ================= AUTH ================= */
+/* AUTH */
 
-#authSection {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+.auth-page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#6c2cff,#ff3d81);
 }
 
-.authCard {
-  width: 100%;
-  max-width: 430px;
-  background: white;
-  padding: 35px 25px;
-  border-radius: 22px;
-  box-shadow: 0 15px 50px rgba(0,0,0,.25);
-  text-align: center;
+.auth-box{
+  width:100%;
+  max-width:400px;
+  background:white;
+  padding:35px 25px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,.2);
+  text-align:center;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+.logo{
+  font-size:32px;
+  font-weight:bold;
+  color:#6c2cff;
+  margin-bottom:15px;
 }
 
-.logo h1 {
-  font-size: 34px;
+.logo span,
+.brand span{
+  color:#ff3d81;
 }
 
-.logoIcon {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #667eea;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: bold;
+.auth-box h2{
+  margin-bottom:8px;
 }
 
-.tagline {
-  color: #777;
-  margin: 8px 0 25px;
+.auth-box p{
+  color:#777;
+  margin-bottom:20px;
 }
 
-.authCard h2 {
-  margin-bottom: 20px;
+.auth-box input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:10px;
+  outline:none;
+  font-size:15px;
 }
 
-.authCard input,
-.editCard input,
-.editCard textarea {
-  width: 100%;
-  padding: 14px;
-  margin: 7px 0;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  outline: none;
-  font-size: 15px;
+.auth-box input:focus{
+  border-color:#6c2cff;
 }
 
-.authCard input:focus,
-.editCard input:focus,
-.editCard textarea:focus {
-  border-color: #667eea;
+.auth-box button{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:10px;
+  background:#6c2cff;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
 }
 
-.authBtn,
-.saveBtn,
-.createBtn,
-.editBtn {
-  border: none;
-  border-radius: 12px;
-  padding: 14px 20px;
-  font-weight: bold;
-  color: white;
-  background: #667eea;
-  width: 100%;
-  margin-top: 12px;
+.switch{
+  margin-top:20px!important;
+  margin-bottom:0!important;
 }
 
-.authBtn:hover,
-.saveBtn:hover,
-.createBtn:hover,
-.editBtn:hover {
-  opacity: .9;
+.switch a{
+  color:#6c2cff;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-.switchText {
-  margin-top: 18px;
-  color: #666;
-  font-size: 14px;
+.message{
+  margin-top:15px;
+  font-weight:bold;
 }
 
-.switchText button {
-  border: none;
-  background: none;
-  color: #667eea;
-  font-weight: bold;
-}
-
-#authMessage {
-  margin-top: 15px;
-  color: #d33;
-}
-
-
-/* ================= APP ================= */
-
-#appSection {
-  min-height: 100vh;
-  padding-bottom: 80px;
-}
-
-.topBar {
-  height: 65px;
-  background: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 10px rgba(0,0,0,.08);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.brandLogo {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #667eea;
-  color: white;
-}
-
-.topUser {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-#userEmail {
-  font-size: 12px;
-  color: #777;
-  max-width: 180px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#logoutBtn {
-  border: none;
-  background: #ef4444;
-  color: white;
-  padding: 9px 13px;
-  border-radius: 9px;
-}
-
-
-/* ================= PAGES ================= */
-
-.appPage {
-  width: 100%;
-  max-width: 700px;
-  margin: auto;
-  padding: 25px 15px;
-}
-
-.pageTitle {
-  margin-bottom: 18px;
-}
-
-.pageTitle h2 {
-  font-size: 26px;
-}
-
-.pageTitle p {
-  color: #777;
-  margin-top: 5px;
-}
-
-
-/* ================= CREATE POST ================= */
-
-.createPost {
-  background: white;
-  padding: 18px;
-  border-radius: 16px;
-  box-shadow: 0 3px 15px rgba(0,0,0,.07);
-  margin-bottom: 20px;
-}
-
-#postText {
-  width: 100%;
-  min-height: 100px;
-  resize: vertical;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 14px;
-  outline: none;
-  font-size: 15px;
-}
-
-.mediaButtons {
-  display: flex;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-.mediaButton {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  border-radius: 10px;
-  background: #f1f3f8;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#uploadStatus,
-#profileUploadStatus {
-  margin-top: 10px;
-  font-size: 13px;
-  color: #667eea;
-}
-
 
-/* ================= POST ================= */
+/* TOP BAR */
 
-.post {
-  background: white;
-  border-radius: 16px;
-  padding: 17px;
-  margin-bottom: 15px;
-  box-shadow: 0 3px 15px rgba(0,0,0,.07);
+.topbar{
+  height:65px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  box-shadow:0 2px 10px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:10;
 }
 
-.postHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.brand{
+  font-size:25px;
+  font-weight:bold;
+  color:#6c2cff;
 }
 
-.postUser {
-  font-weight: bold;
+.top-actions{
+  display:flex;
+  gap:8px;
 }
 
-.postDate {
-  color: #888;
-  font-size: 12px;
+.top-actions button{
+  padding:9px 12px;
+  border-radius:8px;
+  background:#eee;
 }
 
-.postText {
-  margin: 15px 0;
-  line-height: 1.5;
-  white-space: pre-wrap;
+.top-actions button:last-child{
+  background:#ff3d81;
+  color:white;
 }
 
-.post img,
-.post video {
-  width: 100%;
-  max-height: 550px;
-  object-fit: contain;
-  border-radius: 12px;
-  margin-top: 10px;
-  background: #111;
-}
 
-.postActions {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
-}
+/* CONTAINER */
 
-.postActions button {
-  border: none;
-  background: #f1f3f8;
-  padding: 9px 12px;
-  border-radius: 9px;
+.container{
+  width:100%;
+  max-width:700px;
+  margin:auto;
+  padding:20px 15px 50px;
 }
 
-.comments {
-  margin-top: 12px;
-}
 
-.comment {
-  background: #f5f5f5;
-  padding: 8px 10px;
-  border-radius: 8px;
-  margin-top: 5px;
-}
+/* USER */
 
-.commentUser {
-  font-weight: bold;
-  font-size: 13px;
+.welcome-card{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:15px;
 }
 
-.emptyFeed {
-  background: white;
-  padding: 35px;
-  text-align: center;
-  border-radius: 15px;
-  color: #777;
+.avatar,
+.big-avatar{
+  background:linear-gradient(135deg,#6c2cff,#ff3d81);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  border-radius:50%;
 }
-
 
-/* ================= PROFILE ================= */
-
-.profileCard,
-.editCard,
-.settingsCard {
-  background: white;
-  border-radius: 18px;
-  padding: 25px;
-  box-shadow: 0 3px 15px rgba(0,0,0,.07);
+.avatar{
+  width:48px;
+  height:48px;
+  font-size:20px;
 }
 
-.profileCard {
-  text-align: center;
+.welcome-card small{
+  display:block;
+  color:#777;
+  margin-top:4px;
 }
 
-.profilePhoto,
-.editPhoto {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #667eea;
-}
 
-.profileCard h2 {
-  margin-top: 15px;
-}
+/* CREATE POST */
 
-#profileUsername {
-  color: #667eea;
-  margin-top: 5px;
+.create-post{
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-#profileBio {
-  margin: 15px 0;
-  color: #666;
+.create-post textarea{
+  width:100%;
+  min-height:90px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:12px;
+  resize:none;
+  outline:none;
+  font-size:15px;
 }
 
-.profileInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  color: #666;
+.post-tools{
+  margin-top:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.stats {
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-  margin: 25px 0;
+.photo-btn{
+  background:#eee;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  color:#444;
 }
 
-.stats div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.photo-btn input{
+  display:none;
 }
 
-.stats strong {
-  font-size: 22px;
+.post-tools button{
+  background:#6c2cff;
+  color:white;
+  padding:10px 20px;
+  border-radius:8px;
+  font-weight:bold;
 }
 
-.stats span {
-  color: #777;
+#imagePreview img{
+  max-width:100%;
+  max-height:300px;
+  margin-top:12px;
+  border-radius:12px;
 }
 
 
-/* ================= EDIT ================= */
-
-.editCard h2,
-.settingsCard h2 {
-  margin-bottom: 20px;
-}
+/* FEED */
 
-.profileUpload {
-  text-align: center;
-  margin-bottom: 15px;
+.feed-title{
+  margin:25px 0 12px;
 }
 
-.uploadPhotoBtn {
-  display: block;
-  margin: 12px auto;
-  width: fit-content;
-  padding: 10px 15px;
-  background: #667eea;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
+.post{
+  background:white;
+  border-radius:15px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
 }
 
-.editCard textarea {
-  min-height: 100px;
-  resize: vertical;
+.post-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
 }
 
-
-/* ================= SETTINGS ================= */
-
-.settingRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 0;
-  border-bottom: 1px solid #eee;
+.post-user{
+  font-weight:bold;
 }
 
-.settingRow div {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+.post-time{
+  color:#888;
+  font-size:12px;
+  margin-top:3px;
 }
 
-.settingRow small {
-  color: #888;
+.post-content{
+  line-height:1.5;
+  margin-bottom:10px;
+  white-space:pre-wrap;
 }
 
-.settingRow input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
+.post-image{
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-top:8px;
 }
-
-
-/* ================= BOTTOM NAV ================= */
 
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 65px;
-  background: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 -2px 12px rgba(0,0,0,.1);
-  z-index: 20;
+.post-actions{
+  display:flex;
+  gap:8px;
+  border-top:1px solid #eee;
+  margin-top:12px;
+  padding-top:10px;
 }
 
-.bottomNav button {
-  border: none;
-  background: none;
-  color: #555;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  font-size: 18px;
+.post-actions button{
+  flex:1;
+  padding:10px;
+  background:#f2f2f2;
+  border-radius:8px;
 }
 
-.bottomNav span {
-  font-size: 11px;
+.post-actions button.liked{
+  color:#ff1744;
 }
 
 
-/* ================= DARK MODE ================= */
+/* MODAL */
 
-body.dark {
-  background: #121212;
-  color: #eee;
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  z-index:100;
 }
 
-body.dark .topBar,
-body.dark .bottomNav,
-body.dark .createPost,
-body.dark .post,
-body.dark .profileCard,
-body.dark .editCard,
-body.dark .settingsCard,
-body.dark .emptyFeed {
-  background: #1e1e1e;
-  color: #eee;
+.modal-box{
+  background:white;
+  width:100%;
+  max-width:380px;
+  border-radius:20px;
+  padding:30px;
+  text-align:center;
+  position:relative;
 }
 
-body.dark input,
-body.dark textarea {
-  background: #292929;
-  color: white;
-  border-color: #444;
+.close{
+  position:absolute;
+  right:15px;
+  top:15px;
+  background:#eee;
+  width:35px;
+  height:35px;
+  border-radius:50%;
 }
 
-body.dark .mediaButton,
-body.dark .postActions button,
-body.dark .comment {
-  background: #292929;
-  color: white;
+.big-avatar{
+  width:90px;
+  height:90px;
+  margin:10px auto 15px;
+  font-size:35px;
 }
 
-body.dark .bottomNav button {
-  color: #ddd;
+.modal-box button:last-child{
+  margin-top:20px;
+  padding:12px 30px;
+  background:#6c2cff;
+  color:white;
+  border-radius:8px;
 }
 
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
-@media (max-width: 600px) {
+@media(max-width:500px){
 
-  .topBar {
-    padding: 0 12px;
+  .topbar{
+    padding:0 12px;
   }
 
-  #userEmail {
-    display: none;
+  .brand{
+    font-size:22px;
   }
 
-  .appPage {
-    padding: 18px 10px;
+  .top-actions button{
+    padding:8px;
   }
 
-  .authCard {
-    padding: 28px 18px;
+  .container{
+    padding:12px 10px 40px;
   }
 
-  .stats {
-    gap: 40px;
+  .auth-box{
+    padding:30px 20px;
   }
 
     }
