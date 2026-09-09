@@ -464,9 +464,131 @@ onclick="showPage('edit')">
 
 <!-- EDIT PROFILE -->
 
-<section
-id="edit"
-class="page">
+<section id="edit" class="page">
+
+  <div class="card">
+
+    <h2>✏️ Edit Profile</h2>
+
+    <!-- PROFILE PHOTO -->
+
+    <div style="text-align:center;margin:20px 0;">
+
+      <img
+        id="editProfilePhoto"
+        src="https://via.placeholder.com/150"
+        style="
+          width:120px;
+          height:120px;
+          border-radius:50%;
+          object-fit:cover;
+          border:4px solid #ff2d55;
+        "
+      >
+
+      <br><br>
+
+      <label
+        for="profileImageInput"
+        style="
+          display:inline-block;
+          background:#ff2d55;
+          color:white;
+          padding:12px 20px;
+          border-radius:25px;
+          cursor:pointer;
+          font-weight:bold;
+        "
+      >
+        📷 Upload Profile Photo
+      </label>
+
+      <input
+        id="profileImageInput"
+        type="file"
+        accept="image/*"
+        style="display:none;"
+        onchange="previewProfileImage(event)"
+      >
+
+      <p
+        id="uploadStatus"
+        style="
+          margin-top:10px;
+          color:#777;
+          font-size:13px;
+        "
+      ></p>
+
+    </div>
+
+
+    <!-- NAME -->
+
+    <label>Name</label>
+
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="Your name"
+    >
+
+
+    <!-- USERNAME -->
+
+    <label>Username</label>
+
+    <input
+      id="usernameInput"
+      type="text"
+      placeholder="@username"
+    >
+
+
+    <!-- BIO -->
+
+    <label>Bio</label>
+
+    <textarea
+      id="bioInput"
+      placeholder="About you">
+    </textarea>
+
+
+    <!-- LOCATION -->
+
+    <label>Location</label>
+
+    <input
+      id="locationInput"
+      type="text"
+      placeholder="City / Country"
+    >
+
+
+    <!-- WEBSITE -->
+
+    <label>Website</label>
+
+    <input
+      id="websiteInput"
+      type="url"
+      placeholder="https://example.com"
+    >
+
+
+    <!-- SAVE -->
+
+    <button
+      class="mainBtn"
+      onclick="saveFirebaseProfile()"
+    >
+      💾 Save Profile
+    </button>
+
+  </div>
+
+</section>
 
 <div class="card">
 
