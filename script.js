@@ -1,6 +1,7 @@
 // ==========================================
 // Gitalk Social
-// Firebase Posts + Likes + Comments
+// Firebase Social App
+// Posts + Photos + Videos + Likes + Comments
 // ==========================================
 
 import {
@@ -26,6 +27,13 @@ import {
     arrayUnion
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
+
 
 // ==========================================
 // FIREBASE CONFIG
@@ -43,13 +51,12 @@ const firebaseConfig = {
 
     messagingSenderId: "553434284005",
 
-    appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
-
+    appId: "1:553434097f7f7228d2b8b90c"
 };
 
 
 // ==========================================
-// FIREBASE START
+// INITIALIZE FIREBASE
 // ==========================================
 
 const app = initializeApp(firebaseConfig);
@@ -58,11 +65,13 @@ const auth = getAuth(app);
 
 const db = getFirestore(app);
 
+const storage = getStorage(app);
+
 let currentUser = null;
 
 
 // ==========================================
-// LOGIN STATE
+// AUTH STATE
 // ==========================================
 
 onAuthStateChanged(auth, (user) => {
@@ -79,7 +88,7 @@ onAuthStateChanged(auth, (user) => {
 
 
 // ==========================================
-// CREATE POST
+// CREATE TEXT POST
 // ==========================================
 
 window.createPost = async function () {
@@ -91,11 +100,13 @@ window.createPost = async function () {
         return;
     }
 
+
     const input =
         document.getElementById("postText");
 
     const text =
         input.value.trim();
+
 
     if (!text) {
 
@@ -104,16 +115,22 @@ window.createPost = async function () {
         return;
     }
 
+
     try {
 
         await addDoc(
             collection(db, "posts"),
             {
+
                 uid: currentUser.uid,
 
                 email: currentUser.email,
 
                 text: text,
+
+                mediaType: "",
+
+                mediaUrl: "",
 
                 likes: 0,
 
@@ -122,8 +139,10 @@ window.createPost = async function () {
                 likedBy: [],
 
                 createdAt: serverTimestamp()
+
             }
         );
+
 
         input.value = "";
 
@@ -144,7 +163,353 @@ window.createPost = async function () {
 
 
 // ==========================================
-// LOAD POSTS - REAL TIME
+// SELECT PHOTO
+// ==========================================
+
+window.selectPhoto = function () {
+
+    const input =
+        document.getElementById("photoInput");
+
+    if (input) {
+
+        input.click();
+
+    } else {
+
+        alert(
+            "❌ Photo input not found."
+        );
+
+    }
+
+};
+
+
+// ==========================================
+// SELECT VIDEO
+// ==========================================
+
+window.selectVideo = function () {
+
+    const input =
+        document.getElementById("videoInput");
+
+    if (input) {
+
+        input.click();
+
+    } else {
+
+        alert(
+            "❌ Video input not found."
+        );
+
+    }
+
+};
+
+
+// ==========================================
+// PHOTO UPLOAD
+// ==========================================
+
+window.handlePhoto = async function (event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    if (!currentUser) {
+
+        alert("🔐 Please login first.");
+
+        return;
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+        alert("❌ Please select an image file.");
+
+        return;
+    }
+
+
+    // 10 MB limit
+
+    if (file.size > 10 * 1024 * 1024) {
+
+        alert(
+            "❌ Photo must be smaller than 10 MB."
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
+
+    try {
+
+        alert("📷 Uploading photo...");
+
+
+        const safeFileName =
+            createSafeFileName(file.name);
+
+
+        const filePath =
+            "posts/" +
+            currentUser.uid +
+            "/" +
+            Date.now() +
+            "_" +
+            safeFileName;
+
+
+        const storageRef =
+            ref(
+                storage,
+                filePath
+            );
+
+
+        await uploadBytes(
+            storageRef,
+            file
+        );
+
+
+        const imageURL =
+            await getDownloadURL(
+                storageRef
+            );
+
+
+        const captionInput =
+            document.getElementById("postText");
+
+
+        const caption =
+            captionInput
+                ? captionInput.value.trim()
+                : "";
+
+
+        await addDoc(
+            collection(db, "posts"),
+            {
+
+                uid: currentUser.uid,
+
+                email: currentUser.email,
+
+                text: caption,
+
+                mediaType: "image",
+
+                mediaUrl: imageURL,
+
+                likes: 0,
+
+                comments: 0,
+
+                likedBy: [],
+
+                createdAt: serverTimestamp()
+
+            }
+        );
+
+
+        if (captionInput) {
+
+            captionInput.value = "";
+
+        }
+
+
+        alert(
+            "✅ Photo posted successfully!"
+        );
+
+
+        event.target.value = "";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Photo upload failed: " +
+            error.message
+        );
+
+    }
+
+};
+
+
+// ==========================================
+// VIDEO UPLOAD
+// ==========================================
+
+window.handleVideo = async function (event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    if (!currentUser) {
+
+        alert("🔐 Please login first.");
+
+        return;
+    }
+
+
+    if (!file.type.startsWith("video/")) {
+
+        alert("❌ Please select a video file.");
+
+        return;
+    }
+
+
+    // 50 MB limit
+
+    if (file.size > 50 * 1024 * 1024) {
+
+        alert(
+            "❌ Video must be smaller than 50 MB."
+        );
+
+        event.target.value = "";
+
+        return;
+    }
+
+
+    try {
+
+        alert("🎥 Uploading video...");
+
+
+        const safeFileName =
+            createSafeFileName(file.name);
+
+
+        const filePath =
+            "posts/" +
+            currentUser.uid +
+            "/" +
+            Date.now() +
+            "_" +
+            safeFileName;
+
+
+        const storageRef =
+            ref(
+                storage,
+                filePath
+            );
+
+
+        await uploadBytes(
+            storageRef,
+            file
+        );
+
+
+        const videoURL =
+            await getDownloadURL(
+                storageRef
+            );
+
+
+        const captionInput =
+            document.getElementById("postText");
+
+
+        const caption =
+            captionInput
+                ? captionInput.value.trim()
+                : "";
+
+
+        await addDoc(
+            collection(db, "posts"),
+            {
+
+                uid: currentUser.uid,
+
+                email: currentUser.email,
+
+                text: caption,
+
+                mediaType: "video",
+
+                mediaUrl: videoURL,
+
+                likes: 0,
+
+                comments: 0,
+
+                likedBy: [],
+
+                createdAt: serverTimestamp()
+
+            }
+        );
+
+
+        if (captionInput) {
+
+            captionInput.value = "";
+
+        }
+
+
+        alert(
+            "✅ Video posted successfully!"
+        );
+
+
+        event.target.value = "";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert(
+            "❌ Video upload failed: " +
+            error.message
+        );
+
+    }
+
+};
+
+
+// ==========================================
+// LOAD POSTS REAL-TIME
 // ==========================================
 
 function loadPosts() {
@@ -152,28 +517,66 @@ function loadPosts() {
     const feed =
         document.getElementById("feed");
 
+
+    if (!feed) {
+
+        return;
+
+    }
+
+
     const postsQuery =
         query(
             collection(db, "posts"),
-            orderBy("createdAt", "desc")
+            orderBy(
+                "createdAt",
+                "desc"
+            )
         );
+
 
     onSnapshot(
         postsQuery,
+
         (snapshot) => {
 
             feed.innerHTML = "";
 
-            snapshot.forEach((postDoc) => {
 
-                createPostElement(
-                    postDoc.id,
-                    postDoc.data()
-                );
+            snapshot.forEach(
+                (postDoc) => {
 
-            });
+                    createPostElement(
+                        postDoc.id,
+                        postDoc.data()
+                    );
+
+                }
+            );
+
+
+            if (snapshot.empty) {
+
+                feed.innerHTML = `
+
+                    <div class="post">
+
+                        <h3>
+                            Welcome to Gitalk Social 💜
+                        </h3>
+
+                        <p>
+                            Be the first person to create a post!
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
 
         },
+
         (error) => {
 
             console.error(error);
@@ -198,21 +601,118 @@ function createPostElement(postId, post) {
     const feed =
         document.getElementById("feed");
 
+
+    if (!feed) {
+
+        return;
+
+    }
+
+
     const article =
         document.createElement("article");
 
-    article.className = "post";
+
+    article.className =
+        "post";
+
 
     const likes =
-        post.likes || 0;
+        Number(post.likes || 0);
+
 
     const comments =
-        post.comments || 0;
+        Number(post.comments || 0);
+
 
     const liked =
         currentUser &&
         Array.isArray(post.likedBy) &&
-        post.likedBy.includes(currentUser.uid);
+        post.likedBy.includes(
+            currentUser.uid
+        );
+
+
+    let mediaHTML = "";
+
+
+    // IMAGE
+
+    if (
+        post.mediaType === "image" &&
+        post.mediaUrl
+    ) {
+
+        mediaHTML = `
+
+            <div class="post-image">
+
+                <img
+                    src="${escapeAttribute(post.mediaUrl)}"
+                    alt="Gitalk Social photo"
+                    loading="lazy"
+                    style="
+                        width:100%;
+                        max-height:500px;
+                        object-fit:cover;
+                        border-radius:12px;
+                    "
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+    // VIDEO
+
+    if (
+        post.mediaType === "video" &&
+        post.mediaUrl
+    ) {
+
+        mediaHTML = `
+
+            <div class="post-video">
+
+                <video
+                    controls
+                    playsinline
+                    preload="metadata"
+                    style="
+                        width:100%;
+                        max-height:500px;
+                        border-radius:12px;
+                    "
+                >
+
+                    <source
+                        src="${escapeAttribute(post.mediaUrl)}"
+                        type="video/mp4"
+                    >
+
+                    Your browser does not support video.
+
+                </video>
+
+            </div>
+
+        `;
+
+    }
+
+
+    const textHTML =
+        post.text
+            ? `
+                <p class="post-text">
+                    ${escapeHTML(post.text)}
+                </p>
+              `
+            : "";
+
 
     article.innerHTML = `
 
@@ -222,11 +722,13 @@ function createPostElement(postId, post) {
                 G
             </div>
 
+
             <div>
 
                 <strong>
                     ${escapeHTML(
-                        post.email || "Gitalk User"
+                        post.email ||
+                        "Gitalk User"
                     )}
                 </strong>
 
@@ -239,21 +741,33 @@ function createPostElement(postId, post) {
         </div>
 
 
-        <p class="post-text">
-            ${escapeHTML(post.text || "")}
-        </p>
+        ${textHTML}
+
+
+        ${mediaHTML}
 
 
         <div class="post-stats">
 
             <span>
+
                 ${likes}
-                ${likes === 1 ? " Like" : " Likes"}
+
+                ${likes === 1
+                    ? " Like"
+                    : " Likes"}
+
             </span>
 
+
             <span>
+
                 ${comments}
-                ${comments === 1 ? " Comment" : " Comments"}
+
+                ${comments === 1
+                    ? " Comment"
+                    : " Comments"}
+
             </span>
 
         </div>
@@ -265,21 +779,31 @@ function createPostElement(postId, post) {
                 onclick="likePost('${postId}')"
                 ${liked ? "disabled" : ""}
             >
-                ${liked ? "❤️ Liked" : "❤️ Like"}
+
+                ${
+                    liked
+                    ? "❤️ Liked"
+                    : "❤️ Like"
+                }
+
             </button>
 
 
             <button
                 onclick="commentPost('${postId}')"
             >
+
                 💬 Comment
+
             </button>
 
 
             <button
                 onclick="sharePost('${postId}')"
             >
+
                 ↗️ Share
+
             </button>
 
         </div>
@@ -289,11 +813,14 @@ function createPostElement(postId, post) {
             id="comments-${postId}"
             class="comments-box"
         >
+
         </div>
 
     `;
 
+
     feed.appendChild(article);
+
 
     loadComments(postId);
 
@@ -301,7 +828,7 @@ function createPostElement(postId, post) {
 
 
 // ==========================================
-// LIKE
+// LIKE POST
 // ==========================================
 
 window.likePost = async function (postId) {
@@ -313,15 +840,25 @@ window.likePost = async function (postId) {
         return;
     }
 
+
     try {
 
         await updateDoc(
-            doc(db, "posts", postId),
+            doc(
+                db,
+                "posts",
+                postId
+            ),
             {
-                likes: increment(1),
+
+                likes:
+                    increment(1),
 
                 likedBy:
-                    arrayUnion(currentUser.uid)
+                    arrayUnion(
+                        currentUser.uid
+                    )
+
             }
         );
 
@@ -352,13 +889,22 @@ window.commentPost = async function (postId) {
         return;
     }
 
-    const comment =
-        prompt("💬 Write your comment:");
 
-    if (!comment || !comment.trim()) {
+    const comment =
+        prompt(
+            "💬 Write your comment:"
+        );
+
+
+    if (
+        !comment ||
+        !comment.trim()
+    ) {
 
         return;
+
     }
+
 
     try {
 
@@ -370,27 +916,42 @@ window.commentPost = async function (postId) {
                 "comments"
             ),
             {
-                uid: currentUser.uid,
 
-                email: currentUser.email,
+                uid:
+                    currentUser.uid,
 
-                text: comment.trim(),
+                email:
+                    currentUser.email,
+
+                text:
+                    comment.trim(),
 
                 createdAt:
                     serverTimestamp()
+
             }
         );
 
 
         await updateDoc(
-            doc(db, "posts", postId),
+            doc(
+                db,
+                "posts",
+                postId
+            ),
             {
-                comments: increment(1)
+
+                comments:
+                    increment(1)
+
             }
         );
 
 
-        alert("💬 Comment added!");
+        alert(
+            "💬 Comment added!"
+        );
+
 
     } catch (error) {
 
@@ -407,7 +968,7 @@ window.commentPost = async function (postId) {
 
 
 // ==========================================
-// LOAD COMMENTS - REAL TIME
+// LOAD COMMENTS
 // ==========================================
 
 function loadComments(postId) {
@@ -417,7 +978,13 @@ function loadComments(postId) {
             "comments-" + postId
         );
 
-    if (!commentsBox) return;
+
+    if (!commentsBox) {
+
+        return;
+
+    }
+
 
     const commentsQuery =
         query(
@@ -427,12 +994,16 @@ function loadComments(postId) {
                 postId,
                 "comments"
             ),
-            orderBy("createdAt", "asc")
+            orderBy(
+                "createdAt",
+                "asc"
+            )
         );
 
 
     onSnapshot(
         commentsQuery,
+
         (snapshot) => {
 
             commentsBox.innerHTML = "";
@@ -446,7 +1017,9 @@ function loadComments(postId) {
 
 
                     const div =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
 
 
                     div.className =
@@ -464,23 +1037,27 @@ function loadComments(postId) {
 
                         <p>
                             ${escapeHTML(
-                                comment.text || ""
+                                comment.text ||
+                                ""
                             )}
                         </p>
 
                     `;
 
 
-                    commentsBox.appendChild(div);
+                    commentsBox.appendChild(
+                        div
+                    );
 
                 }
             );
 
         },
+
         (error) => {
 
             console.error(
-                "Comment loading error:",
+                "Comments error:",
                 error
             );
 
@@ -491,7 +1068,7 @@ function loadComments(postId) {
 
 
 // ==========================================
-// SHARE
+// SHARE POST
 // ==========================================
 
 window.sharePost = async function () {
@@ -506,11 +1083,14 @@ window.sharePost = async function () {
 
             await navigator.share({
 
-                title: "Gitalk Social",
+                title:
+                    "Gitalk Social",
 
-                text: shareText,
+                text:
+                    shareText,
 
-                url: window.location.href
+                url:
+                    window.location.href
 
             });
 
@@ -530,6 +1110,7 @@ window.sharePost = async function () {
                 window.location.href
             );
 
+
             alert(
                 "🔗 Link copied!"
             );
@@ -548,33 +1129,7 @@ window.sharePost = async function () {
 
 
 // ==========================================
-// PHOTO
-// ==========================================
-
-window.addPhoto = function () {
-
-    alert(
-        "📷 Photo upload will be added next."
-    );
-
-};
-
-
-// ==========================================
-// VIDEO
-// ==========================================
-
-window.addVideo = function () {
-
-    alert(
-        "🎥 Video upload will be added next."
-    );
-
-};
-
-
-// ==========================================
-// OTHER BUTTONS
+// SEARCH / NOTIFICATIONS / ETC.
 // ==========================================
 
 window.showMessage = function (name) {
@@ -586,6 +1141,10 @@ window.showMessage = function (name) {
 
 };
 
+
+// ==========================================
+// HOME
+// ==========================================
 
 window.goHome = function () {
 
@@ -601,16 +1160,48 @@ window.goHome = function () {
 
 
 // ==========================================
-// SECURITY
+// SAFE FILE NAME
+// ==========================================
+
+function createSafeFileName(fileName) {
+
+    return fileName
+        .replace(/[^a-zA-Z0-9._-]/g, "_")
+        .substring(0, 100);
+
+}
+
+
+// ==========================================
+// HTML SECURITY
 // ==========================================
 
 function escapeHTML(text) {
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    div.textContent = text;
+    div.textContent =
+        String(text);
 
     return div.innerHTML;
 
-                        }
+}
+
+
+// ==========================================
+// ATTRIBUTE SECURITY
+// ==========================================
+
+function escapeAttribute(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+                }
