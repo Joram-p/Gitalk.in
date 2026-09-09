@@ -1,115 +1,71 @@
-// PHOTO PICKER
-window.selectPhoto = function () {
-    const input = document.getElementById("photoInput");
-
-    if (!input) {
-        alert("Photo input नहीं मिला!");
-        return;
-    }
-
-    input.click();
-};
-
-
-// VIDEO PICKER
-window.selectVideo = function () {
-    const input = document.getElementById("videoInput");
-
-    if (!input) {
-        alert("Video input नहीं मिला!");
-        return;
-    }
-
-    input.click();
-};
-
-
-// PHOTO SELECTED
-window.handlePhoto = function (event) {
-
-    const file = event.target.files[0];
-
-    if (!file) {
-        return;
-    }
-
-    alert("Photo selected: " + file.name);
-
-};
-
-
-// VIDEO SELECTED
-window.handleVideo = function (event) {
-
-    const file = event.target.files[0];
-
-    if (!file) {
-        return;
-    }
-
-    alert("Video selected: " + file.name);
-
-};
-// ==========================================
-// Gitalk Social
-// Firebase Social App
-// Posts + Photos + Videos + Likes + Comments
-// ==========================================
+/* =====================================================
+   GITALK SOCIAL
+   Firebase Auth + Firestore + Storage
+   ===================================================== */
 
 import {
-    initializeApp
+  initializeApp
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
-    getAuth,
-    onAuthStateChanged
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    query,
-    orderBy,
-    onSnapshot,
-    serverTimestamp,
-    doc,
-    updateDoc,
-    increment,
-    arrayUnion
+  getFirestore,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp,
+  doc,
+  getDoc,
+  setDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 import {
-    getStorage,
-    ref,
-    uploadBytes,
-    getDownloadURL
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
 
 
-// ==========================================
-// FIREBASE CONFIG
-// ==========================================
+/* =====================================================
+   FIREBASE CONFIG
+   ===================================================== */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
+  apiKey:
+    "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
 
-    authDomain: "gitalk-social-3a85a.firebaseapp.com",
+  authDomain:
+    "gitalk-social-3a85a.firebaseapp.com",
 
-    projectId: "gitalk-social-3a85a",
+  projectId:
+    "gitalk-social-3a85a",
 
-    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
+  storageBucket:
+    "gitalk-social-3a85a.firebasestorage.app",
 
-    messagingSenderId: "553434284005",
+  messagingSenderId:
+    "553434284005",
 
-    appId: "1:553434097f7f7228d2b8b90c"
+  appId:
+    "1:553434284005:web:e934097f7f7228d2b8b90c"
 };
 
 
-// ==========================================
-// INITIALIZE FIREBASE
-// ==========================================
+/* =====================================================
+   INITIALIZE FIREBASE
+   ===================================================== */
 
 const app = initializeApp(firebaseConfig);
 
@@ -121,1139 +77,1344 @@ const storage = getStorage(app);
 
 let currentUser = null;
 
+let signupMode = false;
 
-// ==========================================
-// AUTH STATE
-// ==========================================
 
-onAuthStateChanged(auth, (user) => {
+/* =====================================================
+   AUTH MODE
+   ===================================================== */
+
+window.toggleAuth = function () {
+
+  signupMode = !signupMode;
+
+  const title =
+    document.getElementById("authTitle");
+
+  const button =
+    document.getElementById("authButton");
+
+  const switchText =
+    document.getElementById("switchAuth");
+
+  const message =
+    document.getElementById("authMessage");
+
+  message.innerText = "";
+
+  if (signupMode) {
+
+    title.innerText =
+      "Create Gitalk Account";
+
+    button.innerText =
+      "Sign Up";
+
+    button.onclick =
+      window.signup;
+
+    switchText.innerText =
+      "Already have an account? Login";
+
+  } else {
+
+    title.innerText =
+      "Login to Gitalk";
+
+    button.innerText =
+      "Login";
+
+    button.onclick =
+      window.login;
+
+    switchText.innerText =
+      "Create new account";
+  }
+};
+
+
+/* =====================================================
+   SIGN UP
+   ===================================================== */
+
+window.signup = async function () {
+
+  const email =
+    document.getElementById("email")
+      .value.trim();
+
+  const password =
+    document.getElementById("password")
+      .value;
+
+
+  if (!email || !password) {
+
+    showAuthMessage(
+      "Email और password डालें."
+    );
+
+    return;
+  }
+
+
+  if (password.length < 6) {
+
+    showAuthMessage(
+      "Password कम से कम 6 characters का होना चाहिए."
+    );
+
+    return;
+  }
+
+
+  try {
+
+    showAuthMessage(
+      "Account बनाया जा रहा है..."
+    );
+
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const user =
+      result.user;
+
+
+    /* USER PROFILE */
+
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+
+        uid: user.uid,
+
+        email: user.email,
+
+        displayName:
+          "Gitalk User",
+
+        photoURL: "",
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    showAuthMessage(
+      "Account successfully created ❤️"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showAuthMessage(
+      getFriendlyError(error)
+    );
+  }
+};
+
+
+/* =====================================================
+   LOGIN
+   ===================================================== */
+
+window.login = async function () {
+
+  const email =
+    document.getElementById("email")
+      .value.trim();
+
+  const password =
+    document.getElementById("password")
+      .value;
+
+
+  if (!email || !password) {
+
+    showAuthMessage(
+      "Email और password डालें."
+    );
+
+    return;
+  }
+
+
+  try {
+
+    showAuthMessage(
+      "Login हो रहा है..."
+    );
+
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+
+    showAuthMessage(
+      "Login successful ❤️"
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    showAuthMessage(
+      getFriendlyError(error)
+    );
+  }
+};
+
+
+/* =====================================================
+   LOGOUT
+   ===================================================== */
+
+window.logout = async function () {
+
+  try {
+
+    await signOut(auth);
+
+  } catch (error) {
+
+    alert(
+      getFriendlyError(error)
+    );
+  }
+};
+
+
+/* =====================================================
+   AUTH STATE
+   ===================================================== */
+
+onAuthStateChanged(
+  auth,
+  async function (user) {
 
     currentUser = user;
 
+    const authSection =
+      document.getElementById("authSection");
+
+    const appSection =
+      document.getElementById("appSection");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const userEmail =
+      document.getElementById("userEmail");
+
+
     if (user) {
 
-        loadPosts();
+      authSection.style.display =
+        "none";
 
+      appSection.style.display =
+        "block";
+
+      logoutBtn.style.display =
+        "inline-block";
+
+      userEmail.innerText =
+        user.email;
+
+      loadPosts();
+
+    } else {
+
+      authSection.style.display =
+        "block";
+
+      appSection.style.display =
+        "none";
+
+      logoutBtn.style.display =
+        "none";
+
+      userEmail.innerText =
+        "";
+
+      currentUser = null;
     }
+  }
+);
 
-});
 
-
-// ==========================================
-// CREATE TEXT POST
-// ==========================================
+/* =====================================================
+   CREATE TEXT POST
+   ===================================================== */
 
 window.createPost = async function () {
 
-    if (!currentUser) {
+  if (!currentUser) {
 
-        alert("🔐 Please login first.");
+    alert("Please login first.");
 
-        return;
-    }
-
-
-    const input =
-        document.getElementById("postText");
-
-    const text =
-        input.value.trim();
+    return;
+  }
 
 
-    if (!text) {
+  const textarea =
+    document.getElementById("postText");
 
-        alert("✍️ Please write something first.");
-
-        return;
-    }
-
-
-    try {
-
-        await addDoc(
-            collection(db, "posts"),
-            {
-
-                uid: currentUser.uid,
-
-                email: currentUser.email,
-
-                text: text,
-
-                mediaType: "",
-
-                mediaUrl: "",
-
-                likes: 0,
-
-                comments: 0,
-
-                likedBy: [],
-
-                createdAt: serverTimestamp()
-
-            }
-        );
+  const text =
+    textarea.value.trim();
 
 
-        input.value = "";
+  if (!text) {
 
-        alert("🎉 Post published!");
+    alert(
+      "Post में कुछ लिखें."
+    );
 
-    } catch (error) {
+    return;
+  }
 
-        console.error(error);
 
-        alert(
-            "❌ Post failed: " +
-            error.message
-        );
+  try {
 
-    }
+    setStatus(
+      "Post publish हो रहा है..."
+    );
 
+
+    await addDoc(
+      collection(db, "posts"),
+      {
+
+        uid:
+          currentUser.uid,
+
+        email:
+          currentUser.email,
+
+        text:
+          text,
+
+        mediaType:
+          "",
+
+        mediaUrl:
+          "",
+
+        contentType:
+          "",
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    textarea.value = "";
+
+    setStatus(
+      "Post published successfully ❤️",
+      false,
+      true
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    setStatus(
+      getFriendlyError(error),
+      true
+    );
+  }
 };
 
 
-// ==========================================
-// SELECT PHOTO
-// ==========================================
+/* =====================================================
+   PHOTO SELECT
+   ===================================================== */
 
 window.selectPhoto = function () {
 
-    const input =
-        document.getElementById("photoInput");
+  const input =
+    document.getElementById("photoInput");
 
-    if (input) {
+  if (!input) {
 
-        input.click();
+    alert(
+      "Photo input नहीं मिला."
+    );
 
-    } else {
+    return;
+  }
 
-        alert(
-            "❌ Photo input not found."
-        );
-
-    }
-
+  input.click();
 };
 
 
-// ==========================================
-// SELECT VIDEO
-// ==========================================
+/* =====================================================
+   VIDEO SELECT
+   ===================================================== */
 
 window.selectVideo = function () {
 
-    const input =
-        document.getElementById("videoInput");
+  const input =
+    document.getElementById("videoInput");
 
-    if (input) {
+  if (!input) {
 
-        input.click();
+    alert(
+      "Video input नहीं मिला."
+    );
 
-    } else {
+    return;
+  }
 
-        alert(
-            "❌ Video input not found."
-        );
-
-    }
-
+  input.click();
 };
 
 
-// ==========================================
-// PHOTO UPLOAD
-// ==========================================
+/* =====================================================
+   PHOTO UPLOAD
+   ===================================================== */
 
 window.handlePhoto = async function (event) {
 
-    const file =
-        event.target.files[0];
+  const file =
+    event.target.files[0];
 
 
-    if (!file) {
+  if (!file) {
 
-        return;
-
-    }
-
-
-    if (!currentUser) {
-
-        alert("🔐 Please login first.");
-
-        return;
-    }
+    return;
+  }
 
 
-    if (!file.type.startsWith("image/")) {
+  if (!currentUser) {
 
-        alert("❌ Please select an image file.");
+    alert(
+      "Please login first."
+    );
 
-        return;
-    }
-
-
-    // 10 MB limit
-
-    if (file.size > 10 * 1024 * 1024) {
-
-        alert(
-            "❌ Photo must be smaller than 10 MB."
-        );
-
-        event.target.value = "";
-
-        return;
-    }
+    return;
+  }
 
 
-    try {
+  /* CHECK IMAGE */
 
-        alert("📷 Uploading photo...");
+  if (!file.type.startsWith("image/")) {
 
+    alert(
+      "Please select an image."
+    );
 
-        const safeFileName =
-            createSafeFileName(file.name);
+    event.target.value = "";
 
-
-        const filePath =
-            "posts/" +
-            currentUser.uid +
-            "/" +
-            Date.now() +
-            "_" +
-            safeFileName;
+    return;
+  }
 
 
-        const storageRef =
-            ref(
-                storage,
-                filePath
-            );
+  /* 10 MB LIMIT */
+
+  if (
+    file.size >
+    10 * 1024 * 1024
+  ) {
+
+    alert(
+      "Photo 10 MB से छोटी होनी चाहिए."
+    );
+
+    event.target.value = "";
+
+    return;
+  }
 
 
-        await uploadBytes(
-            storageRef,
-            file
-        );
+  try {
+
+    setStatus(
+      "📤 Photo upload हो रही है..."
+    );
 
 
-        const imageURL =
-            await getDownloadURL(
-                storageRef
-            );
+    const safeName =
+      createSafeFileName(
+        file.name
+      );
 
 
-        const captionInput =
-            document.getElementById("postText");
+    const filePath =
+      "posts/" +
+      currentUser.uid +
+      "/" +
+      Date.now() +
+      "_" +
+      safeName;
 
 
-        const caption =
-            captionInput
-                ? captionInput.value.trim()
-                : "";
+    const storageRef =
+      ref(
+        storage,
+        filePath
+      );
 
 
-        await addDoc(
-            collection(db, "posts"),
-            {
+    /* UPLOAD */
 
-                uid: currentUser.uid,
-
-                email: currentUser.email,
-
-                text: caption,
-
-                mediaType: "image",
-
-                mediaUrl: imageURL,
-
-                likes: 0,
-
-                comments: 0,
-
-                likedBy: [],
-
-                createdAt: serverTimestamp()
-
-            }
-        );
+    await uploadBytes(
+      storageRef,
+      file,
+      {
+        contentType:
+          file.type
+      }
+    );
 
 
-        if (captionInput) {
-
-            captionInput.value = "";
-
-        }
+    setStatus(
+      "Photo upload हो गई... Post बनाया जा रहा है..."
+    );
 
 
-        alert(
-            "✅ Photo posted successfully!"
-        );
+    /* DOWNLOAD URL */
+
+    const downloadURL =
+      await getDownloadURL(
+        storageRef
+      );
 
 
-        event.target.value = "";
+    const caption =
+      document.getElementById(
+        "postText"
+      ).value.trim();
 
 
-    } catch (error) {
+    /* FIRESTORE POST */
 
-        console.error(error);
+    await addDoc(
+      collection(db, "posts"),
+      {
 
-        alert(
-            "❌ Photo upload failed: " +
-            error.message
-        );
+        uid:
+          currentUser.uid,
 
-    }
+        email:
+          currentUser.email,
 
+        text:
+          caption,
+
+        mediaType:
+          "image",
+
+        mediaUrl:
+          downloadURL,
+
+        contentType:
+          file.type,
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    document.getElementById(
+      "postText"
+    ).value = "";
+
+
+    event.target.value = "";
+
+
+    setStatus(
+      "✅ Photo posted successfully ❤️",
+      false,
+      true
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "PHOTO UPLOAD ERROR:",
+      error
+    );
+
+
+    setStatus(
+      getFriendlyError(error),
+      true
+    );
+
+
+    event.target.value = "";
+  }
 };
 
 
-// ==========================================
-// VIDEO UPLOAD
-// ==========================================
+/* =====================================================
+   VIDEO UPLOAD
+   ===================================================== */
 
 window.handleVideo = async function (event) {
 
-    const file =
-        event.target.files[0];
+  const file =
+    event.target.files[0];
 
 
-    if (!file) {
+  if (!file) {
 
-        return;
-
-    }
-
-
-    if (!currentUser) {
-
-        alert("🔐 Please login first.");
-
-        return;
-    }
+    return;
+  }
 
 
-    if (!file.type.startsWith("video/")) {
+  if (!currentUser) {
 
-        alert("❌ Please select a video file.");
+    alert(
+      "Please login first."
+    );
 
-        return;
-    }
-
-
-    // 50 MB limit
-
-    if (file.size > 50 * 1024 * 1024) {
-
-        alert(
-            "❌ Video must be smaller than 50 MB."
-        );
-
-        event.target.value = "";
-
-        return;
-    }
+    return;
+  }
 
 
-    try {
+  /* CHECK VIDEO */
 
-        alert("🎥 Uploading video...");
+  if (!file.type.startsWith("video/")) {
 
+    alert(
+      "Please select a video."
+    );
 
-        const safeFileName =
-            createSafeFileName(file.name);
+    event.target.value = "";
 
-
-        const filePath =
-            "posts/" +
-            currentUser.uid +
-            "/" +
-            Date.now() +
-            "_" +
-            safeFileName;
+    return;
+  }
 
 
-        const storageRef =
-            ref(
-                storage,
-                filePath
-            );
+  /* 50 MB LIMIT */
+
+  if (
+    file.size >
+    50 * 1024 * 1024
+  ) {
+
+    alert(
+      "Video 50 MB से छोटी होनी चाहिए."
+    );
+
+    event.target.value = "";
+
+    return;
+  }
 
 
-        await uploadBytes(
-            storageRef,
-            file
-        );
+  try {
+
+    setStatus(
+      "📤 Video upload हो रही है..."
+    );
 
 
-        const videoURL =
-            await getDownloadURL(
-                storageRef
-            );
+    const safeName =
+      createSafeFileName(
+        file.name
+      );
 
 
-        const captionInput =
-            document.getElementById("postText");
+    const filePath =
+      "posts/" +
+      currentUser.uid +
+      "/" +
+      Date.now() +
+      "_" +
+      safeName;
 
 
-        const caption =
-            captionInput
-                ? captionInput.value.trim()
-                : "";
+    const storageRef =
+      ref(
+        storage,
+        filePath
+      );
 
 
-        await addDoc(
-            collection(db, "posts"),
-            {
-
-                uid: currentUser.uid,
-
-                email: currentUser.email,
-
-                text: caption,
-
-                mediaType: "video",
-
-                mediaUrl: videoURL,
-
-                likes: 0,
-
-                comments: 0,
-
-                likedBy: [],
-
-                createdAt: serverTimestamp()
-
-            }
-        );
+    await uploadBytes(
+      storageRef,
+      file,
+      {
+        contentType:
+          file.type
+      }
+    );
 
 
-        if (captionInput) {
-
-            captionInput.value = "";
-
-        }
+    setStatus(
+      "Video upload हो गई... Post बनाया जा रहा है..."
+    );
 
 
-        alert(
-            "✅ Video posted successfully!"
-        );
+    const downloadURL =
+      await getDownloadURL(
+        storageRef
+      );
 
 
-        event.target.value = "";
+    const caption =
+      document.getElementById(
+        "postText"
+      ).value.trim();
 
 
-    } catch (error) {
+    await addDoc(
+      collection(db, "posts"),
+      {
 
-        console.error(error);
+        uid:
+          currentUser.uid,
 
-        alert(
-            "❌ Video upload failed: " +
-            error.message
-        );
+        email:
+          currentUser.email,
 
-    }
+        text:
+          caption,
 
+        mediaType:
+          "video",
+
+        mediaUrl:
+          downloadURL,
+
+        contentType:
+          file.type,
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+    document.getElementById(
+      "postText"
+    ).value = "";
+
+
+    event.target.value = "";
+
+
+    setStatus(
+      "✅ Video posted successfully ❤️",
+      false,
+      true
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "VIDEO UPLOAD ERROR:",
+      error
+    );
+
+
+    setStatus(
+      getFriendlyError(error),
+      true
+    );
+
+
+    event.target.value = "";
+  }
 };
 
 
-// ==========================================
-// LOAD POSTS REAL-TIME
-// ==========================================
+/* =====================================================
+   LOAD POSTS
+   ===================================================== */
+
+let postsUnsubscribe = null;
 
 function loadPosts() {
 
-    const feed =
-        document.getElementById("feed");
+  if (postsUnsubscribe) {
+
+    postsUnsubscribe();
+  }
 
 
-    if (!feed) {
-
-        return;
-
-    }
+  const feed =
+    document.getElementById("feed");
 
 
-    const postsQuery =
-        query(
-            collection(db, "posts"),
-            orderBy(
-                "createdAt",
-                "desc"
-            )
-        );
-
-
-    onSnapshot(
-        postsQuery,
-
-        (snapshot) => {
-
-            feed.innerHTML = "";
-
-
-            snapshot.forEach(
-                (postDoc) => {
-
-                    createPostElement(
-                        postDoc.id,
-                        postDoc.data()
-                    );
-
-                }
-            );
-
-
-            if (snapshot.empty) {
-
-                feed.innerHTML = `
-
-                    <div class="post">
-
-                        <h3>
-                            Welcome to Gitalk Social 💜
-                        </h3>
-
-                        <p>
-                            Be the first person to create a post!
-                        </p>
-
-                    </div>
-
-                `;
-
-            }
-
-        },
-
-        (error) => {
-
-            console.error(error);
-
-            alert(
-                "❌ Feed error: " +
-                error.message
-            );
-
-        }
+  const postsQuery =
+    query(
+      collection(db, "posts"),
+      orderBy(
+        "createdAt",
+        "desc"
+      )
     );
 
+
+  postsUnsubscribe =
+    onSnapshot(
+      postsQuery,
+      function (snapshot) {
+
+        feed.innerHTML = "";
+
+
+        if (snapshot.empty) {
+
+          feed.innerHTML =
+            `
+            <div class="emptyFeed">
+              <h3>Welcome to Gitalk Social ❤️</h3>
+              <p>Be the first person to create a post.</p>
+            </div>
+            `;
+
+          return;
+        }
+
+
+        snapshot.forEach(
+          function (docSnapshot) {
+
+            const post =
+              {
+                id:
+                  docSnapshot.id,
+
+                ...docSnapshot.data()
+              };
+
+
+            feed.appendChild(
+              createPostElement(post)
+            );
+          }
+        );
+
+      },
+
+      function (error) {
+
+        console.error(error);
+
+        feed.innerHTML =
+          `
+          <div class="emptyFeed">
+            ⚠️ Feed load error<br><br>
+            ${escapeHTML(
+              getFriendlyError(error)
+            )}
+          </div>
+          `;
+      }
+    );
 }
 
 
-// ==========================================
-// CREATE POST CARD
-// ==========================================
+/* =====================================================
+   CREATE POST HTML
+   ===================================================== */
 
-function createPostElement(postId, post) {
+function createPostElement(post) {
 
-    const feed =
-        document.getElementById("feed");
+  const article =
+    document.createElement("article");
 
+  article.className =
+    "post";
 
-    if (!feed) {
 
-        return;
+  const date =
+    formatDate(
+      post.createdAt
+    );
 
-    }
 
+  let mediaHTML = "";
 
-    const article =
-        document.createElement("article");
 
+  /* IMAGE */
 
-    article.className =
-        "post";
+  if (
+    post.mediaType === "image" &&
+    post.mediaUrl
+  ) {
 
+    mediaHTML =
+      `
+      <img
+        src="${escapeAttribute(post.mediaUrl)}"
+        alt="Gitalk post image"
+        loading="lazy"
+      >
+      `;
+  }
 
-    const likes =
-        Number(post.likes || 0);
 
+  /* VIDEO */
 
-    const comments =
-        Number(post.comments || 0);
+  if (
+    post.mediaType === "video" &&
+    post.mediaUrl
+  ) {
 
-
-    const liked =
-        currentUser &&
-        Array.isArray(post.likedBy) &&
-        post.likedBy.includes(
-            currentUser.uid
-        );
-
-
-    let mediaHTML = "";
-
-
-    // IMAGE
-
-    if (
-        post.mediaType === "image" &&
-        post.mediaUrl
-    ) {
-
-        mediaHTML = `
-
-            <div class="post-image">
-
-                <img
-                    src="${escapeAttribute(post.mediaUrl)}"
-                    alt="Gitalk Social photo"
-                    loading="lazy"
-                    style="
-                        width:100%;
-                        max-height:500px;
-                        object-fit:cover;
-                        border-radius:12px;
-                    "
-                >
-
-            </div>
-
-        `;
-
-    }
-
-
-    // VIDEO
-
-    if (
-        post.mediaType === "video" &&
-        post.mediaUrl
-    ) {
-
-        mediaHTML = `
-
-            <div class="post-video">
-
-                <video
-                    controls
-                    playsinline
-                    preload="metadata"
-                    style="
-                        width:100%;
-                        max-height:500px;
-                        border-radius:12px;
-                    "
-                >
-
-                    <source
-                        src="${escapeAttribute(post.mediaUrl)}"
-                        type="video/mp4"
-                    >
-
-                    Your browser does not support video.
-
-                </video>
-
-            </div>
-
-        `;
-
-    }
-
-
-    const textHTML =
-        post.text
-            ? `
-                <p class="post-text">
-                    ${escapeHTML(post.text)}
-                </p>
-              `
-            : "";
-
-
-    article.innerHTML = `
-
-        <div class="post-header">
-
-            <div class="small-avatar">
-                G
-            </div>
-
-
-            <div>
-
-                <strong>
-                    ${escapeHTML(
-                        post.email ||
-                        "Gitalk User"
-                    )}
-                </strong>
-
-                <p>
-                    Gitalk Social
-                </p>
-
-            </div>
-
-        </div>
-
-
-        ${textHTML}
-
-
-        ${mediaHTML}
-
-
-        <div class="post-stats">
-
-            <span>
-
-                ${likes}
-
-                ${likes === 1
-                    ? " Like"
-                    : " Likes"}
-
-            </span>
-
-
-            <span>
-
-                ${comments}
-
-                ${comments === 1
-                    ? " Comment"
-                    : " Comments"}
-
-            </span>
-
-        </div>
-
-
-        <div class="post-buttons">
-
-            <button
-                onclick="likePost('${postId}')"
-                ${liked ? "disabled" : ""}
-            >
-
-                ${
-                    liked
-                    ? "❤️ Liked"
-                    : "❤️ Like"
-                }
-
-            </button>
-
-
-            <button
-                onclick="commentPost('${postId}')"
-            >
-
-                💬 Comment
-
-            </button>
-
-
-            <button
-                onclick="sharePost('${postId}')"
-            >
-
-                ↗️ Share
-
-            </button>
-
-        </div>
-
-
-        <div
-            id="comments-${postId}"
-            class="comments-box"
+    mediaHTML =
+      `
+      <video
+        controls
+        playsinline
+        preload="metadata"
+      >
+        <source
+          src="${escapeAttribute(post.mediaUrl)}"
+          type="${escapeAttribute(
+            post.contentType || "video/mp4"
+          )}"
         >
+        Your browser does not support video.
+      </video>
+      `;
+  }
 
+
+  article.innerHTML =
+    `
+    <div class="postHeader">
+
+      <div class="postUser">
+        👤 ${escapeHTML(
+          post.email || "Gitalk User"
+        )}
+      </div>
+
+      <div class="postDate">
+        ${escapeHTML(date)}
+      </div>
+
+    </div>
+
+
+    ${
+      post.text
+        ?
+        `
+        <div class="postText">
+          ${escapeHTML(post.text)}
         </div>
+        `
+        :
+        ""
+    }
 
+
+    ${mediaHTML}
+
+
+    <div class="postActions">
+
+      <button
+        class="likeBtn"
+        data-post-id="${escapeAttribute(post.id)}"
+      >
+        ❤️ Like
+      </button>
+
+      <button
+        class="commentBtn"
+        data-post-id="${escapeAttribute(post.id)}"
+      >
+        💬 Comment
+      </button>
+
+      <button
+        class="shareBtn"
+        data-post-id="${escapeAttribute(post.id)}"
+      >
+        🔗 Share
+      </button>
+
+    </div>
+
+
+    <div
+      class="comments"
+      id="comments-${escapeAttribute(post.id)}"
+    ></div>
     `;
 
 
-    feed.appendChild(article);
-
-
-    loadComments(postId);
-
-}
-
-
-// ==========================================
-// LIKE POST
-// ==========================================
-
-window.likePost = async function (postId) {
-
-    if (!currentUser) {
-
-        alert("🔐 Please login first.");
-
-        return;
-    }
-
-
-    try {
-
-        await updateDoc(
-            doc(
-                db,
-                "posts",
-                postId
-            ),
-            {
-
-                likes:
-                    increment(1),
-
-                likedBy:
-                    arrayUnion(
-                        currentUser.uid
-                    )
-
-            }
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "❌ Like failed: " +
-            error.message
-        );
-
-    }
-
-};
-
-
-// ==========================================
-// ADD COMMENT
-// ==========================================
-
-window.commentPost = async function (postId) {
-
-    if (!currentUser) {
-
-        alert("🔐 Please login first.");
-
-        return;
-    }
-
-
-    const comment =
-        prompt(
-            "💬 Write your comment:"
-        );
-
-
-    if (
-        !comment ||
-        !comment.trim()
-    ) {
-
-        return;
-
-    }
-
-
-    try {
-
-        await addDoc(
-            collection(
-                db,
-                "posts",
-                postId,
-                "comments"
-            ),
-            {
-
-                uid:
-                    currentUser.uid,
-
-                email:
-                    currentUser.email,
-
-                text:
-                    comment.trim(),
-
-                createdAt:
-                    serverTimestamp()
-
-            }
-        );
-
-
-        await updateDoc(
-            doc(
-                db,
-                "posts",
-                postId
-            ),
-            {
-
-                comments:
-                    increment(1)
-
-            }
-        );
-
-
-        alert(
-            "💬 Comment added!"
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "❌ Comment failed: " +
-            error.message
-        );
-
-    }
-
-};
-
-
-// ==========================================
-// LOAD COMMENTS
-// ==========================================
-
-function loadComments(postId) {
-
-    const commentsBox =
-        document.getElementById(
-            "comments-" + postId
-        );
-
-
-    if (!commentsBox) {
-
-        return;
-
-    }
-
-
-    const commentsQuery =
-        query(
-            collection(
-                db,
-                "posts",
-                postId,
-                "comments"
-            ),
-            orderBy(
-                "createdAt",
-                "asc"
-            )
-        );
-
-
-    onSnapshot(
-        commentsQuery,
-
-        (snapshot) => {
-
-            commentsBox.innerHTML = "";
-
-
-            snapshot.forEach(
-                (commentDoc) => {
-
-                    const comment =
-                        commentDoc.data();
-
-
-                    const div =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    div.className =
-                        "comment";
-
-
-                    div.innerHTML = `
-
-                        <strong>
-                            ${escapeHTML(
-                                comment.email ||
-                                "User"
-                            )}
-                        </strong>
-
-                        <p>
-                            ${escapeHTML(
-                                comment.text ||
-                                ""
-                            )}
-                        </p>
-
-                    `;
-
-
-                    commentsBox.appendChild(
-                        div
-                    );
-
-                }
-            );
-
-        },
-
-        (error) => {
-
-            console.error(
-                "Comments error:",
-                error
-            );
-
-        }
+  /* LIKE */
+
+  const likeButton =
+    article.querySelector(
+      ".likeBtn"
     );
 
+  likeButton.onclick =
+    function () {
+
+      likePost(post.id);
+    };
+
+
+  /* COMMENT */
+
+  const commentButton =
+    article.querySelector(
+      ".commentBtn"
+    );
+
+  commentButton.onclick =
+    function () {
+
+      commentPost(post.id);
+    };
+
+
+  /* SHARE */
+
+  const shareButton =
+    article.querySelector(
+      ".shareBtn"
+    );
+
+  shareButton.onclick =
+    function () {
+
+      sharePost(post);
+    };
+
+
+  /* LOAD COMMENTS */
+
+  loadComments(
+    post.id,
+    article.querySelector(".comments")
+  );
+
+
+  return article;
 }
 
 
-// ==========================================
-// SHARE POST
-// ==========================================
+/* =====================================================
+   LIKE SYSTEM
+   ===================================================== */
 
-window.sharePost = async function () {
+async function likePost(postId) {
 
-    const shareText =
-        "Check out Gitalk Social 💜";
+  if (!currentUser) {
+
+    alert(
+      "Please login first."
+    );
+
+    return;
+  }
 
 
-    if (navigator.share) {
+  try {
 
-        try {
+    const likeRef =
+      doc(
+        db,
+        "posts",
+        postId,
+        "likes",
+        currentUser.uid
+      );
 
-            await navigator.share({
 
-                title:
-                    "Gitalk Social",
+    const existing =
+      await getDoc(
+        likeRef
+      );
 
-                text:
-                    shareText,
 
-                url:
-                    window.location.href
+    if (existing.exists()) {
 
-            });
+      /* UNLIKE */
 
-        } catch (error) {
-
-            console.log(
-                "Share cancelled."
-            );
-
-        }
+      await deleteDoc(
+        likeRef
+      );
 
     } else {
 
-        try {
+      /* LIKE */
 
-            await navigator.clipboard.writeText(
-                window.location.href
-            );
+      await setDoc(
+        likeRef,
+        {
 
+          uid:
+            currentUser.uid,
 
-            alert(
-                "🔗 Link copied!"
-            );
+          email:
+            currentUser.email,
 
-        } catch (error) {
-
-            alert(
-                "Please copy the website link manually."
-            );
-
+          createdAt:
+            serverTimestamp()
         }
-
+      );
     }
 
-};
 
+  } catch (error) {
 
-// ==========================================
-// SEARCH / NOTIFICATIONS / ETC.
-// ==========================================
-
-window.showMessage = function (name) {
+    console.error(error);
 
     alert(
-        name +
-        " feature is coming soon! 🚀"
+      getFriendlyError(error)
+    );
+  }
+}
+
+
+/* =====================================================
+   COMMENT
+   ===================================================== */
+
+async function commentPost(postId) {
+
+  if (!currentUser) {
+
+    alert(
+      "Please login first."
     );
 
-};
+    return;
+  }
 
 
-// ==========================================
-// HOME
-// ==========================================
+  const text =
+    prompt(
+      "Write your comment:"
+    );
+
+
+  if (!text) {
+
+    return;
+  }
+
+
+  const cleanText =
+    text.trim();
+
+
+  if (!cleanText) {
+
+    return;
+  }
+
+
+  try {
+
+    await addDoc(
+      collection(
+        db,
+        "posts",
+        postId,
+        "comments"
+      ),
+      {
+
+        uid:
+          currentUser.uid,
+
+        email:
+          currentUser.email,
+
+        text:
+          cleanText,
+
+        createdAt:
+          serverTimestamp()
+      }
+    );
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      getFriendlyError(error)
+    );
+  }
+}
+
+
+/* =====================================================
+   LOAD COMMENTS
+   ===================================================== */
+
+function loadComments(
+  postId,
+  container
+) {
+
+  const commentsQuery =
+    query(
+      collection(
+        db,
+        "posts",
+        postId,
+        "comments"
+      ),
+      orderBy(
+        "createdAt",
+        "asc"
+      )
+    );
+
+
+  onSnapshot(
+    commentsQuery,
+    function (snapshot) {
+
+      container.innerHTML = "";
+
+
+      snapshot.forEach(
+        function (commentDoc) {
+
+          const comment =
+            commentDoc.data();
+
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+
+          div.className =
+            "comment";
+
+
+          div.innerHTML =
+            `
+            <span class="commentUser">
+              ${escapeHTML(
+                comment.email ||
+                "User"
+              )}
+            </span>
+
+            :
+            ${escapeHTML(
+              comment.text || ""
+            )}
+            `;
+
+
+          container.appendChild(div);
+        }
+      );
+
+    },
+
+    function (error) {
+
+      console.error(
+        "COMMENTS ERROR:",
+        error
+      );
+    }
+  );
+}
+
+
+/* =====================================================
+   SHARE
+   ===================================================== */
+
+async function sharePost(post) {
+
+  const shareText =
+    "Check this post on Gitalk Social ❤️";
+
+
+  try {
+
+    if (
+      navigator.share
+    ) {
+
+      await navigator.share({
+
+        title:
+          "Gitalk Social",
+
+        text:
+          shareText,
+
+        url:
+          window.location.href
+      });
+
+    } else {
+
+      await navigator.clipboard.writeText(
+        window.location.href
+      );
+
+      alert(
+        "Link copied! अब आप share कर सकते हैं."
+      );
+    }
+
+  } catch (error) {
+
+    console.log(
+      "Share cancelled."
+    );
+  }
+}
+
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
 
 window.goHome = function () {
 
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 };
 
 
-// ==========================================
-// SAFE FILE NAME
-// ==========================================
+window.goProfile = function () {
 
-function createSafeFileName(fileName) {
-
-    return fileName
-        .replace(/[^a-zA-Z0-9._-]/g, "_")
-        .substring(0, 100);
-
-}
+  alert(
+    "Profile feature जल्द आ रहा है ❤️"
+  );
+};
 
 
-// ==========================================
-// HTML SECURITY
-// ==========================================
-
-function escapeHTML(text) {
-
-    const div =
-        document.createElement(
-            "div"
-        );
-
-    div.textContent =
-        String(text);
-
-    return div.innerHTML;
-
-}
-
-
-// ==========================================
-// ATTRIBUTE SECURITY
-// ==========================================
-
-function escapeAttribute(text) {
-
-    return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;");
-
-                }
+win
