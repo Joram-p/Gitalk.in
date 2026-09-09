@@ -1,64 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
 <title>Gitalk Social</title>
 
 <style>
+
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
   font-family:Arial,sans-serif;
 }
 
 body{
   background:#f4f5f7;
   color:#222;
-  padding-bottom:70px;
+}
+
+
+/* AUTH */
+
+#authPage{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.authBox{
+  width:100%;
+  max-width:400px;
+  background:white;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 5px 25px #0002;
+}
+
+.logo{
+  text-align:center;
+  font-size:32px;
+  font-weight:bold;
+  color:#ff2d55;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#777;
+  margin-bottom:25px;
+}
+
+.authBox input{
+  width:100%;
+  padding:13px;
+  margin-bottom:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  outline:none;
+}
+
+.mainBtn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:25px;
+  background:#ff2d55;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.switchText{
+  text-align:center;
+  margin-top:18px;
+  color:#777;
+}
+
+.switchText button{
+  border:0;
+  background:none;
+  color:#ff2d55;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+
+/* APP */
+
+#appPage{
+  display:none;
+  padding-bottom:80px;
 }
 
 header{
   height:65px;
-  background:#fff;
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:10;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:0 18px;
-  position:sticky;
-  top:0;
-  z-index:1000;
-  box-shadow:0 2px 10px #0002;
+  box-shadow:0 2px 10px #0001;
 }
 
-.logo{
+.headerLogo{
+  color:#ff2d55;
   font-size:25px;
   font-weight:bold;
-  color:#ff2d55;
-}
-
-.logo span{
-  color:#222;
-}
-
-.header-buttons{
-  display:flex;
-  gap:8px;
-}
-
-.header-buttons button,
-.bottom-nav button{
-  border:0;
-  background:none;
-  cursor:pointer;
-}
-
-.header-buttons button{
-  background:#f1f1f1;
-  padding:9px 12px;
-  border-radius:20px;
 }
 
 .container{
@@ -67,133 +126,57 @@ header{
   padding:15px;
 }
 
-/* PROFILE */
-
-.profile-card{
-  background:#fff;
+.card{
+  background:white;
   border-radius:18px;
-  padding:25px;
-  text-align:center;
-  box-shadow:0 2px 8px #0001;
+  padding:20px;
   margin-bottom:15px;
+  box-shadow:0 2px 8px #0001;
 }
 
-.profile-photo{
+.profile{
+  text-align:center;
+}
+
+.profile img{
   width:100px;
   height:100px;
-  border-radius:50%;
   object-fit:cover;
+  border-radius:50%;
   border:4px solid #ff2d55;
 }
 
-.profile-card h2{
+.profile h2{
   margin-top:10px;
 }
 
-.profile-card p{
+.profile p{
   color:#777;
-  margin:6px 0;
+  margin-top:5px;
 }
 
-.profile-buttons{
-  margin-top:15px;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-
-.profile-buttons button{
+.actionBtn{
   border:0;
   padding:10px 18px;
+  margin:12px 4px 0;
   border-radius:22px;
-  cursor:pointer;
   background:#ff2d55;
   color:white;
+  cursor:pointer;
 }
 
-/* POST */
-
-.create-post,
-.post{
-  background:white;
-  border-radius:16px;
-  padding:15px;
-  margin-bottom:15px;
-  box-shadow:0 2px 8px #0001;
+input,textarea{
+  width:100%;
+  padding:12px;
+  margin:6px 0 12px;
+  border:1px solid #ddd;
+  border-radius:10px;
 }
 
 textarea{
-  width:100%;
-  height:80px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px;
+  min-height:90px;
   resize:none;
 }
-
-.post-actions{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-}
-
-.post-actions button{
-  border:0;
-  padding:10px 16px;
-  border-radius:20px;
-  cursor:pointer;
-}
-
-.post-btn{
-  background:#ff2d55;
-  color:white;
-}
-
-.post img.post-image{
-  width:100%;
-  max-height:450px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-top:10px;
-}
-
-.post-header{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-
-.post-avatar{
-  width:45px;
-  height:45px;
-  border-radius:50%;
-}
-
-.post-time{
-  color:#888;
-  font-size:12px;
-}
-
-.post-content{
-  margin:12px 0;
-  line-height:1.5;
-}
-
-.post-footer{
-  display:flex;
-  border-top:1px solid #eee;
-  padding-top:7px;
-}
-
-.post-footer button{
-  flex:1;
-  border:0;
-  background:white;
-  padding:10px;
-  cursor:pointer;
-}
-
-/* PAGES */
 
 .page{
   display:none;
@@ -203,307 +186,190 @@ textarea{
   display:block;
 }
 
-/* SETTINGS */
-
-.settings-box{
-  background:white;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 2px 8px #0001;
-}
-
-.settings-title{
-  padding:20px;
-  border-bottom:1px solid #eee;
-}
-
-.setting-item{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:16px;
-  border-bottom:1px solid #eee;
-}
-
-.setting-info{
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.setting-icon{
-  font-size:22px;
-}
-
-.setting-info small{
-  display:block;
-  color:#888;
-  margin-top:3px;
-}
-
-/* TOGGLE */
-
-.switch{
-  position:relative;
-  width:48px;
-  height:25px;
-}
-
-.switch input{
-  display:none;
-}
-
-.slider{
-  position:absolute;
-  inset:0;
-  background:#ccc;
-  border-radius:30px;
-  cursor:pointer;
-}
-
-.slider:before{
-  content:"";
-  position:absolute;
-  width:19px;
-  height:19px;
-  left:3px;
-  top:3px;
-  background:white;
-  border-radius:50%;
-  transition:.3s;
-}
-
-input:checked + .slider{
-  background:#ff2d55;
-}
-
-input:checked + .slider:before{
-  transform:translateX(23px);
-}
-
-/* EDIT PROFILE */
-
-.edit-box{
-  background:white;
-  padding:20px;
-  border-radius:18px;
-  box-shadow:0 2px 8px #0001;
-}
-
-.form-group{
-  margin-bottom:15px;
-}
-
-.form-group label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select{
-  width:100%;
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  outline:none;
-}
-
-.save-btn{
-  width:100%;
-  border:0;
-  background:#ff2d55;
-  color:white;
-  padding:13px;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
+.bottomNav{
   position:fixed;
   bottom:0;
   left:0;
   right:0;
-  height:62px;
+  height:65px;
   background:white;
   display:flex;
   justify-content:space-around;
   align-items:center;
   box-shadow:0 -2px 10px #0002;
-  z-index:1000;
+  z-index:20;
 }
 
-.bottom-nav button{
-  color:#555;
+.bottomNav button{
+  border:0;
+  background:none;
+  cursor:pointer;
   font-size:13px;
 }
 
-.bottom-nav button:hover{
-  color:#ff2d55;
+.logout{
+  background:#333;
+  color:white;
+  border:0;
+  padding:9px 14px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
-footer{
-  text-align:center;
-  padding:25px;
-  color:#888;
-}
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- ================= AUTH ================= -->
+
+<div id="authPage">
+
+<div class="authBox">
+
+<div class="logo">
+Gitalk.in
+</div>
+
+<div class="subtitle">
+Connect • Share • Enjoy ❤️
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="loginBox">
+
+<h2 style="margin-bottom:15px;">
+Login
+</h2>
+
+<input
+id="loginEmail"
+type="email"
+placeholder="Email"
+>
+
+<input
+id="loginPassword"
+type="password"
+placeholder="Password"
+>
+
+<button
+class="mainBtn"
+onclick="login()">
+🔐 Login
+</button>
+
+<div class="switchText">
+
+Don't have an account?
+
+<button onclick="showSignup()">
+Create Account
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SIGNUP -->
+
+<div id="signupBox"
+style="display:none;">
+
+<h2 style="margin-bottom:15px;">
+Create Account
+</h2>
+
+<input
+id="signupName"
+type="text"
+placeholder="Your Name"
+>
+
+<input
+id="signupEmail"
+type="email"
+placeholder="Email"
+>
+
+<input
+id="signupPassword"
+type="password"
+placeholder="Password (6+ characters)"
+>
+
+<button
+class="mainBtn"
+onclick="signup()">
+❤️ Create Account
+</button>
+
+<div class="switchText">
+
+Already have an account?
+
+<button onclick="showLogin()">
+Login
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ================= APP ================= -->
+
+<div id="appPage">
+
 
 <header>
 
-<div class="logo">
-Gitalk<span>.in</span>
+<div class="headerLogo">
+Gitalk.in
 </div>
 
-<div class="header-buttons">
-<button onclick="searchPosts()">🔍</button>
-<button onclick="openProfile()">👤</button>
+<div>
+
+<span id="userEmail"
+style="font-size:12px;color:#777;">
+</span>
+
+<button
+class="logout"
+onclick="logout()">
+Logout
+</button>
+
 </div>
 
 </header>
 
 
-<main class="container">
+<div class="container">
 
 
 <!-- HOME -->
 
-<section id="homePage" class="page active">
+<section
+id="home"
+class="page active">
 
-<div class="profile-card">
-
-<img
-id="homeProfilePhoto"
-class="profile-photo"
-src="https://via.placeholder.com/150"
->
-
-<h2 id="homeName">
-Gitalk User
-</h2>
-
-<p id="homeBio">
-Welcome to Gitalk Social ❤️
-</p>
-
-<div class="profile-buttons">
-
-<button onclick="openProfile()">
-View Profile
-</button>
-
-<button onclick="openEditProfile()">
-Edit Profile
-</button>
-
-</div>
-
-</div>
-
-
-<!-- CREATE POST -->
-
-<div class="create-post">
-
-<textarea
-id="postText"
-placeholder="What's on your mind?"
-></textarea>
-
-<div class="post-actions">
-
-<label>
-<input
-type="file"
-id="photoInput"
-accept="image/*,video/*"
-onchange="previewMedia(event)"
->
-📷 Photo / Video
-</label>
-
-<button
-class="post-btn"
-onclick="createPost()">
-Post
-</button>
-
-</div>
+<div class="card profile">
 
 <img
-id="preview"
-style="display:none;width:100%;margin-top:10px;border-radius:12px;"
->
-
-</div>
-
-
-<!-- DEMO POST -->
-
-<div id="posts">
-
-<article class="post">
-
-<div class="post-header">
-
-<img
-class="post-avatar"
-src="https://via.placeholder.com/100"
->
-
-<div>
-<b>Gitalk User</b>
-<div class="post-time">Just now</div>
-</div>
-
-</div>
-
-<div class="post-content">
-Welcome to Gitalk Social 🎉<br>
-Connect • Share • Enjoy ❤️
-</div>
-
-<div class="post-footer">
-
-<button onclick="likePost(this)">
-❤️ Like
-</button>
-
-<button onclick="commentPost()">
-💬 Comment
-</button>
-
-<button onclick="sharePost()">
-↗️ Share
-</button>
-
-</div>
-
-</article>
-
-</div>
-
-</section>
-
-
-<!-- PROFILE PAGE -->
-
-<section id="profilePage" class="page">
-
-<div class="profile-card">
-
-<img
-id="profilePhoto"
-class="profile-photo"
+id="homePhoto"
 src="https://via.placeholder.com/150"
 >
 
@@ -511,145 +377,150 @@ src="https://via.placeholder.com/150"
 Gitalk User
 </h2>
 
+<p id="profileUsername">
+</p>
+
 <p id="profileBio">
 Welcome to Gitalk Social ❤️
 </p>
 
-<p id="profileLocation">
-📍 India
-</p>
-
-<div class="profile-buttons">
-
-<button onclick="openEditProfile()">
-✏️ Edit Profile
+<button
+class="actionBtn"
+onclick="showPage('profile')">
+👤 My Profile
 </button>
 
-<button onclick="openSettings()">
-⚙️ Settings
+<button
+class="actionBtn"
+onclick="showPage('edit')">
+✏️ Edit
 </button>
 
 </div>
 
-</div>
+<div class="card">
 
+<h3>📝 Create Post</h3>
 
-<div class="settings-box">
+<br>
 
-<div class="setting-item">
-<div class="setting-info">
-<div class="setting-icon">👥</div>
-<div>
-<b>Followers</b>
-<small id="followers">0 followers</small>
-</div>
-</div>
-</div>
+<textarea
+placeholder="What's on your mind?"
+></textarea>
 
-<div class="setting-item">
-<div class="setting-info">
-<div class="setting-icon">❤️</div>
-<div>
-<b>Likes</b>
-<small id="likes">0 likes</small>
-</div>
-</div>
-</div>
-
-<div class="setting-item">
-<div class="setting-info">
-<div class="setting-icon">📝</div>
-<div>
-<b>Posts</b>
-<small id="postCount">0 posts</small>
-</div>
-</div>
-</div>
+<button
+class="actionBtn"
+onclick="alert('Post system will be connected with Firebase next ❤️')">
+Post
+</button>
 
 </div>
 
 </section>
 
 
+
+<!-- PROFILE -->
+
+<section
+id="profile"
+class="page">
+
+<div class="card profile">
+
+<img
+id="profilePhoto"
+src="https://via.placeholder.com/150"
+>
+
+<h2 id="profileName">
+Gitalk User
+</h2>
+
+<p id="profileUsername">
+</p>
+
+<p id="profileBio">
+</p>
+
+<p id="profileLocation">
+📍 India
+</p>
+
+<p id="profileWebsite">
+</p>
+
+<button
+class="actionBtn"
+onclick="showPage('edit')">
+✏️ Edit Profile
+</button>
+
+</div>
+
+</section>
+
+
+
 <!-- EDIT PROFILE -->
 
-<section id="editPage" class="page">
+<section
+id="edit"
+class="page">
 
-<div class="edit-box">
+<div class="card">
 
 <h2>✏️ Edit Profile</h2>
 
 <br>
 
-<div class="form-group">
-<label>Profile Photo</label>
-
-<input
-type="file"
-id="profileInput"
-accept="image/*"
-onchange="changeProfilePhoto(event)"
->
-</div>
-
-
-<div class="form-group">
 <label>Name</label>
 
 <input
-type="text"
 id="nameInput"
+type="text"
 placeholder="Your name"
 >
-</div>
 
 
-<div class="form-group">
 <label>Username</label>
 
 <input
-type="text"
 id="usernameInput"
+type="text"
 placeholder="@username"
 >
-</div>
 
 
-<div class="form-group">
 <label>Bio</label>
 
 <textarea
 id="bioInput"
-placeholder="Write something about yourself"
-></textarea>
-</div>
+placeholder="About you">
+</textarea>
 
 
-<div class="form-group">
 <label>Location</label>
 
 <input
-type="text"
 id="locationInput"
-placeholder="Your city"
+type="text"
+placeholder="City / Country"
 >
-</div>
 
 
-<div class="form-group">
 <label>Website</label>
 
 <input
-type="url"
 id="websiteInput"
+type="url"
 placeholder="https://example.com"
 >
-</div>
 
 
 <button
-class="save-btn"
-onclick="saveProfile()">
+class="mainBtn"
+onclick="saveFirebaseProfile()">
 💾 Save Profile
 </button>
 
@@ -658,600 +529,128 @@ onclick="saveProfile()">
 </section>
 
 
+
 <!-- SETTINGS -->
 
-<section id="settingsPage" class="page">
+<section
+id="settings"
+class="page">
 
-<div class="settings-box">
+<div class="card">
 
-<div class="settings-title">
-<h2>⚙️ Social Media Settings</h2>
-<p style="color:#888;margin-top:5px;">
-Manage your Gitalk account
-</p>
-</div>
+<h2>⚙️ Social Settings</h2>
 
+<br>
 
-<div class="setting-item">
+<label>
+🔔 Notifications
+</label>
 
-<div class="setting-info">
+<br><br>
 
-<div class="setting-icon">🔔</div>
-
-<div>
-<b>Notifications</b>
-<small>Get notifications for likes and comments</small>
-</div>
-
-</div>
-
-<label class="switch">
 <input
 type="checkbox"
-id="notifications"
 checked
+style="width:auto;"
 >
-<span class="slider"></span>
+
+<hr>
+
+<br>
+
+<label>
+🔒 Private Account
 </label>
 
-</div>
+<br><br>
 
-
-<div class="setting-item">
-
-<div class="setting-info">
-
-<div class="setting-icon">🔒</div>
-
-<div>
-<b>Private Account</b>
-<small>Only followers can see your posts</small>
-</div>
-
-</div>
-
-<label class="switch">
 <input
 type="checkbox"
-id="privateAccount"
+style="width:auto;"
 >
-<span class="slider"></span>
+
+<hr>
+
+<br>
+
+<label>
+🌙 Dark Mode
 </label>
 
-</div>
+<br><br>
 
-
-<div class="setting-item">
-
-<div class="setting-info">
-
-<div class="setting-icon">🌙</div>
-
-<div>
-<b>Dark Mode</b>
-<small>Change website appearance</small>
-</div>
-
-</div>
-
-<label class="switch">
 <input
 type="checkbox"
-id="darkMode"
-onchange="toggleDarkMode()"
+style="width:auto;"
+onchange="toggleDark()"
 >
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-item">
-
-<div class="setting-info">
-
-<div class="setting-icon">📩</div>
-
-<div>
-<b>Messages</b>
-<small>Allow other users to message you</small>
-</div>
-
-</div>
-
-<label class="switch">
-<input
-type="checkbox"
-id="messages"
-checked
->
-<span class="slider"></span>
-</label>
-
-</div>
-
-
-<div class="setting-item">
-
-<div class="setting-info">
-
-<div class="setting-icon">🌐</div>
-
-<div>
-<b>Language</b>
-<small>Choose website language</small>
-</div>
-
-</div>
-
-<select id="language"
-style="padding:8px;border-radius:8px;">
-<option>English</option>
-<option>Hindi</option>
-</select>
-
-</div>
-
-
-<div class="setting-item"
-onclick="logoutUser()"
-style="cursor:pointer;">
-
-<div class="setting-info">
-
-<div class="setting-icon">🚪</div>
-
-<div>
-<b>Logout</b>
-<small>Sign out from your account</small>
-</div>
-
-</div>
-
-</div>
 
 </div>
 
 </section>
 
-</main>
-
-
-<footer>
-© 2026 Gitalk.in — Gitalk Social ❤️
-</footer>
+</div>
 
 
 <!-- BOTTOM NAV -->
 
-<nav class="bottom-nav">
+<nav class="bottomNav">
 
-<button onclick="showPage('homePage')">
+<button onclick="showPage('home')">
 🏠<br>Home
 </button>
 
-<button onclick="createFocus()">
+<button onclick="showPage('home')">
 ➕<br>Create
 </button>
 
-<button onclick="openProfile()">
+<button onclick="showPage('profile')">
 👤<br>Profile
 </button>
 
-<button onclick="openSettings()">
+<button onclick="showPage('settings')">
 ⚙️<br>Settings
 </button>
 
 </nav>
 
+</div>
+
+
 
 <script>
 
-/* PAGE SYSTEM */
+function showPage(id){
 
-function showPage(page){
+document
+.querySelectorAll(".page")
+.forEach(page=>{
+page.classList.remove("active");
+});
 
-document.querySelectorAll(".page")
-.forEach(p=>p.classList.remove("active"));
-
-document.getElementById(page)
+document
+.getElementById(id)
 .classList.add("active");
 
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
+window.scrollTo(0,0);
 
 }
 
 
-/* PROFILE */
+function toggleDark(){
 
-function openProfile(){
+document.body.classList.toggle("dark");
 
-loadProfile();
+if(document.body.classList.contains("dark")){
 
-showPage("profilePage");
+document.body.style.background="#111";
+document.body.style.color="white";
 
-}
-
-
-function openEditProfile(){
-
-loadProfile();
-
-showPage("editPage");
-
-}
-
-
-function openSettings(){
-
-showPage("settingsPage");
-
-}
-
-
-/* LOAD PROFILE */
-
-function loadProfile(){
-
-let name=
-localStorage.getItem("gitalkName")
-||"Gitalk User";
-
-let bio=
-localStorage.getItem("gitalkBio")
-||"Welcome to Gitalk Social ❤️";
-
-let location=
-localStorage.getItem("gitalkLocation")
-||"India";
-
-let username=
-localStorage.getItem("gitalkUsername")
-||"@gitalkuser";
-
-let photo=
-localStorage.getItem("gitalkPhoto")
-||"https://via.placeholder.com/150";
-
-
-document.getElementById("homeName").innerText=name;
-document.getElementById("profileName").innerText=name;
-
-document.getElementById("homeBio").innerText=bio;
-document.getElementById("profileBio").innerText=bio;
-
-document.getElementById("profileLocation").innerText=
-"📍 "+location;
-
-document.getElementById("homeProfilePhoto").src=photo;
-document.getElementById("profilePhoto").src=photo;
-
-
-/* EDIT FORM */
-
-document.getElementById("nameInput").value=name;
-document.getElementById("usernameInput").value=username;
-document.getElementById("bioInput").value=bio;
-document.getElementById("locationInput").value=location;
-
-}
-
-
-/* SAVE PROFILE */
-
-function saveProfile(){
-
-let name=
-document.getElementById("nameInput").value.trim();
-
-let username=
-document.getElementById("usernameInput").value.trim();
-
-let bio=
-document.getElementById("bioInput").value.trim();
-
-let location=
-document.getElementById("locationInput").value.trim();
-
-if(!name){
-alert("Please enter your name.");
-return;
-}
-
-localStorage.setItem("gitalkName",name);
-localStorage.setItem("gitalkUsername",username);
-localStorage.setItem("gitalkBio",bio);
-localStorage.setItem("gitalkLocation",location);
-
-loadProfile();
-
-alert("Profile saved successfully ❤️");
-
-showPage("profilePage");
-
-}
-
-
-/* PROFILE PHOTO */
-
-function changeProfilePhoto(event){
-
-const file=event.target.files[0];
-
-if(!file)return;
-
-if(!file.type.startsWith("image/")){
-alert("Please select an image.");
-return;
-}
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-localStorage.setItem(
-"gitalkPhoto",
-e.target.result
-);
-
-document.getElementById("profilePhoto").src=e.target.result;
-
-};
-
-reader.readAsDataURL(file);
-
-}
-
-
-/* CREATE POST */
-
-function createFocus(){
-
-showPage("homePage");
-
-setTimeout(()=>{
-document.getElementById("postText").focus();
-},100);
-
-}
-
-
-function previewMedia(event){
-
-const file=event.target.files[0];
-
-const preview=
-document.getElementById("preview");
-
-if(!file){
-preview.style.display="none";
-return;
-}
-
-if(file.type.startsWith("image/")){
-
-const reader=new FileReader();
-
-reader.onload=function(e){
-
-preview.src=e.target.result;
-preview.style.display="block";
-
-};
-
-reader.readAsDataURL(file);
-
-}else{
-
-preview.style.display="none";
-
-}
-
-}
-
-
-function createPost(){
-
-const text=
-document.getElementById("postText").value.trim();
-
-const file=
-document.getElementById("photoInput").files[0];
-
-if(!text && !file){
-
-alert("Please write something or select a photo.");
-return;
-
-}
-
-const post=
-document.createElement("article");
-
-post.className="post";
-
-let media="";
-
-if(file && file.type.startsWith("image/")){
-
-media=
-`<img class="post-image"
-src="${URL.createObjectURL(file)}">`;
-
-}
-
-post.innerHTML=`
-
-<div class="post-header">
-
-<img
-class="post-avatar"
-src="${
-localStorage.getItem("gitalkPhoto")
-||"https://via.placeholder.com/100"
-}">
-
-<div>
-<b>${
-localStorage.getItem("gitalkName")
-||"You"
-}</b>
-
-<div class="post-time">
-Just now
-</div>
-
-</div>
-
-</div>
-
-<div class="post-content">
-${escapeHTML(text)}
-</div>
-
-${media}
-
-<div class="post-footer">
-
-<button onclick="likePost(this)">
-❤️ Like
-</button>
-
-<button onclick="commentPost()">
-💬 Comment
-</button>
-
-<button onclick="sharePost()">
-↗️ Share
-</button>
-
-</div>
-
-`;
-
-document.getElementById("posts")
-.prepend(post);
-
-document.getElementById("postText").value="";
-document.getElementById("photoInput").value="";
-document.getElementById("preview").style.display="none";
-
-updatePostCount();
-
-alert("Post created ❤️");
-
-}
-
-
-/* SECURITY */
-
-function escapeHTML(text){
-
-const div=document.createElement("div");
-
-div.textContent=text;
-
-return div.innerHTML;
-
-}
-
-
-/* LIKE */
-
-function likePost(button){
-
-if(button.innerText.includes("Liked")){
-
-button.innerText="❤️ Like";
-
-}else{
-
-button.innerText="💖 Liked";
-
-}
-
-}
-
-
-/* COMMENT */
-
-function commentPost(){
-
-let comment=
-prompt("Write your comment:");
-
-if(comment){
-
-alert("Comment added ❤️");
-
-}
-
-}
-
-
-/* SHARE */
-
-function sharePost(){
-
-if(navigator.share){
-
-navigator.share({
-
-title:"Gitalk Social",
-text:"Check out Gitalk Social ❤️",
-url:location.href
-
-});
-
-}else{
-
-navigator.clipboard.writeText(location.href);
-
-alert("Gitalk link copied ❤️");
-
-}
-
-}
-
-
-/* SEARCH */
-
-function searchPosts(){
-
-let query=
-prompt("Search Gitalk:");
-
-if(query){
-
-alert(
-'Searching for "'+query+'"'
-);
-
-}
-
-}
-
-
-/* DARK MODE */
-
-function toggleDarkMode(){
-
-const enabled=
-document.getElementById("darkMode").checked;
-
-if(enabled){
-
-document.body.style.background="#121212";
-document.body.style.color="#fff";
-
-document.querySelectorAll(
-".profile-card,.create-post,.post,.settings-box,.edit-box"
-).forEach(el=>{
+document
+.querySelectorAll(".card,.authBox,header,.bottomNav")
+.forEach(el=>{
 el.style.background="#1e1e1e";
-el.style.color="#fff";
+el.style.color="white";
 });
 
 }else{
@@ -1262,42 +661,14 @@ location.reload();
 
 }
 
-
-/* POST COUNT */
-
-function updatePostCount(){
-
-let count=
-document.querySelectorAll("#posts .post").length;
-
-document.getElementById("postCount").innerText=
-count+" posts";
-
-}
-
-
-/* LOGOUT */
-
-function logoutUser(){
-
-if(confirm("Are you sure you want to logout?")){
-
-alert("You have been logged out.");
-
-showPage("homePage");
-
-}
-
-}
-
-
-/* START */
-
-loadProfile();
-
-updatePostCount();
-
 </script>
 
+
+<script
+type="module"
+src="./script.js">
+</script>
+
+
 </body>
-  </html>
+</html>
