@@ -1221,4 +1221,209 @@ async function saveProfile() {
       {
         uid: user.uid,
         name: name,
- 
+  email: user.email,
+        bio: bio,
+        photoURL: photoURL,
+        updatedAt: serverTimestamp()
+      },
+      {
+        merge: true
+      }
+    );
+
+    await loadUser();
+    await loadFeed();
+
+    showMessage(
+      "Profile updated successfully ❤️"
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    showMessage(
+      error.message
+    );
+
+  }
+
+}
+
+
+// ======================================================
+// MY POSTS
+// ======================================================
+		  async function loadMyPosts() {
+
+  const user =
+    auth.currentUser;
+
+  const box =
+    $("myPosts");
+
+  if (!user || !box) return;
+
+  box.innerHTML =
+    "<p>Loading your posts...</p>";
+
+  try {
+
+    const snapshot =
+      await getDocs(
+        collection(db, "posts")
+      );
+
+    box.innerHTML = "";
+
+    let count = 0;
+
+    snapshot.forEach(
+      postDoc => {
+
+        const post =
+          postDoc.data();
+
+        if (
+          post.uid === user.uid
+        ) {
+
+          count++;
+
+          const div =
+            document.createElement(
+              "div"
+            );
+
+          div.className =
+            "post";
+
+          div.innerHTML = `
+
+            ${
+              post.text
+                ? `
+                  <p>
+                    ${escapeHTML(
+                      post.text
+                    )}
+                  </p>
+                `
+                : ""
+            }
+
+            ${
+              post.imageURL
+                ? `
+                  <img
+                    src="${escapeHTML(
+                      post.imageURL
+                    )}"
+                    style="
+                      width:100%;
+                      border-radius:12px;
+                      margin-top:10px;
+                    "
+                  >
+                `
+                : ""
+            }
+
+            <div
+              style="
+                margin-top:10px;
+                display:flex;
+                gap:8px;
+              "
+            >
+
+              <button
+                onclick="editPost('${postDoc.id}')"
+              >
+                ✏️ Edit
+              </button>
+
+              <button
+                onclick="deletePost('${postDoc.id}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          `;
+
+          box.appendChild(div);
+
+        }
+
+      }
+    );
+
+    if (count === 0) {
+
+      box.innerHTML =
+        "<p>आपने अभी कोई post नहीं बनाया.</p>";
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    box.innerHTML =
+      "<p>My Posts load नहीं हुए.</p>";
+
+  }
+
+}
+
+
+// ======================================================
+// CLOSE PROFILE
+// ======================================================
+
+if ($("closeProfile")) {
+
+  $("closeProfile").onclick =
+    () => {
+
+      const modal =
+        $("profileModal");
+
+      if (modal) {
+
+        modal.style.display =
+          "none";
+
+      }
+
+    };
+
+}
+
+
+// ======================================================
+// LOGOUT
+// ======================================================
+
+if ($("logoutBtn")) {
+
+  $("logoutBtn").onclick =
+    async () => {
+
+      try {
+
+        await signOut(auth);
+
+      } catch (error) {
+
+        showMessage(
+          error.message
+        );
+
+      }
+
+    };
+
+	}
