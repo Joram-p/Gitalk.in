@@ -1,155 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gitalk Social</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<!-- PROFILE SETTINGS -->
+<div id="profileModal" class="modal hidden">
 
-<body>
+  <div class="modal-box profile-settings">
 
-<!-- AUTH -->
-<div id="authPage">
+    <button id="closeProfile" class="close">✕</button>
 
-  <div id="loginBox" class="auth-box">
-    <div class="logo">Gitalk<span>.in</span></div>
-    <h2>Welcome Back ❤️</h2>
-    <p>Login to Gitalk Social</p>
+    <div id="profileAvatar" class="big-avatar">G</div>
 
-    <input id="loginEmail" type="email" placeholder="Email">
-    <input id="loginPassword" type="password" placeholder="Password">
+    <h2>Profile Settings</h2>
 
-    <button id="loginBtn">Login</button>
+    <label class="profile-photo-label">
+      📷 Change Profile Photo
+      <input
+        id="profilePhotoInput"
+        type="file"
+        accept="image/*">
+    </label>
 
-    <p id="loginMsg" class="msg"></p>
+    <input
+      id="profileNameInput"
+      type="text"
+      placeholder="Your Name">
 
-    <p class="switch">
-      New user?
-      <a id="showRegister">Create Account</a>
-    </p>
-  </div>
+    <textarea
+      id="profileBioInput"
+      placeholder="Write something about yourself..."></textarea>
 
+    <button id="saveProfileBtn" class="save-profile">
+      Save Profile ❤️
+    </button>
 
-  <div id="registerBox" class="auth-box hidden">
-    <div class="logo">Gitalk<span>.in</span></div>
-    <h2>Create Account</h2>
-    <p>Join Gitalk Social</p>
-
-    <input id="registerName" type="text" placeholder="Your Name">
-    <input id="registerEmail" type="email" placeholder="Email">
-    <input id="registerPassword" type="password" placeholder="Password">
-
-    <button id="registerBtn">Create Account</button>
-
-    <p id="registerMsg" class="msg"></p>
-
-    <p class="switch">
-      Already have an account?
-      <a id="showLogin">Login</a>
-    </p>
-  </div>
-
-</div>
-
-
-<!-- SOCIAL APP -->
-<div id="socialPage" class="hidden">
-
-  <header class="topbar">
-    <div class="brand">Gitalk<span>.in</span></div>
-
-    <div>
-      <button id="profileBtn">👤</button>
-      <button id="logoutBtn">Logout</button>
-    </div>
-  </header>
-
-
-  <main class="container">
-
-    <!-- USER -->
-    <div class="user-card">
-      <div id="userAvatar" class="avatar">G</div>
-
-      <div>
-        <b id="userName">User</b>
-        <small id="userEmail"></small>
-      </div>
-    </div>
-
-
-    <!-- CREATE POST -->
-    <div class="create-post">
-
-      <textarea
-        id="postText"
-        placeholder="What's on your mind?"
-      ></textarea>
-
-      <div id="imagePreview"></div>
-
-      <div class="post-tools">
-
-        <label class="photo-btn">
-          📷 Photo
-          <input
-            id="photoInput"
-            type="file"
-            accept="image/*"
-          >
-        </label>
-
-        <button id="postBtn">
-          Post 🚀
-        </button>
-
-      </div>
-
-      <p id="postMsg"></p>
-
-    </div>
-
-
-    <h2 class="feed-title">Social Feed 🌎</h2>
-
-    <div id="feed">
-      <div class="loading">
-        Loading posts...
-      </div>
-    </div>
-
-  </main>
-
-
-  <!-- PROFILE MODAL -->
-  <div id="profileModal" class="modal hidden">
-
-    <div class="modal-box">
-
-      <button id="closeProfile" class="close">✕</button>
-
-      <div id="profileAvatar" class="big-avatar">
-        G
-      </div>
-
-      <h2 id="profileName">User</h2>
-
-      <p id="profileEmail"></p>
-
-      <button id="closeProfile2">
-        Close
-      </button>
-
-    </div>
+    <p id="profileMsg"></p>
 
   </div>
 
 </div>
-
-
-<!-- Firebase + App -->
-<script type="module" src="script.js"></script>
-
-</body>
-</html>
