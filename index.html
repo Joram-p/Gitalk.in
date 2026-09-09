@@ -1,457 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Gitalk Social</title>
-
-  <link rel="stylesheet" href="./style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gitalk Social</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= AUTH SECTION ================= -->
+<div id="app">
 
-<section id="authSection">
-
-  <div class="authCard">
-
-    <div class="logo">
-      <div class="logoIcon">G</div>
-      <h1>Gitalk</h1>
-    </div>
-
-    <p class="tagline">Connect • Share • Discover</p>
-
-    <!-- LOGIN -->
-
-    <div id="loginBox">
-
+  <!-- LOGIN -->
+  <section id="loginPage" class="auth-page">
+    <div class="auth-box">
+      <div class="logo">Gitalk<span>.in</span></div>
       <h2>Welcome Back ❤️</h2>
+      <p>Login to Gitalk Social</p>
 
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Email"
-        autocomplete="email"
-      >
+      <input id="loginEmail" type="email" placeholder="Email">
+      <input id="loginPassword" type="password" placeholder="Password">
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Password"
-        autocomplete="current-password"
-      >
+      <button onclick="login()">Login</button>
 
-      <button class="authBtn" onclick="login()">
-        Login
-      </button>
-
-      <p class="switchText">
+      <p class="switch">
         Don't have an account?
-        <button onclick="showSignup()">Create Account</button>
+        <a onclick="showRegister()">Create Account</a>
       </p>
 
+      <p id="loginMessage" class="message"></p>
     </div>
+  </section>
 
 
-    <!-- SIGNUP -->
+  <!-- REGISTER -->
+  <section id="registerPage" class="auth-page hidden">
+    <div class="auth-box">
+      <div class="logo">Gitalk<span>.in</span></div>
+      <h2>Create Account</h2>
+      <p>Join Gitalk Social</p>
 
-    <div id="signupBox" style="display:none;">
+      <input id="registerName" type="text" placeholder="Your Name">
+      <input id="registerEmail" type="email" placeholder="Email">
+      <input id="registerPassword" type="password" placeholder="Password">
 
-      <h2>Create Account ❤️</h2>
+      <button onclick="register()">Create Account</button>
 
-      <input
-        type="text"
-        id="signupName"
-        placeholder="Full Name"
-      >
-
-      <input
-        type="text"
-        id="signupUsername"
-        placeholder="Username"
-      >
-
-      <input
-        type="email"
-        id="signupEmail"
-        placeholder="Email"
-        autocomplete="email"
-      >
-
-      <input
-        type="password"
-        id="signupPassword"
-        placeholder="Password (minimum 6 characters)"
-        autocomplete="new-password"
-      >
-
-      <button class="authBtn" onclick="signup()">
-        Sign Up
-      </button>
-
-      <p class="switchText">
+      <p class="switch">
         Already have an account?
-        <button onclick="showLogin()">Login</button>
+        <a onclick="showLogin()">Login</a>
       </p>
 
+      <p id="registerMessage" class="message"></p>
     </div>
-
-    <div id="authMessage"></div>
-
-  </div>
-
-</section>
+  </section>
 
 
-<!-- ================= APP SECTION ================= -->
+  <!-- SOCIAL PAGE -->
+  <section id="socialPage" class="hidden">
 
-<section id="appSection" style="display:none;">
+    <header class="topbar">
+      <div class="brand">Gitalk<span>.in</span></div>
 
-  <!-- TOP BAR -->
-
-  <header class="topBar">
-
-    <div class="brand">
-      <span class="brandLogo">G</span>
-      <span>Gitalk</span>
-    </div>
-
-    <div class="topUser">
-      <span id="userEmail"></span>
-
-      <button id="logoutBtn" onclick="logout()">
-        Logout
-      </button>
-    </div>
-
-  </header>
-
-
-  <!-- ================= HOME ================= -->
-
-  <main id="homePage" class="appPage">
-
-    <div class="pageTitle">
-      <h2>Home</h2>
-      <p>Share something with the world</p>
-    </div>
-
-
-    <!-- CREATE POST -->
-
-    <div class="createPost">
-
-      <textarea
-        id="postText"
-        placeholder="What's on your mind?"
-      ></textarea>
-
-
-      <div class="mediaButtons">
-
-        <label class="mediaButton">
-          📷 Photo
-          <input
-            type="file"
-            id="photoInput"
-            accept="image/*"
-            onchange="handlePhotoSelect(event)"
-            hidden
-          >
-        </label>
-
-
-        <label class="mediaButton">
-          🎥 Video
-          <input
-            type="file"
-            id="videoInput"
-            accept="video/*"
-            onchange="handleVideoSelect(event)"
-            hidden
-          >
-        </label>
-
+      <div class="top-actions">
+        <button onclick="showProfile()">👤</button>
+        <button onclick="logout()">Logout</button>
       </div>
+    </header>
 
 
-      <div id="uploadStatus"></div>
+    <main class="container">
 
-
-      <button class="createBtn" onclick="createPost()">
-        🚀 Post
-      </button>
-
-    </div>
-
-
-    <!-- FEED -->
-
-    <div id="feed">
-
-      <div class="emptyFeed">
-        Loading posts...
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= PROFILE ================= -->
-
-  <main id="profilePage" class="appPage" style="display:none;">
-
-    <div class="profileCard">
-
-      <img
-        id="profilePhoto"
-        class="profilePhoto"
-        src="https://via.placeholder.com/120"
-        alt="Profile"
-      >
-
-      <h2 id="profileName">
-        User
-      </h2>
-
-      <p id="profileUsername">
-        @username
-      </p>
-
-      <p id="profileBio">
-        Welcome to Gitalk
-      </p>
-
-      <div class="profileInfo">
-
-        <span>
-          📍 <b id="profileLocation">Not set</b>
-        </span>
-
-        <span>
-          🌐 <b id="profileWebsite">Not set</b>
-        </span>
-
-      </div>
-
-
-      <div class="stats">
-
+      <!-- USER -->
+      <div class="welcome-card">
+        <div id="userAvatar" class="avatar">G</div>
         <div>
-          <strong id="postCount">0</strong>
-          <span>Posts</span>
+          <strong id="welcomeName">User</strong>
+          <small id="welcomeEmail"></small>
+        </div>
+      </div>
+
+
+      <!-- CREATE POST -->
+      <div class="create-post">
+
+        <textarea id="postText"
+          placeholder="What's on your mind?"></textarea>
+
+        <div class="post-tools">
+
+          <label class="photo-btn">
+            📷 Photo
+            <input
+              id="postImage"
+              type="file"
+              accept="image/*"
+              onchange="previewImage(event)">
+          </label>
+
+          <button onclick="createPost()">Post 🚀</button>
         </div>
 
-        <div>
-          <strong id="likeCount">0</strong>
-          <span>Likes</span>
-        </div>
+        <div id="imagePreview"></div>
 
       </div>
 
 
-      <button class="editBtn" onclick="showPage('editPage')">
-        ✏️ Edit Profile
-      </button>
+      <!-- FEED -->
+      <h2 class="feed-title">Social Feed</h2>
+
+      <div id="posts"></div>
+
+    </main>
+
+
+    <!-- PROFILE -->
+    <div id="profileModal" class="modal hidden">
+
+      <div class="modal-box">
+
+        <button class="close" onclick="closeProfile()">✕</button>
+
+        <div id="profileAvatar" class="big-avatar">G</div>
+
+        <h2 id="profileName">User</h2>
+        <p id="profileEmail"></p>
+
+        <button onclick="closeProfile()">Close</button>
+
+      </div>
 
     </div>
 
-  </main>
+  </section>
 
+</div>
 
-  <!-- ================= EDIT PROFILE ================= -->
-
-  <main id="editPage" class="appPage" style="display:none;">
-
-    <div class="editCard">
-
-      <h2>Edit Profile</h2>
-
-
-      <div class="profileUpload">
-
-        <img
-          id="editProfilePhoto"
-          src="https://via.placeholder.com/120"
-          class="editPhoto"
-          alt="Profile"
-        >
-
-        <label class="uploadPhotoBtn">
-
-          📷 Change Photo
-
-          <input
-            type="file"
-            id="profileImageInput"
-            accept="image/*"
-            onchange="previewProfileImage(event)"
-            hidden
-          >
-
-        </label>
-
-      </div>
-
-
-      <div id="profileUploadStatus"></div>
-
-
-      <input
-        type="text"
-        id="nameInput"
-        placeholder="Full Name"
-      >
-
-      <input
-        type="text"
-        id="usernameInput"
-        placeholder="Username"
-      >
-
-      <textarea
-        id="bioInput"
-        placeholder="Bio"
-      ></textarea>
-
-      <input
-        type="text"
-        id="locationInput"
-        placeholder="Location"
-      >
-
-      <input
-        type="url"
-        id="websiteInput"
-        placeholder="Website"
-      >
-
-
-      <button class="saveBtn" onclick="saveFirebaseProfile()">
-        💾 Save Profile
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= SETTINGS ================= -->
-
-  <main id="settingsPage" class="appPage" style="display:none;">
-
-    <div class="settingsCard">
-
-      <h2>⚙️ Settings</h2>
-
-
-      <div class="settingRow">
-
-        <div>
-          <strong>Notifications</strong>
-          <small>Receive notifications</small>
-        </div>
-
-        <input
-          type="checkbox"
-          id="notificationsToggle"
-          onchange="saveSettings()"
-          checked
-        >
-
-      </div>
-
-
-      <div class="settingRow">
-
-        <div>
-          <strong>Private Account</strong>
-          <small>Make your account private</small>
-        </div>
-
-        <input
-          type="checkbox"
-          id="privateToggle"
-          onchange="saveSettings()"
-        >
-
-      </div>
-
-
-      <div class="settingRow">
-
-        <div>
-          <strong>Messages</strong>
-          <small>Allow messages</small>
-        </div>
-
-        <input
-          type="checkbox"
-          id="messagesToggle"
-          onchange="saveSettings()"
-          checked
-        >
-
-      </div>
-
-
-      <div class="settingRow">
-
-        <div>
-          <strong>Dark Mode</strong>
-          <small>Change website appearance</small>
-        </div>
-
-        <input
-          type="checkbox"
-          id="darkToggle"
-          onchange="toggleDarkMode()"
-        >
-
-      </div>
-
-
-      <div id="settingsMessage"></div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= BOTTOM NAV ================= -->
-
-  <nav class="bottomNav">
-
-    <button onclick="showPage('homePage')">
-      🏠
-      <span>Home</span>
-    </button>
-
-    <button onclick="showPage('profilePage')">
-      👤
-      <span>Profile</span>
-    </button>
-
-    <button onclick="showPage('editPage')">
-      ✏️
-      <span>Edit</span>
-    </button>
-
-    <button onclick="showPage('settingsPage')">
-      ⚙️
-      <span>Settings</span>
-    </button>
-
-  </nav>
-
-</section>
-
-
-<script type="module" src="./script.js"></script>
+<script src="script.js"></script>
 
 </body>
-            </html>
+</html>
