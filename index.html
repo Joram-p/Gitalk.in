@@ -1,238 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gitalk Social</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gitalk Social</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f0f2f5;
+  color:#1c1e21;
+}
+
+button{
+  cursor:pointer;
+  border:0;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* =========================
+   AUTH
+========================= */
+
+#authPage{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:linear-gradient(135deg,#1877f2,#42b72a);
+}
+
+.authBox{
+  width:100%;
+  max-width:420px;
+  background:white;
+  padding:30px;
+  border-radius:18px;
+  box-shadow:0 10px 40px rgba(0,0,0,.2);
+}
+
+.logo{
+  text-align:center;
+  color:#1877f2;
+  font-size:38px;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#65676b;
+  margin-bottom:25px;
+}
+
+.authBox input{
+  width:100%;
+  padding:14px;
+  margin:7px 0;
+  border:1px solid #ccd0d5;
+  border-radius:8px;
+  font-size:16px;
+}
+
+.primaryBtn{
+  width:100%;
+  background:#1877f2;
+  color:white;
+  padding:14px;
+  border-radius:8px;
+  font-size:17px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.greenBtn{
+  background:#42b72a;
+}
+
+.authSwitch{
+  text-align:center;
+  margin-top:18px;
+  color:#1877f2;
+  cursor:pointer;
+}
+
+#authMessage{
+  margin-top:12px;
+  text-align:center;
+  color:#e41e3f;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+#appPage{
+  min-height:100vh;
+}
+
+.header{
+  height:60px;
+  background:#1877f2;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+
+.headerLogo{
+  font-size:25px;
+  font-weight:bold;
+  margin-right:20px;
+}
+
+.search{
+  max-width:400px;
+  width:100%;
+}
+
+.search input{
+  width:100%;
+  border:0;
+  outline:0;
+  padding:10px 15px;
+  border-radius:20px;
+  font-size:15px;
+}
+
+.headerRight{
+  margin-left:auto;
+  display:flex;
+  gap:8px;
+}
+
+.headerBtn{
+  background:rgba(255,255,255,.15);
+  color:white;
+  padding:9px 12px;
+  border-radius:20px;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+  background:white;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:15px;
+  box-shadow:0 1px 3px rgba(0,0,0,.12);
+}
+
+.card h2{
+  margin-bottom:15px;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profileHeader{
+  text-align:center;
+  padding:25px;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#ddd;
+  display:block;
+  margin:0 auto 12px;
+}
+
+.profileName{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.profileUsername{
+  color:#65676b;
+  margin-top:5px;
+}
+
+.profileBio{
+  margin-top:10px;
+  color:#444;
+}
+
+.profileActions{
+  margin-top:15px;
+}
+
+/* =========================
+   FRIENDS
+========================= */
+
+.userItem{
+  display:flex;
+  align-items:center;
+  padding:12px;
+  border-bottom:1px solid #eee;
+  gap:12px;
+}
+
+.userItem:last-child{
+  border-bottom:0;
+}
+
+.userInfo{
+  flex:1;
+}
+
+.userName{
+  font-weight:bold;
+}
+
+.userHandle{
+  color:#65676b;
+  font-size:13px;
+}
+
+.smallAvatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  object-fit:cover;
+  background:#ddd;
+}
+
+.actionBtn{
+  padding:9px 14px;
+  border-radius:7px;
+  background:#1877f2;
+  color:white;
+  font-weight:bold;
+}
+
+.acceptBtn{
+  background:#42b72a;
+}
+
+.rejectBtn{
+  background:#e4e6eb;
+  color:#222;
+}
+
+/* =========================
+   CHAT
+========================= */
+
+.chatLayout{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:15px;
+}
+
+.friendList{
+  min-height:500px;
+}
+
+.chatBox{
+  min-height:500px;
+  display:flex;
+  flex-direction:column;
+}
+
+.chatTitle{
+  padding-bottom:15px;
+  border-bottom:1px solid #ddd;
+  font-weight:bold;
+}
+
+.messages{
+  flex:1;
+  overflow-y:auto;
+  padding:15px 5px;
+  min-height:350px;
+}
+
+.message{
+  max-width:75%;
+  padding:10px 13px;
+  border-radius:16px;
+  margin:7px 0;
+  word-wrap:break-word;
+}
+
+.message.me{
+  margin-left:auto;
+  background:#1877f2;
+  color:white;
+  border-bottom-right-radius:4px;
+}
+
+.message.other{
+  background:#e4e6eb;
+  color:#111;
+  border-bottom-left-radius:4px;
+}
+
+.messageTime{
+  font-size:10px;
+  opacity:.7;
+  margin-top:4px;
+}
+
+.chatInput{
+  display:flex;
+  gap:8px;
+  border-top:1px solid #ddd;
+  padding-top:12px;
+}
+
+.chatInput input{
+  flex:1;
+  padding:12px;
+  border:1px solid #ccd0d5;
+  border-radius:20px;
+  outline:0;
+}
+
+.sendBtn{
+  background:#1877f2;
+  color:white;
+  padding:0 20px;
+  border-radius:20px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.bottomNav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:white;
+  border-top:1px solid #ddd;
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  padding:7px;
+  z-index:100;
+}
+
+.navBtn{
+  background:white;
+  padding:10px 16px;
+  border-radius:8px;
+  font-size:14px;
+}
+
+.navBtn:hover{
+  background:#e4e6eb;
+}
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification{
+  padding:13px;
+  border-bottom:1px solid #eee;
+}
+
+.notification.unread{
+  background:#eef5ff;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+  .header{
+    flex-wrap:wrap;
+    height:auto;
+    padding:8px;
+  }
+
+  .headerLogo{
+    font-size:22px;
+  }
+
+  .search{
+    order:3;
+    max-width:none;
+    margin-top:7px;
+  }
+
+  .headerRight{
+    gap:3px;
+  }
+
+  .container{
+    padding:10px;
+    padding-bottom:75px;
+  }
+
+  .chatLayout{
+    grid-template-columns:1fr;
+  }
+
+  .friendList{
+    min-height:auto;
+  }
+
+  .chatBox{
+    min-height:500px;
+  }
+
+  .bottomNav{
+    overflow-x:auto;
+    justify-content:flex-start;
+  }
+
+  .navBtn{
+    min-width:70px;
+    padding:9px 7px;
+  }
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN / REGISTER ================= -->
-<div id="authScreen" class="auth-screen">
+<!-- =========================
+     LOGIN / REGISTER
+========================= -->
 
-  <div class="auth-box">
+<section id="authPage">
 
-    <div class="auth-logo">G</div>
+  <div class="authBox">
 
-    <h1>Gitalk Social</h1>
-    <p class="auth-subtitle">Connect • Share • Chat</p>
+    <div class="logo">Gitalk</div>
+
+    <div class="subtitle">
+      Connect • Chat • Share
+    </div>
 
     <!-- LOGIN -->
-    <div id="loginForm">
+
+    <div id="loginBox">
+
+      <h2 style="text-align:center;margin-bottom:15px;">
+        Login
+      </h2>
 
       <input
-        id="loginEmail"
         type="email"
-        placeholder="Email address"
-        autocomplete="email"
+        id="loginEmail"
+        placeholder="Email"
       >
 
       <input
-        id="loginPassword"
         type="password"
+        id="loginPassword"
         placeholder="Password"
-        autocomplete="current-password"
       >
 
-      <button id="loginBtn" class="primary-btn">
+      <button
+        class="primaryBtn"
+        onclick="loginUser()"
+      >
         Login
       </button>
 
-      <p class="auth-message" id="loginMessage"></p>
-
-      <div class="auth-switch">
-        Don't have an account?
-        <button id="showRegisterBtn" class="link-btn">
-          Create account
-        </button>
+      <div
+        class="authSwitch"
+        onclick="showRegister()"
+      >
+        Create New Account
       </div>
 
     </div>
-
 
     <!-- REGISTER -->
-    <div id="registerForm" style="display:none;">
 
-      <input
-        id="registerName"
-        type="text"
-        placeholder="Full name"
-        autocomplete="name"
-      >
+    <div id="registerBox" class="hidden">
 
-      <input
-        id="registerEmail"
-        type="email"
-        placeholder="Email address"
-        autocomplete="email"
-      >
-
-      <input
-        id="registerPassword"
-        type="password"
-        placeholder="Password"
-        autocomplete="new-password"
-      >
-
-      <input
-        id="registerConfirm"
-        type="password"
-        placeholder="Confirm password"
-        autocomplete="new-password"
-      >
-
-      <button id="registerBtn" class="primary-btn">
+      <h2 style="text-align:center;margin-bottom:15px;">
         Create Account
+      </h2>
+
+      <input
+        type="text"
+        id="registerName"
+        placeholder="Full Name"
+      >
+
+      <input
+        type="text"
+        id="registerUsername"
+        placeholder="Username"
+      >
+
+      <input
+        type="email"
+        id="registerEmail"
+        placeholder="Email"
+      >
+
+      <input
+        type="password"
+        id="registerPassword"
+        placeholder="Password"
+      >
+
+      <button
+        class="primaryBtn greenBtn"
+        onclick="registerUser()"
+      >
+        Register
       </button>
 
-      <p class="auth-message" id="registerMessage"></p>
-
-      <div class="auth-switch">
-        Already have an account?
-        <button id="showLoginBtn" class="link-btn">
-          Login
-        </button>
+      <div
+        class="authSwitch"
+        onclick="showLogin()"
+      >
+        Already have an account? Login
       </div>
 
     </div>
 
+    <div id="authMessage"></div>
+
   </div>
-</div>
+
+</section>
 
 
-<!-- ================= MAIN APP ================= -->
-<div id="appScreen" style="display:none;">
+<!-- =========================
+     MAIN APP
+========================= -->
 
-  <!-- HEADER -->
-  <header class="top-header">
+<section id="appPage" class="hidden">
 
-    <div class="brand">
-      <span class="brand-icon">G</span>
-      <span>Gitalk Social</span>
+  <header class="header">
+
+    <div class="headerLogo">
+      Gitalk
     </div>
 
-    <div class="header-search">
+    <div class="search">
       <input
         id="searchInput"
-        type="search"
-        placeholder="Search Gitalk..."
+        type="text"
+        placeholder="Search friends..."
+        oninput="searchUsers()"
       >
     </div>
 
-    <button id="headerProfileBtn" class="header-profile-btn">
-      👤
-    </button>
+    <div class="headerRight">
+
+      <button
+        class="headerBtn"
+        onclick="openPage('profilePage')"
+      >
+        👤
+      </button>
+
+      <button
+        class="headerBtn"
+        onclick="logoutUser()"
+      >
+        Logout
+      </button>
+
+    </div>
 
   </header>
 
 
-  <!-- ================= HOME ================= -->
-  <main id="homePage" class="page active-page">
+  <main class="container">
 
-    <div class="welcome-card">
+    <!-- ================= HOME ================= -->
 
-      <h2 id="welcomeTitle">
-        Welcome to Gitalk Social ❤️
-      </h2>
+    <div
+      id="homePage"
+      class="page active"
+    >
 
-      <p>
-        Share your thoughts, photos and videos with friends.
-      </p>
+      <div class="card">
 
-    </div>
+        <h2>
+          👋 Welcome to Gitalk Social
+        </h2>
 
-
-    <!-- CREATE POST -->
-    <div class="create-post-card">
-
-      <div class="create-post-top">
-
-        <div id="currentUserAvatar" class="avatar">
-          👤
-        </div>
-
-        <button id="openPostBtn" class="post-input-btn">
-          What's on your mind?
-        </button>
+        <p>
+          Find your friends and start chatting.
+        </p>
 
       </div>
 
-      <div class="post-actions">
+      <div class="card">
 
-        <button id="photoPostBtn">
-          📷 Photo
-        </button>
+        <h2>
+          🔎 Search Friends
+        </h2>
 
-        <button id="videoPostBtn">
-          🎥 Video
-        </button>
-
-        <button id="textPostBtn">
-          📝 Text
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <!-- FEED -->
-    <div id="feed">
-
-      <div class="loading-card">
-        Loading posts...
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= CHAT ================= -->
-  <main id="chatPage" class="page">
-
-    <div class="page-title">
-      <h2>💬 Chat</h2>
-    </div>
-
-    <div class="chat-container">
-
-      <div id="chatUsers" class="chat-users">
-
-        <div class="empty-state">
-          No conversations yet.
-        </div>
-
-      </div>
-
-      <div id="chatWindow" class="chat-window">
-
-        <div class="chat-placeholder">
-          <div>💬</div>
-          <h3>Select a conversation</h3>
-          <p>Your messages will appear here.</p>
+        <div id="searchResults">
+          Search users using the search box above.
         </div>
 
       </div>
 
     </div>
 
-  </main>
 
+    <!-- ================= FRIENDS ================= -->
 
-  <!-- ================= NOTIFICATIONS ================= -->
-  <main id="notificationsPage" class="page">
+    <div
+      id="friendsPage"
+      class="page"
+    >
 
-    <div class="page-title">
-      <h2>🔔 Notifications</h2>
+      <div class="card">
+
+        <h2>
+          👥 Friends
+        </h2>
+
+        <div id="friendsList">
+          Loading...
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <h2>
+          🤝 Friend Requests
+        </h2>
+
+        <div id="requestsList">
+          Loading...
+        </div>
+
+      </div>
+
     </div>
 
-    <div id="notificationsList" class="notifications-list">
 
-      <div class="empty-state">
-        No notifications yet.
+    <!-- ================= CHAT ================= -->
+
+    <div
+      id="chatPage"
+      class="page"
+    >
+
+      <div class="chatLayout">
+
+        <div class="card friendList">
+
+          <h2>
+            💬 Friends
+          </h2>
+
+          <div id="chatFriends">
+            Loading...
+          </div>
+
+        </div>
+
+        <div class="card chatBox">
+
+          <div
+            id="chatTitle"
+            class="chatTitle"
+          >
+            Select a friend
+          </div>
+
+          <div
+            id="messages"
+            class="messages"
+          >
+          </div>
+
+          <div class="chatInput">
+
+            <input
+              id="messageInput"
+              type="text"
+              placeholder="Write a message..."
+              onkeydown="messageKey(event)"
+            >
+
+            <button
+              class="sendBtn"
+              onclick="sendMessage()"
+            >
+              Send
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <div
+      id="profilePage"
+      class="page"
+    >
+
+      <div class="card profileHeader">
+
+        <img
+          id="profileAvatar"
+          class="avatar"
+          src="https://via.placeholder.com/90"
+        >
+
+        <div
+          id="profileName"
+          class="profileName"
+        >
+          User
+        </div>
+
+        <div
+          id="profileUsername"
+          class="profileUsername"
+        >
+          @username
+        </div>
+
+        <div
+          id="profileBio"
+          class="profileBio"
+        >
+          Welcome to Gitalk Social.
+        </div>
+
+        <div class="profileActions">
+
+          <button
+            class="actionBtn"
+            onclick="editProfile()"
+          >
+            Edit Profile
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= NOTIFICATIONS ================= -->
+
+    <div
+      id="notificationsPage"
+      class="page"
+    >
+
+      <div class="card">
+
+        <h2>
+          🔔 Notifications
+        </h2>
+
+        <div id="notificationsList">
+          No notifications.
+        </div>
+
       </div>
 
     </div>
@@ -240,221 +819,559 @@
   </main>
 
 
-  <!-- ================= PROFILE ================= -->
-  <main id="profilePage" class="page">
+  <!-- ================= NAV ================= -->
 
-    <div class="profile-card">
+  <nav class="bottomNav">
 
-      <div id="profileAvatar" class="profile-avatar">
-        👤
-      </div>
-
-      <h2 id="profileName">User</h2>
-
-      <p id="profileEmail">
-        user@example.com
-      </p>
-
-      <button id="editProfileBtn" class="primary-btn">
-        Edit Profile
-      </button>
-
-    </div>
-
-    <div class="profile-stats">
-
-      <div>
-        <strong id="postCount">0</strong>
-        <span>Posts</span>
-      </div>
-
-      <div>
-        <strong>0</strong>
-        <span>Friends</span>
-      </div>
-
-      <div>
-        <strong>0</strong>
-        <span>Followers</span>
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= SETTINGS ================= -->
-  <main id="settingsPage" class="page">
-
-    <div class="page-title">
-      <h2>⚙️ Settings</h2>
-    </div>
-
-    <div class="settings-list">
-
-      <button id="darkModeBtn" class="setting-item">
-        🌙
-        <span>
-          <strong>Dark Mode</strong>
-          <small>Change app appearance</small>
-        </span>
-      </button>
-
-      <button id="accountSettingsBtn" class="setting-item">
-        👤
-        <span>
-          <strong>Account</strong>
-          <small>Manage your account</small>
-        </span>
-      </button>
-
-      <button id="privacyBtn" class="setting-item">
-        🔒
-        <span>
-          <strong>Privacy</strong>
-          <small>Control your privacy</small>
-        </span>
-      </button>
-
-      <button id="logoutBtn" class="setting-item danger">
-        🚪
-        <span>
-          <strong>Logout</strong>
-          <small>Sign out from Gitalk Social</small>
-        </span>
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= BOTTOM NAV ================= -->
-  <nav class="bottom-nav">
-
-    <button data-page="homePage" class="nav-btn active">
-      🏠
-      <span>Home</span>
+    <button
+      class="navBtn"
+      onclick="openPage('homePage')"
+    >
+      🏠 Home
     </button>
 
-    <button data-page="chatPage" class="nav-btn">
-      💬
-      <span>Chat</span>
+    <button
+      class="navBtn"
+      onclick="openPage('friendsPage');loadFriends()"
+    >
+      👥 Friends
     </button>
 
-    <button data-page="notificationsPage" class="nav-btn">
-      🔔
-      <span>Alerts</span>
+    <button
+      class="navBtn"
+      onclick="openPage('chatPage');loadChatFriends()"
+    >
+      💬 Chat
     </button>
 
-    <button data-page="profilePage" class="nav-btn">
-      👤
-      <span>Profile</span>
+    <button
+      class="navBtn"
+      onclick="openPage('notificationsPage');loadNotifications()"
+    >
+      🔔 Alerts
     </button>
 
-    <button data-page="settingsPage" class="nav-btn">
-      ⚙️
-      <span>Settings</span>
+    <button
+      class="navBtn"
+      onclick="openPage('profilePage')"
+    >
+      👤 Profile
     </button>
 
   </nav>
 
-</div>
+</section>
 
 
-<!-- ================= CREATE POST MODAL ================= -->
-<div id="postModal" class="modal">
+<script>
 
-  <div class="modal-box">
+const SUPABASE_URL =
+"https://mhnfutbpvyvhdmqqquyi.supabase.co";
 
-    <div class="modal-header">
+const SUPABASE_KEY =
+"sb_publishable_NpULKcoHIfa0urWJH0oOPA_o9vqamOl";
 
-      <h2>Create Post</h2>
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
-      <button id="closePostBtn" class="close-btn">
-        ✕
+let currentUser = null;
+let selectedFriend = null;
+let messageSubscription = null;
+
+
+/* =========================
+   AUTH PAGE
+========================= */
+
+function showRegister(){
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerBox")
+    .classList.remove("hidden");
+
+  clearAuthMessage();
+}
+
+
+function showLogin(){
+
+  document
+    .getElementById("registerBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+  clearAuthMessage();
+}
+
+
+function authMessage(text){
+
+  document
+    .getElementById("authMessage")
+    .textContent = text;
+}
+
+
+function clearAuthMessage(){
+
+  document
+    .getElementById("authMessage")
+    .textContent = "";
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+async function registerUser(){
+
+  const name =
+    document
+    .getElementById("registerName")
+    .value.trim();
+
+  const username =
+    document
+    .getElementById("registerUsername")
+    .value.trim()
+    .toLowerCase();
+
+  const email =
+    document
+    .getElementById("registerEmail")
+    .value.trim();
+
+  const password =
+    document
+    .getElementById("registerPassword")
+    .value;
+
+  if(!name || !username || !email || !password){
+
+    authMessage("Please fill all fields.");
+    return;
+  }
+
+  if(password.length < 6){
+
+    authMessage("Password must be at least 6 characters.");
+    return;
+  }
+
+  authMessage("Creating account...");
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth.signUp({
+
+    email:email,
+    password:password,
+
+    options:{
+      data:{
+        full_name:name,
+        username:username
+      }
+    }
+
+  });
+
+  if(error){
+
+    authMessage(error.message);
+    return;
+  }
+
+  if(data.user){
+
+    const {
+      error:profileError
+    } = await supabaseClient
+      .from("profiles")
+      .insert({
+
+        id:data.user.id,
+        username:username,
+        full_name:name
+
+      });
+
+    if(profileError){
+
+      authMessage(
+        "Account created, but profile error: "
+        + profileError.message
+      );
+
+      return;
+    }
+  }
+
+  authMessage(
+    "Registration successful. Check your email if confirmation is enabled."
+  );
+
+  showLogin();
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+async function loginUser(){
+
+  const email =
+    document
+    .getElementById("loginEmail")
+    .value.trim();
+
+  const password =
+    document
+    .getElementById("loginPassword")
+    .value;
+
+  if(!email || !password){
+
+    authMessage("Enter email and password.");
+    return;
+  }
+
+  authMessage("Logging in...");
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth.signInWithPassword({
+
+    email:email,
+    password:password
+
+  });
+
+  if(error){
+
+    authMessage(error.message);
+    return;
+  }
+
+  currentUser = data.user;
+
+  await startApp();
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logoutUser(){
+
+  if(messageSubscription){
+
+    await supabaseClient
+      .removeChannel(messageSubscription);
+
+    messageSubscription = null;
+  }
+
+  await supabaseClient.auth.signOut();
+
+  currentUser = null;
+
+  document
+    .getElementById("appPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("authPage")
+    .classList.remove("hidden");
+
+  showLogin();
+}
+
+
+/* =========================
+   START APP
+========================= */
+
+async function startApp(){
+
+  document
+    .getElementById("authPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("appPage")
+    .classList.remove("hidden");
+
+  await loadProfile();
+
+  await loadFriends();
+
+  await loadChatFriends();
+
+  await loadNotifications();
+
+  openPage("homePage");
+
+}
+
+
+/* =========================
+   SESSION CHECK
+========================= */
+
+async function checkSession(){
+
+  const {
+    data
+  } = await supabaseClient.auth.getSession();
+
+  if(data.session){
+
+    currentUser =
+      data.session.user;
+
+    await startApp();
+
+  }
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+  async (event, session)=>{
+
+    if(session && !currentUser){
+
+      currentUser =
+        session.user;
+
+      await startApp();
+
+    }
+
+  }
+);
+
+
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
+function openPage(pageId){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page=>{
+      page.classList.remove("active");
+    });
+
+  const page =
+    document.getElementById(pageId);
+
+  if(page){
+
+    page.classList.add("active");
+
+  }
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+async function loadProfile(){
+
+  if(!currentUser) return;
+
+  let {
+    data,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .eq("id",currentUser.id)
+    .single();
+
+  if(error){
+
+    console.log(error);
+    return;
+  }
+
+  document
+    .getElementById("profileName")
+    .textContent =
+      data.full_name || "User";
+
+  document
+    .getElementById("profileUsername")
+    .textContent =
+      "@" + (data.username || "");
+
+  document
+    .getElementById("profileBio")
+    .textContent =
+      data.bio || "Welcome to Gitalk Social.";
+
+  if(data.avatar_url){
+
+    document
+      .getElementById("profileAvatar")
+      .src = data.avatar_url;
+
+  }
+
+}
+
+
+/* =========================
+   SEARCH USERS
+========================= */
+
+let searchTimer;
+
+function searchUsers(){
+
+  clearTimeout(searchTimer);
+
+  searchTimer =
+    setTimeout(
+      performSearch,
+      400
+    );
+
+}
+
+
+async function performSearch(){
+
+  const input =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim()
+    .toLowerCase();
+
+  const resultBox =
+    document.getElementById("searchResults");
+
+  if(!input){
+
+    resultBox.innerHTML =
+      "Search users using the search box above.";
+
+    return;
+  }
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .select("*")
+    .or(
+      `username.ilike.%${input}%,full_name.ilike.%${input}%`
+    )
+    .neq("id",currentUser.id)
+    .limit(20);
+
+  if(error){
+
+    resultBox.textContent =
+      error.message;
+
+    return;
+  }
+
+  if(!data.length){
+
+    resultBox.textContent =
+      "No users found.";
+
+    return;
+  }
+
+  resultBox.innerHTML = "";
+
+  data.forEach(user=>{
+
+    const div =
+      document.createElement("div");
+
+    div.className = "userItem";
+
+    div.innerHTML = `
+
+      <img
+        class="smallAvatar"
+        src="${user.avatar_url || 'https://via.placeholder.com/48'}"
+      >
+
+      <div class="userInfo">
+
+        <div class="userName">
+          ${escapeHTML(user.full_name || user.username)}
+        </div>
+
+        <div class="userHandle">
+          @${escapeHTML(user.username)}
+        </div>
+
+      </div>
+
+      <button
+        class="actionBtn"
+        onclick="sendFriendRequest('${user.id}')"
+      >
+        Add Friend
       </button>
 
-    </div>
+    `;
 
-    <textarea
-      id="postText"
-      placeholder="What's on your mind?"
-    ></textarea>
+    resultBox.appendChild(div);
 
-    <div id="mediaPreview" class="media-preview"></div>
+  });
 
-    <input
-      id="postPhotoInput"
-      type="file"
-      accept="image/*"
-      hidden
-    >
-
-    <input
-      id="postVideoInput"
-      type="file"
-      accept="video/*"
-      hidden
-    >
-
-    <div class="modal-actions">
-
-      <button id="selectPhotoBtn">
-        📷 Photo
-      </button>
-
-      <button id="selectVideoBtn">
-        🎥 Video
-      </button>
-
-      <button id="publishPostBtn" class="primary-btn">
-        Post
-      </button>
-
-    </div>
-
-    <p id="postMessage" class="auth-message"></p>
-
-  </div>
-
-</div>
+}
 
 
-<!-- ================= EDIT PROFILE MODAL ================= -->
-<div id="profileModal" class="modal">
+/* =========================
+   FRIEND REQUEST
+========================= */
 
-  <div class="modal-box">
+async function sendFriendRequest(friendId){
 
-    <div class="modal-header">
+  if(!currentUser) return;
 
-      <h2>Edit Profile</h2>
+  const {
+    data:existing
+  } = await supabaseClient
+    .from("friendships")
+    .select("*")
+    .or(
+      `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
+    )
+    .maybeSingle();
 
-      <button id="closeProfileBtn" class="close-btn">
-        ✕
-      </button>
+  if(existing){
 
-    </div>
-
-    <input
-      id="editName"
-      type="text"
-      placeholder="Your name"
-    >
-
-    <button id="saveProfileBtn" class="primary-btn">
-      Save Changes
-    </button>
-
-    <p id="profileMessage" class="auth-message"></p>
-
-  </div>
-
-</div>
-
-
-<!-- ================= JAVASCRIPT ================= -->
-<script type="module" src="script.js"></script>
-
-</body>
-     </html>
+    alert(
+      "Friend request already exists
