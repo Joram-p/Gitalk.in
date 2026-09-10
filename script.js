@@ -1,1429 +1,1640 @@
-// ======================================================
-// GITALK SOCIAL - COMPLETE SCRIPT
-// Login / Register / Profile / Posts / Photo Upload
-// Edit / Delete / Like / Comment / Share
-// ======================================================
+/* =========================================================
+   GITALK SOCIAL
+   STEP 3 — COMPLETE SCRIPT.JS
+   Navigation + Posts UI + Chat UI + Profile + Settings
+========================================================= */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+import { initializeApp } from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  orderBy,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  deleteDoc,
-  arrayUnion,
-  arrayRemove,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+    getFirestore
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+import {
+    getStorage
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
-// ======================================================
-// FIREBASE CONFIG
-// ======================================================
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
-  authDomain: "gitalk-social-3a85a.firebaseapp.com",
-  projectId: "gitalk-social-3a85a",
-  storageBucket: "gitalk-social-3a85a.firebasestorage.app",
-  messagingSenderId: "553434284005",
-  appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
+    apiKey: "AIzaSyBDz7YkD4ivdet",
+    authDomain: "gitalk-social-3a85a.firebaseapp.com",
+    projectId: "gitalk-social-3a85a",
+    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
+    messagingSenderId: "",
+    appId: ""
 };
 
 
-// ======================================================
-// INITIALIZE
-// ======================================================
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+/*
+   IMPORTANT:
+   If your Firebase console contains a complete config,
+   replace the values above with your exact Web App config.
+*/
 
 
-// ======================================================
-// HELPERS
-// ======================================================
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
 
-const $ = id => document.getElementById(id);
+let app;
+let auth;
+let db;
+let storage;
 
-function escapeHTML(text = "") {
-  return String(text)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
+try {
 
-function showMessage(message) {
-  alert(message);
-}
+    app = initializeApp(firebaseConfig);
 
+    auth = getAuth(app);
 
-// ======================================================
-// AUTH ELEMENTS
-// ======================================================
+    db = getFirestore(app);
 
-const authPage = $("authPage");
-const socialPage = $("socialPage");
+    storage = getStorage(app);
 
-const loginBox = $("loginBox");
-const registerBox = $("registerBox");
+    console.log("Firebase initialized successfully.");
 
+} catch(error){
 
-// ======================================================
-// LOGIN
-// ======================================================
-
-if ($("loginBtn")) {
-
-  $("loginBtn").onclick = async () => {
-
-    const email = $("loginEmail").value.trim();
-    const password = $("loginPassword").value;
-
-    if (!email || !password) {
-      showMessage("Email और password डालें.");
-      return;
-    }
-
-    try {
-
-      await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      $("loginEmail").value = "";
-      $("loginPassword").value = "";
-
-    } catch (error) {
-
-      showMessage(error.message);
-
-    }
-
-  };
+    console.error("Firebase initialization error:", error);
 
 }
 
 
-// ======================================================
-// REGISTER
-// ======================================================
+/* =========================================================
+   GLOBAL STATE
+========================================================= */
 
-if ($("registerBtn")) {
+let currentUser = null;
 
-  $("registerBtn").onclick = async () => {
+let selectedPhoto = null;
 
-    const name = $("registerName").value.trim();
-    const email = $("registerEmail").value.trim();
-    const password = $("registerPassword").value;
+let selectedVideo = null;
 
-    if (!name || !email || !password) {
-      showMessage("सभी details भरें.");
-      return;
+let currentChatUser = null;
+
+let darkMode = false;
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+if(auth){
+
+    onAuthStateChanged(auth, (user) => {
+
+        currentUser = user;
+
+        if(user){
+
+            console.log("Logged in:", user.email);
+
+            updateUserInterface(user);
+
+        }else{
+
+            console.log("No user logged in.");
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   UPDATE USER INTERFACE
+========================================================= */
+
+function updateUserInterface(user){
+
+    const name =
+        user.displayName ||
+        user.email?.split("@")[0] ||
+        "Gitalk User";
+
+    const photo =
+        user.photoURL || "";
+
+
+    const profileName =
+        document.getElementById("profileName");
+
+    const postAuthorName =
+        document.getElementById("postAuthorName");
+
+
+    if(profileName){
+
+        profileName.textContent = name;
+
     }
 
-    if (password.length < 6) {
-      showMessage("Password कम से कम 6 characters का होना चाहिए.");
-      return;
+
+    if(postAuthorName){
+
+        postAuthorName.textContent = name;
+
     }
 
-    try {
 
-      const result =
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
+    const avatars = [
+
+        document.getElementById("profileAvatar"),
+
+        document.getElementById("currentUserAvatar")
+
+    ];
+
+
+    avatars.forEach(avatar => {
+
+        if(!avatar) return;
+
+
+        if(photo){
+
+            avatar.innerHTML =
+                `<img src="${photo}" alt="Profile">`;
+
+        }else{
+
+            avatar.textContent = "👤";
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+window.showPage = function(page){
+
+    const pages = [
+
+        "home",
+        "chat",
+        "notifications",
+        "profile",
+        "settings"
+
+    ];
+
+
+    pages.forEach(name => {
+
+        const element =
+            document.getElementById(name + "Page");
+
+        if(element){
+
+            element.classList.remove("active");
+
+        }
+
+    });
+
+
+    const target =
+        document.getElementById(page + "Page");
+
+
+    if(target){
+
+        target.classList.add("active");
+
+    }
+
+
+    /* Bottom navigation */
+
+    document.querySelectorAll(".nav-item")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    const nav =
+        document.getElementById("nav" + capitalize(page));
+
+
+    if(nav){
+
+        nav.classList.add("active");
+
+    }
+
+
+    window.scrollTo({
+
+        top:0,
+        behavior:"smooth"
+
+    });
+
+};
+
+
+/* =========================================================
+   CAPITALIZE
+========================================================= */
+
+function capitalize(text){
+
+    return text.charAt(0).toUpperCase() +
+           text.slice(1);
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+window.openSearch = function(){
+
+    const box =
+        document.getElementById("searchBox");
+
+    if(box){
+
+        box.classList.remove("hidden");
+
+    }
+
+
+    const input =
+        document.getElementById("searchInput");
+
+    if(input){
+
+        setTimeout(() => input.focus(),100);
+
+    }
+
+};
+
+
+window.closeSearch = function(){
+
+    const box =
+        document.getElementById("searchBox");
+
+    if(box){
+
+        box.classList.add("hidden");
+
+    }
+
+};
+
+
+const searchInput =
+    document.getElementById("searchInput");
+
+
+if(searchInput){
+
+    searchInput.addEventListener("input", () => {
+
+        const query =
+            searchInput.value.trim().toLowerCase();
+
+        const results =
+            document.getElementById("searchResults");
+
+
+        if(!results) return;
+
+
+        if(!query){
+
+            results.innerHTML = "";
+
+            return;
+
+        }
+
+
+        results.innerHTML = `
+
+            <div class="empty-state">
+
+                🔎
+
+                <p>
+                    Search feature will connect to
+                    Firebase in the next step.
+                </p>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================================
+   CREATE POST MODAL
+========================================================= */
+
+window.openCreatePost = function(type = ""){
+
+    const modal =
+        document.getElementById("createPostModal");
+
+
+    if(!modal) return;
+
+
+    modal.classList.remove("hidden");
+
+
+    const textarea =
+        document.getElementById("postText");
+
+
+    if(textarea){
+
+        textarea.focus();
+
+    }
+
+
+    if(type === "photo"){
+
+        document.getElementById("photoInput")?.click();
+
+    }
+
+
+    if(type === "video"){
+
+        document.getElementById("videoInput")?.click();
+
+    }
+
+};
+
+
+window.closeCreatePost = function(){
+
+    const modal =
+        document.getElementById("createPostModal");
+
+
+    if(modal){
+
+        modal.classList.add("hidden");
+
+    }
+
+
+    resetPostForm();
+
+};
+
+
+/* =========================================================
+   RESET POST FORM
+========================================================= */
+
+function resetPostForm(){
+
+    const text =
+        document.getElementById("postText");
+
+    const photo =
+        document.getElementById("photoInput");
+
+    const video =
+        document.getElementById("videoInput");
+
+    const preview =
+        document.getElementById("postPreview");
+
+
+    if(text){
+
+        text.value = "";
+
+    }
+
+
+    if(photo){
+
+        photo.value = "";
+
+    }
+
+
+    if(video){
+
+        video.value = "";
+
+    }
+
+
+    if(preview){
+
+        preview.innerHTML = "";
+
+    }
+
+
+    selectedPhoto = null;
+
+    selectedVideo = null;
+
+}
+
+
+/* =========================================================
+   PHOTO PREVIEW
+========================================================= */
+
+window.previewPhoto = function(event){
+
+    const file =
+        event.target.files?.[0];
+
+
+    if(!file) return;
+
+
+    selectedPhoto = file;
+
+    selectedVideo = null;
+
+
+    const preview =
+        document.getElementById("postPreview");
+
+
+    if(!preview) return;
+
+
+    const url =
+        URL.createObjectURL(file);
+
+
+    preview.innerHTML = `
+
+        <img
+            src="${url}"
+            alt="Photo preview"
+        >
+
+    `;
+
+};
+
+
+/* =========================================================
+   VIDEO PREVIEW
+========================================================= */
+
+window.previewVideo = function(event){
+
+    const file =
+        event.target.files?.[0];
+
+
+    if(!file) return;
+
+
+    selectedVideo = file;
+
+    selectedPhoto = null;
+
+
+    const preview =
+        document.getElementById("postPreview");
+
+
+    if(!preview) return;
+
+
+    const url =
+        URL.createObjectURL(file);
+
+
+    preview.innerHTML = `
+
+        <video
+            src="${url}"
+            controls
+        ></video>
+
+    `;
+
+};
+
+
+/* =========================================================
+   PUBLISH POST
+========================================================= */
+
+window.publishPost = async function(){
+
+    const textElement =
+        document.getElementById("postText");
+
+
+    const text =
+        textElement?.value.trim() || "";
+
+
+    if(!text && !selectedPhoto && !selectedVideo){
+
+        alert("Please write something or select a photo/video.");
+
+        return;
+
+    }
+
+
+    /*
+       Firebase Firestore + Storage publishing
+       will be added in the next Firebase data step.
+    */
+
+
+    const feed =
+        document.getElementById("feed");
+
+
+    if(feed){
+
+        const empty =
+            feed.querySelector(".empty-feed");
+
+        if(empty){
+
+            empty.remove();
+
+        }
+
+
+        const name =
+            currentUser?.displayName ||
+            currentUser?.email?.split("@")[0] ||
+            "You";
+
+
+        let mediaHTML = "";
+
+
+        if(selectedPhoto){
+
+            const url =
+                URL.createObjectURL(selectedPhoto);
+
+            mediaHTML = `
+
+                <img
+                    class="post-media"
+                    src="${url}"
+                    alt="Post photo"
+                >
+
+            `;
+
+        }
+
+
+        if(selectedVideo){
+
+            const url =
+                URL.createObjectURL(selectedVideo);
+
+            mediaHTML = `
+
+                <video
+                    class="post-media"
+                    src="${url}"
+                    controls
+                ></video>
+
+            `;
+
+        }
+
+
+        const post =
+            document.createElement("article");
+
+
+        post.className = "post";
+
+
+        post.innerHTML = `
+
+            <div class="post-header">
+
+                <div class="avatar">
+                    👤
+                </div>
+
+                <div class="post-author">
+
+                    <strong>
+                        ${escapeHTML(name)}
+                    </strong>
+
+                    <small>
+                        Just now
+                    </small>
+
+                </div>
+
+                <button class="post-menu">
+                    ⋯
+                </button>
+
+            </div>
+
+
+            <div class="post-body">
+
+                ${
+                    text
+                    ?
+                    `<div class="post-text">
+                        ${escapeHTML(text)}
+                    </div>`
+                    :
+                    ""
+                }
+
+                ${mediaHTML}
+
+            </div>
+
+
+            <div class="post-stats">
+
+                <span>❤️ 0 likes</span>
+
+                <span>0 comments</span>
+
+            </div>
+
+
+            <div class="post-actions">
+
+                <button onclick="likePost(this)">
+                    ❤️ Like
+                </button>
+
+                <button onclick="commentPost(this)">
+                    💬 Comment
+                </button>
+
+                <button onclick="sharePost()">
+                    🔄 Share
+                </button>
+
+                <button onclick="savePost(this)">
+                    🔖 Save
+                </button>
+
+            </div>
+
+
+            <div class="comments">
+
+                <div class="comment-input">
+
+                    <input
+                        type="text"
+                        placeholder="Write a comment..."
+                    >
+
+                    <button
+                        onclick="addComment(this)"
+                    >
+                        ➤
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        feed.prepend(post);
+
+    }
+
+
+    closeCreatePost();
+
+
+    alert(
+        "Post added to the screen. Firebase saving will be enabled next."
+    );
+
+};
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+/* =========================================================
+   LIKE POST
+========================================================= */
+
+window.likePost = function(button){
+
+    if(!button) return;
+
+
+    button.classList.toggle("liked");
+
+
+    const stats =
+        button.closest(".post")
+              ?.querySelector(".post-stats span");
+
+
+    if(!stats) return;
+
+
+    const liked =
+        button.classList.contains("liked");
+
+
+    stats.textContent =
+        liked
+        ? "❤️ 1 like"
+        : "❤️ 0 likes";
+
+};
+
+
+/* =========================================================
+   COMMENT POST
+========================================================= */
+
+window.commentPost = function(button){
+
+    const post =
+        button.closest(".post");
+
+
+    if(!post) return;
+
+
+    const input =
+        post.querySelector(".comment-input input");
+
+
+    if(input){
+
+        input.focus();
+
+    }
+
+};
+
+
+/* =========================================================
+   ADD COMMENT
+========================================================= */
+
+window.addComment = function(button){
+
+    const container =
+        button.closest(".comments");
+
+
+    const input =
+        container?.querySelector("input");
+
+
+    if(!input) return;
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text) return;
+
+
+    const comment =
+        document.createElement("div");
+
+
+    comment.className = "comment";
+
+
+    const name =
+        currentUser?.displayName ||
+        "You";
+
+
+    comment.innerHTML = `
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <div class="comment-content">
+
+            <strong>
+                ${escapeHTML(name)}
+            </strong>
+
+            <p>
+                ${escapeHTML(text)}
+            </p>
+
+        </div>
+
+    `;
+
+
+    container.insertBefore(
+        comment,
+        container.querySelector(".comment-input")
+    );
+
+
+    input.value = "";
+
+};
+
+
+/* =========================================================
+   SHARE POST
+========================================================= */
+
+window.sharePost = async function(){
+
+    const shareData = {
+
+        title:"Gitalk Social",
+
+        text:"Check out this post on Gitalk Social."
+
+    };
+
+
+    try{
+
+        if(navigator.share){
+
+            await navigator.share(shareData);
+
+        }else{
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            alert("Link copied!");
+
+        }
+
+    }catch(error){
+
+        console.log("Share cancelled.");
+
+    }
+
+};
+
+
+/* =========================================================
+   SAVE POST
+========================================================= */
+
+window.savePost = function(button){
+
+    if(!button) return;
+
+
+    const saved =
+        button.dataset.saved === "true";
+
+
+    button.dataset.saved =
+        saved ? "false" : "true";
+
+
+    button.innerHTML =
+        saved
+        ? "🔖 Save"
+        : "✅ Saved";
+
+};
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+window.startNewChat = function(){
+
+    const name =
+        prompt("Enter the name of the person you want to chat with:");
+
+
+    if(!name) return;
+
+
+    openChatWindow({
+
+        name:name
+
+    });
+
+};
+
+
+function openChatWindow(user){
+
+    currentChatUser = user;
+
+
+    const modal =
+        document.getElementById("chatModal");
+
+
+    if(!modal) return;
+
+
+    modal.classList.remove("hidden");
+
+
+    const name =
+        document.getElementById("chatUserName");
+
+
+    if(name){
+
+        name.textContent =
+            user.name || "User";
+
+    }
+
+
+    const status =
+        document.getElementById("chatStatus");
+
+
+    if(status){
+
+        status.textContent =
+            "Online";
+
+    }
+
+
+    const messages =
+        document.getElementById("messages");
+
+
+    if(messages){
+
+        messages.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="large-icon">
+                    💬
+                </div>
+
+                <h3>
+                    Start your conversation
+                </h3>
+
+                <p>
+                    Send a message below.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+window.closeChat = function(){
+
+    const modal =
+        document.getElementById("chatModal");
+
+
+    if(modal){
+
+        modal.classList.add("hidden");
+
+    }
+
+};
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+window.sendMessage = function(){
+
+    const input =
+        document.getElementById("messageInput");
+
+
+    const messages =
+        document.getElementById("messages");
+
+
+    if(!input || !messages) return;
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text) return;
+
+
+    const empty =
+        messages.querySelector(".empty-state");
+
+
+    if(empty){
+
+        empty.remove();
+
+    }
+
+
+    const message =
+        document.createElement("div");
+
+
+    message.className =
+        "message sent";
+
+
+    message.innerHTML = `
+
+        ${escapeHTML(text)}
+
+        <span class="message-time">
+            Just now
+        </span>
+
+    `;
+
+
+    messages.appendChild(message);
+
+
+    input.value = "";
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+};
+
+
+/* =========================================================
+   ENTER TO SEND
+========================================================= */
+
+window.handleMessageKey = function(event){
+
+    if(event.key === "Enter"){
+
+        event.preventDefault();
+
+        sendMessage();
+
+    }
+
+};
+
+
+/* =========================================================
+   CHAT IMAGE
+========================================================= */
+
+window.selectChatImage = function(){
+
+    const input =
+        document.createElement("input");
+
+
+    input.type = "file";
+
+    input.accept = "image/*";
+
+
+    input.onchange = () => {
+
+        const file =
+            input.files?.[0];
+
+
+        if(file){
+
+            alert(
+                "Image selected. Firebase chat image upload will be enabled next."
+            );
+
+        }
+
+    };
+
+
+    input.click();
+
+};
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+window.openEditProfile = function(){
+
+    const modal =
+        document.getElementById("editProfileModal");
+
+
+    if(!modal) return;
+
+
+    modal.classList.remove("hidden");
+
+
+    const name =
+        document.getElementById("editName");
+
+
+    const bio =
+        document.getElementById("editBio");
+
+
+    const currentName =
+        document.getElementById("profileName");
+
+
+    const currentBio =
+        document.getElementById("profileBio");
+
+
+    if(name){
+
+        name.value =
+            currentName?.textContent || "";
+
+    }
+
+
+    if(bio){
+
+        bio.value =
+            currentBio?.textContent || "";
+
+    }
+
+};
+
+
+window.closeEditProfile = function(){
+
+    const modal =
+        document.getElementById("editProfileModal");
+
+
+    if(modal){
+
+        modal.classList.add("hidden");
+
+    }
+
+};
+
+
+/* =========================================================
+   SAVE PROFILE
+========================================================= */
+
+window.saveProfile = function(){
+
+    const name =
+        document.getElementById("editName")
+        ?.value.trim();
+
+
+    const bio =
+        document.getElementById("editBio")
+        ?.value.trim();
+
+
+    if(!name){
+
+        alert("Please enter your name.");
+
+        return;
+
+    }
+
+
+    const profileName =
+        document.getElementById("profileName");
+
+
+    const profileBio =
+        document.getElementById("profileBio");
+
+
+    if(profileName){
+
+        profileName.textContent =
+            name;
+
+    }
+
+
+    if(profileBio){
+
+        profileBio.textContent =
+            bio || "Welcome to my Gitalk profile.";
+
+    }
+
+
+    const author =
+        document.getElementById("postAuthorName");
+
+
+    if(author){
+
+        author.textContent =
+            name;
+
+    }
+
+
+    closeEditProfile();
+
+
+    alert(
+        "Profile updated on this device. Firebase profile saving will be added next."
+    );
+
+};
+
+
+/* =========================================================
+   PROFILE PHOTO
+========================================================= */
+
+window.editProfilePhoto = function(){
+
+    const input =
+        document.createElement("input");
+
+
+    input.type = "file";
+
+    input.accept = "image/*";
+
+
+    input.onchange = () => {
+
+        const file =
+            input.files?.[0];
+
+
+        if(!file) return;
+
+
+        const url =
+            URL.createObjectURL(file);
+
+
+        const avatar =
+            document.getElementById("profileAvatar");
+
+
+        if(avatar){
+
+            avatar.innerHTML =
+                `<img src="${url}" alt="Profile">`;
+
+        }
+
+
+        const smallAvatar =
+            document.getElementById("currentUserAvatar");
+
+
+        if(smallAvatar){
+
+            smallAvatar.innerHTML =
+                `<img src="${url}" alt="Profile">`;
+
+        }
+
+    };
+
+
+    input.click();
+
+};
+
+
+window.editCoverPhoto = function(){
+
+    alert(
+        "Cover photo upload will be connected to Firebase Storage next."
+    );
+
+};
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+window.toggleDarkMode = function(){
+
+    darkMode =
+        !darkMode;
+
+
+    document.body.classList.toggle(
+        "dark-mode",
+        darkMode
+    );
+
+
+    const status =
+        document.getElementById("darkModeStatus");
+
+
+    if(status){
+
+        status.textContent =
+            darkMode ? "On" : "Off";
+
+    }
+
+
+    localStorage.setItem(
+        "gitalkDarkMode",
+        darkMode ? "on" : "off"
+    );
+
+};
+
+
+/* =========================================================
+   LOAD DARK MODE
+========================================================= */
+
+if(localStorage.getItem("gitalkDarkMode") === "on"){
+
+    darkMode = true;
+
+    document.body.classList.add("dark-mode");
+
+
+    const status =
+        document.getElementById("darkModeStatus");
+
+
+    if(status){
+
+        status.textContent = "On";
+
+    }
+
+}
+
+
+/* =========================================================
+   SETTINGS PLACEHOLDERS
+========================================================= */
+
+window.openPasswordSettings = function(){
+
+    alert(
+        "Password & Security will be connected to Firebase Authentication."
+    );
+
+};
+
+
+window.openPrivacySettings = function(){
+
+    alert(
+        "Privacy settings are coming in the next module."
+    );
+
+};
+
+
+window.openBlockedUsers = function(){
+
+    alert(
+        "Blocked users management is coming in the next module."
+    );
+
+};
+
+
+window.openNotificationSettings = function(){
+
+    alert(
+        "Notification settings will be connected to Firebase."
+    );
+
+};
+
+
+window.openHelp = function(){
+
+    alert(
+        "Gitalk Social Help Center"
+    );
+
+};
+
+
+window.openAbout = function(){
+
+    alert(
+        "Gitalk Social\nVersion 1.0"
+    );
+
+};
+
+
+window.showSavedPosts = function(){
+
+    alert(
+        "Saved posts will appear here after Firebase integration."
+    );
+
+};
+
+
+window.showMediaPosts = function(){
+
+    alert(
+        "Your photos and videos will appear here."
+    );
+
+};
+
+
+window.markNotificationsRead = function(){
+
+    alert(
+        "Notifications marked as read."
+    );
+
+};
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+window.logoutUser = async function(){
+
+    if(!auth){
+
+        alert("Firebase Authentication is not initialized.");
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm("Are you sure you want to logout?");
+
+
+    if(!confirmed) return;
+
+
+    try{
+
+        await signOut(auth);
+
+        alert("Logged out successfully.");
+
+        window.location.reload();
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Logout failed: " + error.message
         );
 
-      const user = result.user;
-
-      await updateProfile(user, {
-        displayName: name
-      });
-
-      await setDoc(
-        doc(db, "users", user.uid),
-        {
-          uid: user.uid,
-          name: name,
-          email: email,
-          bio: "",
-          photoURL: "",
-          coverURL: "",
-          followers: [],
-          following: [],
-          createdAt: serverTimestamp()
-        },
-        {
-          merge: true
-        }
-      );
-
-      showMessage("Account successfully created ❤️");
-
-      $("registerName").value = "";
-      $("registerEmail").value = "";
-      $("registerPassword").value = "";
-
-    } catch (error) {
-
-      showMessage(error.message);
-
     }
 
-  };
-
-}
+};
 
 
-// ======================================================
-// SWITCH LOGIN / REGISTER
-// ======================================================
+/* =========================================================
+   INITIAL PAGE
+========================================================= */
 
-if ($("showRegister")) {
+document.addEventListener("DOMContentLoaded", () => {
 
-  $("showRegister").onclick = () => {
+    showPage("home");
 
-    loginBox.style.display = "none";
-    registerBox.style.display = "block";
-
-  };
-
-}
-
-
-if ($("showLogin")) {
-
-  $("showLogin").onclick = () => {
-
-    registerBox.style.display = "none";
-    loginBox.style.display = "block";
-
-  };
-
-}
-
-
-// ======================================================
-// AUTH STATE
-// ======================================================
-
-onAuthStateChanged(auth, async user => {
-
-  if (user) {
-
-    authPage.style.display = "none";
-    socialPage.style.display = "block";
-
-    await loadUser();
-    await loadFeed();
-
-  } else {
-
-    authPage.style.display = "block";
-    socialPage.style.display = "none";
-
-  }
+    console.log(
+        "Gitalk Social UI loaded successfully."
+    );
 
 });
 
 
-// ======================================================
-// LOAD USER
-// ======================================================
+/* =========================================================
+   PREVENT MODAL BACKGROUND SCROLL
+========================================================= */
 
-async function loadUser() {
+const observer =
+    new MutationObserver(() => {
 
-  const user = auth.currentUser;
+        const modalOpen =
+            document.querySelector(
+                ".modal:not(.hidden)"
+            );
 
-  if (!user) return;
 
-  const userRef = doc(
-    db,
-    "users",
-    user.uid
-  );
-
-  const snap = await getDoc(userRef);
-
-  let data = {};
-
-  if (snap.exists()) {
-
-    data = snap.data();
-
-  }
-
-  const name =
-    data.name ||
-    user.displayName ||
-    "Gitalk User";
-
-  const photo =
-    data.photoURL ||
-    user.photoURL ||
-    "";
-
-  if ($("userName")) {
-    $("userName").textContent = name;
-  }
-
-  if ($("profileName")) {
-    $("profileName").value = name;
-  }
-
-  if ($("profileEmail")) {
-    $("profileEmail").value =
-      data.email || user.email || "";
-  }
-
-  if ($("profileBio")) {
-    $("profileBio").value =
-      data.bio || "";
-  }
-
-  setAvatar(
-    $("userAvatar"),
-    photo,
-    name
-  );
-
-  setAvatar(
-    $("profileAvatar"),
-    photo,
-    name
-  );
-
-  if ($("profileFollowers")) {
-    $("profileFollowers").textContent =
-      (data.followers || []).length;
-  }
-
-  if ($("profileFollowing")) {
-    $("profileFollowing").textContent =
-      (data.following || []).length;
-  }
-
-}
-
-
-// ======================================================
-// AVATAR
-// ======================================================
-
-function setAvatar(element, photoURL, name) {
-
-  if (!element) return;
-
-  if (photoURL) {
-
-    element.innerHTML = `
-      <img
-        src="${escapeHTML(photoURL)}"
-        style="
-          width:100%;
-          height:100%;
-          object-fit:cover;
-          border-radius:50%;
-        "
-      >
-    `;
-
-  } else {
-
-    element.textContent =
-      name
-        ? name.charAt(0).toUpperCase()
-        : "G";
-
-  }
-
-}
-
-
-// ======================================================
-// CREATE POST
-// ======================================================
-
-if ($("postBtn")) {
-
-  $("postBtn").onclick = createPost;
-
-}
-
-
-async function createPost() {
-
-  const user = auth.currentUser;
-
-  if (!user) return;
-
-  const text =
-    $("postText")?.value.trim() || "";
-
-  const photoInput =
-    $("postImage");
-
-  const file =
-    photoInput?.files?.[0];
-
-  if (!text && !file) {
-
-    showMessage(
-      "Post में text या photo डालें."
-    );
-
-    return;
-
-  }
-
-  try {
-
-    let imageURL = "";
-
-    if (file) {
-
-      if (!file.type.startsWith("image/")) {
-
-        showMessage(
-          "केवल image upload करें."
-        );
-
-        return;
-
-      }
-
-      if (file.size > 10 * 1024 * 1024) {
-
-        showMessage(
-          "Image maximum 10MB हो सकती है."
-        );
-
-        return;
-
-      }
-
-      const fileName =
-        Date.now() + "_" +
-        file.name.replace(/\s+/g, "_");
-
-      const imageRef =
-        ref(
-          storage,
-          `posts/${user.uid}/${fileName}`
-        );
-
-      await uploadBytes(
-        imageRef,
-        file
-      );
-
-      imageURL =
-        await getDownloadURL(imageRef);
-
-    }
-
-    const userSnap =
-      await getDoc(
-        doc(db, "users", user.uid)
-      );
-
-    const userData =
-      userSnap.exists()
-        ? userSnap.data()
-        : {};
-
-    await addDoc(
-      collection(db, "posts"),
-      {
-        uid: user.uid,
-        name:
-          userData.name ||
-          user.displayName ||
-          "Gitalk User",
-
-        photoURL:
-          userData.photoURL ||
-          user.photoURL ||
-          "",
-
-        text: text,
-        imageURL: imageURL,
-
-        likes: [],
-        comments: [],
-
-        createdAt:
-          serverTimestamp()
-      }
-    );
-
-    if ($("postText")) {
-      $("postText").value = "";
-    }
-
-    if ($("postImage")) {
-      $("postImage").value = "";
-    }
-
-    await loadFeed();
-
-    showMessage(
-      "Post published ❤️"
-    );
-
-  } catch (error) {
-
-    console.error(error);
-    showMessage(error.message);
-
-  }
-
-}
-
-
-// ======================================================
-// LOAD FEED
-// ======================================================
-
-async function loadFeed() {
-
-  const feed =
-    $("feed");
-
-  if (!feed) return;
-
-  feed.innerHTML =
-    "<p>Loading posts...</p>";
-
-  try {
-
-    const postsQuery =
-      query(
-        collection(db, "posts"),
-        orderBy(
-          "createdAt",
-          "desc"
-        )
-      );
-
-    const snapshot =
-      await getDocs(postsQuery);
-
-    feed.innerHTML = "";
-
-    if (snapshot.empty) {
-
-      feed.innerHTML = `
-        <div class="post">
-          <p>अभी कोई post नहीं है ❤️</p>
-        </div>
-      `;
-
-      return;
-
-    }
-
-    snapshot.forEach(postDoc => {
-
-      renderPost(
-        feed,
-        postDoc.id,
-        postDoc.data()
-      );
+        document.body.style.overflow =
+            modalOpen ? "hidden" : "";
 
     });
 
-  } catch (error) {
 
-    console.error(error);
-
-    feed.innerHTML = `
-      <div class="post">
-        <p>Posts load नहीं हो सके.</p>
-      </div>
-    `;
-
-  }
-
-}
-
-
-// ======================================================
-// RENDER POST
-// ======================================================
-
-function renderPost(
-  container,
-  postId,
-  post
-) {
-
-  const user =
-    auth.currentUser;
-
-  const likes =
-    post.likes || [];
-
-  const comments =
-    post.comments || [];
-
-  const liked =
-    user &&
-    likes.includes(user.uid);
-
-  const ownPost =
-    user &&
-    user.uid === post.uid;
-
-  const avatar =
-    post.photoURL
-      ? `
-        <img
-          src="${escapeHTML(post.photoURL)}"
-          style="
-            width:45px;
-            height:45px;
-            border-radius:50%;
-            object-fit:cover;
-          "
-        >
-      `
-      : `
-        <div class="avatar">
-          ${escapeHTML(
-            (post.name || "G")
-              .charAt(0)
-              .toUpperCase()
-          )}
-        </div>
-      `;
-
-  const div =
-    document.createElement("div");
-
-  div.className = "post";
-
-  div.innerHTML = `
-
-    <div class="post-header">
-
-      ${avatar}
-
-      <div>
-        <strong>
-          ${escapeHTML(
-            post.name || "Gitalk User"
-          )}
-        </strong>
-
-        <small>
-          Gitalk Social
-        </small>
-      </div>
-
-      ${
-        ownPost
-          ? `
-            <div style="margin-left:auto">
-              <button
-                onclick="editPost('${postId}')"
-              >
-                ✏️
-              </button>
-
-              <button
-                onclick="deletePost('${postId}')"
-              >
-                🗑️
-              </button>
-            </div>
-          `
-          : ""
-      }
-
-    </div>
-
-    ${
-      post.text
-        ? `
-          <p class="post-text">
-            ${escapeHTML(post.text)}
-          </p>
-        `
-        : ""
+observer.observe(
+    document.body,
+    {
+        subtree:true,
+        attributes:true,
+        attributeFilter:["class"]
     }
+);
 
-    ${
-      post.imageURL
-        ? `
-          <img
-            class="post-image"
-            src="${escapeHTML(post.imageURL)}"
-            alt="Post image"
-          >
-        `
-        : ""
-    }
 
-    <div class="post-actions">
+/* =========================================================
+   END
+========================================================= */
 
-      <button
-        onclick="toggleLike('${postId}')"
-      >
-        ${liked ? "❤️" : "🤍"}
-        ${likes.length}
-      </button>
-
-      <button
-        onclick="showComments('${postId}')"
-      >
-        💬 ${comments.length}
-      </button>
-
-      <button
-        onclick="sharePost('${postId}')"
-      >
-        🔗 Share
-      </button>
-
-    </div>
-
-    <div
-      id="comments-${postId}"
-      class="comments"
-    ></div>
-
-  `;
-
-  container.appendChild(div);
-
-}
-
-
-// ======================================================
-// LIKE
-// ======================================================
-
-window.toggleLike =
-  async function(postId) {
-
-    const user =
-      auth.currentUser;
-
-    if (!user) return;
-
-    const postRef =
-      doc(db, "posts", postId);
-
-    const snap =
-      await getDoc(postRef);
-
-    if (!snap.exists()) return;
-
-    const post =
-      snap.data();
-
-    const likes =
-      post.likes || [];
-
-    if (likes.includes(user.uid)) {
-
-      await updateDoc(
-        postRef,
-        {
-          likes:
-            arrayRemove(user.uid)
-        }
-      );
-
-    } else {
-
-      await updateDoc(
-        postRef,
-        {
-          likes:
-            arrayUnion(user.uid)
-        }
-      );
-
-    }
-
-    await loadFeed();
-
-  };
-
-
-// ======================================================
-// COMMENTS
-// ======================================================
-
-window.showComments =
-  async function(postId) {
-
-    const box =
-      $(`comments-${postId}`);
-
-    if (!box) return;
-
-    const comment =
-      prompt(
-        "अपना comment लिखें:"
-      );
-
-    if (!comment || !comment.trim()) {
-      return;
-    }
-
-    const user =
-      auth.currentUser;
-
-    if (!user) return;
-
-    const userSnap =
-      await getDoc(
-        doc(db, "users", user.uid)
-      );
-
-    const userData =
-      userSnap.exists()
-        ? userSnap.data()
-        : {};
-
-    const commentObject = {
-
-      uid: user.uid,
-
-      name:
-        userData.name ||
-        user.displayName ||
-        "Gitalk User",
-
-      text:
-        comment.trim(),
-
-      time:
-        new Date().toISOString()
-
-    };
-
-    await updateDoc(
-      doc(db, "posts", postId),
-      {
-        comments:
-          arrayUnion(commentObject)
-      }
-    );
-
-    await loadFeed();
-
-  };
-
-
-// ======================================================
-// SHARE
-// ======================================================
-
-window.sharePost =
-  async function(postId) {
-
-    const shareURL =
-      window.location.origin +
-      window.location.pathname +
-      "?post=" +
-      postId;
-
-    if (
-      navigator.share
-    ) {
-
-      try {
-
-        await navigator.share({
-          title: "Gitalk Social",
-          text: "Check this post on Gitalk Social",
-          url: shareURL
-        });
-
-      } catch (error) {}
-
-    } else {
-
-      try {
-
-        await navigator.clipboard.writeText(
-          shareURL
-        );
-
-        showMessage(
-          "Post link copied ❤️"
-        );
-
-      } catch (error) {
-
-        prompt(
-          "Copy this link:",
-          shareURL
-        );
-
-      }
-
-    }
-
-  };
-
-
-// ======================================================
-// DELETE POST
-// ======================================================
-
-window.deletePost =
-  async function(postId) {
-
-    const user =
-      auth.currentUser;
-
-    if (!user) return;
-
-    const postRef =
-      doc(db, "posts", postId);
-
-    const snap =
-      await getDoc(postRef);
-
-    if (!snap.exists()) return;
-
-    const post =
-      snap.data();
-
-    if (post.uid !== user.uid) {
-
-      showMessage(
-        "आप केवल अपना post delete कर सकते हैं."
-      );
-
-      return;
-
-    }
-
-    const confirmDelete =
-      confirm(
-        "क्या आप यह post delete करना चाहते हैं?"
-      );
-
-    if (!confirmDelete) return;
-
-    try {
-
-      if (post.imageURL) {
-
-        try {
-
-          const imageRef =
-            ref(
-              storage,
-              post.imageURL
-            );
-
-          await deleteObject(
-            imageRef
-          );
-
-        } catch (error) {
-
-          console.log(
-            "Image delete skipped"
-          );
-
-        }
-
-      }
-
-      await deleteDoc(postRef);
-
-      await loadFeed();
-
-      showMessage(
-        "Post deleted."
-      );
-
-    } catch (error) {
-
-      showMessage(
-        error.message
-      );
-
-    }
-
-  };
-
-
-// ======================================================
-// EDIT POST
-// ======================================================
-
-window.editPost =
-  async function(postId) {
-
-    const user =
-      auth.currentUser;
-
-    if (!user) return;
-
-    const postRef =
-      doc(db, "posts", postId);
-
-    const snap =
-      await getDoc(postRef);
-
-    if (!snap.exists()) return;
-
-    const post =
-      snap.data();
-
-    if (post.uid !== user.uid) {
-
-      showMessage(
-        "आप केवल अपना post edit कर सकते हैं."
-      );
-
-      return;
-
-    }
-
-    const newText =
-      prompt(
-        "Post edit करें:",
-        post.text || ""
-      );
-
-    if (
-      newText === null
-    ) {
-      return;
-    }
-
-    await updateDoc(
-      postRef,
-      {
-        text: newText.trim()
-      }
-    );
-
-    await loadFeed();
-
-  };
-
-
-// ======================================================
-// PROFILE OPEN
-// ======================================================
-
-if ($("profileBtn")) {
-
-  $("profileBtn").onclick =
-    async () => {
-
-      const modal =
-        $("profileModal");
-
-      if (modal) {
-
-        modal.style.display =
-          "flex";
-
-        await loadUser();
-        await loadMyPosts();
-
-      }
-
-    };
-
-}
-
-
-// ======================================================
-// PROFILE PHOTO PREVIEW
-// ======================================================
-
-if ($("profilePhoto")) {
-
-  $("profilePhoto").onchange =
-    event => {
-
-      const file =
-        event.target.files[0];
-
-      if (!file) return;
-
-      if (!file.type.startsWith("image/")) {
-
-        showMessage(
-          "केवल image select करें."
-        );
-
-        return;
-
-      }
-
-      const url =
-        URL.createObjectURL(file);
-
-      if ($("profileAvatar")) {
-
-        $("profileAvatar").innerHTML = `
-          <img
-            src="${url}"
-            style="
-              width:100%;
-              height:100%;
-              border-radius:50%;
-              object-fit:cover;
-            "
-          >
-        `;
-
-      }
-
-    };
-
-}
-
-
-// ======================================================
-// SAVE PROFILE
-// ======================================================
-
-if ($("saveProfileBtn")) {
-
-  $("saveProfileBtn").onclick =
-    saveProfile;
-
-}
-
-
-async function saveProfile() {
-
-  const user =
-    auth.currentUser;
-
-  if (!user) return;
-
-  const name =
-    $("profileName")?.value.trim()
-    || "Gitalk User";
-
-  const bio =
-    $("profileBio")?.value.trim()
-    || "";
-
-  const photoFile =
-    $("profilePhoto")?.files?.[0];
-
-  try {
-
-    let photoURL = "";
-
-    const oldSnap =
-      await getDoc(
-        doc(db, "users", user.uid)
-      );
-
-    const oldData =
-      oldSnap.exists()
-        ? oldSnap.data()
-        : {};
-
-    photoURL =
-      oldData.photoURL ||
-      user.photoURL ||
-      "";
-
-    if (photoFile) {
-
-      if (photoFile.size > 10 * 1024 * 1024) {
-
-        showMessage(
-          "Profile photo maximum 10MB हो सकती है."
-        );
-
-        return;
-
-      }
-
-      const fileName =
-        Date.now() +
-        "_" +
-        photoFile.name.replace(
-          /\s+/g,
-          "_"
-        );
-
-      const photoRef =
-        ref(
-          storage,
-          `profiles/${user.uid}/${fileName}`
-        );
-
-      await uploadBytes(
-        photoRef,
-        photoFile
-      );
-
-      photoURL =
-        await getDownloadURL(
-          photoRef
-        );
-
-    }
-
-    await updateProfile(
-      user,
-      {
-        displayName: name,
-        photoURL: photoURL
-      }
-    );
-
-    await setDoc(
-      doc(db, "users", user.uid),
-      {
-        uid: user.uid,
-        name: name,
-  email: user.email,
-        bio: bio,
-        photoURL: photoURL,
-        updatedAt: serverTimestamp()
-      },
-      {
-        merge: true
-      }
-    );
-
-    await loadUser();
-    await loadFeed();
-
-    showMessage(
-      "Profile updated successfully ❤️"
-    );
-
-  } catch (error) {
-
-    console.error(error);
-
-    showMessage(
-      error.message
-    );
-
-  }
-
-}
-
-
-// ======================================================
-// MY POSTS
-// ======================================================
-		  async function loadMyPosts() {
-
-  const user =
-    auth.currentUser;
-
-  const box =
-    $("myPosts");
-
-  if (!user || !box) return;
-
-  box.innerHTML =
-    "<p>Loading your posts...</p>";
-
-  try {
-
-    const snapshot =
-      await getDocs(
-        collection(db, "posts")
-      );
-
-    box.innerHTML = "";
-
-    let count = 0;
-
-    snapshot.forEach(
-      postDoc => {
-
-        const post =
-          postDoc.data();
-
-        if (
-          post.uid === user.uid
-        ) {
-
-          count++;
-
-          const div =
-            document.createElement(
-              "div"
-            );
-
-          div.className =
-            "post";
-
-          div.innerHTML = `
-
-            ${
-              post.text
-                ? `
-                  <p>
-                    ${escapeHTML(
-                      post.text
-                    )}
-                  </p>
-                `
-                : ""
-            }
-
-            ${
-              post.imageURL
-                ? `
-                  <img
-                    src="${escapeHTML(
-                      post.imageURL
-                    )}"
-                    style="
-                      width:100%;
-                      border-radius:12px;
-                      margin-top:10px;
-                    "
-                  >
-                `
-                : ""
-            }
-
-            <div
-              style="
-                margin-top:10px;
-                display:flex;
-                gap:8px;
-              "
-            >
-
-              <button
-                onclick="editPost('${postDoc.id}')"
-              >
-                ✏️ Edit
-              </button>
-
-              <button
-                onclick="deletePost('${postDoc.id}')"
-              >
-                🗑️ Delete
-              </button>
-
-            </div>
-
-          `;
-
-          box.appendChild(div);
-
-        }
-
-      }
-    );
-
-    if (count === 0) {
-
-      box.innerHTML =
-        "<p>आपने अभी कोई post नहीं बनाया.</p>";
-
-    }
-
-  } catch (error) {
-
-    console.error(error);
-
-    box.innerHTML =
-      "<p>My Posts load नहीं हुए.</p>";
-
-  }
-
-}
-
-
-// ======================================================
-// CLOSE PROFILE
-// ======================================================
-
-if ($("closeProfile")) {
-
-  $("closeProfile").onclick =
-    () => {
-
-      const modal =
-        $("profileModal");
-
-      if (modal) {
-
-        modal.style.display =
-          "none";
-
-      }
-
-    };
-
-}
-
-
-// ======================================================
-// LOGOUT
-// ======================================================
-
-if ($("logoutBtn")) {
-
-  $("logoutBtn").onclick =
-    async () => {
-
-      try {
-
-        await signOut(auth);
-
-      } catch (error) {
-
-        showMessage(
-          error.message
-        );
-
-      }
-
-    };
-
-	}
+console.log(
+    "Gitalk Social Step 3 loaded."
+);
