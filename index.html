@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Gitalk Social</title>
 
@@ -11,859 +11,384 @@
 <style>
 *{
   box-sizing:border-box;
-  margin:0;
-  padding:0;
 }
 
 body{
+  margin:0;
   font-family:Arial,sans-serif;
-  background:#f0f2f5;
-  color:#1c1e21;
+  background:linear-gradient(135deg,#087cf5,#08b8b0,#00c853);
+  min-height:100vh;
+  color:#222;
+}
+
+.wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.card{
+  width:100%;
+  max-width:620px;
+  background:#fff;
+  border-radius:28px;
+  padding:35px;
+  box-shadow:0 15px 45px #0004;
+}
+
+.logo{
+  text-align:center;
+  font-size:52px;
+  font-weight:700;
+  color:#087bea;
+  margin:5px 0;
+}
+
+.tag{
+  text-align:center;
+  color:#666;
+  font-size:21px;
+  margin-bottom:30px;
+}
+
+h2{
+  text-align:center;
+  font-size:30px;
+  margin:10px 0 25px;
+}
+
+input{
+  width:100%;
+  padding:17px 18px;
+  border:1px solid #ccc;
+  border-radius:14px;
+  font-size:17px;
+  margin:7px 0;
+  outline:none;
+}
+
+input:focus{
+  border-color:#087bea;
+  box-shadow:0 0 0 3px #087bea22;
 }
 
 button{
-  cursor:pointer;
+  width:100%;
   border:0;
+  border-radius:14px;
+  padding:16px;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:10px;
+  background:#087cf5;
+  color:#fff;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .hidden{
   display:none!important;
 }
 
-/* =========================
-   AUTH
-========================= */
-
-#authPage{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:linear-gradient(135deg,#1877f2,#42b72a);
-}
-
-.authBox{
-  width:100%;
-  max-width:420px;
-  background:white;
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 10px 40px rgba(0,0,0,.2);
-}
-
-.logo{
+.msg{
   text-align:center;
-  color:#1877f2;
-  font-size:38px;
-  font-weight:bold;
-  margin-bottom:8px;
+  margin:15px 0;
+  padding:12px;
+  border-radius:10px;
+  display:none;
+  line-height:1.5;
 }
 
-.subtitle{
-  text-align:center;
-  color:#65676b;
-  margin-bottom:25px;
+.ok{
+  background:#e8fff0;
+  color:#087a35;
 }
 
-.authBox input{
-  width:100%;
-  padding:14px;
-  margin:7px 0;
-  border:1px solid #ccd0d5;
-  border-radius:8px;
-  font-size:16px;
+.err{
+  background:#ffe9e9;
+  color:#b00020;
 }
 
-.primaryBtn{
-  width:100%;
-  background:#1877f2;
-  color:white;
-  padding:14px;
-  border-radius:8px;
-  font-size:17px;
-  font-weight:bold;
-  margin-top:10px;
-}
-
-.greenBtn{
-  background:#42b72a;
-}
-
-.authSwitch{
-  text-align:center;
-  margin-top:18px;
-  color:#1877f2;
+.link{
+  color:#087bea;
+  font-weight:700;
   cursor:pointer;
-}
-
-#authMessage{
-  margin-top:12px;
   text-align:center;
-  color:#e41e3f;
+  margin-top:20px;
+  font-size:18px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-#appPage{
-  min-height:100vh;
+.small{
+  text-align:center;
+  color:#666;
+  margin-top:16px;
 }
 
-.header{
-  height:60px;
-  background:#1877f2;
-  color:white;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
-
-.headerLogo{
-  font-size:25px;
-  font-weight:bold;
-  margin-right:20px;
-}
-
-.search{
-  max-width:400px;
-  width:100%;
-}
-
-.search input{
-  width:100%;
-  border:0;
-  outline:0;
-  padding:10px 15px;
-  border-radius:20px;
-  font-size:15px;
-}
-
-.headerRight{
-  margin-left:auto;
-  display:flex;
-  gap:8px;
-}
-
-.headerBtn{
-  background:rgba(255,255,255,.15);
-  color:white;
-  padding:9px 12px;
-  border-radius:20px;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
-
-.page{
+.home{
   display:none;
 }
 
-.page.active{
-  display:block;
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #ddd;
+  padding-bottom:15px;
+  margin-bottom:20px;
 }
 
-/* =========================
-   CARD
-========================= */
-
-.card{
-  background:white;
-  border-radius:12px;
-  padding:18px;
-  margin-bottom:15px;
-  box-shadow:0 1px 3px rgba(0,0,0,.12);
+.logo2{
+  font-size:30px;
+  font-weight:bold;
+  color:#087bea;
 }
 
-.card h2{
-  margin-bottom:15px;
+.logout{
+  width:auto;
+  padding:10px 18px;
+  margin:0;
+  background:#222;
 }
 
-/* =========================
-   PROFILE
-========================= */
-
-.profileHeader{
+.profilebox{
   text-align:center;
   padding:25px;
+  background:#f4f7fb;
+  border-radius:18px;
 }
 
 .avatar{
-  width:90px;
-  height:90px;
+  width:85px;
+  height:85px;
   border-radius:50%;
-  object-fit:cover;
-  background:#ddd;
-  display:block;
-  margin:0 auto 12px;
-}
-
-.profileName{
-  font-size:24px;
-  font-weight:bold;
-}
-
-.profileUsername{
-  color:#65676b;
-  margin-top:5px;
-}
-
-.profileBio{
-  margin-top:10px;
-  color:#444;
-}
-
-.profileActions{
-  margin-top:15px;
-}
-
-/* =========================
-   FRIENDS
-========================= */
-
-.userItem{
+  background:#087bea;
+  color:#fff;
   display:flex;
   align-items:center;
-  padding:12px;
-  border-bottom:1px solid #eee;
-  gap:12px;
-}
-
-.userItem:last-child{
-  border-bottom:0;
-}
-
-.userInfo{
-  flex:1;
-}
-
-.userName{
-  font-weight:bold;
-}
-
-.userHandle{
-  color:#65676b;
-  font-size:13px;
-}
-
-.smallAvatar{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  object-fit:cover;
-  background:#ddd;
-}
-
-.actionBtn{
-  padding:9px 14px;
-  border-radius:7px;
-  background:#1877f2;
-  color:white;
-  font-weight:bold;
-}
-
-.acceptBtn{
-  background:#42b72a;
-}
-
-.rejectBtn{
-  background:#e4e6eb;
-  color:#222;
-}
-
-/* =========================
-   CHAT
-========================= */
-
-.chatLayout{
-  display:grid;
-  grid-template-columns:300px 1fr;
-  gap:15px;
-}
-
-.friendList{
-  min-height:500px;
-}
-
-.chatBox{
-  min-height:500px;
-  display:flex;
-  flex-direction:column;
-}
-
-.chatTitle{
-  padding-bottom:15px;
-  border-bottom:1px solid #ddd;
-  font-weight:bold;
-}
-
-.messages{
-  flex:1;
-  overflow-y:auto;
-  padding:15px 5px;
-  min-height:350px;
-}
-
-.message{
-  max-width:75%;
-  padding:10px 13px;
-  border-radius:16px;
-  margin:7px 0;
-  word-wrap:break-word;
-}
-
-.message.me{
-  margin-left:auto;
-  background:#1877f2;
-  color:white;
-  border-bottom-right-radius:4px;
-}
-
-.message.other{
-  background:#e4e6eb;
-  color:#111;
-  border-bottom-left-radius:4px;
-}
-
-.messageTime{
-  font-size:10px;
-  opacity:.7;
-  margin-top:4px;
-}
-
-.chatInput{
-  display:flex;
-  gap:8px;
-  border-top:1px solid #ddd;
-  padding-top:12px;
-}
-
-.chatInput input{
-  flex:1;
-  padding:12px;
-  border:1px solid #ccd0d5;
-  border-radius:20px;
-  outline:0;
-}
-
-.sendBtn{
-  background:#1877f2;
-  color:white;
-  padding:0 20px;
-  border-radius:20px;
-}
-
-/* =========================
-   NAV
-========================= */
-
-.bottomNav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  background:white;
-  border-top:1px solid #ddd;
-  display:flex;
   justify-content:center;
-  gap:5px;
-  padding:7px;
-  z-index:100;
+  margin:auto;
+  font-size:35px;
+  font-weight:bold;
 }
 
-.navBtn{
-  background:white;
-  padding:10px 16px;
-  border-radius:8px;
-  font-size:14px;
+#userEmail{
+  color:#666;
+  margin-top:10px;
 }
 
-.navBtn:hover{
-  background:#e4e6eb;
-}
+@media(max-width:500px){
 
-/* =========================
-   NOTIFICATION
-========================= */
-
-.notification{
-  padding:13px;
-  border-bottom:1px solid #eee;
-}
-
-.notification.unread{
-  background:#eef5ff;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:700px){
-
-  .header{
-    flex-wrap:wrap;
-    height:auto;
-    padding:8px;
+  .wrap{
+    padding:15px;
   }
 
-  .headerLogo{
-    font-size:22px;
+  .card{
+    padding:25px 18px;
+    border-radius:22px;
   }
 
-  .search{
-    order:3;
-    max-width:none;
-    margin-top:7px;
+  .logo{
+    font-size:45px;
   }
 
-  .headerRight{
-    gap:3px;
+  .tag{
+    font-size:18px;
   }
 
-  .container{
-    padding:10px;
-    padding-bottom:75px;
-  }
-
-  .chatLayout{
-    grid-template-columns:1fr;
-  }
-
-  .friendList{
-    min-height:auto;
-  }
-
-  .chatBox{
-    min-height:500px;
-  }
-
-  .bottomNav{
-    overflow-x:auto;
-    justify-content:flex-start;
-  }
-
-  .navBtn{
-    min-width:70px;
-    padding:9px 7px;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     LOGIN / REGISTER
-========================= -->
+<div class="wrap">
 
-<section id="authPage">
+<div class="card">
 
-  <div class="authBox">
+<!-- ================= LOGIN ================= -->
 
-    <div class="logo">Gitalk</div>
+<section id="loginBox">
 
-    <div class="subtitle">
-      Connect • Chat • Share
-    </div>
+  <div class="logo">
+    Gitalk
+  </div>
 
-    <!-- LOGIN -->
+  <div class="tag">
+    Connect • Chat • Share
+  </div>
 
-    <div id="loginBox">
+  <h2>
+    Login
+  </h2>
 
-      <h2 style="text-align:center;margin-bottom:15px;">
-        Login
-      </h2>
+  <div id="loginMsg" class="msg"></div>
 
-      <input
-        type="email"
-        id="loginEmail"
-        placeholder="Email"
-      >
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Email"
+    autocomplete="email"
+  >
 
-      <input
-        type="password"
-        id="loginPassword"
-        placeholder="Password"
-      >
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Password"
+    autocomplete="current-password"
+  >
 
-      <button
-        class="primaryBtn"
-        onclick="loginUser()"
-      >
-        Login
-      </button>
+  <button
+    id="loginBtn"
+    type="button"
+  >
+    Login
+  </button>
 
-      <div
-        class="authSwitch"
-        onclick="showRegister()"
-      >
-        Create New Account
-      </div>
-
-    </div>
-
-    <!-- REGISTER -->
-
-    <div id="registerBox" class="hidden">
-
-      <h2 style="text-align:center;margin-bottom:15px;">
-        Create Account
-      </h2>
-
-      <input
-        type="text"
-        id="registerName"
-        placeholder="Full Name"
-      >
-
-      <input
-        type="text"
-        id="registerUsername"
-        placeholder="Username"
-      >
-
-      <input
-        type="email"
-        id="registerEmail"
-        placeholder="Email"
-      >
-
-      <input
-        type="password"
-        id="registerPassword"
-        placeholder="Password"
-      >
-
-      <button
-        class="primaryBtn greenBtn"
-        onclick="registerUser()"
-      >
-        Register
-      </button>
-
-      <div
-        class="authSwitch"
-        onclick="showLogin()"
-      >
-        Already have an account? Login
-      </div>
-
-    </div>
-
-    <div id="authMessage"></div>
-
+  <div
+    id="openRegister"
+    class="link"
+  >
+    Create New Account
   </div>
 
 </section>
 
 
-<!-- =========================
-     MAIN APP
-========================= -->
-
-<section id="appPage" class="hidden">
-
-  <header class="header">
-
-    <div class="headerLogo">
-      Gitalk
-    </div>
-
-    <div class="search">
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Search friends..."
-        oninput="searchUsers()"
-      >
-    </div>
-
-    <div class="headerRight">
-
-      <button
-        class="headerBtn"
-        onclick="openPage('profilePage')"
-      >
-        👤
-      </button>
-
-      <button
-        class="headerBtn"
-        onclick="logoutUser()"
-      >
-        Logout
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <main class="container">
-
-    <!-- ================= HOME ================= -->
-
-    <div
-      id="homePage"
-      class="page active"
-    >
-
-      <div class="card">
-
-        <h2>
-          👋 Welcome to Gitalk Social
-        </h2>
-
-        <p>
-          Find your friends and start chatting.
-        </p>
-
-      </div>
-
-      <div class="card">
-
-        <h2>
-          🔎 Search Friends
-        </h2>
-
-        <div id="searchResults">
-          Search users using the search box above.
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= FRIENDS ================= -->
-
-    <div
-      id="friendsPage"
-      class="page"
-    >
-
-      <div class="card">
-
-        <h2>
-          👥 Friends
-        </h2>
-
-        <div id="friendsList">
-          Loading...
-        </div>
-
-      </div>
-
-      <div class="card">
-
-        <h2>
-          🤝 Friend Requests
-        </h2>
-
-        <div id="requestsList">
-          Loading...
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= CHAT ================= -->
-
-    <div
-      id="chatPage"
-      class="page"
-    >
-
-      <div class="chatLayout">
-
-        <div class="card friendList">
-
-          <h2>
-            💬 Friends
-          </h2>
-
-          <div id="chatFriends">
-            Loading...
-          </div>
-
-        </div>
-
-        <div class="card chatBox">
-
-          <div
-            id="chatTitle"
-            class="chatTitle"
-          >
-            Select a friend
-          </div>
-
-          <div
-            id="messages"
-            class="messages"
-          >
-          </div>
-
-          <div class="chatInput">
-
-            <input
-              id="messageInput"
-              type="text"
-              placeholder="Write a message..."
-              onkeydown="messageKey(event)"
-            >
-
-            <button
-              class="sendBtn"
-              onclick="sendMessage()"
-            >
-              Send
-            </button>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= PROFILE ================= -->
-
-    <div
-      id="profilePage"
-      class="page"
-    >
-
-      <div class="card profileHeader">
-
-        <img
-          id="profileAvatar"
-          class="avatar"
-          src="https://via.placeholder.com/90"
-        >
-
-        <div
-          id="profileName"
-          class="profileName"
-        >
-          User
-        </div>
-
-        <div
-          id="profileUsername"
-          class="profileUsername"
-        >
-          @username
-        </div>
-
-        <div
-          id="profileBio"
-          class="profileBio"
-        >
-          Welcome to Gitalk Social.
-        </div>
-
-        <div class="profileActions">
-
-          <button
-            class="actionBtn"
-            onclick="editProfile()"
-          >
-            Edit Profile
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- ================= NOTIFICATIONS ================= -->
-
-    <div
-      id="notificationsPage"
-      class="page"
-    >
-
-      <div class="card">
-
-        <h2>
-          🔔 Notifications
-        </h2>
-
-        <div id="notificationsList">
-          No notifications.
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-
-  <!-- ================= NAV ================= -->
-
-  <nav class="bottomNav">
-
-    <button
-      class="navBtn"
-      onclick="openPage('homePage')"
-    >
-      🏠 Home
-    </button>
-
-    <button
-      class="navBtn"
-      onclick="openPage('friendsPage');loadFriends()"
-    >
-      👥 Friends
-    </button>
-
-    <button
-      class="navBtn"
-      onclick="openPage('chatPage');loadChatFriends()"
-    >
-      💬 Chat
-    </button>
-
-    <button
-      class="navBtn"
-      onclick="openPage('notificationsPage');loadNotifications()"
-    >
-      🔔 Alerts
-    </button>
-
-    <button
-      class="navBtn"
-      onclick="openPage('profilePage')"
-    >
-      👤 Profile
-    </button>
-
-  </nav>
+<!-- ================= REGISTER ================= -->
+
+<section
+  id="registerBox"
+  class="hidden"
+>
+
+  <div class="logo">
+    Gitalk
+  </div>
+
+  <div class="tag">
+    Create your social account
+  </div>
+
+  <h2>
+    Create Account
+  </h2>
+
+  <div
+    id="registerMsg"
+    class="msg"
+  ></div>
+
+  <input
+    id="fullName"
+    type="text"
+    placeholder="Full Name"
+    autocomplete="name"
+  >
+
+  <input
+    id="username"
+    type="text"
+    placeholder="Username"
+    autocomplete="username"
+  >
+
+  <input
+    id="registerEmail"
+    type="email"
+    placeholder="Email"
+    autocomplete="email"
+  >
+
+  <input
+    id="registerPassword"
+    type="password"
+    placeholder="Password (minimum 6 characters)"
+    autocomplete="new-password"
+  >
+
+  <button
+    id="registerBtn"
+    type="button"
+  >
+    Create Account
+  </button>
+
+  <div
+    id="backLogin"
+    class="link"
+  >
+    ← Back to Login
+  </div>
 
 </section>
 
 
+<!-- ================= HOME ================= -->
+
+<section
+  id="homeBox"
+  class="home"
+>
+
+  <div class="top">
+
+    <div class="logo2">
+      Gitalk
+    </div>
+
+    <button
+      id="logoutBtn"
+      class="logout"
+      type="button"
+    >
+      Logout
+    </button>
+
+  </div>
+
+
+  <div class="profilebox">
+
+    <div
+      id="avatar"
+      class="avatar"
+    >
+      G
+    </div>
+
+    <h2 id="welcomeName">
+      Welcome
+    </h2>
+
+    <div id="userEmail"></div>
+
+    <p id="welcomeUsername"></p>
+
+  </div>
+
+
+  <div class="small">
+    Login successful! ❤️
+  </div>
+
+</section>
+
+</div>
+
+</div>
+
+
 <script>
+
+/* =====================================================
+   SUPABASE CONFIG
+===================================================== */
 
 const SUPABASE_URL =
 "https://mhnfutbpvyvhdmqqquyi.supabase.co";
@@ -871,297 +396,502 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_NpULKcoHIfa0urWJH0oOPA_o9vqamOl";
 
-const supabaseClient =
+
+const sb =
 window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-let currentUser = null;
-let selectedFriend = null;
-let messageSubscription = null;
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const loginBox =
+document.getElementById("loginBox");
+
+const registerBox =
+document.getElementById("registerBox");
+
+const homeBox =
+document.getElementById("homeBox");
 
 
-/* =========================
-   AUTH PAGE
-========================= */
+/* =====================================================
+   MESSAGE FUNCTION
+===================================================== */
 
-function showRegister(){
+function showMsg(
+  id,
+  text,
+  type
+){
 
-  document
-    .getElementById("loginBox")
-    .classList.add("hidden");
+  const el =
+  document.getElementById(id);
 
-  document
-    .getElementById("registerBox")
-    .classList.remove("hidden");
+  el.textContent = text;
 
-  clearAuthMessage();
+  el.className =
+  "msg " + type;
+
+  el.style.display =
+  "block";
 }
 
+
+function hideMsg(id){
+
+  const el =
+  document.getElementById(id);
+
+  el.style.display =
+  "none";
+}
+
+
+/* =====================================================
+   SHOW LOGIN
+===================================================== */
 
 function showLogin(){
 
-  document
-    .getElementById("registerBox")
-    .classList.add("hidden");
+  loginBox.classList.remove(
+    "hidden"
+  );
 
-  document
-    .getElementById("loginBox")
-    .classList.remove("hidden");
+  registerBox.classList.add(
+    "hidden"
+  );
 
-  clearAuthMessage();
+  homeBox.style.display =
+  "none";
+
+  hideMsg("registerMsg");
 }
 
 
-function authMessage(text){
+/* =====================================================
+   SHOW REGISTER
+===================================================== */
 
-  document
-    .getElementById("authMessage")
-    .textContent = text;
+function showRegister(){
+
+  loginBox.classList.add(
+    "hidden"
+  );
+
+  registerBox.classList.remove(
+    "hidden"
+  );
+
+  homeBox.style.display =
+  "none";
+
+  hideMsg("loginMsg");
 }
 
 
-function clearAuthMessage(){
+/* =====================================================
+   REGISTER PAGE BUTTON
+===================================================== */
 
-  document
-    .getElementById("authMessage")
-    .textContent = "";
+document
+.getElementById("openRegister")
+.addEventListener(
+  "click",
+  function(){
+
+    showRegister();
+
+  }
+);
+
+
+/* =====================================================
+   BACK TO LOGIN
+===================================================== */
+
+document
+.getElementById("backLogin")
+.addEventListener(
+  "click",
+  function(){
+
+    showLogin();
+
+  }
+);
+
+
+/* =====================================================
+   CREATE PROFILE
+===================================================== */
+
+async function ensureProfile(
+  user,
+  name="",
+  username=""
+){
+
+  const result =
+  await sb
+  .from("profiles")
+  .select("*")
+  .eq("id",user.id)
+  .maybeSingle();
+
+
+  if(result.error){
+
+    throw result.error;
+
+  }
+
+
+  if(!result.data){
+
+    let base =
+    username ||
+    (user.email || "user")
+    .split("@")[0];
+
+
+    base =
+    base
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9_]/g,
+      ""
+    )
+    .slice(0,30);
+
+
+    if(!base){
+
+      base =
+      "user" +
+      Math.floor(
+        Math.random()*99999
+      );
+
+    }
+
+
+    const {error} =
+    await sb
+    .from("profiles")
+    .insert({
+
+      id:user.id,
+
+      username:base,
+
+      full_name:
+      name ||
+      user.user_metadata?.full_name ||
+      base
+
+    });
+
+
+    if(
+      error &&
+      !String(error.message)
+      .toLowerCase()
+      .includes("duplicate")
+    ){
+
+      throw error;
+
+    }
+
+  }
+
 }
 
 
-/* =========================
-   REGISTER
-========================= */
+/* =====================================================
+   OPEN HOME
+===================================================== */
 
-async function registerUser(){
+async function openHome(user){
+
+  loginBox.classList.add(
+    "hidden"
+  );
+
+  registerBox.classList.add(
+    "hidden"
+  );
+
+  homeBox.style.display =
+  "block";
+
+
+  let profile =
+  null;
+
+
+  const result =
+  await sb
+  .from("profiles")
+  .select("*")
+  .eq("id",user.id)
+  .maybeSingle();
+
+
+  if(!result.error){
+
+    profile =
+    result.data;
+
+  }
+
 
   const name =
-    document
-    .getElementById("registerName")
-    .value.trim();
+  profile?.full_name ||
+  user.user_metadata?.full_name ||
+  "Gitalk User";
+
 
   const username =
+  profile?.username
+  ? "@" + profile.username
+  : "";
+
+
+  document
+  .getElementById("welcomeName")
+  .textContent =
+  "Welcome, " + name;
+
+
+  document
+  .getElementById("welcomeUsername")
+  .textContent =
+  username;
+
+
+  document
+  .getElementById("userEmail")
+  .textContent =
+  user.email || "";
+
+
+  document
+  .getElementById("avatar")
+  .textContent =
+  (
+    name.charAt(0) ||
+    "G"
+  ).toUpperCase();
+
+}
+
+
+/* =====================================================
+   REGISTER
+===================================================== */
+
+document
+.getElementById("registerBtn")
+.addEventListener(
+  "click",
+  async function(){
+
+    hideMsg("registerMsg");
+
+
+    const fullName =
     document
-    .getElementById("registerUsername")
-    .value.trim()
+    .getElementById("fullName")
+    .value
+    .trim();
+
+
+    const username =
+    document
+    .getElementById("username")
+    .value
+    .trim()
     .toLowerCase();
 
-  const email =
+
+    const email =
     document
     .getElementById("registerEmail")
-    .value.trim();
+    .value
+    .trim();
 
-  const password =
+
+    const password =
     document
     .getElementById("registerPassword")
     .value;
 
-  if(!name || !username || !email || !password){
 
-    authMessage("Please fill all fields.");
-    return;
-  }
+    /* VALIDATION */
 
-  if(password.length < 6){
+    if(
+      !fullName ||
+      !username ||
+      !email ||
+      !password
+    ){
 
-    authMessage("Password must be at least 6 characters.");
-    return;
-  }
-
-  authMessage("Creating account...");
-
-  const {
-    data,
-    error
-  } = await supabaseClient.auth.signUp({
-
-    email:email,
-    password:password,
-
-    options:{
-      data:{
-        full_name:name,
-        username:username
-      }
-    }
-
-  });
-
-  if(error){
-
-    authMessage(error.message);
-    return;
-  }
-
-  if(data.user){
-
-    const {
-      error:profileError
-    } = await supabaseClient
-      .from("profiles")
-      .insert({
-
-        id:data.user.id,
-        username:username,
-        full_name:name
-
-      });
-
-    if(profileError){
-
-      authMessage(
-        "Account created, but profile error: "
-        + profileError.message
+      showMsg(
+        "registerMsg",
+        "Please fill all fields.",
+        "err"
       );
 
       return;
+
     }
-  }
-
-  authMessage(
-    "Registration successful. Check your email if confirmation is enabled."
-  );
-
-  showLogin();
-}
 
 
-/* =========================
-   LOGIN
-========================= */
+    if(password.length < 6){
 
-async function loginUser(){
+      showMsg(
+        "registerMsg",
+        "Password must be at least 6 characters.",
+        "err"
+      );
 
-  const email =
-    document
-    .getElementById("loginEmail")
-    .value.trim();
+      return;
 
-  const password =
-    document
-    .getElementById("loginPassword")
-    .value;
-
-  if(!email || !password){
-
-    authMessage("Enter email and password.");
-    return;
-  }
-
-  authMessage("Logging in...");
-
-  const {
-    data,
-    error
-  } = await supabaseClient.auth.signInWithPassword({
-
-    email:email,
-    password:password
-
-  });
-
-  if(error){
-
-    authMessage(error.message);
-    return;
-  }
-
-  currentUser = data.user;
-
-  await startApp();
-
-}
+    }
 
 
-/* =========================
-   LOGOUT
-========================= */
-
-async function logoutUser(){
-
-  if(messageSubscription){
-
-    await supabaseClient
-      .removeChannel(messageSubscription);
-
-    messageSubscription = null;
-  }
-
-  await supabaseClient.auth.signOut();
-
-  currentUser = null;
-
-  document
-    .getElementById("appPage")
-    .classList.add("hidden");
-
-  document
-    .getElementById("authPage")
-    .classList.remove("hidden");
-
-  showLogin();
-}
+    const btn =
+    document.getElementById(
+      "registerBtn"
+    );
 
 
-/* =========================
-   START APP
-========================= */
+    btn.disabled =
+    true;
 
-async function startApp(){
-
-  document
-    .getElementById("authPage")
-    .classList.add("hidden");
-
-  document
-    .getElementById("appPage")
-    .classList.remove("hidden");
-
-  await loadProfile();
-
-  await loadFriends();
-
-  await loadChatFriends();
-
-  await loadNotifications();
-
-  openPage("homePage");
-
-}
+    btn.textContent =
+    "Creating Account...";
 
 
-/* =========================
-   SESSION CHECK
-========================= */
+    try{
 
-async function checkSession(){
+      const {data,error} =
+      await sb.auth.signUp({
 
-  const {
-    data
-  } = await supabaseClient.auth.getSession();
+        email:email,
 
-  if(data.session){
+        password:password,
 
-    currentUser =
-      data.session.user;
+        options:{
 
-    await startApp();
+          data:{
 
-  }
+            full_name:
+            fullName,
 
-}
+            username:
+            username
+
+          }
+
+        }
+
+      });
 
 
-supabaseClient.auth.onAuthStateChange(
-  async (event, session)=>{
+      if(error){
 
-    if(session && !currentUser){
+        throw error;
 
-      currentUser =
-        session.user;
+      }
 
-      await startApp();
+
+      /* SESSION AVAILABLE */
+
+      if(
+        data.session &&
+        data.user
+      ){
+
+        try{
+
+          await ensureProfile(
+            data.user,
+            fullName,
+            username
+          );
+
+        }
+        catch(profileError){
+
+          showMsg(
+            "registerMsg",
+            "Account created, but profile setup failed: " +
+            profileError.message,
+            "err"
+          );
+
+          return;
+
+        }
+
+
+        showMsg(
+          "registerMsg",
+          "Account created successfully! ❤️",
+          "ok"
+        );
+
+
+        setTimeout(
+          function(){
+
+            openHome(
+              data.user
+            );
+
+          },
+          700
+        );
+
+      }
+
+      /* EMAIL CONFIRMATION */
+
+      else{
+
+        showMsg(
+          "registerMsg",
+          "Account created! Please check your email and confirm your email address, then Login.",
+          "ok"
+        );
+
+      }
+
+
+    }
+    catch(e){
+
+      showMsg(
+        "registerMsg",
+        e.message ||
+        "Registration failed.",
+        "err"
+      );
+
+    }
+    finally{
+
+      btn.disabled =
+      false;
+
+      btn.textContent =
+      "Create Account";
 
     }
 
@@ -1169,209 +899,195 @@ supabaseClient.auth.onAuthStateChange(
 );
 
 
-/* =========================
-   PAGE NAVIGATION
-========================= */
+/* =====================================================
+   LOGIN
+===================================================== */
 
-function openPage(pageId){
+document
+.getElementById("loginBtn")
+.addEventListener(
+  "click",
+  async function(){
 
-  document
-    .querySelectorAll(".page")
-    .forEach(page=>{
-      page.classList.remove("active");
-    });
-
-  const page =
-    document.getElementById(pageId);
-
-  if(page){
-
-    page.classList.add("active");
-
-  }
-
-}
+    hideMsg("loginMsg");
 
 
-/* =========================
-   PROFILE
-========================= */
-
-async function loadProfile(){
-
-  if(!currentUser) return;
-
-  let {
-    data,
-    error
-  } = await supabaseClient
-    .from("profiles")
-    .select("*")
-    .eq("id",currentUser.id)
-    .single();
-
-  if(error){
-
-    console.log(error);
-    return;
-  }
-
-  document
-    .getElementById("profileName")
-    .textContent =
-      data.full_name || "User";
-
-  document
-    .getElementById("profileUsername")
-    .textContent =
-      "@" + (data.username || "");
-
-  document
-    .getElementById("profileBio")
-    .textContent =
-      data.bio || "Welcome to Gitalk Social.";
-
-  if(data.avatar_url){
-
+    const email =
     document
-      .getElementById("profileAvatar")
-      .src = data.avatar_url;
-
-  }
-
-}
+    .getElementById("loginEmail")
+    .value
+    .trim();
 
 
-/* =========================
-   SEARCH USERS
-========================= */
+    const password =
+    document
+    .getElementById("loginPassword")
+    .value;
 
-let searchTimer;
 
-function searchUsers(){
+    if(
+      !email ||
+      !password
+    ){
 
-  clearTimeout(searchTimer);
+      showMsg(
+        "loginMsg",
+        "Please enter email and password.",
+        "err"
+      );
 
-  searchTimer =
-    setTimeout(
-      performSearch,
-      400
+      return;
+
+    }
+
+
+    const btn =
+    document.getElementById(
+      "loginBtn"
     );
 
-}
+
+    btn.disabled =
+    true;
+
+    btn.textContent =
+    "Logging in...";
 
 
-async function performSearch(){
+    try{
 
-  const input =
-    document
-    .getElementById("searchInput")
-    .value
-    .trim()
-    .toLowerCase();
+      const {data,error} =
+      await sb.auth
+      .signInWithPassword({
 
-  const resultBox =
-    document.getElementById("searchResults");
+        email:email,
 
-  if(!input){
+        password:password
 
-    resultBox.innerHTML =
-      "Search users using the search box above.";
+      });
 
-    return;
+
+      if(error){
+
+        throw error;
+
+      }
+
+
+      if(data.user){
+
+        try{
+
+          await ensureProfile(
+            data.user
+          );
+
+        }
+        catch(profileError){
+
+          console.log(
+            "Profile:",
+            profileError
+          );
+
+        }
+
+
+        await openHome(
+          data.user
+        );
+
+      }
+
+    }
+    catch(e){
+
+      showMsg(
+        "loginMsg",
+        e.message ||
+        "Login failed.",
+        "err"
+      );
+
+    }
+    finally{
+
+      btn.disabled =
+      false;
+
+      btn.textContent =
+      "Login";
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+document
+.getElementById("logoutBtn")
+.addEventListener(
+  "click",
+  async function(){
+
+    await sb.auth.signOut();
+
+    showLogin();
+
+  }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+sb.auth.onAuthStateChange(
+  async function(
+    event,
+    session
+  ){
+
+    if(
+      session?.user &&
+      event === "SIGNED_IN"
+    ){
+
+      await openHome(
+        session.user
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   CHECK EXISTING SESSION
+===================================================== */
+
+(async function(){
+
+  const {data} =
+  await sb.auth.getSession();
+
+
+  if(data.session){
+
+    await openHome(
+      data.session.user
+    );
+
   }
 
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("profiles")
-    .select("*")
-    .or(
-      `username.ilike.%${input}%,full_name.ilike.%${input}%`
-    )
-    .neq("id",currentUser.id)
-    .limit(20);
+})();
 
-  if(error){
+</script>
 
-    resultBox.textContent =
-      error.message;
-
-    return;
-  }
-
-  if(!data.length){
-
-    resultBox.textContent =
-      "No users found.";
-
-    return;
-  }
-
-  resultBox.innerHTML = "";
-
-  data.forEach(user=>{
-
-    const div =
-      document.createElement("div");
-
-    div.className = "userItem";
-
-    div.innerHTML = `
-
-      <img
-        class="smallAvatar"
-        src="${user.avatar_url || 'https://via.placeholder.com/48'}"
-      >
-
-      <div class="userInfo">
-
-        <div class="userName">
-          ${escapeHTML(user.full_name || user.username)}
-        </div>
-
-        <div class="userHandle">
-          @${escapeHTML(user.username)}
-        </div>
-
-      </div>
-
-      <button
-        class="actionBtn"
-        onclick="sendFriendRequest('${user.id}')"
-      >
-        Add Friend
-      </button>
-
-    `;
-
-    resultBox.appendChild(div);
-
-  });
-
-}
-
-
-/* =========================
-   FRIEND REQUEST
-========================= */
-
-async function sendFriendRequest(friendId){
-
-  if(!currentUser) return;
-
-  const {
-    data:existing
-  } = await supabaseClient
-    .from("friendships")
-    .select("*")
-    .or(
-      `and(requester_id.eq.${currentUser.id},addressee_id.eq.${friendId}),and(requester_id.eq.${friendId},addressee_id.eq.${currentUser.id})`
-    )
-    .maybeSingle();
-
-  if(existing){
-
-    alert(
-      "Friend request already exists
+</body>
+</html>
