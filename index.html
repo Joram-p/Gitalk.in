@@ -1,37 +1,802 @@
-<!-- PROFILE SETTINGS -->
-<div id="profileModal" class="modal hidden">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="modal-box profile-settings">
+<title>Gitalk Social</title>
 
-    <button id="closeProfile" class="close">✕</button>
+<!-- Main CSS -->
+<link rel="stylesheet" href="style.css">
 
-    <div id="profileAvatar" class="big-avatar">G</div>
+<!-- Firebase will be connected in script.js -->
+</head>
 
-    <h2>Profile Settings</h2>
+<body>
 
-    <label class="profile-photo-label">
-      📷 Change Profile Photo
-      <input
-        id="profilePhotoInput"
-        type="file"
-        accept="image/*">
-    </label>
+<!-- =========================
+     TOP HEADER
+========================= -->
+<header class="top-header">
+
+    <div class="brand">
+        <div class="logo">G</div>
+        <div>
+            <h1>Gitalk</h1>
+            <span>Social</span>
+        </div>
+    </div>
+
+    <div class="header-actions">
+        <button onclick="openSearch()" title="Search">🔍</button>
+        <button onclick="showPage('notifications')" title="Notifications">🔔</button>
+        <button onclick="showPage('chat')" title="Messages">💬</button>
+    </div>
+
+</header>
+
+
+<!-- =========================
+     SEARCH BOX
+========================= -->
+<div id="searchBox" class="search-box hidden">
 
     <input
-      id="profileNameInput"
-      type="text"
-      placeholder="Your Name">
+        type="text"
+        id="searchInput"
+        placeholder="Search people or posts..."
+    >
 
-    <textarea
-      id="profileBioInput"
-      placeholder="Write something about yourself..."></textarea>
+    <button onclick="closeSearch()">✕</button>
 
-    <button id="saveProfileBtn" class="save-profile">
-      Save Profile ❤️
-    </button>
-
-    <p id="profileMsg"></p>
-
-  </div>
+    <div id="searchResults"></div>
 
 </div>
+
+
+<!-- =========================
+     MAIN APP
+========================= -->
+<main id="app">
+
+
+<!-- =========================
+     HOME PAGE
+========================= -->
+<section id="homePage" class="page active">
+
+    <div class="welcome-card">
+
+        <div class="welcome-text">
+            <h2>Welcome to Gitalk Social 👋</h2>
+            <p>Connect, share and chat with your friends.</p>
+        </div>
+
+    </div>
+
+
+    <!-- CREATE POST -->
+    <div class="create-post card">
+
+        <div class="create-top">
+
+            <div class="avatar" id="currentUserAvatar">
+                👤
+            </div>
+
+            <button
+                class="post-input"
+                onclick="openCreatePost()"
+            >
+                What's on your mind?
+            </button>
+
+        </div>
+
+
+        <div class="post-tools">
+
+            <button onclick="openCreatePost('photo')">
+                📷 Photo
+            </button>
+
+            <button onclick="openCreatePost('video')">
+                🎥 Video
+            </button>
+
+            <button onclick="openCreatePost('feeling')">
+                😊 Feeling
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FEED -->
+    <div id="feed">
+
+        <!-- Posts will be loaded by Firebase -->
+
+        <div class="empty-feed">
+
+            <div class="empty-icon">📝</div>
+
+            <h3>No posts yet</h3>
+
+            <p>Be the first person to share something!</p>
+
+            <button onclick="openCreatePost()">
+                Create Post
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CHAT PAGE
+========================= -->
+<section id="chatPage" class="page">
+
+    <div class="page-title">
+
+        <div>
+            <h2>Messages</h2>
+            <p>Chat with your friends</p>
+        </div>
+
+        <button onclick="startNewChat()">➕</button>
+
+    </div>
+
+
+    <div id="chatList" class="chat-list">
+
+        <div class="empty-state">
+
+            <div class="large-icon">💬</div>
+
+            <h3>Your messages</h3>
+
+            <p>Start a conversation with someone.</p>
+
+            <button onclick="startNewChat()">
+                Start Chat
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     NOTIFICATIONS PAGE
+========================= -->
+<section id="notificationsPage" class="page">
+
+    <div class="page-title">
+
+        <div>
+            <h2>Notifications</h2>
+            <p>Stay updated</p>
+        </div>
+
+        <button onclick="markNotificationsRead()">
+            ✓
+        </button>
+
+    </div>
+
+
+    <div id="notificationsList">
+
+        <div class="empty-state">
+
+            <div class="large-icon">🔔</div>
+
+            <h3>No notifications</h3>
+
+            <p>New activity will appear here.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PROFILE PAGE
+========================= -->
+<section id="profilePage" class="page">
+
+    <div class="profile-cover">
+
+        <button
+            class="cover-edit"
+            onclick="editCoverPhoto()"
+        >
+            📷
+        </button>
+
+    </div>
+
+
+    <div class="profile-card">
+
+        <div class="profile-avatar-wrapper">
+
+            <div
+                class="profile-avatar"
+                id="profileAvatar"
+            >
+                👤
+            </div>
+
+            <button
+                onclick="editProfilePhoto()"
+                class="avatar-edit"
+            >
+                📷
+            </button>
+
+        </div>
+
+
+        <h2 id="profileName">
+            Gitalk User
+        </h2>
+
+        <p id="profileBio">
+            Welcome to my Gitalk profile.
+        </p>
+
+
+        <div class="profile-stats">
+
+            <div>
+                <strong id="postCount">0</strong>
+                <span>Posts</span>
+            </div>
+
+            <div>
+                <strong id="followersCount">0</strong>
+                <span>Followers</span>
+            </div>
+
+            <div>
+                <strong id="followingCount">0</strong>
+                <span>Following</span>
+            </div>
+
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="openEditProfile()"
+        >
+            ✏️ Edit Profile
+        </button>
+
+    </div>
+
+
+    <div class="profile-tabs">
+
+        <button class="active">
+            📝 Posts
+        </button>
+
+        <button onclick="showSavedPosts()">
+            🔖 Saved
+        </button>
+
+        <button onclick="showMediaPosts()">
+            🖼️ Media
+        </button>
+
+    </div>
+
+
+    <div id="profilePosts">
+
+        <div class="empty-state">
+
+            <div class="large-icon">📝</div>
+
+            <h3>No posts</h3>
+
+            <p>Your posts will appear here.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     SETTINGS PAGE
+========================= -->
+<section id="settingsPage" class="page">
+
+    <div class="page-title">
+
+        <div>
+            <h2>Settings</h2>
+            <p>Manage your Gitalk Social account</p>
+        </div>
+
+    </div>
+
+
+    <!-- ACCOUNT -->
+    <div class="settings-group">
+
+        <h3>Account</h3>
+
+        <button
+            class="settings-item"
+            onclick="openEditProfile()"
+        >
+
+            <span class="settings-icon">👤</span>
+
+            <span class="settings-text">
+                <strong>Edit Profile</strong>
+                <small>Change name, bio and profile photo</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+
+        <button
+            class="settings-item"
+            onclick="openPasswordSettings()"
+        >
+
+            <span class="settings-icon">🔐</span>
+
+            <span class="settings-text">
+                <strong>Password & Security</strong>
+                <small>Manage your account security</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- PRIVACY -->
+    <div class="settings-group">
+
+        <h3>Privacy</h3>
+
+        <button
+            class="settings-item"
+            onclick="openPrivacySettings()"
+        >
+
+            <span class="settings-icon">🛡️</span>
+
+            <span class="settings-text">
+                <strong>Privacy</strong>
+                <small>Control who can see your content</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+
+        <button
+            class="settings-item"
+            onclick="openBlockedUsers()"
+        >
+
+            <span class="settings-icon">🚫</span>
+
+            <span class="settings-text">
+                <strong>Blocked Users</strong>
+                <small>Manage blocked accounts</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- NOTIFICATIONS -->
+    <div class="settings-group">
+
+        <h3>Preferences</h3>
+
+        <button
+            class="settings-item"
+            onclick="openNotificationSettings()"
+        >
+
+            <span class="settings-icon">🔔</span>
+
+            <span class="settings-text">
+                <strong>Notifications</strong>
+                <small>Choose what notifications you receive</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+
+        <button
+            class="settings-item"
+            onclick="toggleDarkMode()"
+        >
+
+            <span class="settings-icon">🌙</span>
+
+            <span class="settings-text">
+                <strong>Dark Mode</strong>
+                <small>Change app appearance</small>
+            </span>
+
+            <span id="darkModeStatus">Off</span>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- HELP -->
+    <div class="settings-group">
+
+        <h3>Help & Information</h3>
+
+        <button
+            class="settings-item"
+            onclick="openHelp()"
+        >
+
+            <span class="settings-icon">❓</span>
+
+            <span class="settings-text">
+                <strong>Help Center</strong>
+                <small>Get help with Gitalk Social</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+
+        <button
+            class="settings-item"
+            onclick="openAbout()"
+        >
+
+            <span class="settings-icon">ℹ️</span>
+
+            <span class="settings-text">
+                <strong>About Gitalk Social</strong>
+                <small>Version and information</small>
+            </span>
+
+            <span>›</span>
+
+        </button>
+
+    </div>
+
+
+
+    <!-- LOGOUT -->
+    <button
+        class="logout-btn"
+        onclick="logoutUser()"
+    >
+        🚪 Logout
+    </button>
+
+</section>
+
+</main>
+
+
+
+<!-- =========================
+     CREATE POST MODAL
+========================= -->
+<div
+    id="createPostModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Create Post</h2>
+
+            <button onclick="closeCreatePost()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="post-author">
+
+            <div class="avatar">
+                👤
+            </div>
+
+            <strong id="postAuthorName">
+                Gitalk User
+            </strong>
+
+        </div>
+
+
+        <textarea
+            id="postText"
+            placeholder="What's on your mind?"
+            rows="5"
+        ></textarea>
+
+
+        <div id="postPreview"></div>
+
+
+        <div class="upload-options">
+
+            <label>
+                📷 Photo
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                    hidden
+                    onchange="previewPhoto(event)"
+                >
+            </label>
+
+
+            <label>
+                🎥 Video
+                <input
+                    type="file"
+                    id="videoInput"
+                    accept="video/*"
+                    hidden
+                    onchange="previewVideo(event)"
+                >
+            </label>
+
+        </div>
+
+
+        <button
+            class="publish-btn"
+            onclick="publishPost()"
+        >
+            🚀 Publish Post
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     CHAT WINDOW MODAL
+========================= -->
+<div
+    id="chatModal"
+    class="modal hidden"
+>
+
+    <div class="chat-window">
+
+        <div class="chat-header">
+
+            <button onclick="closeChat()">
+                ←
+            </button>
+
+            <div>
+
+                <strong id="chatUserName">
+                    User
+                </strong>
+
+                <small id="chatStatus">
+                    Offline
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="messages"
+            class="messages"
+        >
+        </div>
+
+
+        <div class="chat-input">
+
+            <button onclick="selectChatImage()">
+                📷
+            </button>
+
+            <input
+                type="text"
+                id="messageInput"
+                placeholder="Write a message..."
+                onkeydown="handleMessageKey(event)"
+            >
+
+            <button onclick="sendMessage()">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     EDIT PROFILE MODAL
+========================= -->
+<div
+    id="editProfileModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Edit Profile</h2>
+
+            <button onclick="closeEditProfile()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <label>
+            Name
+        </label>
+
+        <input
+            type="text"
+            id="editName"
+            placeholder="Your name"
+        >
+
+
+        <label>
+            Bio
+        </label>
+
+        <textarea
+            id="editBio"
+            placeholder="Write something about yourself..."
+            rows="4"
+        ></textarea>
+
+
+        <button
+            class="primary-btn"
+            onclick="saveProfile()"
+        >
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        onclick="showPage('home')"
+        id="navHome"
+    >
+        <span>🏠</span>
+        <small>Home</small>
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('chat')"
+        id="navChat"
+    >
+        <span>💬</span>
+        <small>Chat</small>
+    </button>
+
+
+    <button
+        class="create-button"
+        onclick="openCreatePost()"
+    >
+        ＋
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('notifications')"
+        id="navNotifications"
+    >
+        <span>🔔</span>
+        <small>Alerts</small>
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('profile')"
+        id="navProfile"
+    >
+        <span>👤</span>
+        <small>Profile</small>
+    </button>
+
+
+    <button
+        class="nav-item"
+        onclick="showPage('settings')"
+        id="navSettings"
+    >
+        <span>⚙️</span>
+        <small>Settings</small>
+    </button>
+
+</nav>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+<script type="module" src="script.js"></script>
+
+</body>
+  </html>
