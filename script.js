@@ -1,1640 +1,1491 @@
-/* =========================================================
-   GITALK SOCIAL
-   STEP 3 — COMPLETE SCRIPT.JS
-   Navigation + Posts UI + Chat UI + Profile + Settings
-========================================================= */
+// ======================================================
+// GITALK SOCIAL
+// FIREBASE AUTHENTICATION + BASIC APP
+// ======================================================
 
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
-    getFirestore
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 import {
-    getStorage
-} from
-"https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-storage.js";
 
 
-/* =========================================================
-   FIREBASE CONFIG
-========================================================= */
+// ======================================================
+// FIREBASE CONFIG
+// ======================================================
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBDz7YkD4ivdet",
-    authDomain: "gitalk-social-3a85a.firebaseapp.com",
-    projectId: "gitalk-social-3a85a",
-    storageBucket: "gitalk-social-3a85a.firebasestorage.app",
-    messagingSenderId: "",
-    appId: ""
+  apiKey: "AIzaSyBDz7YkD4ivdet3kjJ1HcmfCUbS8WOc25I",
+  authDomain: "gitalk-social-3a85a.firebaseapp.com",
+  projectId: "gitalk-social-3a85a",
+  storageBucket: "gitalk-social-3a85a.firebasestorage.app",
+  messagingSenderId: "553434284005",
+  appId: "1:553434284005:web:e934097f7f7228d2b8b90c"
 };
 
 
-/*
-   IMPORTANT:
-   If your Firebase console contains a complete config,
-   replace the values above with your exact Web App config.
-*/
+// ======================================================
+// INITIALIZE FIREBASE
+// ======================================================
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+const storage = getStorage(app);
 
 
-/* =========================================================
-   INITIALIZE FIREBASE
-========================================================= */
+// ======================================================
+// ELEMENTS
+// ======================================================
 
-let app;
-let auth;
-let db;
-let storage;
+const authScreen =
+  document.getElementById("authScreen");
 
-try {
+const appScreen =
+  document.getElementById("appScreen");
 
-    app = initializeApp(firebaseConfig);
+const loginForm =
+  document.getElementById("loginForm");
 
-    auth = getAuth(app);
+const registerForm =
+  document.getElementById("registerForm");
 
-    db = getFirestore(app);
+const loginEmail =
+  document.getElementById("loginEmail");
 
-    storage = getStorage(app);
+const loginPassword =
+  document.getElementById("loginPassword");
 
-    console.log("Firebase initialized successfully.");
+const registerName =
+  document.getElementById("registerName");
 
-} catch(error){
+const registerEmail =
+  document.getElementById("registerEmail");
 
-    console.error("Firebase initialization error:", error);
+const registerPassword =
+  document.getElementById("registerPassword");
+
+const registerConfirm =
+  document.getElementById("registerConfirm");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const registerBtn =
+  document.getElementById("registerBtn");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const registerMessage =
+  document.getElementById("registerMessage");
+
+
+// ======================================================
+// SHOW REGISTER
+// ======================================================
+
+document
+  .getElementById("showRegisterBtn")
+  .addEventListener("click", () => {
+
+    loginForm.style.display = "none";
+
+    registerForm.style.display = "block";
+
+    clearMessages();
+
+  });
+
+
+// ======================================================
+// SHOW LOGIN
+// ======================================================
+
+document
+  .getElementById("showLoginBtn")
+  .addEventListener("click", () => {
+
+    registerForm.style.display = "none";
+
+    loginForm.style.display = "block";
+
+    clearMessages();
+
+  });
+
+
+// ======================================================
+// CLEAR MESSAGES
+// ======================================================
+
+function clearMessages() {
+
+  loginMessage.textContent = "";
+
+  registerMessage.textContent = "";
 
 }
 
 
-/* =========================================================
-   GLOBAL STATE
-========================================================= */
+// ======================================================
+// REGISTER
+// ======================================================
 
-let currentUser = null;
+registerBtn.addEventListener("click", async () => {
 
-let selectedPhoto = null;
+  const name =
+    registerName.value.trim();
 
-let selectedVideo = null;
+  const email =
+    registerEmail.value.trim();
 
-let currentChatUser = null;
+  const password =
+    registerPassword.value;
 
-let darkMode = false;
+  const confirm =
+    registerConfirm.value;
 
 
-/* =========================================================
-   AUTH STATE
-========================================================= */
+  if (!name || !email || !password || !confirm) {
 
-if(auth){
+    registerMessage.textContent =
+      "Please fill all fields.";
 
-    onAuthStateChanged(auth, (user) => {
+    return;
 
-        currentUser = user;
+  }
 
-        if(user){
 
-            console.log("Logged in:", user.email);
+  if (password !== confirm) {
 
-            updateUserInterface(user);
+    registerMessage.textContent =
+      "Passwords do not match.";
 
-        }else{
+    return;
 
-            console.log("No user logged in.");
+  }
 
-        }
 
+  if (password.length < 6) {
+
+    registerMessage.textContent =
+      "Password must be at least 6 characters.";
+
+    return;
+
+  }
+
+
+  registerBtn.disabled = true;
+
+  registerBtn.textContent =
+    "Creating account...";
+
+
+  try {
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    const user = result.user;
+
+
+    await updateProfile(user, {
+      displayName: name
     });
 
-}
 
-
-/* =========================================================
-   UPDATE USER INTERFACE
-========================================================= */
-
-function updateUserInterface(user){
-
-    const name =
-        user.displayName ||
-        user.email?.split("@")[0] ||
-        "Gitalk User";
-
-    const photo =
-        user.photoURL || "";
-
-
-    const profileName =
-        document.getElementById("profileName");
-
-    const postAuthorName =
-        document.getElementById("postAuthorName");
-
-
-    if(profileName){
-
-        profileName.textContent = name;
-
-    }
-
-
-    if(postAuthorName){
-
-        postAuthorName.textContent = name;
-
-    }
-
-
-    const avatars = [
-
-        document.getElementById("profileAvatar"),
-
-        document.getElementById("currentUserAvatar")
-
-    ];
-
-
-    avatars.forEach(avatar => {
-
-        if(!avatar) return;
-
-
-        if(photo){
-
-            avatar.innerHTML =
-                `<img src="${photo}" alt="Profile">`;
-
-        }else{
-
-            avatar.textContent = "👤";
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   PAGE NAVIGATION
-========================================================= */
-
-window.showPage = function(page){
-
-    const pages = [
-
-        "home",
-        "chat",
-        "notifications",
-        "profile",
-        "settings"
-
-    ];
-
-
-    pages.forEach(name => {
-
-        const element =
-            document.getElementById(name + "Page");
-
-        if(element){
-
-            element.classList.remove("active");
-
-        }
-
-    });
-
-
-    const target =
-        document.getElementById(page + "Page");
-
-
-    if(target){
-
-        target.classList.add("active");
-
-    }
-
-
-    /* Bottom navigation */
-
-    document.querySelectorAll(".nav-item")
-        .forEach(item => {
-
-            item.classList.remove("active");
-
-        });
-
-
-    const nav =
-        document.getElementById("nav" + capitalize(page));
-
-
-    if(nav){
-
-        nav.classList.add("active");
-
-    }
-
-
-    window.scrollTo({
-
-        top:0,
-        behavior:"smooth"
-
-    });
-
-};
-
-
-/* =========================================================
-   CAPITALIZE
-========================================================= */
-
-function capitalize(text){
-
-    return text.charAt(0).toUpperCase() +
-           text.slice(1);
-
-}
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-window.openSearch = function(){
-
-    const box =
-        document.getElementById("searchBox");
-
-    if(box){
-
-        box.classList.remove("hidden");
-
-    }
-
-
-    const input =
-        document.getElementById("searchInput");
-
-    if(input){
-
-        setTimeout(() => input.focus(),100);
-
-    }
-
-};
-
-
-window.closeSearch = function(){
-
-    const box =
-        document.getElementById("searchBox");
-
-    if(box){
-
-        box.classList.add("hidden");
-
-    }
-
-};
-
-
-const searchInput =
-    document.getElementById("searchInput");
-
-
-if(searchInput){
-
-    searchInput.addEventListener("input", () => {
-
-        const query =
-            searchInput.value.trim().toLowerCase();
-
-        const results =
-            document.getElementById("searchResults");
-
-
-        if(!results) return;
-
-
-        if(!query){
-
-            results.innerHTML = "";
-
-            return;
-
-        }
-
-
-        results.innerHTML = `
-
-            <div class="empty-state">
-
-                🔎
-
-                <p>
-                    Search feature will connect to
-                    Firebase in the next step.
-                </p>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-
-/* =========================================================
-   CREATE POST MODAL
-========================================================= */
-
-window.openCreatePost = function(type = ""){
-
-    const modal =
-        document.getElementById("createPostModal");
-
-
-    if(!modal) return;
-
-
-    modal.classList.remove("hidden");
-
-
-    const textarea =
-        document.getElementById("postText");
-
-
-    if(textarea){
-
-        textarea.focus();
-
-    }
-
-
-    if(type === "photo"){
-
-        document.getElementById("photoInput")?.click();
-
-    }
-
-
-    if(type === "video"){
-
-        document.getElementById("videoInput")?.click();
-
-    }
-
-};
-
-
-window.closeCreatePost = function(){
-
-    const modal =
-        document.getElementById("createPostModal");
-
-
-    if(modal){
-
-        modal.classList.add("hidden");
-
-    }
-
-
-    resetPostForm();
-
-};
-
-
-/* =========================================================
-   RESET POST FORM
-========================================================= */
-
-function resetPostForm(){
-
-    const text =
-        document.getElementById("postText");
-
-    const photo =
-        document.getElementById("photoInput");
-
-    const video =
-        document.getElementById("videoInput");
-
-    const preview =
-        document.getElementById("postPreview");
-
-
-    if(text){
-
-        text.value = "";
-
-    }
-
-
-    if(photo){
-
-        photo.value = "";
-
-    }
-
-
-    if(video){
-
-        video.value = "";
-
-    }
-
-
-    if(preview){
-
-        preview.innerHTML = "";
-
-    }
-
-
-    selectedPhoto = null;
-
-    selectedVideo = null;
-
-}
-
-
-/* =========================================================
-   PHOTO PREVIEW
-========================================================= */
-
-window.previewPhoto = function(event){
-
-    const file =
-        event.target.files?.[0];
-
-
-    if(!file) return;
-
-
-    selectedPhoto = file;
-
-    selectedVideo = null;
-
-
-    const preview =
-        document.getElementById("postPreview");
-
-
-    if(!preview) return;
-
-
-    const url =
-        URL.createObjectURL(file);
-
-
-    preview.innerHTML = `
-
-        <img
-            src="${url}"
-            alt="Photo preview"
-        >
-
-    `;
-
-};
-
-
-/* =========================================================
-   VIDEO PREVIEW
-========================================================= */
-
-window.previewVideo = function(event){
-
-    const file =
-        event.target.files?.[0];
-
-
-    if(!file) return;
-
-
-    selectedVideo = file;
-
-    selectedPhoto = null;
-
-
-    const preview =
-        document.getElementById("postPreview");
-
-
-    if(!preview) return;
-
-
-    const url =
-        URL.createObjectURL(file);
-
-
-    preview.innerHTML = `
-
-        <video
-            src="${url}"
-            controls
-        ></video>
-
-    `;
-
-};
-
-
-/* =========================================================
-   PUBLISH POST
-========================================================= */
-
-window.publishPost = async function(){
-
-    const textElement =
-        document.getElementById("postText");
-
-
-    const text =
-        textElement?.value.trim() || "";
-
-
-    if(!text && !selectedPhoto && !selectedVideo){
-
-        alert("Please write something or select a photo/video.");
-
-        return;
-
-    }
-
-
-    /*
-       Firebase Firestore + Storage publishing
-       will be added in the next Firebase data step.
-    */
-
-
-    const feed =
-        document.getElementById("feed");
-
-
-    if(feed){
-
-        const empty =
-            feed.querySelector(".empty-feed");
-
-        if(empty){
-
-            empty.remove();
-
-        }
-
-
-        const name =
-            currentUser?.displayName ||
-            currentUser?.email?.split("@")[0] ||
-            "You";
-
-
-        let mediaHTML = "";
-
-
-        if(selectedPhoto){
-
-            const url =
-                URL.createObjectURL(selectedPhoto);
-
-            mediaHTML = `
-
-                <img
-                    class="post-media"
-                    src="${url}"
-                    alt="Post photo"
-                >
-
-            `;
-
-        }
-
-
-        if(selectedVideo){
-
-            const url =
-                URL.createObjectURL(selectedVideo);
-
-            mediaHTML = `
-
-                <video
-                    class="post-media"
-                    src="${url}"
-                    controls
-                ></video>
-
-            `;
-
-        }
-
-
-        const post =
-            document.createElement("article");
-
-
-        post.className = "post";
-
-
-        post.innerHTML = `
-
-            <div class="post-header">
-
-                <div class="avatar">
-                    👤
-                </div>
-
-                <div class="post-author">
-
-                    <strong>
-                        ${escapeHTML(name)}
-                    </strong>
-
-                    <small>
-                        Just now
-                    </small>
-
-                </div>
-
-                <button class="post-menu">
-                    ⋯
-                </button>
-
-            </div>
-
-
-            <div class="post-body">
-
-                ${
-                    text
-                    ?
-                    `<div class="post-text">
-                        ${escapeHTML(text)}
-                    </div>`
-                    :
-                    ""
-                }
-
-                ${mediaHTML}
-
-            </div>
-
-
-            <div class="post-stats">
-
-                <span>❤️ 0 likes</span>
-
-                <span>0 comments</span>
-
-            </div>
-
-
-            <div class="post-actions">
-
-                <button onclick="likePost(this)">
-                    ❤️ Like
-                </button>
-
-                <button onclick="commentPost(this)">
-                    💬 Comment
-                </button>
-
-                <button onclick="sharePost()">
-                    🔄 Share
-                </button>
-
-                <button onclick="savePost(this)">
-                    🔖 Save
-                </button>
-
-            </div>
-
-
-            <div class="comments">
-
-                <div class="comment-input">
-
-                    <input
-                        type="text"
-                        placeholder="Write a comment..."
-                    >
-
-                    <button
-                        onclick="addComment(this)"
-                    >
-                        ➤
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        feed.prepend(post);
-
-    }
-
-
-    closeCreatePost();
-
-
-    alert(
-        "Post added to the screen. Firebase saving will be enabled next."
-    );
-
-};
-
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
-function escapeHTML(text){
-
-    const div =
-        document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-
-}
-
-
-/* =========================================================
-   LIKE POST
-========================================================= */
-
-window.likePost = function(button){
-
-    if(!button) return;
-
-
-    button.classList.toggle("liked");
-
-
-    const stats =
-        button.closest(".post")
-              ?.querySelector(".post-stats span");
-
-
-    if(!stats) return;
-
-
-    const liked =
-        button.classList.contains("liked");
-
-
-    stats.textContent =
-        liked
-        ? "❤️ 1 like"
-        : "❤️ 0 likes";
-
-};
-
-
-/* =========================================================
-   COMMENT POST
-========================================================= */
-
-window.commentPost = function(button){
-
-    const post =
-        button.closest(".post");
-
-
-    if(!post) return;
-
-
-    const input =
-        post.querySelector(".comment-input input");
-
-
-    if(input){
-
-        input.focus();
-
-    }
-
-};
-
-
-/* =========================================================
-   ADD COMMENT
-========================================================= */
-
-window.addComment = function(button){
-
-    const container =
-        button.closest(".comments");
-
-
-    const input =
-        container?.querySelector("input");
-
-
-    if(!input) return;
-
-
-    const text =
-        input.value.trim();
-
-
-    if(!text) return;
-
-
-    const comment =
-        document.createElement("div");
-
-
-    comment.className = "comment";
-
-
-    const name =
-        currentUser?.displayName ||
-        "You";
-
-
-    comment.innerHTML = `
-
-        <div class="avatar">
-            👤
-        </div>
-
-        <div class="comment-content">
-
-            <strong>
-                ${escapeHTML(name)}
-            </strong>
-
-            <p>
-                ${escapeHTML(text)}
-            </p>
-
-        </div>
-
-    `;
-
-
-    container.insertBefore(
-        comment,
-        container.querySelector(".comment-input")
+    await setDoc(
+      doc(db, "users", user.uid),
+      {
+        uid: user.uid,
+        name: name,
+        email: email,
+        photoURL: "",
+        createdAt: serverTimestamp()
+      }
     );
 
 
-    input.value = "";
+    registerMessage.textContent =
+      "Account created successfully ❤️";
 
-};
 
+  } catch (error) {
 
-/* =========================================================
-   SHARE POST
-========================================================= */
+    console.error(error);
 
-window.sharePost = async function(){
+    registerMessage.textContent =
+      firebaseError(error);
 
-    const shareData = {
+  }
 
-        title:"Gitalk Social",
 
-        text:"Check out this post on Gitalk Social."
+  registerBtn.disabled = false;
 
-    };
-
-
-    try{
-
-        if(navigator.share){
-
-            await navigator.share(shareData);
-
-        }else{
-
-            await navigator.clipboard.writeText(
-                window.location.href
-            );
-
-            alert("Link copied!");
-
-        }
-
-    }catch(error){
-
-        console.log("Share cancelled.");
-
-    }
-
-};
-
-
-/* =========================================================
-   SAVE POST
-========================================================= */
-
-window.savePost = function(button){
-
-    if(!button) return;
-
-
-    const saved =
-        button.dataset.saved === "true";
-
-
-    button.dataset.saved =
-        saved ? "false" : "true";
-
-
-    button.innerHTML =
-        saved
-        ? "🔖 Save"
-        : "✅ Saved";
-
-};
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-window.startNewChat = function(){
-
-    const name =
-        prompt("Enter the name of the person you want to chat with:");
-
-
-    if(!name) return;
-
-
-    openChatWindow({
-
-        name:name
-
-    });
-
-};
-
-
-function openChatWindow(user){
-
-    currentChatUser = user;
-
-
-    const modal =
-        document.getElementById("chatModal");
-
-
-    if(!modal) return;
-
-
-    modal.classList.remove("hidden");
-
-
-    const name =
-        document.getElementById("chatUserName");
-
-
-    if(name){
-
-        name.textContent =
-            user.name || "User";
-
-    }
-
-
-    const status =
-        document.getElementById("chatStatus");
-
-
-    if(status){
-
-        status.textContent =
-            "Online";
-
-    }
-
-
-    const messages =
-        document.getElementById("messages");
-
-
-    if(messages){
-
-        messages.innerHTML = `
-
-            <div class="empty-state">
-
-                <div class="large-icon">
-                    💬
-                </div>
-
-                <h3>
-                    Start your conversation
-                </h3>
-
-                <p>
-                    Send a message below.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-window.closeChat = function(){
-
-    const modal =
-        document.getElementById("chatModal");
-
-
-    if(modal){
-
-        modal.classList.add("hidden");
-
-    }
-
-};
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-window.sendMessage = function(){
-
-    const input =
-        document.getElementById("messageInput");
-
-
-    const messages =
-        document.getElementById("messages");
-
-
-    if(!input || !messages) return;
-
-
-    const text =
-        input.value.trim();
-
-
-    if(!text) return;
-
-
-    const empty =
-        messages.querySelector(".empty-state");
-
-
-    if(empty){
-
-        empty.remove();
-
-    }
-
-
-    const message =
-        document.createElement("div");
-
-
-    message.className =
-        "message sent";
-
-
-    message.innerHTML = `
-
-        ${escapeHTML(text)}
-
-        <span class="message-time">
-            Just now
-        </span>
-
-    `;
-
-
-    messages.appendChild(message);
-
-
-    input.value = "";
-
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-};
-
-
-/* =========================================================
-   ENTER TO SEND
-========================================================= */
-
-window.handleMessageKey = function(event){
-
-    if(event.key === "Enter"){
-
-        event.preventDefault();
-
-        sendMessage();
-
-    }
-
-};
-
-
-/* =========================================================
-   CHAT IMAGE
-========================================================= */
-
-window.selectChatImage = function(){
-
-    const input =
-        document.createElement("input");
-
-
-    input.type = "file";
-
-    input.accept = "image/*";
-
-
-    input.onchange = () => {
-
-        const file =
-            input.files?.[0];
-
-
-        if(file){
-
-            alert(
-                "Image selected. Firebase chat image upload will be enabled next."
-            );
-
-        }
-
-    };
-
-
-    input.click();
-
-};
-
-
-/* =========================================================
-   PROFILE
-========================================================= */
-
-window.openEditProfile = function(){
-
-    const modal =
-        document.getElementById("editProfileModal");
-
-
-    if(!modal) return;
-
-
-    modal.classList.remove("hidden");
-
-
-    const name =
-        document.getElementById("editName");
-
-
-    const bio =
-        document.getElementById("editBio");
-
-
-    const currentName =
-        document.getElementById("profileName");
-
-
-    const currentBio =
-        document.getElementById("profileBio");
-
-
-    if(name){
-
-        name.value =
-            currentName?.textContent || "";
-
-    }
-
-
-    if(bio){
-
-        bio.value =
-            currentBio?.textContent || "";
-
-    }
-
-};
-
-
-window.closeEditProfile = function(){
-
-    const modal =
-        document.getElementById("editProfileModal");
-
-
-    if(modal){
-
-        modal.classList.add("hidden");
-
-    }
-
-};
-
-
-/* =========================================================
-   SAVE PROFILE
-========================================================= */
-
-window.saveProfile = function(){
-
-    const name =
-        document.getElementById("editName")
-        ?.value.trim();
-
-
-    const bio =
-        document.getElementById("editBio")
-        ?.value.trim();
-
-
-    if(!name){
-
-        alert("Please enter your name.");
-
-        return;
-
-    }
-
-
-    const profileName =
-        document.getElementById("profileName");
-
-
-    const profileBio =
-        document.getElementById("profileBio");
-
-
-    if(profileName){
-
-        profileName.textContent =
-            name;
-
-    }
-
-
-    if(profileBio){
-
-        profileBio.textContent =
-            bio || "Welcome to my Gitalk profile.";
-
-    }
-
-
-    const author =
-        document.getElementById("postAuthorName");
-
-
-    if(author){
-
-        author.textContent =
-            name;
-
-    }
-
-
-    closeEditProfile();
-
-
-    alert(
-        "Profile updated on this device. Firebase profile saving will be added next."
-    );
-
-};
-
-
-/* =========================================================
-   PROFILE PHOTO
-========================================================= */
-
-window.editProfilePhoto = function(){
-
-    const input =
-        document.createElement("input");
-
-
-    input.type = "file";
-
-    input.accept = "image/*";
-
-
-    input.onchange = () => {
-
-        const file =
-            input.files?.[0];
-
-
-        if(!file) return;
-
-
-        const url =
-            URL.createObjectURL(file);
-
-
-        const avatar =
-            document.getElementById("profileAvatar");
-
-
-        if(avatar){
-
-            avatar.innerHTML =
-                `<img src="${url}" alt="Profile">`;
-
-        }
-
-
-        const smallAvatar =
-            document.getElementById("currentUserAvatar");
-
-
-        if(smallAvatar){
-
-            smallAvatar.innerHTML =
-                `<img src="${url}" alt="Profile">`;
-
-        }
-
-    };
-
-
-    input.click();
-
-};
-
-
-window.editCoverPhoto = function(){
-
-    alert(
-        "Cover photo upload will be connected to Firebase Storage next."
-    );
-
-};
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-window.toggleDarkMode = function(){
-
-    darkMode =
-        !darkMode;
-
-
-    document.body.classList.toggle(
-        "dark-mode",
-        darkMode
-    );
-
-
-    const status =
-        document.getElementById("darkModeStatus");
-
-
-    if(status){
-
-        status.textContent =
-            darkMode ? "On" : "Off";
-
-    }
-
-
-    localStorage.setItem(
-        "gitalkDarkMode",
-        darkMode ? "on" : "off"
-    );
-
-};
-
-
-/* =========================================================
-   LOAD DARK MODE
-========================================================= */
-
-if(localStorage.getItem("gitalkDarkMode") === "on"){
-
-    darkMode = true;
-
-    document.body.classList.add("dark-mode");
-
-
-    const status =
-        document.getElementById("darkModeStatus");
-
-
-    if(status){
-
-        status.textContent = "On";
-
-    }
-
-}
-
-
-/* =========================================================
-   SETTINGS PLACEHOLDERS
-========================================================= */
-
-window.openPasswordSettings = function(){
-
-    alert(
-        "Password & Security will be connected to Firebase Authentication."
-    );
-
-};
-
-
-window.openPrivacySettings = function(){
-
-    alert(
-        "Privacy settings are coming in the next module."
-    );
-
-};
-
-
-window.openBlockedUsers = function(){
-
-    alert(
-        "Blocked users management is coming in the next module."
-    );
-
-};
-
-
-window.openNotificationSettings = function(){
-
-    alert(
-        "Notification settings will be connected to Firebase."
-    );
-
-};
-
-
-window.openHelp = function(){
-
-    alert(
-        "Gitalk Social Help Center"
-    );
-
-};
-
-
-window.openAbout = function(){
-
-    alert(
-        "Gitalk Social\nVersion 1.0"
-    );
-
-};
-
-
-window.showSavedPosts = function(){
-
-    alert(
-        "Saved posts will appear here after Firebase integration."
-    );
-
-};
-
-
-window.showMediaPosts = function(){
-
-    alert(
-        "Your photos and videos will appear here."
-    );
-
-};
-
-
-window.markNotificationsRead = function(){
-
-    alert(
-        "Notifications marked as read."
-    );
-
-};
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-window.logoutUser = async function(){
-
-    if(!auth){
-
-        alert("Firebase Authentication is not initialized.");
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm("Are you sure you want to logout?");
-
-
-    if(!confirmed) return;
-
-
-    try{
-
-        await signOut(auth);
-
-        alert("Logged out successfully.");
-
-        window.location.reload();
-
-    }catch(error){
-
-        console.error(error);
-
-        alert(
-            "Logout failed: " + error.message
-        );
-
-    }
-
-};
-
-
-/* =========================================================
-   INITIAL PAGE
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    showPage("home");
-
-    console.log(
-        "Gitalk Social UI loaded successfully."
-    );
+  registerBtn.textContent =
+    "Create Account";
 
 });
 
 
-/* =========================================================
-   PREVENT MODAL BACKGROUND SCROLL
-========================================================= */
+// ======================================================
+// LOGIN
+// ======================================================
 
-const observer =
-    new MutationObserver(() => {
+loginBtn.addEventListener("click", async () => {
 
-        const modalOpen =
-            document.querySelector(
-                ".modal:not(.hidden)"
-            );
+  const email =
+    loginEmail.value.trim();
+
+  const password =
+    loginPassword.value;
 
 
-        document.body.style.overflow =
-            modalOpen ? "hidden" : "";
+  if (!email || !password) {
+
+    loginMessage.textContent =
+      "Please enter email and password.";
+
+    return;
+
+  }
+
+
+  loginBtn.disabled = true;
+
+  loginBtn.textContent =
+    "Logging in...";
+
+
+  try {
+
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+
+    loginMessage.textContent =
+      "Login successful ❤️";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    loginMessage.textContent =
+      firebaseError(error);
+
+  }
+
+
+  loginBtn.disabled = false;
+
+  loginBtn.textContent =
+    "Login";
+
+});
+
+
+// ======================================================
+// FIREBASE ERROR MESSAGE
+// ======================================================
+
+function firebaseError(error) {
+
+  switch (error.code) {
+
+    case "auth/invalid-email":
+      return "Invalid email address.";
+
+    case "auth/user-not-found":
+      return "No account found with this email.";
+
+    case "auth/wrong-password":
+    case "auth/invalid-credential":
+      return "Incorrect email or password.";
+
+    case "auth/email-already-in-use":
+      return "This email is already registered.";
+
+    case "auth/weak-password":
+      return "Password is too weak.";
+
+    case "auth/network-request-failed":
+      return "Network error. Check your internet.";
+
+    default:
+      return error.message || "Something went wrong.";
+
+  }
+
+}
+
+
+// ======================================================
+// AUTH STATE
+// ======================================================
+
+onAuthStateChanged(auth, async (user) => {
+
+  if (user) {
+
+    authScreen.style.display = "none";
+
+    appScreen.style.display = "block";
+
+    await loadUserProfile(user);
+
+    loadPosts();
+
+  } else {
+
+    authScreen.style.display = "flex";
+
+    appScreen.style.display = "none";
+
+  }
+
+});
+
+
+// ======================================================
+// LOAD USER PROFILE
+// ======================================================
+
+async function loadUserProfile(user) {
+
+  let name =
+    user.displayName || "Gitalk User";
+
+
+  const welcome =
+    document.getElementById("welcomeTitle");
+
+  const profileName =
+    document.getElementById("profileName");
+
+  const profileEmail =
+    document.getElementById("profileEmail");
+
+  const editName =
+    document.getElementById("editName");
+
+
+  welcome.textContent =
+    `Welcome ${name} ❤️`;
+
+
+  profileName.textContent =
+    name;
+
+
+  profileEmail.textContent =
+    user.email || "";
+
+
+  editName.value =
+    name;
+
+
+  if (user.photoURL) {
+
+    document.getElementById(
+      "currentUserAvatar"
+    ).innerHTML =
+      `<img src="${escapeHTML(user.photoURL)}">`;
+
+
+    document.getElementById(
+      "profileAvatar"
+    ).innerHTML =
+      `<img src="${escapeHTML(user.photoURL)}">`;
+
+  }
+
+}
+
+
+// ======================================================
+// NAVIGATION
+// ======================================================
+
+document
+  .querySelectorAll(".nav-btn")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const page =
+        button.dataset.page;
+
+
+      document
+        .querySelectorAll(".page")
+        .forEach(p => {
+
+          p.classList.remove("active-page");
+
+        });
+
+
+      const selected =
+        document.getElementById(page);
+
+
+      if (selected) {
+
+        selected.classList.add(
+          "active-page"
+        );
+
+      }
+
+
+      document
+        .querySelectorAll(".nav-btn")
+        .forEach(btn => {
+
+          btn.classList.remove("active");
+
+        });
+
+
+      button.classList.add("active");
+
+    });
+
+  });
+
+
+// ======================================================
+// PROFILE HEADER BUTTON
+// ======================================================
+
+document
+  .getElementById("headerProfileBtn")
+  .addEventListener("click", () => {
+
+    openPage("profilePage");
+
+  });
+
+
+// ======================================================
+// OPEN PAGE
+// ======================================================
+
+function openPage(pageId) {
+
+  document
+    .querySelectorAll(".page")
+    .forEach(page => {
+
+      page.classList.remove(
+        "active-page"
+      );
 
     });
 
 
-observer.observe(
-    document.body,
-    {
-        subtree:true,
-        attributes:true,
-        attributeFilter:["class"]
+  const page =
+    document.getElementById(pageId);
+
+
+  if (page) {
+
+    page.classList.add(
+      "active-page"
+    );
+
+  }
+
+
+  document
+    .querySelectorAll(".nav-btn")
+    .forEach(btn => {
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === pageId
+      );
+
+    });
+
+}
+
+
+// ======================================================
+// LOGOUT
+// ======================================================
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener("click", async () => {
+
+    try {
+
+      await signOut(auth);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Logout failed.");
+
     }
+
+  });
+
+
+// ======================================================
+// CREATE POST MODAL
+// ======================================================
+
+const postModal =
+  document.getElementById("postModal");
+
+const postText =
+  document.getElementById("postText");
+
+const photoInput =
+  document.getElementById("postPhotoInput");
+
+const videoInput =
+  document.getElementById("postVideoInput");
+
+const mediaPreview =
+  document.getElementById("mediaPreview");
+
+
+function openPostModal() {
+
+  postModal.classList.add("show");
+
+}
+
+
+function closePostModal() {
+
+  postModal.classList.remove("show");
+
+}
+
+
+document
+  .getElementById("openPostBtn")
+  .addEventListener(
+    "click",
+    openPostModal
+  );
+
+
+document
+  .getElementById("textPostBtn")
+  .addEventListener(
+    "click",
+    openPostModal
+  );
+
+
+document
+  .getElementById("photoPostBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      openPostModal();
+
+      photoInput.click();
+
+    }
+  );
+
+
+document
+  .getElementById("videoPostBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      openPostModal();
+
+      videoInput.click();
+
+    }
+  );
+
+
+document
+  .getElementById("closePostBtn")
+  .addEventListener(
+    "click",
+    closePostModal
+  );
+
+
+document
+  .getElementById("selectPhotoBtn")
+  .addEventListener(
+    "click",
+    () => photoInput.click()
+  );
+
+
+document
+  .getElementById("selectVideoBtn")
+  .addEventListener(
+    "click",
+    () => videoInput.click()
+  );
+
+
+// ======================================================
+// PHOTO PREVIEW
+// ======================================================
+
+photoInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      photoInput.files[0];
+
+
+    if (!file) return;
+
+
+    videoInput.value = "";
+
+
+    const url =
+      URL.createObjectURL(file);
+
+
+    mediaPreview.innerHTML =
+      `<img src="${url}" alt="Preview">`;
+
+  }
 );
 
 
-/* =========================================================
-   END
-========================================================= */
+// ======================================================
+// VIDEO PREVIEW
+// ======================================================
+
+videoInput.addEventListener(
+  "change",
+  () => {
+
+    const file =
+      videoInput.files[0];
+
+
+    if (!file) return;
+
+
+    photoInput.value = "";
+
+
+    const url =
+      URL.createObjectURL(file);
+
+
+    mediaPreview.innerHTML =
+      `<video src="${url}" controls></video>`;
+
+  }
+);
+
+
+// ======================================================
+// PUBLISH POST
+// ======================================================
+
+document
+  .getElementById("publishPostBtn")
+  .addEventListener(
+    "click",
+    publishPost
+  );
+
+
+async function publishPost() {
+
+  const user =
+    auth.currentUser;
+
+
+  if (!user) {
+
+    alert("Please login first.");
+
+    return;
+
+  }
+
+
+  const text =
+    postText.value.trim();
+
+
+  const photo =
+    photoInput.files[0];
+
+
+  const video =
+    videoInput.files[0];
+
+
+  if (!text && !photo && !video) {
+
+    document.getElementById(
+      "postMessage"
+    ).textContent =
+      "Write something or select a photo/video.";
+
+    return;
+
+  }
+
+
+  const publishBtn =
+    document.getElementById(
+      "publishPostBtn"
+    );
+
+
+  publishBtn.disabled = true;
+
+  publishBtn.textContent =
+    "Posting...";
+
+
+  try {
+
+    let mediaURL = "";
+
+    let mediaType = "";
+
+
+    const file =
+      photo || video;
+
+
+    if (file) {
+
+      mediaType =
+        photo ? "image" : "video";
+
+
+      const fileName =
+        `${Date.now()}_${file.name}`;
+
+
+      const storageRef =
+        ref(
+          storage,
+          `posts/${user.uid}/${fileName}`
+        );
+
+
+      const snapshot =
+        await uploadBytes(
+          storageRef,
+          file
+        );
+
+
+      mediaURL =
+        await getDownloadURL(
+          snapshot.ref
+        );
+
+    }
+
+
+    await addDoc(
+      collection(db, "posts"),
+      {
+
+        uid: user.uid,
+
+        author:
+          user.displayName ||
+          "Gitalk User",
+
+        authorEmail:
+          user.email || "",
+
+        text: text,
+
+        mediaURL: mediaURL,
+
+        mediaType: mediaType,
+
+        likes: 0,
+
+        comments: 0,
+
+        shares: 0,
+
+        createdAt:
+          serverTimestamp()
+
+      }
+    );
+
+
+    postText.value = "";
+
+    photoInput.value = "";
+
+    videoInput.value = "";
+
+    mediaPreview.innerHTML = "";
+
+    closePostModal();
+
+
+    document.getElementById(
+      "postMessage"
+    ).textContent = "";
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    document.getElementById(
+      "postMessage"
+    ).textContent =
+      "Post failed: " + error.message;
+
+  }
+
+
+  publishBtn.disabled = false;
+
+  publishBtn.textContent =
+    "Post";
+
+}
+
+
+// ======================================================
+// LOAD POSTS
+// ======================================================
+
+let unsubscribePosts = null;
+
+
+function loadPosts() {
+
+  if (unsubscribePosts) {
+
+    unsubscribePosts();
+
+  }
+
+
+  const feed =
+    document.getElementById("feed");
+
+
+  const postsQuery =
+    query(
+      collection(db, "posts"),
+      orderBy(
+        "createdAt",
+        "desc"
+      )
+    );
+
+
+  unsubscribePosts =
+    onSnapshot(
+      postsQuery,
+      snapshot => {
+
+        feed.innerHTML = "";
+
+
+        if (snapshot.empty) {
+
+          feed.innerHTML = `
+            <div class="empty-state">
+              <h3>No posts yet</h3>
+              <p>Be the first to create a post ❤️</p>
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        let count = 0;
+
+
+        snapshot.forEach(
+          docSnap => {
+
+            const post =
+              docSnap.data();
+
+
+            count++;
+
+
+            feed.appendChild(
+              createPostElement(
+                docSnap.id,
+                post
+              )
+            );
+
+          }
+        );
+
+
+        document.getElementById(
+          "postCount"
+        ).textContent =
+          count;
+
+      },
+      error => {
+
+        console.error(error);
+
+        feed.innerHTML = `
+          <div class="empty-state">
+            <h3>Unable to load posts</h3>
+            <p>${escapeHTML(error.message)}</p>
+          </div>
+        `;
+
+      }
+    );
+
+}
+
+
+// ======================================================
+// CREATE POST ELEMENT
+// ======================================================
+
+function createPostElement(
+  id,
+  post
+) {
+
+  const card =
+    document.createElement("article");
+
+
+  card.className =
+    "post-card";
+
+
+  let media = "";
+
+
+  if (
+    post.mediaURL &&
+    post.mediaType === "image"
+  ) {
+
+    media = `
+      <img
+        class="post-media"
+        src="${escapeHTML(post.mediaURL)}"
+        alt="Post image"
+      >
+    `;
+
+  }
+
+
+  if (
+    post.mediaURL &&
+    post.mediaType === "video"
+  ) {
+
+    media = `
+      <video
+        class="post-media"
+        src="${escapeHTML(post.mediaURL)}"
+        controls
+      ></video>
+    `;
+
+  }
+
+
+  card.innerHTML = `
+
+    <div class="post-header">
+
+      <div class="avatar">
+        👤
+      </div>
+
+      <div class="post-author">
+
+        <strong>
+          ${escapeHTML(
+            post.author ||
+            "Gitalk User"
+          )}
+        </strong>
+
+        <small>
+          Gitalk Social
+        </small>
+
+      </div>
+
+    </div>
+
+    ${
+      post.text
+      ?
+      `<div class="post-text">
+        ${escapeHTML(post.text)}
+      </div>`
+      :
+      ""
+    }
+
+    ${media}
+
+    <div class="post-buttons">
+
+      <button data-action="like">
+        ❤️ Like
+      </button>
+
+      <button data-action="comment">
+        💬 Comment
+      </button>
+
+      <button data-action="share">
+        🔗 Share
+      </button>
+
+    </div>
+
+  `;
+
+
+  card
+    .querySelector(
+      '[data-action="like"]'
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        alert("Like feature next step ❤️");
+
+      }
+    );
+
+
+  card
+    .querySelector(
+      '[data-action="comment"]'
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        alert("Comment feature next step 💬");
+
+      }
+    );
+
+
+  card
+    .querySelector(
+      '[data-action="share"]'
+    )
+    .addEventListener(
+      "click",
+      async () => {
+
+        const shareText =
+          post.text ||
+          "Check this post on Gitalk Social";
+
+
+        if (
+          navigator.share
+        ) {
+
+          try {
+
+            await navigator.share({
+              title: "Gitalk Social",
+              text: shareText
+            });
+
+          } catch {}
+
+        } else {
+
+          await navigator.clipboard.writeText(
+            shareText
+          );
+
+          alert(
+            "Post text copied!"
+          );
+
+        }
+
+      }
+    );
+
+
+  return card;
+
+}
+
+
+// ======================================================
+// EDIT PROFILE
+// ======================================================
+
+const profileModal =
+  document.getElementById(
+    "profileModal"
+  );
+
+
+document
+  .getElementById(
+    "editProfileBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      profileModal.classList.add(
+        "show"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "closeProfileBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      profileModal.classList.remove(
+        "show"
+      );
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "saveProfileBtn"
+  )
+  .addEventListener(
+    "click",
+    async () => {
+
+      const user =
+        auth.currentUser;
+
+
+      if (!user) return;
+
+
+      const name =
+        document
+          .getElementById(
+            "editName"
+          )
+          .value.trim();
+
+
+      if (!name) {
+
+        return;
+
+      }
+
+
+      try {
+
+        await updateProfile(
+          user,
+          {
+            displayName: name
+          }
+        );
+
+
+        await setDoc(
+          doc(
+            db,
+            "users",
+            user.uid
+          ),
+          {
+            name: name
+          },
+          {
+            merge: true
+          }
+        );
+
+
+        await loadUserProfile(
+          user
+        );
+
+
+        profileModal.classList.remove(
+          "show"
+        );
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        document.getElementById(
+          "profileMessage"
+        ).textContent =
+          error.message;
+
+      }
+
+    }
+  );
+
+
+// ======================================================
+// DARK MODE
+// ======================================================
+
+document
+  .getElementById(
+    "darkModeBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      document.body.classList.toggle(
+        "dark-mode"
+      );
+
+
+      localStorage.setItem(
+        "gitalkDarkMode",
+        document.body.classList.contains(
+          "dark-mode"
+        )
+      );
+
+    }
+  );
+
+
+if (
+  localStorage.getItem(
+    "gitalkDarkMode"
+  ) === "true"
+) {
+
+  document.body.classList.add(
+    "dark-mode"
+  );
+
+}
+
+
+// ======================================================
+// SEARCH
+// ======================================================
+
+document
+  .getElementById(
+    "searchInput"
+  )
+  .addEventListener(
+    "input",
+    event => {
+
+      const value =
+        event.target.value
+          .toLowerCase()
+          .trim();
+
+
+      document
+        .querySelectorAll(
+          ".post-card"
+        )
+        .forEach(post => {
+
+          post.style.display =
+            !value ||
+            post.textContent
+              .toLowerCase()
+              .includes(value)
+              ?
+              ""
+              :
+              "none";
+
+        });
+
+    }
+  );
+
+
+// ======================================================
+// EMPTY SETTINGS BUTTONS
+// ======================================================
+
+document
+  .getElementById(
+    "accountSettingsBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      openPage("profilePage");
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "privacyBtn"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      alert(
+        "Privacy controls will be added in the next step."
+      );
+
+    }
+  );
+
+
+// ======================================================
+// ESCAPE HTML
+// ======================================================
+
+function escapeHTML(value) {
+
+  if (value === null ||
+      value === undefined) {
+
+    return "";
+
+  }
+
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+// ======================================================
+// GLOBAL MODAL CLOSE
+// ======================================================
+
+window.addEventListener(
+  "click",
+  event => {
+
+    if (
+      event.target === postModal
+    ) {
+
+      closePostModal();
+
+    }
+
+
+    if (
+      event.target === profileModal
+    ) {
+
+      profileModal.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+// ======================================================
+// GITALK SOCIAL READY
+// ======================================================
 
 console.log(
-    "Gitalk Social Step 3 loaded."
+  "Gitalk Social Firebase initialized successfully ❤️"
 );
