@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gitalk Social - Login Diagnostic</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f0f2f5;padding:20px}
+.card{max-width:430px;margin:30px auto;background:white;padding:24px;border-radius:16px;box-shadow:0 4px 18px #0002}
+h1{text-align:center;color:#1877f2;margin-top:0}
+input{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:8px;font-size:16px}
+button{width:100%;padding:13px;margin-top:10px;border:0;border-radius:8px;background:#1877f2;color:white;font-size:16px;font-weight:bold}
+#status{margin-top:16px;padding:12px;border-radius:8px;background:#eee;white-space:pre-wrap;word-break:break-word}
+.ok{background:#d9f7df!important;color:#146c2e}
+.err{background:#ffe0e0!important;color:#a00}
+.info{background:#e8f1ff!important;color:#1456a0}
+.small{font-size:13px;color:#666;margin-top:14px;text-align:center}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Gitalk Social</h1>
+<h3>Login Diagnostic</h3>
+
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button type="button" id="loginBtn">LOGIN</button>
+
+<div id="status" class="info">Starting diagnostic...</div>
+<div class="small">This temporary page checks JavaScript, Supabase and Login.</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const status = document.getElementById("status");
+
+  function show(text, type="info"){
+    status.textContent = text;
+    status.className = type;
+  }
+
+  window.addEventListener("error", function(e){
+    show("JavaScript ERROR:\\n" + e.message + "\\nLine: " + e.lineno, "err");
+  });
+
+  window.addEventListener("unhandledrejection", function(e){
+    show("Promise ERROR:\\n" + (e.reason?.message || e.reason || "Unknown error"), "err");
+  });
+
+  show("1. JavaScript is running.\\nChecking Supabase library...","info");
+
+  if(!window.supabase){
+    show("ERROR: Supabase library is NOT loaded.\\n\\nThe CDN script could not load. Tell me this exact message.","err");
+    return;
+  }
+
+  show("2. Supabase library loaded.\\nCreating connection...","info");
+
+  const SUPABASE_URL = "https://mhnfutbpvyvhdmqqquyi.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_NpULKcoHIfa0urWJH0oOPA_o9vqamOl";
+
+  let client;
+
+  try{
+    client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    show("3. Supabase connection created.\\n\\nNow enter your email/password and press LOGIN.","ok");
+  }catch(err){
+    show("ERROR creating Supabase client:\\n" + err.message,"err");
+    return;
+  }
+
+  document.getElementById("loginBtn").addEventListener("click", async function(){
+    show("4. LOGIN button clicked.\\nChecking details...","info");
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if(!email || !password){
+      show("Please enter both Email and Password.","err");
+      return;
+    }
+
+    show("5. Connecting to Supabase Auth...","info");
+
+    try{
+      const {data, error} = await client.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if(error){
+        show("LOGIN FAILED:\\n" + error.message + "\\n\\nCode: " + (error.status || "N/A"),"err");
+        return;
+      }
+
+      show(
+        "LOGIN SUCCESSFUL!\\n\\nUser: " +
+        (data.user?.email || "unknown") +
+        "\\n\\nSupabase Auth is working correctly.",
+        "ok"
+      );
+    }catch(err){
+      show("LOGIN EXCEPTION:\\n" + (err.message || err),"err");
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
