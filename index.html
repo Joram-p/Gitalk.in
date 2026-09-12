@@ -1,34 +1,1256 @@
-<!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gitalk.in — Premium Picks</title><meta name="description" content="Premium product picks and affiliate deals from Gitalk.in">
-<link rel="stylesheet" href="assets/css/style.css">
-</head><body>
-<div class="announcement">✦ CURATED PICKS • FRESH DEALS • GITALK.IN ✦</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-10">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GITALK.IN — Discover Something Beautiful</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f7f4ef;
+    color:#171717;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#151515;
+    color:white;
+    text-align:center;
+    padding:9px;
+    font-size:11px;
+    letter-spacing:2px;
+}
+
+/* HEADER */
+
+header{
+    height:82px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    text-decoration:none;
+    color:#111;
+    font-size:25px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#e94b61;
+}
+
+nav{
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#222;
+    font-size:14px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#e94b61;
+}
+
+.header-search{
+    width:210px;
+    padding:12px 17px;
+    border:1px solid #ddd;
+    border-radius:30px;
+    outline:none;
+}
+
+/* HERO */
+
+.hero{
+    min-height:610px;
+    padding:70px 8%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at 80% 20%,#ffd0d8 0,transparent 28%),
+    radial-gradient(circle at 20% 80%,#f8df9c 0,transparent 25%),
+    linear-gradient(135deg,#fff0e9,#f7e9d4,#e6e4ff);
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.label{
+    display:inline-block;
+    background:white;
+    padding:9px 16px;
+    border-radius:30px;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:2px;
+    box-shadow:0 8px 25px #00000010;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(48px,7vw,88px);
+    line-height:.95;
+    margin:24px 0;
+}
+
+.hero h1 span{
+    color:#e94b61;
+    font-style:italic;
+}
+
+.hero p{
+    max-width:570px;
+    font-size:17px;
+    line-height:1.7;
+    color:#555;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:14px;
+    margin-top:30px;
+}
+
+.btn{
+    text-decoration:none;
+    padding:15px 22px;
+    border-radius:13px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.btn-dark{
+    background:#151515;
+    color:white;
+}
+
+.btn-pink{
+    background:#e94b61;
+    color:white;
+}
+
+/* HERO VISUAL */
+
+.hero-visual{
+    width:400px;
+    height:430px;
+    position:relative;
+}
+
+.hero-card{
+    position:absolute;
+    border-radius:30px;
+    box-shadow:0 30px 60px #0002;
+}
+
+.card-back{
+    width:250px;
+    height:330px;
+    right:5px;
+    top:30px;
+    background:#c9c4fa;
+    transform:rotate(9deg);
+}
+
+.card-front{
+    width:260px;
+    height:340px;
+    left:10px;
+    bottom:5px;
+    background:#fff5d9;
+    transform:rotate(-7deg);
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.card-front small{
+    letter-spacing:3px;
+    font-weight:bold;
+}
+
+.card-front h2{
+    font-family:Georgia,serif;
+    font-size:46px;
+}
+
+.round-badge{
+    position:absolute;
+    right:0;
+    bottom:15px;
+    width:75px;
+    height:75px;
+    background:#e94b61;
+    color:white;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    text-align:center;
+    font-size:10px;
+    font-weight:bold;
+    transform:rotate(12deg);
+}
+
+/* SECTION */
+
+section.content{
+    padding:80px 6%;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:30px;
+}
+
+.section-head small{
+    color:#e94b61;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.section-head h2{
+    font-family:Georgia,serif;
+    font-size:45px;
+    margin-top:8px;
+}
+
+.section-head a{
+    color:#111;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* CATEGORIES */
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+}
+
+.category{
+    height:150px;
+    border-radius:22px;
+    padding:22px;
+    display:flex;
+    align-items:end;
+    color:white;
+    text-decoration:none;
+    font-size:18px;
+    font-weight:bold;
+    overflow:hidden;
+    position:relative;
+}
+
+.category:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent,#0008);
+}
+
+.category span{
+    position:relative;
+    z-index:2;
+}
+
+.cat1{
+    background:linear-gradient(135deg,#ef8b8b,#7d3f4e);
+}
+
+.cat2{
+    background:linear-gradient(135deg,#e9c46a,#9b642c);
+}
+
+.cat3{
+    background:linear-gradient(135deg,#7b8fe8,#403b7a);
+}
+
+.cat4{
+    background:linear-gradient(135deg,#77a98c,#28584b);
+}
+
+.cat5{
+    background:linear-gradient(135deg,#e783b0,#7c3d65);
+}
+
+/* FILTERS */
+
+.filters{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    margin-bottom:30px;
+}
+
+.filter{
+    border:1px solid #ddd;
+    background:white;
+    padding:11px 17px;
+    border-radius:30px;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.filter.active{
+    background:#151515;
+    color:white;
+}
+
+/* PRODUCTS */
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product{
+    background:white;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid #eee;
+    box-shadow:0 12px 35px #0000000c;
+    transition:.3s;
+}
+
+.product:hover{
+    transform:translateY(-8px);
+    box-shadow:0 25px 50px #0002;
+}
+
+.product-image{
+    height:245px;
+    position:relative;
+    background:#eee;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.tag{
+    position:absolute;
+    top:12px;
+    left:12px;
+    background:#e94b61;
+    color:white;
+    padding:7px 11px;
+    border-radius:20px;
+    font-size:9px;
+    font-weight:bold;
+}
+
+.heart{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:38px;
+    height:38px;
+    border:0;
+    border-radius:50%;
+    background:white;
+    font-size:21px;
+    cursor:pointer;
+}
+
+.product-info{
+    padding:18px;
+}
+
+.product-info small{
+    color:#e94b61;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.product-info h3{
+    margin:9px 0 18px;
+    font-size:17px;
+}
+
+.product-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.deal{
+    background:#151515;
+    color:white;
+    text-decoration:none;
+    padding:11px 13px;
+    border-radius:10px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+/* BIG BANNER */
+
+.big-banner{
+    margin:0 6% 80px;
+    padding:65px;
+    border-radius:32px;
+
+    background:
+    linear-gradient(120deg,#191919,#362c3d);
+
+    color:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:30px;
+}
+
+.big-banner h2{
+    font-family:Georgia,serif;
+    font-size:48px;
+    margin:10px 0;
+}
+
+.big-banner h2 span{
+    color:#ff6680;
+    font-style:italic;
+}
+
+.big-banner p{
+    color:#bbb;
+}
+
+.banner-btn{
+    background:#e94b61;
+    color:white;
+    padding:15px 20px;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:bold;
+}
+
+/* NEWS */
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.news{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+}
+
+.news span{
+    color:#e94b61;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.news h3{
+    font-family:Georgia,serif;
+    font-size:25px;
+    margin:12px 0;
+}
+
+.news p{
+    color:#666;
+    line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+    background:#151515;
+    color:#aaa;
+    padding:45px 6%;
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+footer .logo{
+    color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px){
+
+    .hero-visual{
+        display:none;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:650px){
+
+    header{
+        height:auto;
+        padding:16px 5%;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    nav{
+        order:3;
+        width:100%;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .header-search{
+        display:none;
+    }
+
+    .hero{
+        min-height:520px;
+        padding:55px 7%;
+    }
+
+    .hero h1{
+        font-size:52px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        text-align:center;
+    }
+
+    section.content{
+        padding:55px 5%;
+    }
+
+    .section-head h2{
+        font-size:36px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .category{
+        height:125px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .product-image{
+        height:175px;
+    }
+
+    .product-info{
+        padding:13px;
+    }
+
+    .product-info h3{
+        font-size:15px;
+    }
+
+    .product-bottom{
+        display:block;
+    }
+
+    .price{
+        display:block;
+        margin-bottom:10px;
+    }
+
+    .deal{
+        display:block;
+        text-align:center;
+    }
+
+    .big-banner{
+        margin:0 5% 55px;
+        padding:38px 7%;
+        display:block;
+    }
+
+    .big-banner h2{
+        font-size:38px;
+    }
+
+    .banner-btn{
+        display:inline-block;
+        margin-top:20px;
+    }
+
+    .news-grid{
+        grid-template-columns:1fr;
+    }
+
+    footer{
+        display:block;
+        text-align:center;
+    }
+
+    footer div{
+        margin:10px 0;
+    }
+
+}
+
+@media(max-width:390px){
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+🔥 GITALK.IN • DISCOVER • EXPLORE • SHOP • TRAVEL
+</div>
+
 <header>
-  <a class="logo" href="index.html"><span class="mark">G</span><span>GITALK</span><i>.IN</i></a>
-  <nav><a class="active" href="index.html">Home</a><a href="products.html">Shop</a><a href="deals.html">Deals</a><a href="#">Travel</a><a href="#">Gallery</a></nav>
-  <a class="navbtn" href="products.html">Explore →</a>
+
+<a class="logo" href="#">
+GITALK<span>.IN</span>
+</a>
+
+<nav>
+<a href="#">Home</a>
+<a href="#shop">Shop</a>
+<a href="#deals">Deals</a>
+<a href="#travel">Travel</a>
+<a href="#news">News</a>
+</nav>
+
+<input
+class="header-search"
+id="search"
+placeholder="Search..."
+>
+
 </header>
+
+
+<!-- HERO -->
+
 <section class="hero">
-  <div class="hero-copy">
-    <div class="eyebrow">THE GITALK EDIT</div>
-    <h1>Beautiful finds.<br><em>Better choices.</em></h1>
-    <p>Discover trending products, travel favourites and lifestyle picks — thoughtfully curated in one colourful place.</p>
-    <div class="actions"><a class="primary" href="products.html">Shop the collection <span>↗</span></a><a class="secondary" href="deals.html">See hot deals</a></div>
-    <div class="trust"><span>✦</span> Curated weekly <span>•</span> Mobile friendly <span>•</span> Easy to shop</div>
-  </div>
-  <div class="hero-art">
-    <div class="orb orb1"></div><div class="orb orb2"></div>
-    <div class="art-card back">TRAVEL<br><strong>EDIT</strong></div>
-    <div class="art-card front"><span>GITALK</span><strong>TOP<br>PICKS</strong><small>2026 COLLECTION</small></div>
-    <div class="spark">✦</div>
-  </div>
+
+<div class="hero-content">
+
+<span class="label">
+THE GITALK EDIT ✦
+</span>
+
+<h1>
+Discover<br>
+something <span>special.</span>
+</h1>
+
+<p>
+Premium product discoveries, travel inspiration,
+Rajasthan stories and beautiful finds — all in one place.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#shop" class="btn btn-dark">
+Explore Products ↗
+</a>
+
+<a href="#deals" class="btn btn-pink">
+🔥 Hot Deals
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-visual">
+
+<div class="hero-card card-back"></div>
+
+<div class="hero-card card-front">
+
+<small>GITALK.IN</small>
+
+<h2>
+TOP<br>
+PICKS
+</h2>
+
+<small>
+CURATED 2026
+</small>
+
+</div>
+
+<div class="round-badge">
+NEW<br>
+COLLECTION
+</div>
+
+</div>
+
 </section>
-<main>
-<section class="section"><div class="section-head"><div><small>HANDPICKED FOR YOU</small><h2>Trending now</h2></div><a href="products.html">View all →</a></div><div id="productGrid" class="grid"></div></section>
-<section class="banner"><div><small>RAJASTHAN × TRAVEL × LIFESTYLE</small><h2>Explore something<br><em>different.</em></h2><p>From everyday essentials to travel-inspired discoveries.</p></div><a href="products.html">Explore picks ↗</a></section>
-</main>
-<footer><div class="logo"><span class="mark">G</span><span>GITALK</span><i>.IN</i></div><p>© 2026 Gitalk.in · Affiliate links may earn us a commission.</p></footer>
-<script src="data/affiliate-links.js"></script><script src="data/products.js"></script><script src="assets/js/app.js"></script>
-</body></html>
+
+
+<!-- CATEGORIES -->
+
+<section class="content">
+
+<div class="section-head">
+
+<div>
+<small>EXPLORE</small>
+<h2>Choose your world</h2>
+</div>
+
+</div>
+
+
+<div class="categories">
+
+<a class="category cat1" href="#shop">
+<span>🛍️ Shopping</span>
+</a>
+
+<a class="category cat2" href="#travel">
+<span>🏜️ Rajasthan</span>
+</a>
+
+<a class="category cat3" href="#shop">
+<span>💻 Gadgets</span>
+</a>
+
+<a class="category cat4" href="#travel">
+<span>✈️ Travel</span>
+</a>
+
+<a class="category cat5" href="#news">
+<span>🌸 Lifestyle</span>
+</a>
+
+</div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="content" id="shop">
+
+<div class="section-head">
+
+<div>
+<small>HANDPICKED FOR YOU</small>
+<h2>Trending Picks</h2>
+</div>
+
+<a href="#shop">
+View all →
+</a>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter active" data-category="All">
+All
+</button>
+
+<button class="filter" data-category="Trending">
+Trending
+</button>
+
+<button class="filter" data-category="Electronics">
+Electronics
+</button>
+
+<button class="filter" data-category="Home">
+Home
+</button>
+
+<button class="filter" data-category="Travel">
+Travel
+</button>
+
+<button class="filter" data-category="Fashion">
+Fashion
+</button>
+
+</div>
+
+
+<div class="products" id="products"></div>
+
+</section>
+
+
+<!-- DEALS -->
+
+<section class="big-banner" id="deals">
+
+<div>
+
+<small>
+GITALK SPECIAL
+</small>
+
+<h2>
+Find your next<br>
+<span>favourite.</span>
+</h2>
+
+<p>
+Fresh deals and useful products,
+carefully selected for you.
+</p>
+
+</div>
+
+<a href="#shop" class="banner-btn">
+Explore Deals ↗
+</a>
+
+</section>
+
+
+<!-- NEWS -->
+
+<section class="content" id="news">
+
+<div class="section-head">
+
+<div>
+<small>GITALK STORIES</small>
+<h2>Explore & Discover</h2>
+</div>
+
+</div>
+
+
+<div class="news-grid">
+
+<article class="news">
+
+<span>RAJASTHAN</span>
+
+<h3>
+Discover the colours of Jodhpur
+</h3>
+
+<p>
+Explore places, culture, food and beautiful
+experiences from Rajasthan.
+</p>
+
+</article>
+
+
+<article class="news">
+
+<span>TRAVEL</span>
+
+<h3>
+Travel smarter in 2026
+</h3>
+
+<p>
+Useful travel products, accessories and
+destination inspiration.
+</p>
+
+</article>
+
+
+<article class="news">
+
+<span>LIFESTYLE</span>
+
+<h3>
+Beautiful things for everyday life
+</h3>
+
+<p>
+Discover products and ideas selected
+for modern everyday living.
+</p>
+
+</article>
+
+</div>
+
+</section>
+
+
+<footer id="travel">
+
+<div class="logo">
+GITALK<span>.IN</span>
+</div>
+
+<div>
+Travel • Explore • Flowers • News & Media
+</div>
+
+<div>
+© 2026 Gitalk.in
+</div>
+
+</footer>
+
+
+<script>
+
+/* ================================
+   CENTRAL AFFILIATE LINKS
+================================ */
+
+const AFFILIATE_LINKS = {
+
+product1:
+"https://link.amazon/B0ihgukwM",
+
+product2:
+"https://link.amazon/B00hJy1Sk",
+
+product3:
+"https://link.amazon/B07UkxFz2",
+
+product4:
+"https://link.amazon/B00JSrcZe",
+
+product5:
+"https://link.amazon/B043zOhI3",
+
+product6:
+"https://link.amazon/B07aC5WLy",
+
+product7:
+"https://link.amazon/B0eFHSkSN",
+
+product8:
+"https://link.amazon/B0j0fHdEt"
+
+};
+
+
+/* ================================
+   PRODUCTS
+================================ */
+
+const PRODUCTS = [
+
+{
+id:"product1",
+name:"Smart Pick One",
+category:"Trending",
+price:"₹999",
+image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800",
+affiliateKey:"product1",
+tag:"HOT"
+},
+
+{
+id:"product2",
+name:"Premium Gadget",
+category:"Electronics",
+price:"₹1,499",
+image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800",
+affiliateKey:"product2",
+tag:"TOP"
+},
+
+{
+id:"product3",
+name:"Home Essential",
+category:"Home",
+price:"₹799",
+image:"https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800",
+affiliateKey:"product3",
+tag:"DEAL"
+},
+
+{
+id:"product4",
+name:"Style Edit",
+category:"Fashion",
+price:"₹1,299",
+image:"https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=800",
+affiliateKey:"product4",
+tag:"NEW"
+},
+
+{
+id:"product5",
+name:"Travel Favourite",
+category:"Travel",
+price:"₹1,999",
+image:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800",
+affiliateKey:"product5",
+tag:"HOT"
+},
+
+{
+id:"product6",
+name:"Lifestyle Pick",
+category:"Trending",
+price:"₹899",
+image:"https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=800",
+affiliateKey:"product6",
+tag:"TOP"
+},
+
+{
+id:"product7",
+name:"Beauty Choice",
+category:"Home",
+price:"₹699",
+image:"https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800",
+affiliateKey:"product7",
+tag:"DEAL"
+},
+
+{
+id:"product8",
+name:"Gadget Pick",
+category:"Electronics",
+price:"₹1,799",
+image:"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800",
+affiliateKey:"product8",
+tag:"NEW"
+}
+
+];
+
+
+/* ================================
+   PRODUCT RENDER
+================================ */
+
+const container =
+document.getElementById("products");
+
+
+function renderProducts(list){
+
+container.innerHTML = "";
+
+list.forEach(product => {
+
+const link =
+AFFILIATE_LINKS[product.affiliateKey] || "#";
+
+
+container.innerHTML += `
+
+<article class="product">
+
+<div class="product-image">
+
+<img
+src="${product.image}"
+alt="${product.name}"
+loading="lazy"
+>
+
+<span class="tag">
+${product.tag}
+</span>
+
+<button class="heart">
+♡
+</button>
+
+</div>
+
+
+<div class="product-info">
+
+<small>
+${product.category}
+</small>
+
+<h3>
+${product.name}
+</h3>
+
+<div class="product-bottom">
+
+<span class="price">
+${product.price}
+</span>
+
+<a
+class="deal"
+href="${link}"
+target="_blank"
+rel="nofollow sponsored noopener"
+>
+View Deal ↗
+</a>
+
+</div>
+
+</div>
+
+</article>
+
+`;
+
+});
+
+}
+
+
+renderProducts(PRODUCTS);
+
+
+/* ================================
+   CATEGORY FILTER
+================================ */
+
+document
+.querySelectorAll(".filter")
+.forEach(button => {
+
+button.addEventListener("click",() => {
+
+document
+.querySelectorAll(".filter")
+.forEach(b =>
+b.classList.remove("active")
+);
+
+button.classList.add("active");
+
+const category =
+button.dataset.category;
+
+if(category === "All"){
+
+renderProducts(PRODUCTS);
+
+}else{
+
+renderProducts(
+PRODUCTS.filter(
+p => p.category === category
+)
+);
+
+}
+
+});
+
+});
+
+
+/* ================================
+   SEARCH
+================================ */
+
+document
+.getElementById("search")
+.addEventListener("input",function(){
+
+const query =
+this.value.toLowerCase();
+
+const result =
+PRODUCTS.filter(product =>
+
+(
+product.name +
+" " +
+product.category
+)
+.toLowerCase()
+.includes(query)
+
+);
+
+renderProducts(result);
+
+});
+
+
+/* ================================
+   WISHLIST
+================================ */
+
+document
+.addEventListener("click",function(e){
+
+if(e.target.classList.contains("heart")){
+
+e.target.textContent =
+e.target.textContent === "♡"
+? "♥"
+: "♡";
+
+}
+
+});
+
+</script>
+
+</body>
+  </html>
