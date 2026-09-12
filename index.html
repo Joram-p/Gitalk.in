@@ -1,35 +1,91 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Gitalk.in — Best Deals</title>
-  <meta name="description" content="Gitalk.in Best Deals and recommendations">
-  <link rel="stylesheet" href="../assets/css/deals.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gitalk.in — Today's Best Deals</title>
+<meta name="description" content="Gitalk.in premium affiliate deals">
+<link rel="stylesheet" href="../assets/css/deals.css">
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../">GIT<span>ALK</span><small>.in</small></a>
-  <a class="home" href="../">← Home</a>
+<div class="top-strip">
+  <div>🔥 Best Deals &nbsp; | &nbsp; 🛡️ Trusted Affiliate Links &nbsp; | &nbsp; 🛍️ Shop Smart</div>
+  <div>Welcome to Gitalk.in &nbsp; | &nbsp; Follow Us: ● ● ●</div>
+</div>
+
+<header class="nav">
+  <a class="logo" href="../"><span class="logo-mark">G</span><span>Gitalk<small>.in</small><em>Explore · Shop · Grow</em></span></a>
+  <nav>
+    <a href="../">Home</a><a href="../travel/">Travel</a><a href="../explore/">Explore</a>
+    <a href="../flowers/">Flowers</a><a href="../news/">News</a><a class="active" href="./">Deals <b>Hot</b></a>
+  </nav>
+  <div class="search"><input id="search" placeholder="Search deals, products..."><button>⌕</button></div>
 </header>
 
-<main>
-  <section class="hero">
-    <p class="eyebrow">GITalk.in PICKS</p>
-    <h1>🔥 Today's Best Deals</h1>
-    <p>काम की चीज़ें, आसान तुलना और सीधे खरीदने का विकल्प।</p>
-    <input id="search" type="search" placeholder="🔎 Product खोजें...">
+<section class="hero">
+  <div class="hero-copy">
+    <span class="limited">🔥 LIMITED TIME</span>
+    <h1>Today's <strong>Best Deals</strong></h1>
+    <p>Top Products &nbsp; • &nbsp; Amazing Discounts &nbsp; • &nbsp; Trusted Links</p>
+    <a class="primary" href="#deals">Shop Now →</a>
+    <div class="trust"><span>🛡️ 100% Genuine</span><span>🏷️ Best Prices</span><span>🔒 Secure Shopping</span><span>🚚 Fast Delivery</span></div>
+  </div>
+  <div class="hero-side">Smart Shopping<br><strong>Better Living</strong><small>Jodhpur · Rajasthan</small></div>
+</section>
+
+<div class="categories">
+  <button data-cat="all">🏷️<span>All Deals</span></button>
+  <button data-cat="Electronics">💻<span>Electronics</span></button>
+  <button data-cat="Fashion">👕<span>Fashion</span></button>
+  <button data-cat="Home">🏠<span>Home & Kitchen</span></button>
+  <button data-cat="Beauty">🌸<span>Beauty & Health</span></button>
+  <button data-cat="Travel">✈️<span>Travel</span></button>
+  <button data-cat="Sports">🏋️<span>Sports</span></button>
+  <button data-cat="Toys">🎁<span>Toys & More</span></button>
+</div>
+
+<main class="layout">
+<section>
+  <div class="section-head"><div><span class="fire">🔥</span><h2>Today's Best Deals</h2><p>Grab the best offers before they're gone!</p></div><a href="#deals">View All Deals →</a></div>
+  <div id="deals" class="products"></div>
+  <p id="empty" class="empty" hidden>No matching products found.</p>
+
+  <section class="rajasthan-banner">
+    <div><small>Travel · Culture · Heritage · Adventure</small><h2>Rajasthan Special Deals</h2><a href="../travel/">Explore Now →</a></div>
+    <div class="fort">Jodhpur<br><strong>The Blue City</strong></div>
   </section>
 
-  <section class="notice">
-    <strong>Affiliate Disclosure:</strong> इस पेज के कुछ links affiliate links हो सकते हैं। आप खरीदारी करते हैं तो हमें बिना आपके अतिरिक्त खर्च के commission मिल सकता है।
-  </section>
+  <div class="features">
+    <span>🛡️ <b>Secure Payments</b><small>100% secure & trusted</small></span>
+    <span>🚚 <b>Free Shipping</b><small>On eligible orders</small></span>
+    <span>↩️ <b>Easy Returns</b><small>Hassle-free returns</small></span>
+    <span>◷ <b>24/7 Support</b><small>We're here to help</small></span>
+    <span>✓ <b>Best Price Guarantee</b><small>Shop with confidence</small></span>
+  </div>
 
-  <section id="products" class="grid" aria-live="polite"></section>
-  <p id="empty" class="empty" hidden>कोई product नहीं मिला।</p>
+  <div class="lower">
+    <article><h3>Latest News & Media <a href="../news/">View All →</a></h3><p>🏰 Rajasthan Tourism: Jodhpur Fort attracts record visitors</p><p>🗺️ New Travel Routes to Explore in Rajasthan</p><p>🛒 India's E-commerce Growth Hits New High</p></article>
+    <article><h3>Rajasthan Highlights <a href="../explore/">View All →</a></h3><p>📍 Jodhpur — The Blue City</p><p>🏯 Mehrangarh Fort — A Royal Heritage</p><p>👑 Umaid Bhawan Palace — A Royal Experience</p></article>
+    <article><h3>Our Flower Gallery <a href="../flowers/">View All →</a></h3><div class="flowers"><i>🌹</i><i>🌻</i><i>🌷</i><i>🌺</i><i>🌸</i><i>💐</i></div></article>
+  </div>
+</section>
+
+<aside>
+  <div class="widget"><h3>🔥 Live News & Updates <b>LIVE</b></h3><p>🏰 Jodhpur Fort: A Royal Heritage of Rajasthan</p><p>🗺️ Rajasthan Tourism 2025: New Travel Guidelines</p><p>🌄 Rajasthan's Best Monsoon Destinations</p></div>
+  <div class="widget weather"><h3>☀️ Weather</h3><strong>Jodhpur, Rajasthan</strong><div class="temp">32°C <small>Sunny</small></div></div>
+  <div class="widget"><h3>🕐 Live Clock</h3><div id="clock" class="clock">--:--:--</div></div>
+  <div class="widget"><h3>💱 Currency Converter</h3><input id="amount" type="number" value="1"><select><option>USD → INR</option></select><div class="convert">₹ <span id="converted">83.45</span></div></div>
+  <div class="widget"><h3>📍 Jodhpur Google Map</h3><div class="map">📍 Jodhpur<br><a href="https://www.google.com/maps/search/?api=1&query=Jodhpur+Rajasthan" target="_blank" rel="noopener">View on Google Maps</a></div></div>
+  <div class="widget ai"><h3>🤖 JORAM AI Assistant</h3><p>Ask me anything about travel, shopping, deals, Rajasthan and more...</p><input placeholder="Type your message..."></div>
+  <div class="widget upload"><h3>📸 Photo / Video Upload</h3><p>Share your photos & videos</p><input id="media" type="file" accept="image/*,video/*"><label for="media">Upload Now</label></div>
+</aside>
 </main>
 
-<footer>© <span id="year"></span> Gitalk.in · Deals</footer>
+<footer>
+  <div class="footer-brand"><span class="logo-mark">G</span><b>Gitalk.in</b><small>Explore · Shop · Grow</small></div>
+  <div>Home &nbsp; | &nbsp; About Us &nbsp; | &nbsp; Contact &nbsp; | &nbsp; Privacy Policy &nbsp; | &nbsp; Affiliate Disclosure</div>
+  <p>© <span id="year"></span> Gitalk.in. All rights reserved. This site contains affiliate links; we may earn a commission when you buy through our links.</p>
+</footer>
 <script src="../assets/js/deals.js"></script>
 </body>
 </html>
