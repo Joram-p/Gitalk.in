@@ -1,0 +1,1 @@
+Put your real logo, product images, flower photos, Rajasthan photos and videos in the matching folders. Placeholder visuals are CSS/emoji based so the package works immediately.
