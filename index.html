@@ -1,69 +1,31 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Gitalk.in - premium affiliate comparison website for AI tools, software and hosting.">
-<title>Gitalk.in — Smart Tools & Deals</title>
-<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<header class="header">
-  <a class="logo" href="index.html">GITALK<span>.IN</span></a>
-  <nav>
-    <a href="#categories">Categories</a><a href="#featured">Featured</a><a href="#deals">Deals</a><a href="#about">About</a>
-  </nav>
-  <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☾</button>
-</header>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Gitalk.in — AI tools, software, hosting and smart product discovery.">
+<title>Gitalk.in — Discover Better Tools</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="glow a"></div><div class="glow b"></div>
+<header><a class="brand" href="#"><strong>G</strong><span>GITALK<i>.IN</i></span></a>
+<nav><a href="#categories">Categories</a><a href="#popular">Popular</a><a href="#deals">Deals</a><a href="#about">About</a></nav>
+<div class="actions"><button id="theme">☼</button><a class="menu" href="#categories">☰</a></div></header>
 
-<main>
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">USA-FOCUSED • SMART SHOPPING</p>
-    <h1>Find better tools.<br><em>Make smarter choices.</em></h1>
-    <p class="lead">Discover useful AI tools, software and online services through clear comparisons and buying guides.</p>
-    <div class="hero-actions"><a class="btn primary" href="#featured">Explore Tools</a><a class="btn ghost" href="#deals">Today's Deals</a></div>
-  </div>
-  <div class="hero-card"><div class="orb">✦</div><p>Curated picks</p><strong>AI • Software • Hosting</strong><small>Updated product data can be managed from one file.</small></div>
-</section>
+<section class="hero"><div><label>✦ CURATED FOR SMART SHOPPERS</label>
+<h1>Discover tools that<br><span>work smarter.</span></h1>
+<p>Premium comparisons, useful software and online services — all in one place.</p>
+<div class="buttons"><a class="primary" href="#popular">Explore picks →</a><a class="secondary" href="#categories">Browse categories</a></div>
+<div class="trust">✓ Independent guides &nbsp; ✓ Updated offers &nbsp; ✓ Mobile friendly</div></div>
+<div class="visual"><div class="orb">✦<small>SMART<br>CHOICES</small></div><div class="float one">🤖 <b>AI Tools</b><small>Trending now</small></div><div class="float two">🔥 <b>Best Deals</b><small>Explore offers</small></div></div></section>
 
-<section class="toolbar">
-  <div><input id="search" type="search" placeholder="Search tools, software, hosting..." aria-label="Search products"></div>
-  <div id="chips" class="chips"></div>
-</section>
+<div class="searchbar"><div class="search">⌕ <input id="search" placeholder="Search AI tools, software, hosting..."></div><div id="chips"></div></div>
 
-<section id="categories" class="section">
-  <div class="section-head"><div><p class="eyebrow">EXPLORE</p><h2>Popular categories</h2></div></div>
-  <div class="category-grid">
-    <button data-cat="AI Tools">🤖 <b>AI Tools</b><span>Writing, video & productivity</span></button>
-    <button data-cat="Software">💻 <b>Software</b><span>Business & marketing tools</span></button>
-    <button data-cat="Hosting">🌐 <b>Hosting</b><span>Websites & WordPress</span></button>
-    <button data-cat="Security">🔐 <b>Security</b><span>Privacy & protection</span></button>
-  </div>
-</section>
+<section id="categories" class="section"><small class="eyebrow">EXPLORE</small><h2>Shop by category</h2>
+<div class="cats"><button data-cat="AI & SEO">🤖<b>AI & SEO</b><span>Grow, write & automate</span>→</button>
+<button data-cat="AI Writing">✍️<b>AI Writing</b><span>Content & creativity</span>→</button>
+<button data-cat="Hosting">🌐<b>Hosting</b><span>Websites & WordPress</span>→</button>
+<button data-cat="Business">💼<b>Business</b><span>Tools for teams</span>→</button></div></section>
 
-<section id="featured" class="section">
-  <div class="section-head"><div><p class="eyebrow">TOP PICKS</p><h2>Featured tools</h2></div><span id="count" class="muted"></span></div>
-  <div id="products" class="product-grid"></div>
-</section>
+<section id="popular" class="section"><div class="heading"><div><small class="eyebrow">EDITOR'S PICKS</small><h2>Popular right now</h2></div><span id="count"></span></div><div id="grid" class="grid"></div></section>
 
-<section id="deals" class="deal-banner">
-  <div><p class="eyebrow">DEALS</p><h2>Smart picks, without the noise.</h2><p>Always verify current pricing and offers on the merchant's official website.</p></div>
-  <a class="btn primary" href="#featured">Browse picks</a>
-</section>
+<section id="deals" class="deal"><div><small class="eyebrow">GITALK DEALS</small><h2>Save time. Choose better.</h2><p>Check the official merchant page for current pricing, features and offers.</p></div><a class="primary light" href="#popular">View picks →</a></section>
 
-<section id="about" class="section about">
-  <p class="eyebrow">ABOUT GITALK.IN</p>
-  <h2>Useful comparisons for real decisions.</h2>
-  <p>Gitalk.in is designed for product discovery and affiliate content. Affiliate relationships, when used, will be disclosed clearly. Prices and offers may change.</p>
-</section>
-</main>
-
-<footer>
-  <div><strong>GITALK.IN</strong><p>Smart tools & product discovery.</p></div>
-  <div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="affiliate-disclosure.html">Affiliate Disclosure</a></div>
-  <p>© 2026 Gitalk.in</p>
-</footer>
-<script src="js/app.js"></script>
-</body>
-</html>
+<section id="about" class="section about"><small class="eyebrow">WHY GITALK?</small><h2>Less searching.<br>More deciding.</h2><p>Gitalk.in brings useful comparisons and product discovery into a clean experience. Affiliate relationships will be disclosed clearly.</p></section>
+<footer><div><a class="brand" href="#"><strong>G</strong><span>GITALK<i>.IN</i></span></a><p>Smart tools & product discovery.</p></div><div class="links"><a href="#about">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="affiliate-disclosure.html">Disclosure</a></div><span>© 2026 Gitalk.in</span></footer>
+<script src="js/app.js"></script></body></html>
