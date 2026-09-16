@@ -1,5 +1,14 @@
-GITALK.IN FIXED VERSION
+GITALK.IN — LIGHT 16-COLOUR 3D THEME
 
-Extract the ZIP and open index.html directly in Chrome/Edge/Safari. CSS is embedded inside every HTML page, so the pages will not appear as unstyled/default HTML.
+Extract the ZIP completely and open OPEN_FIRST.html or index.html.
 
-This is a frontend demo. Real payments, recharge, live booking, login, business database and APIs require secure backend integrations.
+This update uses:
+- Bright white/light-blue digital background
+- 16-colour neon accents
+- 3D multicolour GITALK logo
+- Light 3D globe/orbit hero
+- Glass/soft-shadow cards
+- Responsive mobile layout
+- CSS + JavaScript embedded in every HTML page
+
+Live payments, recharge, booking, banking, login and business APIs still require secure backend integrations.
