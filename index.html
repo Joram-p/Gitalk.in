@@ -1,64 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gitalk.in | Travel • Shopping • Rajasthan</title>
-<meta name="description" content="Gitalk.in – travel guides, smart shopping, Rajasthan, flowers and news.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://gitalk.in/">
-<link rel="stylesheet" href="style.css">
+<title>Gitalk.in — Digital Services & Business</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/3d-theme.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
-<div class="topbar"><span>Explore • Shop • Save • Grow</span><span id="clock">Loading...</span></div>
-<header><nav class="nav">
-<a class="logo" href="index.html"><b>🏔️</b><span>Gitalk<span>.in</span><small>Your Travel & Shopping Guide</small></span></a>
-<div class="menu">
-<a href="index.html">Home</a><a href="travel.html">Travel</a><a href="explore.html">Explore</a><a href="flowers.html">Flowers</a><a href="news.html">News</a><a href="products.html">Products</a><a href="gallery.html">Gallery</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-</div>
-<button class="search-btn" onclick="focusSearch()">⌕</button>
-</nav></header>
-
-<section class="hero"><div class="hero-content">
-<div class="badge">Explore the Real Rajasthan</div>
-<h1>Discover Amazing Places,<br><em>Smart Products</em> & More</h1>
-<p>Travel guides, product recommendations, beautiful flowers, latest news and useful digital tools — all in one place.</p>
-<div class="hero-search"><input id="searchInput" placeholder="Search travel, products, places or topics..."><button onclick="searchSite()">Search</button></div>
-</div></section>
-
-<section class="features">
-<a href="travel.html"><b>✈️</b><strong>Travel Guides</strong><small>Explore the world</small></a>
-<a href="products.html"><b>🛍️</b><strong>Best Products</strong><small>Smart shopping</small></a>
-<a href="flowers.html"><b>🌸</b><strong>Flower Gallery</strong><small>Nature's beauty</small></a>
-<a href="news.html"><b>📰</b><strong>Latest News</strong><small>Stay updated</small></a>
-<a href="about.html"><b>🤖</b><strong>JORAM AI</strong><small>Digital assistant</small></a>
+<header class="topbar">
+  <a class="logo" href="index.html"><span>GITALK</span><small>Digital Services & Business</small></a>
+  <button class="menu-btn" id="menuBtn">☰</button>
+  <nav id="mainNav">
+    <a href="services.html">Services</a><a href="business.html">Business</a>
+    <a href="shopping.html">Shopping</a><a href="travel.html">Travel</a>
+    <a href="booking.html">Booking</a><a href="recharge.html">Recharge</a>
+    <a href="media.html">Media</a><a href="technology.html">Technology</a>
+  </nav>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <div class="badge">ONE DIGITAL PLATFORM</div>
+    <h1>Everything you need.<br><em>One Gitalk.</em></h1>
+    <p>Shopping, services, businesses, travel, booking, recharge, bills, technology and media — all in one modern digital platform.</p>
+    <div class="search"><input id="globalSearch" placeholder="Search products, services, businesses, hotels, jobs..."><button onclick="searchSite()">Search</button></div>
+  </div>
+  <div class="logo-orb"><div class="orb-text">GITALK</div><div class="orb-ring"></div></div>
 </section>
-
-<div class="container">
-<section><div class="section-title"><h2>✈️ Travel Guides</h2><a href="travel.html">View All →</a></div>
-<div class="cards">
-<article class="card"><img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=85" alt="Jodhpur Rajasthan"><div><h3>Jodhpur</h3><p>Blue City of Rajasthan</p><a class="btn" href="travel.html">Read Guide →</a></div></article>
-<article class="card"><img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=85" alt="Udaipur"><div><h3>Udaipur</h3><p>City of Lakes</p><a class="btn" href="travel.html">Read Guide →</a></div></article>
-<article class="card"><img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=85" alt="Jaipur"><div><h3>Jaipur</h3><p>Pink City of India</p><a class="btn" href="travel.html">Read Guide →</a></div></article>
-<article class="card"><img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=800&q=85" alt="Jaisalmer"><div><h3>Jaisalmer</h3><p>Golden City</p><a class="btn" href="travel.html">Read Guide →</a></div></article>
-</div></section>
-
-<section><div class="section-title"><h2>🛍️ Featured Products</h2><a href="products.html">View All →</a></div>
-<div class="products">
-<div class="product"><span>-35%</span><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=85" alt="Travel backpack"><h3>Travel Backpack</h3><div class="rating">★★★★★ 4.6</div><b>₹2,499</b><a class="amazon" href="products.html">View Product →</a></div>
-<div class="product"><span>-20%</span><img src="https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&w=600&q=85" alt="Travel pillow"><h3>Travel Pillow</h3><div class="rating">★★★★★ 4.4</div><b>₹999</b><a class="amazon" href="products.html">View Product →</a></div>
-<div class="product"><span>-42%</span><img src="https://images.unsplash.com/photo-1609592424935-0a7e9e6b7e7e?auto=format&fit=crop&w=600&q=85" alt="Power bank"><h3>Power Bank</h3><div class="rating">★★★★★ 4.5</div><b>₹1,299</b><a class="amazon" href="products.html">View Product →</a></div>
-<div class="product"><span>-27%</span><img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=600&q=85" alt="Camera"><h3>Action Camera</h3><div class="rating">★★★★★ 4.3</div><b>₹3,999</b><a class="amazon" href="products.html">View Product →</a></div>
-</div></section>
-
-<section><div class="section-title"><h2>🌸 Flowers</h2><a href="flowers.html">View Gallery →</a></div><div class="flowers">
-<img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=500&q=85" alt="Rose">
-<img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=85" alt="Lotus">
-<img src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=500&q=85" alt="Sunflower">
-<img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=500&q=85" alt="Tulip">
-</div></section>
+<section class="section">
+<h2>Explore Gitalk</h2>
+<div class="grid" id="categoryGrid"></div>
+</section>
+<section class="section">
+<h2>Popular Services</h2>
+<div class="grid">
+  <a class="card" href="recharge.html"><b>📱 Recharge & Bills</b><span>Mobile, DTH, electricity, gas and more</span></a>
+  <a class="card" href="booking.html"><b>🎫 Booking</b><span>Travel, movies, events and appointments</span></a>
+  <a class="card" href="travel.html"><b>✈️ Travel & Tourism</b><span>Flights, trains, buses, hotels and tours</span></a>
+  <a class="card" href="business.html"><b>🏪 Business</b><span>Discover and promote local businesses</span></a>
 </div>
-
-<footer><div class="footer-grid"><div><h2>Gitalk<span>.in</span></h2><p>Your Travel & Shopping Guide.</p></div><div><h3>Explore</h3><a href="travel.html">Travel</a><a href="products.html">Products</a><a href="flowers.html">Flowers</a><a href="news.html">News</a></div><div><h3>Company</h3><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div><div><h3>Contact</h3><p>navyaaitech@gmail.com</p><p>Jodhpur, Rajasthan, India</p></div></div><div class="copyright">© 2026 Gitalk.in — All Rights Reserved.</div></footer>
-<script src="script.js"></script>
+</section>
+</main>
+<footer>© 2026 Gitalk.in · Digital Services & Business</footer>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/search.js"></script>
 </body></html>
