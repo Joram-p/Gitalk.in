@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://gitalk.in/</loc>
-  </url>
-  <url>
-    <loc>https://gitalk.in/travel-accessories.html</loc>
-  </url>
+<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://gitalk.in/</loc></url>
+<url><loc>https://gitalk.in/travel.html</loc></url>
+<url><loc>https://gitalk.in/explore.html</loc></url>
+<url><loc>https://gitalk.in/flowers.html</loc></url>
+<url><loc>https://gitalk.in/news.html</loc></url>
+<url><loc>https://gitalk.in/products.html</loc></url>
+<url><loc>https://gitalk.in/gallery.html</loc></url>
+<url><loc>https://gitalk.in/about.html</loc></url>
+<url><loc>https://gitalk.in/contact.html</loc></url>
 </urlset>
