@@ -14,6 +14,7 @@ health.html
 education.html
 auto.html
 food.html
+joram.html
 assets/style.css
 assets/app.js
 README.md
