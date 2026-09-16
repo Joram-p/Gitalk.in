@@ -1,40 +1,482 @@
-.hero,.card,.logo-orb{
-  background:linear-gradient(
-    145deg,
-    rgba(255,255,255,.075),
-    rgba(255,255,255,.025)
-  );
+/* ================================
+   FUTURISTIC DIGITAL PINK THEME
+   ================================ */
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  color:#fff;
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(255,0,153,.20),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 80% 25%,
+      rgba(145,0,255,.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(255,60,180,.13),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #05030a 0%,
+      #100716 45%,
+      #06030b 100%
+    );
+
+  background-attachment:fixed;
+  position:relative;
+  overflow-x:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+
+/* ================================
+   DIGITAL TECHNOLOGY GRID
+   ================================ */
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+
+  background-image:
+    linear-gradient(
+      rgba(255,80,190,.11) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,80,190,.11) 1px,
+      transparent 1px
+    );
+
+  background-size:45px 45px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,1),
+      rgba(0,0,0,.15)
+    );
+}
+
+
+/* ================================
+   PINK DIGITAL GLOW
+   ================================ */
+
+body:after{
+  content:"";
+  position:fixed;
+  width:550px;
+  height:550px;
+  left:-180px;
+  top:15%;
+
+  border-radius:50%;
+  pointer-events:none;
+  z-index:-1;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,0,170,.18),
+      transparent 70%
+    );
+
+  filter:blur(25px);
+}
+
+
+/* ================================
+   HERO / CARDS / LOGO
+   ================================ */
+
+.hero,
+.card,
+.logo-orb{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.075),
+      rgba(255,20,160,.025)
+    );
+
   box-shadow:
     12px 12px 35px rgba(0,0,0,.28),
     -8px -8px 25px rgba(255,255,255,.015);
 }
 
-.card{
-  border:1px solid rgba(255,255,255,.09);
-  transform:translateZ(0);
-  transition:transform .25s ease,box-shadow .25s ease;
-}
 
-.card:hover{
-  transform:translateY(-7px) perspective(700px) rotateX(2deg) rotateY(-2deg);
-  box-shadow:
-    18px 22px 45px rgba(0,0,0,.35),
-    0 0 30px rgba(255,80,170,.12);
-}
+/* ================================
+   HERO
+   ================================ */
 
 .hero{
   border-radius:35px;
   position:relative;
   overflow:hidden;
+
+  border:1px solid rgba(255,100,200,.10);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
 }
+
+
+/* Hero pink light */
 
 .hero:before{
   content:"";
   position:absolute;
+
   width:450px;
   height:450px;
+
   border-radius:50%;
+
   right:-180px;
+  top:-200px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,64,170,.20),
+      transparent 65%
+    );
+
+  pointer-events:none;
+}
+
+
+/* Second futuristic glow */
+
+.hero:after{
+  content:"";
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  left:-100px;
+  bottom:-120px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(170,40,255,.16),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+
+/* ================================
+   CARDS
+   ================================ */
+
+.card{
+  border:1px solid rgba(255,100,200,.13);
+
+  transform:translateZ(0);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  position:relative;
+  overflow:hidden;
+}
+
+
+/* Card pink shine */
+
+.card:before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255,100,200,.07) 50%,
+      transparent 80%
+    );
+
+  transform:translateX(-100%);
+  transition:transform .5s ease;
+
+  pointer-events:none;
+}
+
+
+.card:hover:before{
+  transform:translateX(100%);
+}
+
+
+/* Card hover */
+
+.card:hover{
+  transform:
+    translateY(-7px)
+    perspective(700px)
+    rotateX(2deg)
+    rotateY(-2deg);
+
+  border-color:
+    rgba(255,100,200,.28);
+
+  box-shadow:
+    18px 22px 45px rgba(0,0,0,.35),
+    0 0 30px rgba(255,80,180,.14),
+    inset 0 0 20px rgba(255,60,180,.025);
+}
+
+
+/* ================================
+   LOGO ORB
+   ================================ */
+
+.logo-orb{
+  border:1px solid rgba(255,120,210,.16);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255,180,225,.18),
+      rgba(255,20,160,.08) 40%,
+      rgba(20,5,25,.5) 75%
+    );
+
+  box-shadow:
+    0 0 25px rgba(255,50,180,.18),
+    12px 12px 35px rgba(0,0,0,.30),
+    inset 0 0 25px rgba(255,60,180,.08);
+}
+
+
+/* ================================
+   SEARCH BUTTON
+   ================================ */
+
+.search button{
+  border:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd1e8,
+      #ff7ac3,
+      #ff4daf
+    );
+
+  color:#210713;
+
+  box-shadow:
+    0 8px 25px rgba(255,70,170,.25);
+
+  cursor:pointer;
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    filter .2s ease;
+}
+
+
+.search button:hover{
+  transform:translateY(-2px);
+
+  filter:brightness(1.08);
+
+  box-shadow:
+    0 12px 30px rgba(255,50,170,.38),
+    0 0 20px rgba(255,100,200,.20);
+}
+
+
+.search button:active{
+  transform:translateY(0);
+}
+
+
+/* ================================
+   INPUT
+   ================================ */
+
+.search input{
+  background:
+    rgba(255,255,255,.045);
+
+  color:#fff;
+
+  border:1px solid
+    rgba(255,100,200,.13);
+
+  outline:none;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+.search input::placeholder{
+  color:rgba(255,255,255,.45);
+}
+
+
+.search input:focus{
+  border-color:
+    rgba(255,100,200,.40);
+
+  background:
+    rgba(255,255,255,.065);
+
+  box-shadow:
+    0 0 20px rgba(255,60,180,.10);
+}
+
+
+/* ================================
+   PINK NEON TEXT
+   ================================ */
+
+.pink-text{
+  color:#ff8dcc;
+
+  text-shadow:
+    0 0 10px rgba(255,70,180,.35),
+    0 0 25px rgba(255,40,170,.15);
+}
+
+
+/* ================================
+   TECHNOLOGY GLOW ELEMENT
+   ================================ */
+
+.tech-glow{
+  position:relative;
+}
+
+
+.tech-glow:after{
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,0,170,.22),
+      transparent 70%
+    );
+
+  filter:blur(10px);
+
+  pointer-events:none;
+}
+
+
+/* ================================
+   SCROLLBAR
+   ================================ */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#08040c;
+}
+
+::-webkit-scrollbar-thumb{
+  background:
+    linear-gradient(
+      #ff69bd,
+      #b832ff
+    );
+
+  border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:
+    linear-gradient(
+      #ff9bd4,
+      #d05cff
+    );
+}
+
+
+/* ================================
+   SELECTION
+   ================================ */
+
+::selection{
+  background:rgba(255,70,180,.35);
+  color:#fff;
+}
+
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media(max-width:768px){
+
+  .hero{
+    border-radius:25px;
+  }
+
+  .hero:before{
+    width:300px;
+    height:300px;
+
+    right:-140px;
+    top:-130px;
+  }
+
+  body:before{
+    background-size:35px 35px;
+  }
+
+  .card:hover{
+    transform:translateY(-4px);
+  }
+}  right:-180px;
   top:-200px;
   background:radial-gradient(
     circle,
