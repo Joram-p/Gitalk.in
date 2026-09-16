@@ -1,4 +1,4 @@
-# Gitalk.in — Complete 3D Digital Services & Business Frontend
+# Gitalk.in — Digital Services & Business
 
 ## Open
 Extract the ZIP and open `index.html` in Chrome/Edge/Safari.
