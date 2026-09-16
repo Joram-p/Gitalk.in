@@ -1,17 +1,19 @@
-# Gitalk.in
+# Gitalk.in — Complete 3D Digital Services & Business Frontend
 
-Modern modular starter for a digital services & business portal.
+## Open
+Extract the ZIP and open `index.html` in Chrome/Edge/Safari.
 
-## Run
-Open `index.html` in a browser or serve this folder with any static web server.
+## Included
+- 16-colour 3D-style Gitalk logo built in CSS
+- Neon digital/glassmorphism UI
+- Responsive desktop/tablet/mobile layout
+- Home dashboard
+- Services, Business, Shopping, Travel, Booking
+- Recharge & Bills, Banking & Finance
+- Technology, Media, Jobs, Property, Health, Education, Auto, Food
+- Search/filter UI
+- Login/Register demo modal
+- Modular `assets/style.css` and `assets/app.js`
 
-## Update
-- Categories/UI: `assets/js/main.js`
-- Theme: `assets/css/3d-theme.css`
-- Responsive layout: `assets/css/responsive.css`
-- Businesses: `data/businesses.json`
-- Services: `data/services.json`
-- Offers: `data/offers.json`
-- News: `data/news.json`
-
-This is a frontend starter. Real payments, booking, authentication, live news, banking APIs and merchant dashboards require secure backend/API integrations.
+## Production integrations still required
+Payments, mobile recharge, live travel/booking, banking APIs, user authentication, business database, orders, notifications and admin dashboard need secure server-side/API integrations.
