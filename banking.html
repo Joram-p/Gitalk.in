@@ -208,7 +208,7 @@ footer{margin-top:55px;padding:40px 0 25px;border-top:1px solid #ffffff12;backgr
 @keyframes orbitSpinReverse{from{transform:rotateY(65deg) rotateZ(-20deg)}to{transform:rotateY(65deg) rotateZ(-380deg)}}
 @keyframes floatIcon{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(4deg)}}
 @media(prefers-reduced-motion:reduce){.globe,.globe:before,.globe:after,.orbit,.orbit2,.floating{animation:none!important}}
-.auth-choice{max-width:460px;text-align:center}.auth-logo{font-size:30px;font-weight:900;letter-spacing:-1px;background:linear-gradient(90deg,#00aef0,#6d45ef,#f32aa7,#ff9b00);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px}.auth-logo span{color:#6d45ef}.auth-choice h2{margin:4px 0 8px}.auth-sub{color:#6d8499;line-height:1.5;margin:0 0 20px}.auth-choice .btn{width:100%;box-sizing:border-box;margin:8px 0}.auth-choice .secondary{display:flex;align-items:center;justify-content:center;text-decoration:none;background:linear-gradient(90deg,#22c55e,#06b6d4);color:#fff;padding:13px 18px;border-radius:12px;font-weight:800}.auth-note{font-size:12px;color:#8096aa;margin-top:12px}</style>
+</style>
 </head><body>
 <header class="topbar"><div class="container nav">
 <a class="brand" href="index.html"><span class="logo3d"> </span><span class="brandtext"><strong>Gitalk.in</strong><small>Digital Services &amp; Business</small></span></a>
@@ -224,7 +224,7 @@ footer{margin-top:55px;padding:40px 0 25px;border-top:1px solid #ffffff12;backgr
 <a href="media.html">Media</a>
 <a href="technology.html">Technology</a>
 </nav>
-<div class="nav-actions"><button class="iconbtn" onclick="toast('Notifications panel demo')">🔔</button><a class="btn primary" href="auth/login.php" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">Login / Register</a></div>
+<div class="nav-actions"><button class="iconbtn" onclick="toast('Notifications panel demo')">🔔</button><button class="btn primary" data-login>Login / Register</button></div>
 </div></header>
 <main class="container"><section class="page-head"><div class="eyebrow" style="color:#8cecff;font-size:12px;font-weight:800;letter-spacing:2px">GITALK DIGITAL SERVICES & BUSINESS</div><h1>🏦 Banking & Finance</h1><p>Explore Banking & Finance options on one connected digital platform.</p></section>
 <div class="searchbox"><input id="filterSearch" placeholder="Search in this category..."><button class="btn primary" onclick="toast('Search ready')">Search</button></div>
@@ -238,7 +238,7 @@ footer{margin-top:55px;padding:40px 0 25px;border-top:1px solid #ffffff12;backgr
 <div><h4>Company</h4><a href="#">About Gitalk</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
 </div><div class="container copyright"><span>© 2026 Gitalk.in — Digital Services &amp; Business</span><span>Made for web &amp; mobile</span></div></footer>
 <div id="toast" class="toast"></div>
-<div id="loginModal" class="modal"><div class="modal-box auth-choice"><button class="close" data-close>×</button><div class="auth-logo">GITALK<span>.in</span></div><h2>Login / Register</h2><p class="auth-sub">Secure access to your Gitalk Digital Services &amp; Business account.</p><a class="btn primary" href="auth/login.php">🔐 Login to Gitalk</a><a class="btn secondary" href="auth/register.php">✨ Create New Account</a><div class="auth-note">Email + password authentication • Secure session</div></div></div>
+<div id="loginModal" class="modal"><div class="modal-box"><button class="close" data-close>×</button><h2>Login / Register</h2><p style="color:#9db2c8">Frontend demo form. Connect your secure authentication backend here.</p><input placeholder="Mobile number / Email" style="width:100%;padding:13px;background:#071224;border:1px solid #294762;border-radius:12px;color:#fff;margin:8px 0"><button class="btn primary demoAction" style="width:100%">Continue</button></div></div>
 <script>
 
 const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
@@ -251,7 +251,7 @@ function init(){
  function doSearch(){const v=(search?.value||"").trim(); if(!v)return toast("Search ke liye kuch type karein"); location.href="services.html?q="+encodeURIComponent(v)}
  if(searchBtn) searchBtn.onclick=doSearch;
  if(search) search.addEventListener("keydown",e=>{if(e.key==="Enter")doSearch()});
- 
+ qsa(".demoAction").forEach(b=>b.onclick=()=>toast("Demo action: backend/API integration ke baad live hoga."));
  const params=new URLSearchParams(location.search), query=(params.get("q")||"").toLowerCase();
  if(query){
    qsa("[data-searchable]").forEach(el=>{el.style.display=el.textContent.toLowerCase().includes(query)?"":"none"});
