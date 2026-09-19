@@ -109,4 +109,77 @@ footer{margin-top:55px;padding:40px 0 25px;border-top:1px solid #ffffff12;backgr
 @keyframes orbitSpinReverse{from{transform:rotateY(65deg) rotateZ(-20deg)}to{transform:rotateY(65deg) rotateZ(-380deg)}}
 @keyframes floatIcon{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(4deg)}}
 @media(prefers-reduced-motion:reduce){.globe,.globe:before,.globe:after,.orbit,.orbit2,.floating{animation:none!important}}
+</style><style id="gitalk-final-premium-theme">
+
+:root{
+ --g-navy:#102044;--g-blue:#2563eb;--g-cyan:#06b6d4;--g-violet:#7c3aed;
+ --g-pink:#ec4899;--g-bg:#f5f9ff;--g-card:rgba(255,255,255,.82);
+ --g-border:rgba(37,99,235,.14);--g-shadow:0 18px 50px rgba(16,32,68,.10);
+}
+html{scroll-behavior:smooth}
+body{
+ background:
+ radial-gradient(circle at 8% 5%,rgba(37,99,235,.10),transparent 28%),
+ radial-gradient(circle at 92% 12%,rgba(124,58,237,.09),transparent 26%),
+ linear-gradient(135deg,#fff 0%,var(--g-bg) 52%,#eef7ff 100%) !important;
+ color:var(--g-navy) !important;
+}
+body:before{
+ content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
+ background:conic-gradient(from 180deg,rgba(6,182,212,.05),rgba(124,58,237,.06),rgba(236,72,153,.04),rgba(37,99,235,.05));
+ filter:blur(55px);animation:gAurora 14s ease-in-out infinite alternate;
+}
+@keyframes gAurora{from{transform:rotate(0deg) scale(1)}to{transform:rotate(10deg) scale(1.08)}}
+header,.navbar,.nav,.topbar,.site-header{
+ background:rgba(255,255,255,.76)!important;backdrop-filter:blur(18px);
+ border-bottom:1px solid var(--g-border)!important;box-shadow:0 8px 28px rgba(16,32,68,.06)!important;
+}
+.card,.panel,.box,.service-card,.category-card,.news-card,.social-card,.auth-card,.modal-content{
+ background:var(--g-card)!important;backdrop-filter:blur(16px);
+ border:1px solid var(--g-border)!important;border-radius:22px!important;
+ box-shadow:var(--g-shadow)!important;
+}
+button,.btn,.button{
+ border-radius:14px!important;border:0!important;
+ background:linear-gradient(135deg,var(--g-blue),var(--g-violet))!important;
+ box-shadow:0 10px 24px rgba(37,99,235,.22)!important;
+ transition:transform .2s ease,box-shadow .2s ease!important;
+}
+button:hover,.btn:hover,.button:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(37,99,235,.28)!important}
+input,select,textarea{
+ border:1px solid rgba(37,99,235,.16)!important;border-radius:14px!important;
+ background:rgba(255,255,255,.92)!important;box-shadow:inset 0 1px 2px rgba(16,32,68,.03)!important;
+}
+.gitalk-logo-wrap{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.gitalk-logo-img{width:150px;height:auto;display:block;filter:drop-shadow(0 9px 14px rgba(37,99,235,.18))}
+.gitalk-logo-wrap:hover .gitalk-logo-img{transform:translateY(-1px) scale(1.015);transition:.2s}
+.g-final-brand{
+ display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.8px;color:var(--g-navy);
+}
+.g-final-mark{
+ width:46px;height:46px;border-radius:15px;display:grid;place-items:center;color:#fff;
+ background:linear-gradient(135deg,#2563eb,#06b6d4 42%,#7c3aed 72%,#ec4899);
+ box-shadow:0 12px 25px rgba(37,99,235,.24);transform:rotate(-4deg);
+}
+.g-final-mark:after{content:"G";font-size:27px;font-weight:900;transform:rotate(4deg)}
+.g-final-word{font-size:25px}
+.g-final-word span{background:linear-gradient(90deg,#2563eb,#06b6d4,#7c3aed,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.g-glow{animation:gFloat 5s ease-in-out infinite}
+@keyframes gFloat{50%{transform:translateY(-7px)}}
+@media(max-width:700px){
+ .gitalk-logo-img{width:122px}.g-final-word{font-size:21px}.g-final-mark{width:40px;height:40px}
+ .card,.panel,.box,.service-card,.category-card,.news-card,.social-card,.auth-card,.modal-content{border-radius:18px!important}
+}
+
+</style>
+<style id="gitalK-neo-style">
+:root{--n-bg:#f3f7ff;--n-text:#15264b;--n-muted:#7181a3;--n-blue:#2d7ff9;--n-cyan:#20d5ee;--n-violet:#8b6cff}
+body{background:radial-gradient(circle at 8% 8%,rgba(70,190,255,.24),transparent 25%),radial-gradient(circle at 92% 18%,rgba(139,108,255,.18),transparent 28%),linear-gradient(135deg,#fff,#f1f6ff 52%,#edf5ff)!important;color:var(--n-text)!important}
+header,.navbar,.nav,.topbar,.site-header{background:rgba(255,255,255,.68)!important;backdrop-filter:blur(24px)!important;box-shadow:0 10px 30px rgba(70,91,130,.07)!important}
+.card,.panel,.box,.service-card,.category-card,.news-card,.social-card,.auth-card,.modal-content,.feature-card{background:linear-gradient(145deg,rgba(255,255,255,.93),rgba(237,244,255,.8))!important;border:1px solid rgba(255,255,255,.9)!important;border-radius:28px!important;box-shadow:18px 18px 42px rgba(72,93,135,.18),-14px -14px 34px rgba(255,255,255,.98),inset 1px 1px 0 #fff!important}
+input,select,textarea{border:1px solid #fff!important;border-radius:18px!important;background:#f1f6ff!important;box-shadow:inset 6px 6px 14px rgba(83,105,145,.1),inset -6px -6px 14px #fff!important;min-height:52px}
+button,.btn,.button{border-radius:18px!important;background:linear-gradient(100deg,#bff5ff,#b8d9ff 48%,#cbbcff)!important;color:#19315f!important;font-weight:800!important;border:1px solid #fff!important;box-shadow:10px 10px 24px rgba(72,93,135,.18),-8px -8px 20px #fff!important}
+button:hover,.btn:hover,.button:hover{transform:translateY(-2px)!important}
+h1,h2,h3,h4{color:var(--n-text)}
+a{color:#256eea}
 </style></head><body><div>Opening <a href="index.html">Gitalk.in</a>…</div></body></html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-label="GITALK">
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2563eb"/><stop offset=".35" stop-color="#06b6d4"/>
+    <stop offset=".68" stop-color="#7c3aed"/><stop offset="1" stop-color="#ec4899"/>
+  </linearGradient>
+  <filter id="s"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-opacity=".20"/></filter>
+</defs>
+<g filter="url(#s)">
+  <path d="M18 60c0-25 20-44 45-44h44v22H66c-13 0-24 10-24 22s11 22 24 22h22V68H69V48h43v56H63c-25 0-45-19-45-44z" fill="url(#g)"/>
+  <path d="M118 16h22v88h-22zM156 16h22v88h-22zM196 16h22v88h-22zM236 16h22v88h-22zM276 16h22v88h-22z" fill="url(#g)"/>
+  <text x="315" y="88" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="800" letter-spacing="4" fill="#102044">GITALK</text>
+</g></svg>
