@@ -1,27 +1,15 @@
-# Gitalk.in — Complete Colourful Digital Services Theme
+# Gitalk.in — 7 Colour Live 3D Final Theme
 
-## Service categories
-1. Shopping
-2. Tourism & Travel
-3. Technology
-4. Banking & Finance
-5. News & Media
-6. Booking & Tickets
-7. Mobile & Recharge
-8. Bill Payment
-9. Education
-10. Jobs & Career
-11. Government Services
-12. Social & Video
-13. Health
-14. Agriculture
-15. Business & Payments
+Features:
+- 7-colour animated digital theme
+- Live 3D rainbow Gitalk G logo
+- Animated 3D hero orb with service icons
+- Welcome message: Discover • Connect • Explore • Grow
+- 10-photo auto-sliding gallery with swipe/touch support
+- Complete service directory with clickable website buttons
+- Shopping, Tourism, Technology, Banking, News, Booking, Recharge, Bills,
+  Education, Jobs, Government, Social, Health, Agriculture and Business
+- Responsive mobile design
+- No external dependency for the gallery artwork
 
-Each category has clickable website buttons that open in a new tab.
-
-Also included:
-- 10-photo auto-sliding gallery
-- Touch/swipe support
-- Colourful 3D digital theme
-- Responsive mobile layout
-- Gitalk.in / Joram Services & Business branding
+Upload all files to the GitHub Pages repository root.

@@ -10,3 +10,45 @@
 .service-buttons a:hover{transform:translateY(-2px);background:#ece9ff;box-shadow:0 6px 14px #aeb9db55}
 .sg1{--accent:#fd79a8}.sg2{--accent:#74b9ff}.sg3{--accent:#55efc4}.sg4{--accent:#ffeaa7}.sg5{--accent:#a29bfe}.sg6{--accent:#ff7675}.sg7{--accent:#00cec9}.sg8{--accent:#fdcb6e}.sg9{--accent:#81ecec}.sg10{--accent:#fab1a0}.sg11{--accent:#6c5ce7}.sg12{--accent:#e84393}.sg13{--accent:#55efc4}.sg14{--accent:#74b9ff}.sg15{--accent:#ff7675}
 @media(max-width:850px){.service-directory{grid-template-columns:1fr}}
+
+/* Gitalk 7-colour live 3D branding */
+:root{
+ --c1:#ff3b81;--c2:#ff8a00;--c3:#ffe000;--c4:#21d47b;
+ --c5:#00cfff;--c6:#4169ff;--c7:#9b45ff;
+}
+.header{box-shadow:0 5px 25px rgba(64,81,125,.06)}
+.brand{gap:12px}.brand-text{display:flex;flex-direction:column;line-height:1}
+.brand-text b{font-size:27px;letter-spacing:-1px}
+.brand-text small{font-size:20px;color:#9b45ff;font-weight:900;margin-left:2px}
+.brand-text em{font-size:9px;font-style:normal;color:#68748b;margin-top:6px;letter-spacing:.3px}
+.live-logo{
+ width:58px;height:58px;border-radius:18px;position:relative;isolation:isolate;
+ background:conic-gradient(from 0deg,var(--c1),var(--c2),var(--c3),var(--c4),var(--c5),var(--c6),var(--c7),var(--c1));
+ box-shadow:inset 5px 5px 10px rgba(255,255,255,.72),inset -7px -8px 12px rgba(20,20,80,.22),0 12px 28px rgba(74,76,170,.27);
+ animation:logoHue 7s linear infinite,logoFloat 3.8s ease-in-out infinite;
+ transform-style:preserve-3d;
+}
+.live-logo:before,.live-logo:after{
+ content:"";position:absolute;inset:5px;border-radius:15px;border:2px solid rgba(255,255,255,.55);
+ transform:translateZ(7px);pointer-events:none
+}
+.live-logo:after{inset:11px;border-color:rgba(255,255,255,.25);transform:translateZ(12px)}
+.live-logo span{
+ position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:36px;font-weight:1000;
+ text-shadow:2px 4px 5px rgba(20,25,90,.28);transform:translateZ(18px)
+}
+@keyframes logoHue{to{filter:hue-rotate(360deg)}}@keyframes logoFloat{50%{transform:perspective(220px) rotateY(9deg) rotateX(-7deg) translateY(-4px)}}
+.hero-tagline{font-size:22px;font-weight:900;letter-spacing:.4px;background:linear-gradient(90deg,var(--c6),var(--c7),var(--c1),var(--c2),var(--c4));-webkit-background-clip:text;color:transparent;margin:10px 0}
+.digital-orb{filter:drop-shadow(0 20px 30px rgba(73,92,190,.13))}
+.orb-core{position:relative;overflow:hidden;animation:orbLive 4.5s ease-in-out infinite;background:conic-gradient(from 0deg,var(--c6),var(--c5),var(--c4),var(--c3),var(--c2),var(--c1),var(--c7),var(--c6))}
+.orb-core:before{content:"";position:absolute;inset:-20%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.48) 50%,transparent 62%);animation:shine 3.2s linear infinite}
+.orb-core span,.orb-core small{position:relative;z-index:2}.orb-core small{display:block;position:absolute;bottom:46px;font-size:13px;letter-spacing:.5px}
+.ring-b{width:300px;height:300px;border-color:rgba(0,207,255,.42);transform:rotateX(68deg) rotateZ(20deg);animation:spinReverse 11s linear infinite}
+.ring-a{animation:spin 9s linear infinite}
+@keyframes orbLive{50%{transform:translateY(-12px) rotateY(7deg) rotateX(-4deg)}}
+@keyframes shine{to{transform:translateX(120%)}}@keyframes spinReverse{to{transform:rotateX(68deg) rotateZ(-340deg)}}
+.colour-strip{display:flex;height:8px;width:100%;position:relative;z-index:3}
+.colour-strip span{flex:1}.colour-strip span:nth-child(1){background:var(--c1)}.colour-strip span:nth-child(2){background:var(--c2)}.colour-strip span:nth-child(3){background:var(--c3)}.colour-strip span:nth-child(4){background:var(--c4)}.colour-strip span:nth-child(5){background:var(--c5)}.colour-strip span:nth-child(6){background:var(--c6)}.colour-strip span:nth-child(7){background:var(--c7)}
+.card,.service-group,.news-grid article{transition:transform .25s ease,box-shadow .25s ease}
+.card:hover,.service-group:hover{transform:translateY(-8px) scale(1.01)}
+@media(max-width:850px){.brand-text em{display:none}.live-logo{width:50px;height:50px}.brand-text b{font-size:23px}.brand-text small{font-size:17px}.hero-tagline{font-size:18px}}
