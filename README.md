@@ -1,10 +1,27 @@
-# Gitalk.in Colourful Digital Theme — Related Websites
+# Gitalk.in — Complete Colourful Digital Services Theme
 
-Includes:
-- Colourful responsive 3D theme
-- 10-photo auto-sliding gallery with touch/swipe
-- Related website buttons for Shopping, Tourism, Technology, Banking, Media/News, Booking, Recharge, Bill Pay and Education
-- External websites open in a new tab
-- No external dependency for gallery images
+## Service categories
+1. Shopping
+2. Tourism & Travel
+3. Technology
+4. Banking & Finance
+5. News & Media
+6. Booking & Tickets
+7. Mobile & Recharge
+8. Bill Payment
+9. Education
+10. Jobs & Career
+11. Government Services
+12. Social & Video
+13. Health
+14. Agriculture
+15. Business & Payments
 
-The listed links point to official/primary websites where possible. Always verify the destination before entering passwords, OTPs, payment details, or banking information.
+Each category has clickable website buttons that open in a new tab.
+
+Also included:
+- 10-photo auto-sliding gallery
+- Touch/swipe support
+- Colourful 3D digital theme
+- Responsive mobile layout
+- Gitalk.in / Joram Services & Business branding
