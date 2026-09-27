@@ -1,112 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gitalk.in — Services & Business</title>
-  <meta name="description" content="Gitalk.in — services, business, technology, shopping, tourism, banking, media and more.">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gitalk.in — Colourful Digital Services</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <a class="brand" href="#">
-      <span class="logo3d">G</span>
-      <span><b>Gitalk</b><small>.in</small></span>
-    </a>
-    <button class="menu-btn" id="menuBtn">☰</button>
-    <nav id="nav">
-      <a href="#home">Home</a>
-      <a href="#services">Services</a>
-      <a href="#news">News</a>
-      <a href="#education">Education</a>
-      <a href="#login">Login</a>
-    </nav>
-  </header>
+<header class="header">
+  <a class="brand" href="#"><span class="logo3d">G</span><span><b>Gitalk</b><small>.in</small></span></a>
+  <button class="menu-btn" id="menuBtn">☰</button>
+  <nav id="nav"><a href="#home">Home</a><a href="#gallery">Gallery</a><a href="#services">Services</a><a href="#news">News</a><a href="#education">Education</a><a href="#login">Login</a></nav>
+</header>
 
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-copy">
-        <div class="pill">🌐 Joram Services & Business</div>
-        <h1>Everything you need,<br><span>in one smart place.</span></h1>
-        <p>Shopping, tourism, technology, banking, media, booking, recharge, bills and educational resources — connected through Gitalk.in.</p>
-        <div class="actions">
-          <a class="btn primary" href="#services">Explore Services →</a>
-          <a class="btn secondary" href="#education">Kids Education</a>
-        </div>
-        <div class="stats">
-          <div><strong>10+</strong><small>Categories</small></div>
-          <div><strong>24/7</strong><small>Online Access</small></div>
-          <div><strong>Free</strong><small>Starter Theme</small></div>
-        </div>
-      </div>
-      <div class="globe-wrap" aria-label="Animated globe">
-        <div class="globe">
-          <div class="lat lat1"></div><div class="lat lat2"></div><div class="lat lat3"></div>
-          <div class="lon lon1"></div><div class="lon lon2"></div><div class="lon lon3"></div>
-        </div>
-        <div class="orbit orbit1">🛒</div>
-        <div class="orbit orbit2">✈️</div>
-        <div class="orbit orbit3">📱</div>
-        <div class="orbit orbit4">📚</div>
-      </div>
-    </section>
+<main>
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-copy">
+    <div class="pill">✨ Joram Services & Business</div>
+    <h1>Welcome to <span>Gitalk.in</span></h1>
+    <p>A colourful digital home for shopping, tourism, technology, banking, media, booking, recharge, bills and education.</p>
+    <div class="actions"><a class="btn primary" href="#services">Explore Services →</a><a class="btn white" href="#gallery">View Gallery</a></div>
+  </div>
+  <div class="digital-orb"><div class="orb-ring"></div><div class="orb-core">G</div><span class="orb-icon i1">🛒</span><span class="orb-icon i2">✈️</span><span class="orb-icon i3">📱</span><span class="orb-icon i4">📚</span></div>
+</section>
 
-    <section class="section" id="services">
-      <div class="section-head">
-        <div><span class="eyebrow">EXPLORE</span><h2>Popular Services</h2></div>
-        <p>Quick access to useful digital services.</p>
-      </div>
-      <div class="grid">
-        <a class="card" href="#"><span>🛍️</span><b>Shopping</b><small>Products & offers</small></a>
-        <a class="card" href="#"><span>✈️</span><b>Tourism</b><small>Travel & places</small></a>
-        <a class="card" href="#"><span>💻</span><b>Technology</b><small>Digital tools</small></a>
-        <a class="card" href="#"><span>🏦</span><b>Banking</b><small>Banking resources</small></a>
-        <a class="card" href="#"><span>📰</span><b>Media & News</b><small>Updates & headlines</small></a>
-        <a class="card" href="#"><span>🎟️</span><b>Booking</b><small>Tickets & bookings</small></a>
-        <a class="card" href="#"><span>📲</span><b>Recharge</b><small>Mobile recharge</small></a>
-        <a class="card" href="#"><span>💳</span><b>Bill Pay</b><small>Utility payments</small></a>
-      </div>
-    </section>
+<section class="gallery-section" id="gallery">
+  <div class="section-head"><div><span class="eyebrow">10 PHOTO GALLERY</span><h2>Digital World Gallery</h2></div><p>Auto-sliding • Swipe • Touch friendly</p></div>
+  <div class="slider" id="slider">
+    <div class="track" id="track">
+      <div class="slide"><img src="gallery1.svg" alt="Digital World"></div>
+      <div class="slide"><img src="gallery2.svg" alt="Shopping"></div>
+      <div class="slide"><img src="gallery3.svg" alt="Tourism"></div>
+      <div class="slide"><img src="gallery4.svg" alt="Technology"></div>
+      <div class="slide"><img src="gallery5.svg" alt="Media"></div>
+      <div class="slide"><img src="gallery6.svg" alt="Banking"></div>
+      <div class="slide"><img src="gallery7.svg" alt="Booking"></div>
+      <div class="slide"><img src="gallery8.svg" alt="Recharge"></div>
+      <div class="slide"><img src="gallery9.svg" alt="Education"></div>
+      <div class="slide"><img src="gallery10.svg" alt="Joram Business"></div>
+    </div>
+    <button class="arrow prev" id="prev">‹</button><button class="arrow next" id="next">›</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</section>
 
-    <section class="news-section" id="news">
-      <div class="section-head">
-        <div><span class="eyebrow">LATEST</span><h2>Media & Social Updates</h2></div>
-        <p>Connect your preferred news/API source here.</p>
-      </div>
-      <div class="news-grid">
-        <article><span class="news-icon">📰</span><h3>Google News Updates</h3><p>Place your news feed or approved API integration here.</p><a href="#">View Updates →</a></article>
-        <article><span class="news-icon">📢</span><h3>Social Updates</h3><p>Add links to your social pages and latest posts.</p><a href="#">Open Social →</a></article>
-        <article><span class="news-icon">🔔</span><h3>Important Alerts</h3><p>Show important notices and service announcements.</p><a href="#">See Alerts →</a></article>
-      </div>
-    </section>
+<section class="section" id="services">
+<div class="section-head"><div><span class="eyebrow">EXPLORE</span><h2>Popular Services</h2></div></div>
+<div class="grid">
+<a class="card c1" href="#"><span>🛍️</span><b>Shopping</b><small>Products & offers</small></a>
+<a class="card c2" href="#"><span>✈️</span><b>Tourism</b><small>Travel & places</small></a>
+<a class="card c3" href="#"><span>💻</span><b>Technology</b><small>Digital tools</small></a>
+<a class="card c4" href="#"><span>🏦</span><b>Banking</b><small>Banking resources</small></a>
+<a class="card c5" href="#"><span>📰</span><b>Media & News</b><small>Latest updates</small></a>
+<a class="card c6" href="#"><span>🎟️</span><b>Booking</b><small>Tickets & bookings</small></a>
+<a class="card c7" href="#"><span>📲</span><b>Recharge</b><small>Mobile recharge</small></a>
+<a class="card c8" href="#"><span>💳</span><b>Bill Pay</b><small>Utility payments</small></a>
+</div></section>
 
-    <section class="education" id="education">
-      <div class="edu-card">
-        <div>
-          <span class="eyebrow">LEARNING</span>
-          <h2>Kids Educational Books</h2>
-          <p>Alphabet, numbers, animals, colours and everyday learning materials for children.</p>
-          <a class="btn primary" href="#">Open Education →</a>
-        </div>
-        <div class="book-stack"><div>ABC</div><div>123</div><div>🎨</div></div>
-      </div>
-    </section>
+<section class="news" id="news"><span class="eyebrow">UPDATES</span><h2>Media & Social Updates</h2><div class="news-grid"><article>📰<h3>Google News</h3><p>Connect your news feed here.</p></article><article>📢<h3>Social Updates</h3><p>Add your social pages and posts.</p></article><article>🔔<h3>Alerts</h3><p>Show important announcements.</p></article></div></section>
 
-    <section class="login" id="login">
-      <div class="login-box">
-        <span class="eyebrow">ACCOUNT</span>
-        <h2>Login / Register</h2>
-        <p>This starter theme includes the UI. Connect Firebase/Supabase later for real authentication and email verification.</p>
-        <div class="login-actions"><button class="btn primary">Login</button><button class="btn secondary">Create Account</button></div>
-      </div>
-    </section>
-  </main>
+<section class="education" id="education"><div><span class="eyebrow">LEARNING</span><h2>Kids Educational Books</h2><p>Alphabet, numbers, animals, colours and everyday learning resources.</p><a class="btn primary" href="#">Open Education →</a></div><div class="book">ABC<br><small>123 • 🎨</small></div></section>
 
-  <footer>
-    <div><b>Gitalk<span>.in</span></b><p>Joram Services & Business</p></div>
-    <p>© 2026 Gitalk.in · Digital Services Directory</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<section class="login" id="login"><span class="eyebrow">ACCOUNT</span><h2>Login / Register</h2><p>Connect Firebase or Supabase later for real authentication and email verification.</p><button class="btn primary">Login</button> <button class="btn white">Create Account</button></section>
+</main>
+<footer><b>Gitalk<span>.in</span></b><small>Joram Services & Business • © 2026</small></footer>
+<script src="script.js"></script>
+</body></html>

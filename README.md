@@ -1,15 +1,17 @@
-# Gitalk.in 3D Light Theme
+# Gitalk.in Colourful Digital Theme
 
-## Files
-- `index.html` — main website
-- `style.css` — light 3D responsive theme
-- `script.js` — mobile menu and small interactions
+### Included
+- Colourful digital/3D responsive theme
+- Animated Gitalk logo and digital orb
+- 10-slide auto-playing gallery
+- Gallery arrows + dots
+- Mobile swipe/touch support
+- Shopping, Tourism, Technology, Banking, Media, Booking, Recharge, Bill Pay
+- Education and Login/Register UI
+- No external image/CDN dependency for the gallery
 
-## GitHub Pages
-1. Upload all three files to your repository.
-2. Keep `index.html` in the repository root.
-3. In GitHub: Settings → Pages → Deploy from branch → select your main branch and `/root`.
-4. Open the generated GitHub Pages address.
+### GitHub Pages
+Upload all files to your repository root and enable GitHub Pages from Settings → Pages.
 
-## Important
-The Login/Register section is UI only. Real authentication and email verification require connecting a service such as Firebase or Supabase.
+### Replace gallery photos
+The current 10 gallery files are lightweight SVG designs. You can replace `gallery1.svg` ... `gallery10.svg` with your own images and keep the same filenames.
