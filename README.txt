@@ -1,15 +1,15 @@
-GITALK.IN LIGHT + MEDIA + SOCIAL UPDATE
+SMART INDIA HUB
+================
+1. Upload the complete folder to your hosting/GitHub Pages.
+2. Keep index.html in the root.
+3. Keep css/style.css inside css/
+4. Keep js/app.js inside js/
+5. Keep all section pages inside pages/
+6. Put your images inside assets/images/
+7. Edit each page independently.
 
-Open OPEN_FIRST.html or index.html.
-
-Includes:
-- Light premium digital theme
-- 16-colour accents
-- 3D GITALK logo
-- Media & Social Updates
-- Google-News-inspired Top Stories / India / Business / Technology / Sports tabs
-- Like / Share / Follow UI
-- Official Google News shortcut
-- Responsive mobile design
-
-For real live news, connect your own CMS or licensed news API through a backend.
+Suggested next steps:
+- Replace placeholder content.
+- Add your real affiliate links.
+- Add privacy/terms/disclaimer pages suitable for your site.
+- Connect a real search/API only after deciding the data sources.
