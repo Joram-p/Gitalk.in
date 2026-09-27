@@ -1,17 +1,10 @@
-# Gitalk.in Colourful Digital Theme
+# Gitalk.in Colourful Digital Theme — Related Websites
 
-### Included
-- Colourful digital/3D responsive theme
-- Animated Gitalk logo and digital orb
-- 10-slide auto-playing gallery
-- Gallery arrows + dots
-- Mobile swipe/touch support
-- Shopping, Tourism, Technology, Banking, Media, Booking, Recharge, Bill Pay
-- Education and Login/Register UI
-- No external image/CDN dependency for the gallery
+Includes:
+- Colourful responsive 3D theme
+- 10-photo auto-sliding gallery with touch/swipe
+- Related website buttons for Shopping, Tourism, Technology, Banking, Media/News, Booking, Recharge, Bill Pay and Education
+- External websites open in a new tab
+- No external dependency for gallery images
 
-### GitHub Pages
-Upload all files to your repository root and enable GitHub Pages from Settings → Pages.
-
-### Replace gallery photos
-The current 10 gallery files are lightweight SVG designs. You can replace `gallery1.svg` ... `gallery10.svg` with your own images and keep the same filenames.
+The listed links point to official/primary websites where possible. Always verify the destination before entering passwords, OTPs, payment details, or banking information.
