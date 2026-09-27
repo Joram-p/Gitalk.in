@@ -1,19 +1,15 @@
-# Gitalk.in — Complete 3D Digital Services & Business Frontend
+# Gitalk.in 3D Light Theme
 
-## Open
-Extract the ZIP and open `index.html` in Chrome/Edge/Safari.
+## Files
+- `index.html` — main website
+- `style.css` — light 3D responsive theme
+- `script.js` — mobile menu and small interactions
 
-## Included
-- 16-colour 3D-style Gitalk logo built in CSS
-- Neon digital/glassmorphism UI
-- Responsive desktop/tablet/mobile layout
-- Home dashboard
-- Services, Business, Shopping, Travel, Booking
-- Recharge & Bills, Banking & Finance
-- Technology, Media, Jobs, Property, Health, Education, Auto, Food
-- Search/filter UI
-- Login/Register demo modal
-- Modular `assets/style.css` and `assets/app.js`
+## GitHub Pages
+1. Upload all three files to your repository.
+2. Keep `index.html` in the repository root.
+3. In GitHub: Settings → Pages → Deploy from branch → select your main branch and `/root`.
+4. Open the generated GitHub Pages address.
 
-## Production integrations still required
-Payments, mobile recharge, live travel/booking, banking APIs, user authentication, business database, orders, notifications and admin dashboard need secure server-side/API integrations.
+## Important
+The Login/Register section is UI only. Real authentication and email verification require connecting a service such as Firebase or Supabase.
