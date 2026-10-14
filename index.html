@@ -1,134 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gitalk.in — Colourful Digital Services</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7fbff">
+  <meta name="description" content="Gitalk — useful digital services, learning resources, and everyday links in one place.">
+  <title>Gitalk — Your Digital World</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="header">
-  <a class="brand" href="#">
-  <span class="logo3d live-logo"><span>G</span></span>
-  <span class="brand-text"><b>Gitalk</b><small>.in</small><em>Joram Services &amp; Business</em></span>
-</a>
-  <button class="menu-btn" id="menuBtn">☰</button>
-  <nav id="nav"><a href="#home">Home</a><a href="#gallery">Gallery</a><a href="#services">All Services</a><a href="#news">News</a><a href="#education">Education</a><a href="#login">Login</a></nav>
-</header>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Gitalk home">
+      <span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav id="mainNav">
+      <a href="#services">Services</a>
+      <a href="kids.html">Kids Learning</a>
+      <a href="#about">About</a>
+      <button class="btn btn-outline" id="openLogin">Log in</button>
+      <button class="btn btn-primary" id="openRegister">Join free</button>
+    </nav>
+  </header>
 
-<main>
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-copy">
-    <div class="pill">✨ Joram Services &amp; Business</div>
-    <h1>Welcome to <span>Gitalk.in</span></h1><div class="hero-tagline">Discover • Connect • Explore • Grow</div>
-    <p>सेवा • जानकारी • व्यापार • शिक्षा — सब कुछ एक ही डिजिटल जगह पर।<br>Explore useful websites, discover new opportunities and connect with your digital world.</p>
-    <div class="actions"><a class="btn primary" href="#services">Explore Services →</a><a class="btn white" href="#gallery">View Gallery</a></div>
-  </div>
-  <div class="digital-orb"><div class="orb-ring ring-a"></div><div class="orb-ring ring-b"></div><div class="orb-core"><span>G</span><small>Gitalk.in</small></div><span class="orb-icon i1">🛒</span><span class="orb-icon i2">✈️</span><span class="orb-icon i3">📱</span><span class="orb-icon i4">📚</span></div>
-</section>
+  <main>
+    <section class="hero section-wrap">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="pulse"></span> YOUR EVERYDAY DIGITAL HUB</span>
+        <h1>One place for your<br><span class="gradient-text">digital world.</span></h1>
+        <p>Discover useful services, learning resources, travel links, technology tools and more — organised simply by Gitalk.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-large" href="#services">Explore services <span>↗</span></a>
+          <a class="btn btn-soft btn-large" href="kids.html">Explore learning</a>
+        </div>
+        <div class="hero-proof"><div class="avatar-stack"><i>G</i><i>✦</i><i>◎</i></div><span>Useful links. Simple access. One hub.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Decorative animated digital globe">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="globe"><div class="globe-grid"></div><span class="globe-shine"></span></div>
+        <div class="float-chip chip-one">✦ Smart tools</div>
+        <div class="float-chip chip-two">🌍 Explore</div>
+        <div class="float-chip chip-three">📚 Learn</div>
+        <div class="spark spark-one">✧</div><div class="spark spark-two">✦</div>
+      </div>
+    </section>
 
-<section class="gallery-section" id="gallery">
-  <div class="section-head"><div><span class="eyebrow">10 PHOTO GALLERY</span><h2>Digital World Gallery</h2></div><p>Auto-sliding • Swipe • Touch friendly</p></div>
-  <div class="slider" id="slider">
-    <div class="track" id="track">
-      <div class="slide"><img src="gallery1.svg" alt="Digital World"></div>
-      <div class="slide"><img src="gallery2.svg" alt="Shopping"></div>
-      <div class="slide"><img src="gallery3.svg" alt="Tourism"></div>
-      <div class="slide"><img src="gallery4.svg" alt="Technology"></div>
-      <div class="slide"><img src="gallery5.svg" alt="Media"></div>
-      <div class="slide"><img src="gallery6.svg" alt="Banking"></div>
-      <div class="slide"><img src="gallery7.svg" alt="Booking"></div>
-      <div class="slide"><img src="gallery8.svg" alt="Recharge"></div>
-      <div class="slide"><img src="gallery9.svg" alt="Education"></div>
-      <div class="slide"><img src="gallery10.svg" alt="Joram Business"></div>
-    </div>
-    <button class="arrow prev" id="prev">‹</button><button class="arrow next" id="next">›</button>
-  </div>
-  <div class="dots" id="dots"></div>
-</section>
+    <section class="stats section-wrap">
+      <div><strong>10+</strong><span>Service categories</span></div>
+      <div><strong>24/7</strong><span>Browse anytime</span></div>
+      <div><strong>One hub</strong><span>Easy discovery</span></div>
+    </section>
 
-<div class="colour-strip" aria-label="Seven colour digital theme">
-  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
-<section class="section" id="services">
-<div class="section-head">
-  <div><span class="eyebrow">ALL SERVICES</span><h2>Gitalk Service Directory</h2></div>
-  <p>हर category में useful website buttons</p>
-</div>
-<div class="service-directory">
+    <section class="section-wrap services-section" id="services">
+      <div class="section-heading">
+        <div><span class="eyebrow">EXPLORE GITALK</span><h2>What do you need today?</h2><p>Find a useful category or search for a service.</p></div>
+        <label class="search-box"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Search services..." aria-label="Search services"></label>
+      </div>
+      <div class="filter-row" id="filters">
+        <button class="filter active" data-filter="All">All</button>
+        <button class="filter" data-filter="Daily">Daily needs</button>
+        <button class="filter" data-filter="Digital">Digital</button>
+        <button class="filter" data-filter="Learning">Learning</button>
+        <button class="filter" data-filter="Travel">Travel</button>
+      </div>
+      <div class="service-grid" id="serviceGrid">
+        <a class="service-card" data-tags="Daily" href="https://www.google.com/" target="_blank" rel="noopener"><span class="card-icon icon-blue">⌕</span><span class="card-label">Discover</span><h3>Search & Explore</h3><p>Find information, websites and helpful resources.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Daily" href="https://www.amazon.in/" target="_blank" rel="noopener"><span class="card-icon icon-orange">▣</span><span class="card-label">Shopping</span><h3>Shopping links</h3><p>Browse shopping platforms and product ideas.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Daily" href="https://www.onlinesbi.sbi/" target="_blank" rel="noopener"><span class="card-icon icon-green">₹</span><span class="card-label">Banking</span><h3>Banking</h3><p>Quick access to official banking websites.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Daily" href="https://www.bharatbillpay.com/" target="_blank" rel="noopener"><span class="card-icon icon-violet">▤</span><span class="card-label">Payments</span><h3>Bills & Recharge</h3><p>Find bill-payment and recharge services.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Travel" href="https://www.irctc.co.in/" target="_blank" rel="noopener"><span class="card-icon icon-cyan">✈</span><span class="card-label">Travel</span><h3>Travel & Booking</h3><p>Train tickets, trip planning and booking links.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Digital" href="https://news.google.com/" target="_blank" rel="noopener"><span class="card-icon icon-red">◉</span><span class="card-label">Media</span><h3>News & Media</h3><p>Read news and discover media platforms.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Digital" href="https://www.canva.com/" target="_blank" rel="noopener"><span class="card-icon icon-pink">✧</span><span class="card-label">Creativity</span><h3>Design tools</h3><p>Explore creative and productivity tools.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Digital" href="https://www.youtube.com/" target="_blank" rel="noopener"><span class="card-icon icon-red">▶</span><span class="card-label">Video</span><h3>Video & Social</h3><p>Visit popular video and social platforms.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Learning" href="kids.html"><span class="card-icon icon-yellow">📚</span><span class="card-label">Education</span><h3>Kids Learning</h3><p>Simple learning ideas, worksheets and books.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Travel" href="https://www.incredibleindia.gov.in/" target="_blank" rel="noopener"><span class="card-icon icon-green">⌖</span><span class="card-label">Tourism</span><h3>Tourism & Places</h3><p>Discover destinations and travel information.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Digital" href="https://github.com/" target="_blank" rel="noopener"><span class="card-icon icon-dark">⌘</span><span class="card-label">Technology</span><h3>Tech resources</h3><p>Developer resources and technology platforms.</p><span class="card-arrow">↗</span></a>
+        <a class="service-card" data-tags="Daily" href="https://www.india.gov.in/" target="_blank" rel="noopener"><span class="card-icon icon-blue">✚</span><span class="card-label">Public services</span><h3>Government services</h3><p>Start with official government information.</p><span class="card-arrow">↗</span></a>
+      </div>
+      <p class="no-results" id="noResults" hidden>No matching services. Try another search.</p>
+    </section>
 
-<div class="service-group sg1"><div class="group-title">🛍️ Shopping</div><div class="service-buttons">
-<a href="https://www.amazon.in/" target="_blank" rel="noopener">Amazon ↗</a><a href="https://www.flipkart.com/" target="_blank" rel="noopener">Flipkart ↗</a><a href="https://www.myntra.com/" target="_blank" rel="noopener">Myntra ↗</a><a href="https://www.ajio.com/" target="_blank" rel="noopener">AJIO ↗</a><a href="https://www.meesho.com/" target="_blank" rel="noopener">Meesho ↗</a>
-</div></div>
+    <section class="learning-banner section-wrap">
+      <div class="learning-icon">📘</div><div><span class="eyebrow">GITALK KIDS</span><h2>Little learners, big discoveries.</h2><p>Explore alphabet, numbers, colours, animals and printable activity ideas.</p></div><a class="btn btn-primary" href="kids.html">Visit learning corner ↗</a>
+    </section>
 
-<div class="service-group sg2"><div class="group-title">✈️ Tourism & Travel</div><div class="service-buttons">
-<a href="https://www.irctctourism.com/" target="_blank" rel="noopener">IRCTC Tourism ↗</a><a href="https://www.makemytrip.com/" target="_blank" rel="noopener">MakeMyTrip ↗</a><a href="https://www.goibibo.com/" target="_blank" rel="noopener">Goibibo ↗</a><a href="https://www.booking.com/" target="_blank" rel="noopener">Booking.com ↗</a><a href="https://www.tripadvisor.in/" target="_blank" rel="noopener">Tripadvisor ↗</a>
-</div></div>
+    <section class="about-section section-wrap" id="about">
+      <div><span class="eyebrow">ABOUT GITALK</span><h2>Made to make the internet easier.</h2></div>
+      <p>Gitalk is a growing directory for useful links and learning resources. We aim to make everyday online discovery easier through a clean, mobile-friendly experience.</p>
+    </section>
+  </main>
 
-<div class="service-group sg3"><div class="group-title">💻 Technology</div><div class="service-buttons">
-<a href="https://www.google.com/" target="_blank" rel="noopener">Google ↗</a><a href="https://www.microsoft.com/" target="_blank" rel="noopener">Microsoft ↗</a><a href="https://github.com/" target="_blank" rel="noopener">GitHub ↗</a><a href="https://www.canva.com/" target="_blank" rel="noopener">Canva ↗</a><a href="https://www.adobe.com/" target="_blank" rel="noopener">Adobe ↗</a>
-</div></div>
+  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span></a><p>Useful things, all in one place.</p><div><a href="#services">Services</a><a href="kids.html">Kids Learning</a><a href="README.md">Setup guide</a></div><small>© <span id="year"></span> Gitalk. External services belong to their respective owners.</small></footer>
 
-<div class="service-group sg4"><div class="group-title">🏦 Banking & Finance</div><div class="service-buttons">
-<a href="https://sbi.bank.in/" target="_blank" rel="noopener">SBI ↗</a><a href="https://www.hdfc.bank.in/" target="_blank" rel="noopener">HDFC Bank ↗</a><a href="https://www.icici.bank.in/" target="_blank" rel="noopener">ICICI Bank ↗</a><a href="https://www.axisbank.com/" target="_blank" rel="noopener">Axis Bank ↗</a><a href="https://www.rbi.org.in/" target="_blank" rel="noopener">RBI ↗</a>
-</div></div>
-
-<div class="service-group sg5"><div class="group-title">📰 News & Media</div><div class="service-buttons">
-<a href="https://news.google.com/" target="_blank" rel="noopener">Google News ↗</a><a href="https://www.ndtv.com/" target="_blank" rel="noopener">NDTV ↗</a><a href="https://www.indiatoday.in/" target="_blank" rel="noopener">India Today ↗</a><a href="https://www.aajtak.in/" target="_blank" rel="noopener">Aaj Tak ↗</a><a href="https://www.thehindu.com/" target="_blank" rel="noopener">The Hindu ↗</a>
-</div></div>
-
-<div class="service-group sg6"><div class="group-title">🎟️ Booking & Tickets</div><div class="service-buttons">
-<a href="https://www.irctc.co.in/" target="_blank" rel="noopener">IRCTC ↗</a><a href="https://in.bookmyshow.com/" target="_blank" rel="noopener">BookMyShow ↗</a><a href="https://www.makemytrip.com/" target="_blank" rel="noopener">Flight Booking ↗</a><a href="https://www.redbus.in/" target="_blank" rel="noopener">RedBus ↗</a><a href="https://www.uber.com/in/en/" target="_blank" rel="noopener">Uber ↗</a>
-</div></div>
-
-<div class="service-group sg7"><div class="group-title">📱 Mobile & Recharge</div><div class="service-buttons">
-<a href="https://www.airtel.in/" target="_blank" rel="noopener">Airtel ↗</a><a href="https://www.jio.com/" target="_blank" rel="noopener">Jio ↗</a><a href="https://www.myvi.in/" target="_blank" rel="noopener">Vi ↗</a><a href="https://paytm.com/recharge-bill-payment" target="_blank" rel="noopener">Paytm Recharge ↗</a><a href="https://www.phonepe.com/" target="_blank" rel="noopener">PhonePe ↗</a>
-</div></div>
-
-<div class="service-group sg8"><div class="group-title">💳 Bill Payment</div><div class="service-buttons">
-<a href="https://paytm.com/recharge-bill-payment" target="_blank" rel="noopener">Paytm Bills ↗</a><a href="https://www.phonepe.com/" target="_blank" rel="noopener">PhonePe Bills ↗</a><a href="https://www.bharatbillpay.com/" target="_blank" rel="noopener">Bharat BillPay ↗</a><a href="https://www.bsesdelhi.com/" target="_blank" rel="noopener">Electricity ↗</a><a href="https://www.irctc.co.in/" target="_blank" rel="noopener">IRCTC ↗</a>
-</div></div>
-
-<div class="service-group sg9"><div class="group-title">🎓 Education</div><div class="service-buttons">
-<a href="https://www.khanacademy.org/" target="_blank" rel="noopener">Khan Academy ↗</a><a href="https://diksha.gov.in/" target="_blank" rel="noopener">DIKSHA ↗</a><a href="https://swayam.gov.in/" target="_blank" rel="noopener">SWAYAM ↗</a><a href="https://www.education.gov.in/" target="_blank" rel="noopener">Education Ministry ↗</a><a href="https://www.ncert.nic.in/" target="_blank" rel="noopener">NCERT ↗</a>
-</div></div>
-
-<div class="service-group sg10"><div class="group-title">💼 Jobs & Career</div><div class="service-buttons">
-<a href="https://www.ncs.gov.in/" target="_blank" rel="noopener">National Career Service ↗</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://www.naukri.com/" target="_blank" rel="noopener">Naukri ↗</a><a href="https://www.indeed.com/" target="_blank" rel="noopener">Indeed ↗</a><a href="https://www.upwork.com/" target="_blank" rel="noopener">Upwork ↗</a>
-</div></div>
-
-<div class="service-group sg11"><div class="group-title">🏛️ Government Services</div><div class="service-buttons">
-<a href="https://www.india.gov.in/" target="_blank" rel="noopener">India.gov.in ↗</a><a href="https://www.uidai.gov.in/" target="_blank" rel="noopener">Aadhaar ↗</a><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax ↗</a><a href="https://www.digilocker.gov.in/" target="_blank" rel="noopener">DigiLocker ↗</a><a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener">Passport Seva ↗</a>
-</div></div>
-
-<div class="service-group sg12"><div class="group-title">🧑‍💻 Social & Video</div><div class="service-buttons">
-<a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook ↗</a><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram ↗</a><a href="https://www.whatsapp.com/" target="_blank" rel="noopener">WhatsApp ↗</a><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
-</div></div>
-
-<div class="service-group sg13"><div class="group-title">❤️ Health</div><div class="service-buttons">
-<a href="https://www.mohfw.gov.in/" target="_blank" rel="noopener">Health Ministry ↗</a><a href="https://www.abdm.gov.in/" target="_blank" rel="noopener">ABDM ↗</a><a href="https://www.apollohospitals.com/" target="_blank" rel="noopener">Apollo ↗</a><a href="https://www.practo.com/" target="_blank" rel="noopener">Practo ↗</a>
-</div></div>
-
-<div class="service-group sg14"><div class="group-title">🌾 Agriculture</div><div class="service-buttons">
-<a href="https://agmarknet.gov.in/" target="_blank" rel="noopener">Agmarknet ↗</a><a href="https://pmkisan.gov.in/" target="_blank" rel="noopener">PM-KISAN ↗</a><a href="https://enam.gov.in/" target="_blank" rel="noopener">e-NAM ↗</a><a href="https://farmer.gov.in/" target="_blank" rel="noopener">Farmer Portal ↗</a>
-</div></div>
-
-<div class="service-group sg15"><div class="group-title">💼 Business & Payments</div><div class="service-buttons">
-<a href="https://www.udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam Registration ↗</a><a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST Portal ↗</a><a href="https://www.paypal.com/in/home" target="_blank" rel="noopener">PayPal ↗</a><a href="https://razorpay.com/" target="_blank" rel="noopener">Razorpay ↗</a>
-</div></div>
-
-</div></section>
-
-<section class="news" id="news"><span class="eyebrow">UPDATES</span><h2>Media & Social Updates</h2><div class="news-grid">
-<article>📰<h3>Google News</h3><p>Latest headlines and news search.</p><a class="site-btn" href="https://news.google.com/" target="_blank" rel="noopener">Open Google News ↗</a></article>
-<article>📺<h3>Video & Social</h3><p>Popular video and social platforms.</p><a class="site-btn" href="https://www.youtube.com/" target="_blank" rel="noopener">Open YouTube ↗</a></article>
-<article>🔔<h3>News Sources</h3><p>Quick links to major Indian news websites.</p><a class="site-btn" href="https://www.ndtv.com/" target="_blank" rel="noopener">Open NDTV ↗</a></article>
-</div></section>
-
-<section class="education" id="education"><div><span class="eyebrow">LEARNING</span><h2>Kids Educational Books</h2><p>Alphabet, numbers, animals, colours and everyday learning resources.</p><div class="edu-links"><a class="btn primary" href="https://www.khanacademy.org/" target="_blank" rel="noopener">Khan Academy ↗</a><a class="btn white" href="https://www.education.gov.in/" target="_blank" rel="noopener">Education Ministry ↗</a></div></div><div class="book">ABC<br><small>123 • 🎨</small></div></section>
-
-<section class="login" id="login"><span class="eyebrow">ACCOUNT</span><h2>Login / Register</h2><p>Connect Firebase or Supabase later for real authentication and email verification.</p><button class="btn primary">Login</button> <button class="btn white">Create Account</button></section>
-</main>
-<footer><b>Gitalk<span>.in</span></b><small>Joram Services & Business • © 2026</small></footer>
-<script src="script.js"></script>
-</body></html>
+  <dialog id="authDialog" class="auth-dialog">
+    <form method="dialog" class="dialog-close-row"><button class="close-btn" aria-label="Close">×</button></form>
+    <div class="auth-logo"><span class="brand-mark">G</span></div>
+    <span class="eyebrow" id="authEyebrow">WELCOME TO GITALK</span><h2 id="authTitle">Join Gitalk</h2>
+    <p id="authDescription">Create an account experience preview.</p>
+    <form id="authForm">
+      <label id="nameLabel">Name<input id="authName" name="name" autocomplete="name" placeholder="Your name"></label>
+      <label>Email address<input id="authEmail" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+      <label>Password<input id="authPassword" type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label>
+      <p class="auth-notice">Demo only: this form does not create an account or send email. Connect a secure authentication provider before publishing.</p>
+      <button class="btn btn-primary btn-large full-width" type="submit" id="authSubmit">Continue</button>
+    </form>
+    <button class="auth-switch" id="authSwitch" type="button">Already have an account? Log in</button>
+    <p class="form-feedback" id="formFeedback" role="status"></p>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
