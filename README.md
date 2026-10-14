@@ -1,34 +1,35 @@
-# Gitalk Website Starter
+# Gitalk Advanced Website Starter
 
-A responsive, static website starter for Gitalk.in. It includes a light theme, animated globe illustration, service directory, search/filter, Kids Learning page, and a front-end-only login/register dialog.
+Includes a responsive homepage, service directory with search and category filters, Kids Learning page, Books & Printables catalogue page, privacy notice template, animated globe, and front-end login/register demo.
 
 ## Files
-- `index.html` — homepage and service directory
-- `kids.html` — kids learning activity page
-- `styles.css` — responsive design and animations
-- `app.js` — search, filters, mobile navigation, demo modal and learning activities
+- `index.html` — homepage and services directory
+- `kids.html` — learning activity page
+- `books.html` — digital books/printables catalogue starter
+- `privacy.html` — privacy notice template to customise
+- `styles.css` — responsive styling and animations
+- `app.js` — filters, mobile navigation, learning prompts, and demo auth modal
 
-## Run locally
-1. Extract the ZIP.
-2. Open `index.html` in a browser.
-3. For local development, you can use VS Code with the Live Server extension.
+## Test locally
+Extract the ZIP and open `index.html` in a browser. For a more reliable local preview, use VS Code with a Live Server extension.
 
-## Publish with GitHub Pages
-1. Upload all four files to the root of your GitHub repository.
-2. In GitHub, open **Settings → Pages**.
-3. Choose **Deploy from a branch**, select your main branch and `/ (root)`, then save.
-4. Wait for the deployment and open the Pages URL. If using a custom domain, configure DNS and the custom domain in GitHub Pages.
+## Publish on GitHub Pages
+1. Open your website repository on GitHub.
+2. Upload all files from this folder to the repository root (or replace old starter files after backing them up).
+3. Open **Settings → Pages**.
+4. Choose **Deploy from a branch**, select your main branch and `/ (root)`, then save.
+5. Wait for deployment. If using a custom domain, configure the domain and DNS records in GitHub Pages settings.
 
-## Important notes before production
-- The login/register dialog is a visual demo only. It does **not** create accounts, send verification emails, or save passwords.
-- Never store passwords in browser JavaScript or local storage.
-- For real authentication, connect Supabase Auth, Firebase Authentication, or another trusted authentication provider. Set up email verification, password reset, database access rules, and spam protection.
-- If adding payments, use a trusted payment provider and never collect card details directly in this static site.
-- External service links currently point to example official platforms. Review every destination before publishing and add your own affiliate parameters only after approval.
-- This starter does not include an admin panel or backend database yet. These need a secure backend and authorization rules.
-- Check all external links, accessibility, privacy policy, terms, and contact details before making the site public.
+## Important — production features
+This package is a **front-end starter**, not a complete backend application:
+- Login/register form is a visual demo. It does not create accounts, store passwords, send email verification, or reset passwords.
+- To enable real authentication, connect a trusted service such as Supabase Auth or Firebase Authentication. Configure email verification, password reset, rate limiting, secure access policies and environment settings.
+- No admin dashboard/database is connected yet. An admin panel needs a protected backend and authorization checks; do not put secret keys in public JavaScript.
+- Books are currently catalogue placeholders. Add your own book files, rights/licences, prices and secure checkout/delivery before selling.
+- Affiliate income requires programme approval and correct disclosures; add tracking IDs only after acceptance.
+- External links are examples. Review each destination before launch.
+- The privacy page is only a template, not legal advice. Update it to describe the real data practices and add your contact information.
+- Do not collect bank card details or passwords directly on a static website.
 
-## Customisation
-- Edit the service cards in `index.html`.
-- Change colours and layout in `styles.css` (`:root` variables are near the top).
-- Add learning activities in `app.js`.
+## Customise
+Edit service cards in `index.html`, book/activity cards in `books.html` and `kids.html`, and colours in the `:root` section of `styles.css`.

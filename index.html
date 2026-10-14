@@ -1,112 +1,50 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f7fbff">
-  <meta name="description" content="Gitalk — useful digital services, learning resources, and everyday links in one place.">
-  <title>Gitalk — Your Digital World</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7faff"><meta name="description" content="Gitalk — useful digital services, learning, books and tools in one place.">
+<title>Gitalk — Your Digital World</title><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Gitalk home">
-      <span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span>
-    </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
-    <nav id="mainNav">
-      <a href="#services">Services</a>
-      <a href="kids.html">Kids Learning</a>
-      <a href="#about">About</a>
-      <button class="btn btn-outline" id="openLogin">Log in</button>
-      <button class="btn btn-primary" id="openRegister">Join free</button>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero section-wrap">
-      <div class="hero-copy">
-        <span class="eyebrow"><span class="pulse"></span> YOUR EVERYDAY DIGITAL HUB</span>
-        <h1>One place for your<br><span class="gradient-text">digital world.</span></h1>
-        <p>Discover useful services, learning resources, travel links, technology tools and more — organised simply by Gitalk.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary btn-large" href="#services">Explore services <span>↗</span></a>
-          <a class="btn btn-soft btn-large" href="kids.html">Explore learning</a>
-        </div>
-        <div class="hero-proof"><div class="avatar-stack"><i>G</i><i>✦</i><i>◎</i></div><span>Useful links. Simple access. One hub.</span></div>
-      </div>
-      <div class="hero-art" aria-label="Decorative animated digital globe">
-        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-        <div class="globe"><div class="globe-grid"></div><span class="globe-shine"></span></div>
-        <div class="float-chip chip-one">✦ Smart tools</div>
-        <div class="float-chip chip-two">🌍 Explore</div>
-        <div class="float-chip chip-three">📚 Learn</div>
-        <div class="spark spark-one">✧</div><div class="spark spark-two">✦</div>
-      </div>
-    </section>
-
-    <section class="stats section-wrap">
-      <div><strong>10+</strong><span>Service categories</span></div>
-      <div><strong>24/7</strong><span>Browse anytime</span></div>
-      <div><strong>One hub</strong><span>Easy discovery</span></div>
-    </section>
-
-    <section class="section-wrap services-section" id="services">
-      <div class="section-heading">
-        <div><span class="eyebrow">EXPLORE GITALK</span><h2>What do you need today?</h2><p>Find a useful category or search for a service.</p></div>
-        <label class="search-box"><span>⌕</span><input id="serviceSearch" type="search" placeholder="Search services..." aria-label="Search services"></label>
-      </div>
-      <div class="filter-row" id="filters">
-        <button class="filter active" data-filter="All">All</button>
-        <button class="filter" data-filter="Daily">Daily needs</button>
-        <button class="filter" data-filter="Digital">Digital</button>
-        <button class="filter" data-filter="Learning">Learning</button>
-        <button class="filter" data-filter="Travel">Travel</button>
-      </div>
-      <div class="service-grid" id="serviceGrid">
-        <a class="service-card" data-tags="Daily" href="https://www.google.com/" target="_blank" rel="noopener"><span class="card-icon icon-blue">⌕</span><span class="card-label">Discover</span><h3>Search & Explore</h3><p>Find information, websites and helpful resources.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Daily" href="https://www.amazon.in/" target="_blank" rel="noopener"><span class="card-icon icon-orange">▣</span><span class="card-label">Shopping</span><h3>Shopping links</h3><p>Browse shopping platforms and product ideas.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Daily" href="https://www.onlinesbi.sbi/" target="_blank" rel="noopener"><span class="card-icon icon-green">₹</span><span class="card-label">Banking</span><h3>Banking</h3><p>Quick access to official banking websites.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Daily" href="https://www.bharatbillpay.com/" target="_blank" rel="noopener"><span class="card-icon icon-violet">▤</span><span class="card-label">Payments</span><h3>Bills & Recharge</h3><p>Find bill-payment and recharge services.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Travel" href="https://www.irctc.co.in/" target="_blank" rel="noopener"><span class="card-icon icon-cyan">✈</span><span class="card-label">Travel</span><h3>Travel & Booking</h3><p>Train tickets, trip planning and booking links.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Digital" href="https://news.google.com/" target="_blank" rel="noopener"><span class="card-icon icon-red">◉</span><span class="card-label">Media</span><h3>News & Media</h3><p>Read news and discover media platforms.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Digital" href="https://www.canva.com/" target="_blank" rel="noopener"><span class="card-icon icon-pink">✧</span><span class="card-label">Creativity</span><h3>Design tools</h3><p>Explore creative and productivity tools.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Digital" href="https://www.youtube.com/" target="_blank" rel="noopener"><span class="card-icon icon-red">▶</span><span class="card-label">Video</span><h3>Video & Social</h3><p>Visit popular video and social platforms.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Learning" href="kids.html"><span class="card-icon icon-yellow">📚</span><span class="card-label">Education</span><h3>Kids Learning</h3><p>Simple learning ideas, worksheets and books.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Travel" href="https://www.incredibleindia.gov.in/" target="_blank" rel="noopener"><span class="card-icon icon-green">⌖</span><span class="card-label">Tourism</span><h3>Tourism & Places</h3><p>Discover destinations and travel information.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Digital" href="https://github.com/" target="_blank" rel="noopener"><span class="card-icon icon-dark">⌘</span><span class="card-label">Technology</span><h3>Tech resources</h3><p>Developer resources and technology platforms.</p><span class="card-arrow">↗</span></a>
-        <a class="service-card" data-tags="Daily" href="https://www.india.gov.in/" target="_blank" rel="noopener"><span class="card-icon icon-blue">✚</span><span class="card-label">Public services</span><h3>Government services</h3><p>Start with official government information.</p><span class="card-arrow">↗</span></a>
-      </div>
-      <p class="no-results" id="noResults" hidden>No matching services. Try another search.</p>
-    </section>
-
-    <section class="learning-banner section-wrap">
-      <div class="learning-icon">📘</div><div><span class="eyebrow">GITALK KIDS</span><h2>Little learners, big discoveries.</h2><p>Explore alphabet, numbers, colours, animals and printable activity ideas.</p></div><a class="btn btn-primary" href="kids.html">Visit learning corner ↗</a>
-    </section>
-
-    <section class="about-section section-wrap" id="about">
-      <div><span class="eyebrow">ABOUT GITALK</span><h2>Made to make the internet easier.</h2></div>
-      <p>Gitalk is a growing directory for useful links and learning resources. We aim to make everyday online discovery easier through a clean, mobile-friendly experience.</p>
-    </section>
-  </main>
-
-  <footer class="site-footer"><a class="brand" href="index.html"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span></a><p>Useful things, all in one place.</p><div><a href="#services">Services</a><a href="kids.html">Kids Learning</a><a href="README.md">Setup guide</a></div><small>© <span id="year"></span> Gitalk. External services belong to their respective owners.</small></footer>
-
-  <dialog id="authDialog" class="auth-dialog">
-    <form method="dialog" class="dialog-close-row"><button class="close-btn" aria-label="Close">×</button></form>
-    <div class="auth-logo"><span class="brand-mark">G</span></div>
-    <span class="eyebrow" id="authEyebrow">WELCOME TO GITALK</span><h2 id="authTitle">Join Gitalk</h2>
-    <p id="authDescription">Create an account experience preview.</p>
-    <form id="authForm">
-      <label id="nameLabel">Name<input id="authName" name="name" autocomplete="name" placeholder="Your name"></label>
-      <label>Email address<input id="authEmail" type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
-      <label>Password<input id="authPassword" type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label>
-      <p class="auth-notice">Demo only: this form does not create an account or send email. Connect a secure authentication provider before publishing.</p>
-      <button class="btn btn-primary btn-large full-width" type="submit" id="authSubmit">Continue</button>
-    </form>
-    <button class="auth-switch" id="authSwitch" type="button">Already have an account? Log in</button>
-    <p class="form-feedback" id="formFeedback" role="status"></p>
-  </dialog>
-  <script src="app.js"></script>
-</body>
-</html>
+<header class="header">
+  <a class="brand" href="index.html"><span class="logo3d">G</span><span>gitalk<span class="dot">.</span></span></a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+  <nav id="nav"><a href="#services">Services</a><a href="books.html">Books</a><a href="kids.html">Kids Learning</a><a href="#about">About</a><button class="btn ghost" id="loginBtn">Log in</button><button class="btn primary" id="registerBtn">Join free</button></nav>
+</header>
+<main>
+<section class="hero wrap">
+  <div class="hero-copy"><span class="eyebrow"><i></i> YOUR EVERYDAY DIGITAL HUB</span><h1>Your world.<br><span class="gradient">One smart place.</span></h1><p>Discover useful websites, daily services, learning activities, digital books and tools — all organised by Gitalk.</p>
+  <div class="actions"><a class="btn primary big" href="#services">Explore services ↗</a><a class="btn soft big" href="books.html">Explore books</a></div>
+  <div class="mini-proof"><span class="proof-icons">✦ ◎ G</span> Simple • Helpful • Mobile friendly</div></div>
+  <div class="hero-visual"><div class="orbit o1"></div><div class="orbit o2"></div><div class="globe"><div class="grid"></div><span></span></div><div class="bubble b1">🌍 Explore</div><div class="bubble b2">📚 Learn</div><div class="bubble b3">✦ Digital tools</div><div class="star s1">✧</div><div class="star s2">✦</div></div>
+</section>
+<section class="wrap stats"><div><b>12+</b><span>Service categories</span></div><div><b>Anytime</b><span>Browse helpful links</span></div><div><b>One hub</b><span>Made for everyday use</span></div></section>
+<section class="wrap section" id="services">
+ <div class="section-head"><div><span class="eyebrow">EXPLORE GITALK</span><h2>What do you need today?</h2><p>Search the directory or select a category.</p></div><label class="search">⌕ <input id="search" type="search" placeholder="Search services..." aria-label="Search services"></label></div>
+ <div class="filters" id="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="daily">Daily needs</button><button class="filter" data-filter="digital">Digital</button><button class="filter" data-filter="learning">Learning</button><button class="filter" data-filter="travel">Travel</button></div>
+ <div class="cards" id="cards">
+ <a class="service" data-cat="daily" href="https://www.google.com/" target="_blank" rel="noopener"><span class="ico blue">⌕</span><small>DISCOVER</small><h3>Search & Explore</h3><p>Find information and useful websites.</p><b>↗</b></a>
+ <a class="service" data-cat="daily" href="https://www.amazon.in/" target="_blank" rel="noopener"><span class="ico orange">▣</span><small>SHOPPING</small><h3>Shopping links</h3><p>Explore shopping platforms and products.</p><b>↗</b></a>
+ <a class="service" data-cat="daily" href="https://www.onlinesbi.sbi/" target="_blank" rel="noopener"><span class="ico green">₹</span><small>BANKING</small><h3>Banking</h3><p>Visit official online banking websites.</p><b>↗</b></a>
+ <a class="service" data-cat="daily" href="https://www.bharatbillpay.com/" target="_blank" rel="noopener"><span class="ico purple">▤</span><small>PAYMENTS</small><h3>Bills & Recharge</h3><p>Find bill and recharge services.</p><b>↗</b></a>
+ <a class="service" data-cat="travel" href="https://www.irctc.co.in/" target="_blank" rel="noopener"><span class="ico cyan">✈</span><small>TRAVEL</small><h3>Travel & Booking</h3><p>Train tickets and trip-planning links.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://news.google.com/" target="_blank" rel="noopener"><span class="ico red">◉</span><small>MEDIA</small><h3>News & Media</h3><p>Discover current news and media sites.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://www.canva.com/" target="_blank" rel="noopener"><span class="ico pink">✧</span><small>CREATIVITY</small><h3>Design tools</h3><p>Explore design and productivity tools.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://www.youtube.com/" target="_blank" rel="noopener"><span class="ico red">▶</span><small>VIDEO</small><h3>Video & Social</h3><p>Visit popular video platforms.</p><b>↗</b></a>
+ <a class="service" data-cat="learning" href="kids.html"><span class="ico yellow">📚</span><small>EDUCATION</small><h3>Kids Learning</h3><p>Letters, numbers, colours and activities.</p><b>↗</b></a>
+ <a class="service" data-cat="travel" href="https://www.incredibleindia.gov.in/" target="_blank" rel="noopener"><span class="ico green">⌖</span><small>TOURISM</small><h3>Tourism & Places</h3><p>Explore destinations and travel ideas.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://github.com/" target="_blank" rel="noopener"><span class="ico dark">⌘</span><small>TECHNOLOGY</small><h3>Tech resources</h3><p>Developer tools and technology sites.</p><b>↗</b></a>
+ <a class="service" data-cat="daily" href="https://www.india.gov.in/" target="_blank" rel="noopener"><span class="ico blue">✚</span><small>PUBLIC SERVICES</small><h3>Government links</h3><p>Start with official government information.</p><b>↗</b></a>
+ <a class="service" data-cat="learning" href="books.html"><span class="ico purple">▤</span><small>DIGITAL BOOKS</small><h3>Books & Printables</h3><p>Learning resources and printable ideas.</p><b>↗</b></a>
+ <a class="service" data-cat="daily" href="https://www.google.com/maps" target="_blank" rel="noopener"><span class="ico cyan">⌖</span><small>LOCAL</small><h3>Maps & Places</h3><p>Find places and plan routes.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://translate.google.com/" target="_blank" rel="noopener"><span class="ico orange">文</span><small>LANGUAGE</small><h3>Translation</h3><p>Explore language and translation tools.</p><b>↗</b></a>
+ <a class="service" data-cat="digital" href="https://mail.google.com/" target="_blank" rel="noopener"><span class="ico red">✉</span><small>EMAIL</small><h3>Email services</h3><p>Access popular email platforms.</p><b>↗</b></a>
+ </div><p id="empty" class="empty" hidden>No services found. Try another search.</p>
+</section>
+<section class="wrap banner"><div class="banner-icon">📚</div><div><span class="eyebrow">GITALK KIDS & BOOKS</span><h2>Little learners, big discoveries.</h2><p>Explore activities, book ideas and printable practice for children.</p></div><a class="btn primary" href="kids.html">Explore learning ↗</a></section>
+<section class="wrap about" id="about"><div><span class="eyebrow">ABOUT GITALK</span><h2>Making online discovery easier.</h2></div><p>Gitalk is a growing directory of useful links and learning resources. We aim to make everyday browsing simple through a clean, mobile-friendly experience.</p></section>
+</main>
+<footer class="footer"><a class="brand" href="index.html"><span class="logo3d">G</span><span>gitalk<span class="dot">.</span></span></a><p>Useful things, all in one place.</p><div><a href="#services">Services</a><a href="books.html">Books</a><a href="kids.html">Kids Learning</a><a href="privacy.html">Privacy</a></div><small>© <span class="year"></span> Gitalk. External services belong to their respective owners.</small></footer>
+<dialog id="authDialog" class="modal"><form method="dialog" class="close-row"><button class="close" aria-label="Close">×</button></form><div class="modal-logo"><span class="logo3d">G</span></div><span class="eyebrow" id="modeEyebrow">WELCOME TO GITALK</span><h2 id="modeTitle">Join Gitalk</h2><p id="modeDesc">Account features are a setup preview until a secure auth provider is connected.</p><form id="authForm"><label id="nameWrap">Name<input id="name" autocomplete="name" placeholder="Your name"></label><label>Email<input id="email" type="email" required autocomplete="email" placeholder="you@example.com"></label><label>Password<input id="password" type="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"></label><p class="notice">Demo only: this form does not create accounts, store passwords or send verification emails.</p><button class="btn primary full" id="submitAuth">Create account</button></form><button id="switchMode" class="switch">Already registered? Log in</button><p id="authFeedback" class="feedback" role="status"></p></dialog>
+<script src="app.js"></script>
+</body></html>
