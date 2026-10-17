@@ -4,3 +4,30 @@
 .content-page{max-width:900px;margin:70px auto;padding:0 24px 80px;min-height:55vh}.content-page .eyebrow{margin-bottom:12px}.content-page h1{font-size:clamp(34px,5vw,48px);letter-spacing:-1.8px}.content-page h2{font:800 23px Manrope;margin-top:32px}.content-page p,.content-page li{color:#626d80;line-height:1.9}.content-page .lead{font-size:18px;color:#667085}.content-page a{color:#6552e8;text-decoration:underline}
 @media(max-width:900px){.hero{grid-template-columns:1fr;gap:42px;padding-top:65px}.hero-card{max-width:500px;justify-self:start;transform:none}.category-grid{grid-template-columns:repeat(2,1fr)}.section-heading{align-items:start;flex-direction:column}.guide-grid{grid-template-columns:1fr 1fr}.guide-card:last-child{display:none}.newsletter{align-items:flex-start;flex-direction:column}.newsletter form{width:100%}}
 @media(max-width:600px){.site-header{height:68px}.menu-toggle{display:block}.nav{display:none;position:absolute;top:67px;left:0;right:0;padding:18px 24px 24px;background:white;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:17px}.nav.open{display:flex}.nav-cta{text-align:center}.hero{padding:55px 23px 50px}h1{letter-spacing:-1.7px}.hero-copy{font-size:15px}.trust-row{gap:10px}.stats-strip{padding:20px 12px;gap:9px}.stats-strip div{flex-direction:column;text-align:center;gap:3px}.stats-strip strong{font-size:13px}.stats-strip span{font-size:10px}.section,.featured{padding:60px 22px}.category-grid{gap:10px}.category-card{padding:17px;min-height:220px}.category-card h3{font-size:16px}.category-card p{font-size:11px}.category-icon{margin-bottom:17px}.guide-grid{grid-template-columns:1fr}.guide-card:last-child{display:block}.guide-art{height:135px}.newsletter{margin:45px 20px;padding:27px 22px}.newsletter h2{font-size:26px}.newsletter form{grid-template-columns:1fr}.newsletter form small{grid-column:auto}.disclosure{margin:0 20px 40px}.site-footer{grid-template-columns:1fr;padding:30px 22px}.footer-links{justify-content:flex-start;gap:14px}.site-footer>small{margin-top:7px}}
+
+/* AI tools directory */
+.directory-hero{padding:70px max(7vw,24px) 48px;background:radial-gradient(ellipse at 90% 0%,#e6e4ff 0,transparent 34%),linear-gradient(180deg,#fafbff,#fff)}
+.directory-hero h1{max-width:800px}.directory-hero p{max-width:690px;color:#697386;font-size:16px;line-height:1.8}
+.directory-controls{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0 0}
+.filter-btn{border:1px solid #e2e6ef;border-radius:30px;padding:9px 15px;background:#fff;color:#667085;font:600 12px 'DM Sans',sans-serif;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:#171f31;border-color:#171f31;color:#fff}
+.tool-directory{padding:38px max(7vw,24px) 85px}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tool-card{border:1px solid #e7eaf1;border-radius:17px;padding:22px;background:#fff;display:flex;flex-direction:column;min-height:280px;transition:.2s}
+.tool-card:hover{transform:translateY(-3px);box-shadow:0 15px 35px #1b28500d;border-color:#d9d4ff}
+.tool-card[hidden]{display:none}
+.tool-card-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+.tool-logo{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:#f0edff;color:#7156ef;font:800 18px Manrope,sans-serif}
+.tool-logo.blue{background:#eaf3ff;color:#347fdd}.tool-logo.green{background:#e7faf2;color:#168c68}.tool-logo.orange{background:#fff1e8;color:#e78a45}.tool-logo.dark{background:#e9edf4;color:#1b2436}
+.tool-card h2{font:800 18px Manrope;margin:0 0 3px;letter-spacing:-.5px}
+.tool-type{font-size:10px;color:#8b93a3;font-weight:800;letter-spacing:1px}
+.tool-card p{font-size:12px;color:#707b8e;line-height:1.8;margin-bottom:17px}
+.tool-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tool-tags span{font-size:10px;padding:5px 8px;border-radius:7px;background:#f5f6fa;color:#677184}
+.tool-actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tool-actions a{font-size:12px;font-weight:800;color:#6552e8}
+.tool-actions .visit{background:#171f31;color:#fff;padding:9px 12px;border-radius:9px}
+.directory-note{margin:0 max(7vw,24px) 60px;border:1px solid #e7eaf1;border-radius:14px;padding:20px 23px;background:#fbfcff}
+.directory-note p{font-size:12px;color:#737e90;line-height:1.8;margin:6px 0 0}
+@media(max-width:900px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.directory-hero{padding:48px 22px 32px}.tool-directory{padding:30px 20px 60px}.tool-grid{grid-template-columns:1fr}.tool-card{min-height:250px}}

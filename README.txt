@@ -1,6 +1,7 @@
 SMARTEARN HUB — WEBSITE STARTER KIT
 
 Included:
+- AI Tools Directory with category filters and official provider links
 - Responsive homepage with premium light theme
 - About, Contact, Privacy, Disclaimer and Terms pages
 - Three original starter guides
@@ -25,3 +26,6 @@ POSSIBLE REVENUE PATHS
 - Display ads after the site meets the provider's requirements and is approved
 - Sell useful original digital products or services
 Revenue is not guaranteed. Build original, useful content and an audience first.
+
+NEXT STEP FOR AFFILIATE EARNINGS
+The AI directory currently uses official links only, not affiliate links. Join each provider's official affiliate program if one is available to you, use your approved tracking URL, and clearly disclose affiliate relationships. Do not fabricate affiliate IDs or assume every provider has a program.
