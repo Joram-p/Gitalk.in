@@ -1,0 +1,1 @@
+Gitalk updated to a soft glass + neumorphic style inspired by the supplied OTP reference. Existing Supabase authentication is preserved. otp-demo.html shows the matching OTP visual.
