@@ -1,91 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f9ff">
-  <meta name="description" content="Gitalk — where people connect through conversation. Share ideas, discover communities, and meet people who share your interests.">
-  <title>Gitalk — Talk. Connect. Belong.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gitalk.in — Connect Through Conversation</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="announcement"><span class="spark">✦</span> A fresh space for real conversations <a href="#communities">Explore communities <span aria-hidden="true">→</span></a></div>
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Gitalk home"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span></a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation" aria-expanded="false">☰</button>
-    <nav class="nav-links" id="navLinks">
-      <a href="#discover">Discover</a><a href="#communities">Communities</a><a href="#how">How it works</a>
-    </nav>
-    <div class="header-actions"><a class="login" href="#join">Log in</a><a class="button button-small" href="#join">Join Gitalk <span>↗</span></a></div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PEOPLE. YOUR CONVERSATIONS.</div>
-        <h1>Good things<br>start with <span class="gradient-text">a hello.</span></h1>
-        <p class="hero-description">A place to share what matters, find your people, and discover fresh perspectives. Come as you are — there’s a conversation waiting for you.</p>
-        <div class="hero-actions"><a class="button" href="#join">Find your community <span>→</span></a><a class="text-link" href="#discover"><span class="play">▶</span> Explore Gitalk</a></div>
-        <div class="social-proof"><div class="avatar-stack"><span>R</span><span>A</span><span>M</span><span>S</span></div><div><strong>Your next favourite conversation</strong><small>could start right here.</small></div></div>
-      </div>
-      <div class="hero-visual" aria-label="Illustration of people connecting through conversation">
-        <div class="orb orb-one"></div><div class="orb orb-two"></div>
-        <div class="float-card float-card-top"><span class="mini-icon purple">✦</span><div><strong>Ideas welcome</strong><small>Every perspective matters</small></div></div>
-        <div class="conversation-card">
-          <div class="card-top"><span class="online-dot"></span><span>THE COMMUNITY ROOM</span><span class="dots">•••</span></div>
-          <div class="chat-bubble bubble-a"><span class="person-icon p1">A</span><div><strong>Aria</strong><p>What’s one small thing that made your day better? ☀️</p></div></div>
-          <div class="chat-bubble bubble-b"><span class="person-icon p2">K</span><div><strong>Kabir</strong><p>A stranger’s kindness. Passing it on today 💜</p></div></div>
-          <div class="chat-bubble bubble-c"><span class="person-icon p3">Y</span><div><strong>You</strong><p>Finding this conversation!</p></div></div>
-          <div class="reply-bar"><span>Share your thoughts…</span><span class="send-button">↑</span></div>
-        </div>
-        <div class="float-card float-card-bottom"><span class="mini-icon peach">♡</span><div><strong>Be yourself</strong><small>There’s room for your voice</small></div></div>
-        <span class="deco deco-star">✳</span><span class="deco deco-plus">＋</span>
-      </div>
-    </section>
-
-    <section class="values-strip" id="how">
-      <div><span class="value-icon">◎</span><span><strong>Connect genuinely</strong><small>Meet people beyond the scroll.</small></span></div>
-      <div><span class="value-icon">✳</span><span><strong>Share openly</strong><small>Your ideas deserve a space.</small></span></div>
-      <div><span class="value-icon">⌘</span><span><strong>Grow together</strong><small>Learn from different viewpoints.</small></span></div>
-    </section>
-
-    <section class="section discover-section" id="discover">
-      <div class="section-heading"><div><div class="eyebrow">A LITTLE SOMETHING FOR EVERYONE</div><h2>Follow your <span class="gradient-text">curiosity.</span></h2></div><a class="text-link desktop-link" href="#communities">See all topics <span>→</span></a></div>
-      <div class="topic-grid">
-        <a class="topic-card topic-lilac" href="#join"><span class="topic-symbol">✦</span><span class="topic-count">IDEAS & CREATIVITY</span><h3>Big ideas.<br>Little sparks.</h3><span class="topic-arrow">↗</span></a>
-        <a class="topic-card topic-mint" href="#join"><span class="topic-symbol">⌘</span><span class="topic-count">TECH & AI</span><h3>What’s next<br>starts here.</h3><span class="topic-arrow">↗</span></a>
-        <a class="topic-card topic-peach" href="#join"><span class="topic-symbol">♡</span><span class="topic-count">LIFE & WELLBEING</span><h3>Real life.<br>Real talk.</h3><span class="topic-arrow">↗</span></a>
-        <a class="topic-card topic-blue" href="#join"><span class="topic-symbol">✺</span><span class="topic-count">LEARNING & SKILLS</span><h3>Stay curious.<br>Keep growing.</h3><span class="topic-arrow">↗</span></a>
-      </div>
-    </section>
-
-    <section class="community-section" id="communities">
-      <div class="community-copy"><div class="eyebrow">MORE THAN A FEED</div><h2>Find a place<br>to <span class="gradient-text">belong.</span></h2><p>From niche interests to everyday questions, communities make it easier to find people who just get it.</p><a class="button" href="#join">Explore communities <span>→</span></a></div>
-      <div class="community-panel">
-        <div class="panel-heading"><div><strong>Community picks</strong><small>Spaces to explore today</small></div><span class="live-label"><i></i> OPEN TO ALL</span></div>
-        <div class="community-row"><span class="community-emoji emoji-purple">✦</span><div><strong>Creative Corner</strong><small>Art, ideas & making things</small></div><span class="member-count">↗</span></div>
-        <div class="community-row"><span class="community-emoji emoji-green">⌘</span><div><strong>AI Curious</strong><small>Tools, trends & possibilities</small></div><span class="member-count">↗</span></div>
-        <div class="community-row"><span class="community-emoji emoji-orange">☀</span><div><strong>Everyday Wins</strong><small>Small joys, shared together</small></div><span class="member-count">↗</span></div>
-        <div class="community-row"><span class="community-emoji emoji-blue">✎</span><div><strong>Learn Something</strong><small>Questions, skills & discoveries</small></div><span class="member-count">↗</span></div>
-      </div>
-    </section>
-
-    <section class="join-section" id="join">
-      <div class="join-decoration decoration-left">✳</div><div class="join-decoration decoration-right">✦</div>
-      <div class="eyebrow light-eyebrow">YOUR VOICE BELONGS HERE</div><h2>Make room for<br><span>better conversations.</span></h2><p>Create your profile, join conversations, discover communities, and make your voice part of something bigger.</p>
-      <a class="button button-white" href="mailto:hello@gitalk.in?subject=Join%20Gitalk">Get started <span>→</span></a>
-      <small class="join-note">Be curious. Be kind. Be part of it.</small>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-main"><a class="brand footer-brand" href="index.html"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.</span></span></a><p>Where people connect<br>through conversation.</p>
-      <div class="footer-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
-    </div><div class="footer-bottom"><span>© <span id="year"></span> Gitalk.in. Made for meaningful conversations.</span><span>Talk freely. Connect genuinely. Share openly.</span></div>
-  </footer>
-  <script src="script.js"></script>
-</body>
-</html>
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-icon">G</span> Gitalk<span class="gradient">.in</span></a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  <nav id="nav"><a class="active" href="index.html">Home</a><a href="#community">Community</a><a href="bloggers.html">Bloggers</a><a href="gallery.html">Gallery</a><a href="articles.html">Articles</a><a href="#about">About</a></nav>
+  <div class="nav-actions"><a class="login" href="#login">Login</a><a class="button small" href="#signup">Sign Up</a></div>
+</header>
+<main>
+<section class="hero">
+  <div class="hero-content"><span class="eyebrow">YOUR SPACE. YOUR VOICE.</span><h1>Talk freely.<br><span class="gradient">Connect genuinely.</span></h1>
+  <p>A place where people talk, connect, and share ideas, moments, stories, and interests.</p>
+  <div class="hero-actions"><a class="button" href="#signup">Join the community ↗</a><a class="button ghost" href="#explore">Explore Gitalk</a></div>
+  <div class="hero-stats"><span><b>01</b> Share your story</span><span><b>02</b> Find your people</span><span><b>03</b> Get inspired</span></div></div>
+  <div class="hero-art"><div class="orb orb1"></div><div class="orb orb2"></div><div class="hero-card"><span class="bubble">✦</span><p>Good conversations<br>start with one hello.</p><small>Make room for new ideas.</small></div></div>
+</section>
+<section class="features section" id="community"><div class="section-heading"><span class="eyebrow">MADE FOR CONNECTION</span><h2>More than a social feed.</h2><p>Discover different ways to express yourself and find your community.</p></div>
+<div class="feature-grid"><article class="feature"><span class="feature-icon blue">☏</span><h3>Start a conversation</h3><p>Share thoughts, ask questions, and meet new people.</p></article><article class="feature"><span class="feature-icon purple">♧</span><h3>Join communities</h3><p>Find people who share your interests and passions.</p></article><article class="feature"><span class="feature-icon pink">♥</span><h3>Express yourself</h3><p>Post your moments, opinions, photos, and ideas.</p></article><article class="feature"><span class="feature-icon green">✧</span><h3>Discover people</h3><p>Explore fresh perspectives and inspiring creators.</p></article></div></section>
+<section class="portal-section section" id="explore"><div class="section-heading row-heading"><div><span class="eyebrow">EXPLORE GITALK</span><h2>Choose your next destination.</h2></div><p>Every section has its own space, style, and purpose.</p></div>
+<div class="portal-grid">
+<a class="portal portal-blog" href="bloggers.html"><span class="portal-tag">01 / CREATE</span><div><h3>Bloggers</h3><p>Build your voice. Publish your own blog and share your experiences.</p><span class="text-link">Meet the bloggers ↗</span></div></a>
+<a class="portal portal-articles" href="articles.html"><span class="portal-tag">02 / LEARN</span><div><h3>Articles</h3><p>Read useful stories about technology, lifestyle, education, travel, and more.</p><span class="text-link">Explore articles ↗</span></div></a>
+<a class="portal portal-gallery" href="gallery.html"><span class="portal-tag">03 / SEE</span><div><h3>Digital Gallery</h3><p>A visual collection of nature, travel, people, creativity, and everyday life.</p><span class="text-link">Open the gallery ↗</span></div></a>
+</div></section>
+<section class="latest section"><div class="section-heading row-heading"><div><span class="eyebrow">FRESH FROM THE COMMUNITY</span><h2>Stories worth your time.</h2></div><a class="text-link" href="articles.html">View all articles ↗</a></div><div class="article-grid">
+<a class="article-card" href="articles.html"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=700&q=80" alt="Notebook and workspace"><div class="article-body"><span class="category">LIFESTYLE</span><h3>How to make space for better ideas</h3><p>Small habits that help creativity grow.</p><small>4 min read · Community picks</small></div></a>
+<a class="article-card" href="articles.html"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Mountain landscape"><div class="article-body"><span class="category travel">TRAVEL</span><h3>Places that make you pause</h3><p>Discover the beauty of slowing down.</p><small>6 min read · Travel</small></div></a>
+<a class="article-card" href="articles.html"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80" alt="People working with technology"><div class="article-body"><span class="category tech">TECHNOLOGY</span><h3>Ideas shaping our digital future</h3><p>A friendly look at the tools changing how we connect.</p><small>5 min read · Technology</small></div></a>
+</div></section>
+<section class="join section" id="signup"><div><span class="eyebrow">YOUR NEXT CONVERSATION STARTS HERE</span><h2>Bring your ideas.<br>Find your people.</h2><p>Create your profile and make your voice part of something bigger.</p></div><a class="button" href="mailto:hello@gitalk.in">Get started ↗</a></section>
+</main>
+<footer id="about"><div class="footer-brand"><a class="brand" href="index.html"><span class="brand-icon">G</span> Gitalk<span class="gradient">.in</span></a><p>Talk freely. Connect genuinely. Share openly.</p></div><div><b>Explore</b><a href="#community">Community</a><a href="bloggers.html">Bloggers</a><a href="gallery.html">Digital Gallery</a><a href="articles.html">Articles</a></div><div><b>Support</b><a href="mailto:hello@gitalk.in">Contact</a><a href="#about">About Gitalk</a><a href="#about">Privacy</a></div><div><b>Stay in the loop</b><p>Fresh ideas, stories, and community highlights.</p><form id="subscribeForm"><input type="email" placeholder="Your email address" required><button class="button small">Subscribe</button></form></div><div class="copyright">© 2026 Gitalk.in · Where people connect through conversation.</div></footer>
+<script src="script.js"></script>
+</body></html>
