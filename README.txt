@@ -1,27 +1,27 @@
-GITALK Digital 3D Website — GitHub Pages ready
+GITALK DIWALI WISHES WEBSITE
 
-FILES
-- index.html: complete responsive website (HTML, CSS and JavaScript are included in one file)
-- 404.html: friendly GitHub Pages not-found page
+Files:
+- index.html: complete responsive Diwali-themed multi-page-in-page website
+- diwali-video.mp4: put your supplied video here (rename the uploaded video to this exact name)
+- 404.html: friendly not-found page
 
-PUBLISH / FIX THE 404
-1. Open your GitHub repository: Joram-p/Gitalk.in
-2. Upload/replace index.html and 404.html in the REPOSITORY ROOT (not inside a subfolder).
-3. Commit the changes to the branch selected in Settings → Pages.
-4. In Settings → Pages, confirm the correct branch and folder (usually main / root).
-5. Wait for GitHub Pages deployment to finish, then open your published Pages URL.
-6. If the repository is a project site, the published address is normally https://joram-p.github.io/Gitalk.in/ (check Settings → Pages for the exact URL).
+VIDEO SETUP:
+1. Copy your uploaded 1000426627.mp4 file into the same folder as index.html.
+2. Rename it to diwali-video.mp4.
+3. Upload index.html, 404.html and diwali-video.mp4 to the ROOT of your GitHub Pages repository.
+4. Commit changes and wait for GitHub Pages deployment.
+5. Open your site. Video is configured autoplay + muted + loop + playsinline. Browsers usually block autoplay with sound, so users must tap controls to unmute.
 
-FEATURES
-- Animated rotating 3D-inspired G logo and globe
-- Responsive Japanese-inspired pastel/digital style
-- Circular auto-moving photo gallery, pause/resume and shuffle
-- In-site navigation: sections render inside the same page without a full page reload
-- AI prompt builder, learning pages, services, media and contact sections
-- 404 page
+If your video file is too large for GitHub's browser upload limit, use Git LFS or host the video using a service that provides a stable direct MP4 URL and replace src="diwali-video.mp4" with that URL.
 
-IMPORTANT
-- Gallery photos load from Unsplash and need an internet connection.
-- AI tools section links to third-party services; it does NOT include an actual free 3-minute AI video generation engine. Such generation requires an external provider/API and usually has usage limits.
-- Update hello@gitalk.in in index.html to your real contact email before publishing.
-- No login/database or payment processing is included in this front-end starter.
+Features:
+- Diwali theme with animated logo, diya flame and sparkles
+- Autoplaying muted looping video on home page
+- Home, Wishes, Gallery, Activities, About and Share sections
+- Personal greeting generator and native share support
+- Round auto-moving gallery and pause control
+- Responsive mobile navigation
+- 404.html fallback page
+- Online gallery images need internet
+
+Note: This is a static website; no database/login or actual AI generator is included.
