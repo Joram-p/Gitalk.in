@@ -1,238 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gitalk.in — Connect Through Conversation</title>
-
-    <meta name="description"
-          content="Gitalk is a social space to connect through conversations, ideas, interests, and communities.">
-
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f3e8">
+  <meta name="description" content="Gitalk — useful online tools, learning guides, ideas and digital resources, with a Japanese-inspired design.">
+  <title>Gitalk — Ideas for Everyday Life</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
 </head>
-
 <body>
+  <div class="topline"><span>GITAlK JOURNAL</span><span>暮らし · 学び · アイデア</span></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Gitalk home">
+      <span class="brand-mark"><span>G</span></span>
+      <span class="brand-copy"><strong>gitalk<span>.in</span></strong><small>Ideas for everyday life</small></span>
+    </a>
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#discover">Discover</a><a href="#tools">Tools</a><a href="#guides">Guides</a><a href="#about">About</a>
+      <a class="nav-cta" href="#newsletter">Stay inspired <span>↗</span></a>
+    </nav>
+  </header>
 
-    <!-- Navigation -->
-    <header class="navbar">
-        <a href="index.html" class="logo">
-            <span class="logo-icon">G</span>
-            Gitalk<span class="dot">.</span>
-        </a>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="red-dot"></span> A LITTLE MORE CLARITY, EVERY DAY</p>
+        <h1>Small ideas.<br><em>Beautiful</em> possibilities.</h1>
+        <p class="hero-text">Explore helpful digital tools, simple guides and fresh ideas — thoughtfully collected for curious minds.</p>
+        <div class="hero-actions"><a class="button button-dark" href="#discover">Explore Gitalk <span>↗</span></a><a class="text-link" href="#tools">Browse online tools <span>→</span></a></div>
+        <div class="hero-note"><span class="sun-symbol">☼</span><span>Made for curious people<br><b>Learning never goes out of style.</b></span></div>
+      </div>
+      <div class="hero-art" aria-label="Japanese-inspired illustration of a red sun and Mount Fuji">
+        <div class="art-label">NO. 001 <span>—</span> THE BEGINNING</div>
+        <div class="sun"></div>
+        <svg class="fuji" viewBox="0 0 600 360" role="img" aria-label="Mount Fuji illustration">
+          <path d="M25 310 L210 90 L260 135 L300 30 L355 118 L390 82 L575 310 Z" fill="#273c3a"/>
+          <path d="M238 125 L300 30 L355 118 L333 103 L314 112 L299 86 L279 119 L262 112 Z" fill="#fffaf0"/>
+          <path d="M25 310 Q170 260 300 310 T575 310 L600 360 L0 360 Z" fill="#4f7166"/>
+          <path d="M0 330 Q160 290 300 330 T600 330 L600 360 L0 360Z" fill="#253f3b"/>
+          <path d="M300 30 L355 118 L390 82 L575 310 L425 280 L354 170 L333 103 L314 112Z" fill="#1f3332" opacity=".45"/>
+        </svg>
+        <div class="art-stamp">日<br>本</div>
+        <div class="art-caption">Find beauty in the<br>everyday details.</div>
+        <div class="art-wave"></div>
+      </div>
+    </section>
 
-        <button class="menu-toggle" id="menuToggle"
-                aria-label="Toggle navigation" aria-expanded="false">
-            ☰
-        </button>
+    <section class="ticker" aria-label="Site themes"><span>TOOLS THAT HELP</span><b>✳</b><span>IDEAS THAT INSPIRE</span><b>✳</b><span>LEARN AT YOUR PACE</span><b>✳</b><span>TOOLS THAT HELP</span></section>
 
-        <nav class="nav-links" id="navLinks">
-            <a href="#home">Home</a>
-            <a href="#features">Features</a>
-            <a href="blog.html">Blog</a>
-            <a href="gallery.html">Gallery</a>
-            <a href="products.html">Products</a>
-        </nav>
+    <section class="section discover" id="discover">
+      <div class="section-heading"><div><p class="eyebrow">THE GITAlK COLLECTION</p><h2>Find your next <em>good idea.</em></h2></div><p class="section-intro">A calm corner of the internet for useful discoveries, practical learning and creative projects.</p></div>
+      <div class="feature-grid">
+        <a class="feature-card card-tools" href="#tools"><span class="card-number">01 / TOOLS</span><span class="card-icon">✳</span><h3>Useful online tools</h3><p>Simple digital helpers for everyday tasks and creative work.</p><span class="card-arrow">Explore tools ↗</span><div class="card-decoration rings"></div></a>
+        <a class="feature-card card-learn" href="#guides"><span class="card-number">02 / LEARN</span><span class="card-icon">文</span><h3>Learn something new</h3><p>Friendly guides that make unfamiliar topics easier to understand.</p><span class="card-arrow">Read guides ↗</span><div class="card-decoration leaf">葉</div></a>
+        <a class="feature-card card-create" href="#ideas"><span class="card-number">03 / CREATE</span><span class="card-icon">✎</span><h3>Make room for ideas</h3><p>Inspiration for stories, education, technology and small projects.</p><span class="card-arrow">Get inspired ↗</span><div class="card-decoration circle-art"></div></a>
+      </div>
+    </section>
 
-        <div class="nav-buttons">
-            <a href="login.html" class="btn btn-outline">Login</a>
-            <a href="register.html" class="btn btn-primary">Join Gitalk</a>
-        </div>
-    </header>
+    <section class="tools-band" id="tools"><div class="tools-inner"><div><p class="eyebrow">YOUR DIGITAL TOOLBOX</p><h2>Less hassle.<br><em>More done.</em></h2><p class="muted">Explore the tools collection as it grows. New resources can be added here without changing the overall design.</p></div>
+      <div class="tool-list">
+        <a href="#newsletter"><span class="tool-icon">✦</span><span><b>AI & creativity</b><small>Ideas, writing and creative workflows</small></span><span class="tool-go">↗</span></a>
+        <a href="#newsletter"><span class="tool-icon">▤</span><span><b>Learning corner</b><small>Educational resources and study guides</small></span><span class="tool-go">↗</span></a>
+        <a href="#newsletter"><span class="tool-icon">◎</span><span><b>Everyday utilities</b><small>Helpful resources for daily tasks</small></span><span class="tool-go">↗</span></a>
+      </div>
+    </div></section>
 
-    <!-- Hero Section -->
-    <main>
-        <section class="hero" id="home">
+    <section class="section guides" id="guides"><div class="section-heading"><div><p class="eyebrow">THE READING ROOM</p><h2>Good things take <em>curiosity.</em></h2></div><a class="text-link" href="#ideas">View all topics →</a></div>
+      <div class="guide-grid">
+        <article class="guide-card"><div class="guide-image image-zen"><span>学</span><div class="mini-sun"></div><div class="mountain-shape"></div></div><div class="guide-meta">LEARNING <span>·</span> 5 MIN READ</div><h3>Make learning a daily habit</h3><p>Small, repeatable steps can make new skills feel more approachable.</p><a href="#ideas" class="read-link">Read the idea <span>↗</span></a></article>
+        <article class="guide-card"><div class="guide-image image-ideas"><span>アイデア</span><div class="paper paper-one"></div><div class="paper paper-two"></div><div class="paper paper-three"></div></div><div class="guide-meta">CREATIVITY <span>·</span> 4 MIN READ</div><h3>Turn a tiny idea into a project</h3><p>A simple way to organise your thoughts and start making progress.</p><a href="#ideas" class="read-link">Read the idea <span>↗</span></a></article>
+        <article class="guide-card"><div class="guide-image image-tech"><span>未来</span><div class="tech-orbit orbit-one"></div><div class="tech-orbit orbit-two"></div><div class="tech-core">G</div></div><div class="guide-meta">TECHNOLOGY <span>·</span> 6 MIN READ</div><h3>Explore technology with confidence</h3><p>Understand digital tools through clear explanations and practical examples.</p><a href="#ideas" class="read-link">Read the idea <span>↗</span></a></article>
+      </div>
+    </section>
 
-            <div class="hero-content">
-                <span class="eyebrow">
-                    YOUR SPACE. YOUR PEOPLE. YOUR VOICE.
-                </span>
+    <section class="quote-strip" id="ideas"><span class="quote-mark">“</span><blockquote>In a world that moves quickly,<br><em>make space for wonder.</em></blockquote><span class="quote-jp">一期一会</span><small>ICHIGO ICHIE — TREASURE THIS MOMENT</small></section>
 
-                <h1>
-                    Good things start with a
-                    <span>conversation.</span>
-                </h1>
+    <section class="newsletter" id="newsletter"><div class="newsletter-flower">✿</div><div><p class="eyebrow">A NOTE FROM GITAlK</p><h2>Stay curious.</h2><p>More helpful ideas and resources are on the way. Come back and explore what’s new.</p></div><a class="button button-red" href="mailto:hello@gitalk.in?subject=Hello%20Gitalk">Say hello <span>↗</span></a></section>
+  </main>
 
-                <p>
-                    Share what matters, discover fresh perspectives,
-                    and connect with people who make your world bigger.
-                </p>
-
-                <div class="hero-actions">
-                    <a href="register.html" class="btn btn-primary btn-large">
-                        Create Your Profile →
-                    </a>
-
-                    <a href="#features" class="btn btn-outline btn-large">
-                        Explore Features
-                    </a>
-                </div>
-
-                <div class="hero-note">
-                    ✨ Talk freely. Connect genuinely. Share openly.
-                </div>
-            </div>
-
-            <!-- Visual Preview -->
-            <div class="hero-visual">
-                <div class="preview-card">
-
-                    <div class="user-info">
-                        <div class="avatar">G</div>
-
-                        <div>
-                            <strong>Gitalk Community</strong>
-                            <small>Welcome to the conversation</small>
-                        </div>
-                    </div>
-
-                    <h3>Every idea deserves a conversation. 💜</h3>
-
-                    <p>
-                        Meet new people, share your thoughts,
-                        discover communities, and express yourself.
-                    </p>
-
-                    <div class="preview-image">
-                        <span>SHARE YOUR WORLD ✨</span>
-                    </div>
-
-                    <div class="post-actions">
-                        <span>♡ Like</span>
-                        <span>♧ Comment</span>
-                        <span>↗ Share</span>
-                    </div>
-
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Features -->
-        <section class="features-section" id="features">
-
-            <div class="section-heading">
-                <span class="eyebrow">DISCOVER GITALK</span>
-
-                <h2>
-                    Everything you need to
-                    <span>connect and create.</span>
-                </h2>
-
-                <p>
-                    One platform for conversations, creativity,
-                    knowledge, shopping, and AI-powered tools.
-                </p>
-            </div>
-
-            <div class="feature-grid">
-
-                <a href="feed.html" class="feature-card">
-                    <div class="feature-icon">👥</div>
-                    <h3>Social Community</h3>
-                    <p>Share posts, connect with people, and join conversations.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="gallery.html" class="feature-card">
-                    <div class="feature-icon">🖼️</div>
-                    <h3>Photo Gallery</h3>
-                    <p>Share photos, discover images, and explore creative content.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="reels.html" class="feature-card">
-                    <div class="feature-icon">🎬</div>
-                    <h3>Reels & Videos</h3>
-                    <p>Discover short videos and share memorable moments.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="chat.html" class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3>Friends Chat</h3>
-                    <p>Build friendships and communicate with your community.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="blog.html" class="feature-card">
-                    <div class="feature-icon">📝</div>
-                    <h3>Blog & Articles</h3>
-                    <p>Publish ideas, read articles, and share your knowledge.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="products.html" class="feature-card">
-                    <div class="feature-icon">🛍️</div>
-                    <h3>Affiliate Products</h3>
-                    <p>Explore products, comparisons, and recommendations.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="ai-video.html" class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Video Studio</h3>
-                    <p>Create a workspace for AI-powered video generation.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="dashboard.html" class="feature-card">
-                    <div class="feature-icon">👤</div>
-                    <h3>My Dashboard</h3>
-                    <p>Manage your profile and access your personal workspace.</p>
-                    <span>Explore →</span>
-                </a>
-
-                <a href="admin.html" class="feature-card">
-                    <div class="feature-icon">⚙️</div>
-                    <h3>Admin Panel</h3>
-                    <p>Plan content management and administration tools.</p>
-                    <span>Explore →</span>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- Call to Action -->
-        <section class="cta-section">
-            <span class="eyebrow">YOUR COMMUNITY STARTS HERE</span>
-
-            <h2>Make your voice part of something bigger.</h2>
-
-            <p>
-                Create your profile, discover people,
-                and start your next conversation.
-            </p>
-
-            <a href="register.html" class="btn btn-white btn-large">
-                Join Gitalk Today →
-            </a>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <a href="index.html" class="logo">
-            <span class="logo-icon">G</span>
-            Gitalk<span class="dot">.</span>
-        </a>
-
-        <p>Gitalk — where people connect through conversation.</p>
-
-        <div class="footer-links">
-            <a href="privacy.html">Privacy</a>
-            <a href="terms.html">Terms</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-        <small>
-            © <span id="year"></span> Gitalk.in. All rights reserved.
-        </small>
-    </footer>
-
-    <script src="script.js"></script>
-
+  <footer class="footer" id="about"><a class="footer-brand" href="index.html"><span class="brand-mark"><span>G</span></span><span><b>gitalk.in</b><small>Joram Services and Business</small></span></a><p>Thoughtful tools. Useful knowledge. New possibilities.</p><div class="footer-links"><a href="index.html">Home</a><a href="#tools">Tools</a><a href="#guides">Guides</a><a href="privacy.html">Privacy</a><a href="contact.html">Contact</a></div><div class="footer-bottom"><span>© <span id="year">2026</span> Gitalk.in. All rights reserved.</span><span>Designed with a little Japanese-inspired calm <b>✿</b></span></div></footer>
 </body>
-                                                                               </html>
+</html>
