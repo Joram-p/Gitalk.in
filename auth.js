@@ -3,7 +3,7 @@ import { createClient } from
 
 // STEP 3 में अपने Supabase Project URL और Publishable Key डालें.
 const SUPABASE_URL = "https://mhnfutbpvyvhdmqqquyi.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_iqgShS9BnBtwnL0RwBTeMg_U9leFFf9";
 
 let supabase = null;
 
