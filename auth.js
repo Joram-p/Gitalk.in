@@ -2,7 +2,7 @@ import { createClient } from
   "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 // STEP 3 में अपने Supabase Project URL और Publishable Key डालें.
-const SUPABASE_URL = "";
+const SUPABASE_URL = "https://mhnfutbpvyvhdmqqquyi.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "";
 
 let supabase = null;
