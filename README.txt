@@ -1,30 +1,27 @@
-GITALK.IN — JAPANESE ANIME + EDUCATIONAL BOOKS REDESIGN
+GITALK Digital 3D Website — GitHub Pages ready
 
-Files included:
-- index.html — home page
-- style.css — responsive anime-inspired design
-- script.js — mobile menu and current year
-- 404.html — custom not-found page
-- contact.html — contact starter page
-- privacy.html — privacy starter page
+FILES
+- index.html: complete responsive website (HTML, CSS and JavaScript are included in one file)
+- 404.html: friendly GitHub Pages not-found page
 
-UPLOAD TO GITHUB PAGES:
-1. Download this ZIP and extract it.
-2. Open your GitHub repository: https://github.com/Joram-p/Gitalk.in
-3. Upload the CONTENTS of the extracted folder into the repository root, not a nested folder.
-4. Make sure the home page filename is exactly index.html.
-5. Commit the changes to the branch/folder selected in Settings > Pages.
-6. Wait for the GitHub Pages deployment to finish and open the published URL shown in Settings > Pages.
+PUBLISH / FIX THE 404
+1. Open your GitHub repository: Joram-p/Gitalk.in
+2. Upload/replace index.html and 404.html in the REPOSITORY ROOT (not inside a subfolder).
+3. Commit the changes to the branch selected in Settings → Pages.
+4. In Settings → Pages, confirm the correct branch and folder (usually main / root).
+5. Wait for GitHub Pages deployment to finish, then open your published Pages URL.
+6. If the repository is a project site, the published address is normally https://joram-p.github.io/Gitalk.in/ (check Settings → Pages for the exact URL).
 
-IF 404 CONTINUES:
-- Check Settings > Pages to confirm the deployment source and published URL.
-- Check the Actions tab for a failed deployment.
-- If using a custom domain, check the repository's Pages custom-domain setting and DNS records.
-- Make sure index.html is in the published root and lower-case.
+FEATURES
+- Animated rotating 3D-inspired G logo and globe
+- Responsive Japanese-inspired pastel/digital style
+- Circular auto-moving photo gallery, pause/resume and shuffle
+- In-site navigation: sections render inside the same page without a full page reload
+- AI prompt builder, learning pages, services, media and contact sections
+- 404 page
 
-IMPORTANT LIMITATIONS:
-- This is a static website design. The AI/tool cards are front-end placeholders, not actual working AI video generators.
-- Educational sections are landing-page categories, not downloadable books yet.
-- There is no database, user login, email verification, payment, ad integration or earning guarantee included.
-- Replace hello@gitalk.in if you do not have that email address.
-- Update the privacy policy before collecting visitor data.
+IMPORTANT
+- Gallery photos load from Unsplash and need an internet connection.
+- AI tools section links to third-party services; it does NOT include an actual free 3-minute AI video generation engine. Such generation requires an external provider/API and usually has usage limits.
+- Update hello@gitalk.in in index.html to your real contact email before publishing.
+- No login/database or payment processing is included in this front-end starter.
