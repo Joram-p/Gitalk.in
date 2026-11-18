@@ -16,7 +16,7 @@ main{max-width:1200px;margin:28px auto;padding:0 18px}.hero{display:grid;grid-te
 .hero h1{font-size:clamp(28px,4vw,45px);line-height:1.12;margin:12px 0}.hero p{color:#e4ebff;line-height:1.7}.pill{display:inline-block;background:#ffffff20;padding:7px 12px;border-radius:20px;font-size:12px}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px;display:flex;flex-direction:column;justify-content:center}.stat b{font-size:30px;color:var(--blue)}.stat small{color:var(--muted)}
 .section{margin-top:28px}.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.section h2{margin:0 0 14px;font-size:23px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 5px 20px #243c7008}.card h3{margin:7px 0}.card p{color:var(--muted);line-height:1.55;font-size:14px}.icon{font-size:27px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 5px 20px #243c7008;overflow:hidden}.card h3{margin:7px 0}.card p{color:var(--muted);line-height:1.55;font-size:14px}.icon{font-size:27px}.topic-img{width:100%;height:112px;object-fit:cover;border-radius:13px;margin:-2px 0 10px}.hero-art{width:100%;max-height:190px;object-fit:contain;margin-top:12px;display:block}.heroText{position:relative;overflow:hidden}
 button,.btn{border:0;background:var(--blue);color:#fff;padding:11px 15px;border-radius:11px;font-weight:750;cursor:pointer}.btn.secondary{background:#eaf0ff;color:#2449b8}
 input,select{width:100%;padding:13px;border:1px solid #d9e1f0;border-radius:12px;font:inherit;background:white;color:var(--ink)}label{font-weight:700;font-size:13px;display:block;margin:12px 0 6px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.lesson{border-left:4px solid var(--cyan);padding:12px 15px;background:#f4fbff;border-radius:8px;margin:10px 0;line-height:1.65}
@@ -31,13 +31,13 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
 <nav id="nav"><button class="active" data-page="home">होम</button><button data-page="course">Complete Course</button><button data-page="practice">Daily Practice</button><button data-page="tests">Mock Tests</button><button data-page="dictionary">Dictionary</button><button data-page="progress">My Progress</button></nav></header>
 <main>
 <section id="home" class="page">
-<div class="hero"><div class="heroText"><span class="pill">YOUR ENGLISH JOURNEY STARTS HERE</span><h1>अब अंग्रेज़ी बोलें<br>बिना झिझक के!</h1><p>हिंदी में समझें, अंग्रेज़ी में बोलें। Grammar, vocabulary, daily conversations, listening practice और mock tests — एक ही जगह।</p><button onclick="showPage('course')">कोर्स शुरू करें →</button></div>
+<div class="hero"><div class="heroText"><span class="pill">YOUR ENGLISH JOURNEY STARTS HERE</span><h1>अब अंग्रेज़ी बोलें<br>बिना झिझक के!</h1><p>हिंदी में समझें, अंग्रेज़ी में बोलें। Grammar, vocabulary, daily conversations, listening practice और mock tests — एक ही जगह।</p><button onclick="showPage('course')">कोर्स शुरू करें →</button><img class="hero-art" src="images/hero-learning.svg" alt="English सीखते हुए विद्यार्थी और किताब का चित्र"></div>
 <div class="stats"><div class="stat"><b>12</b><small>Learning Modules</small></div><div class="stat"><b>1000+</b><small>Practice Questions</small></div><div class="stat"><b>500+</b><small>Dictionary Search Words</small></div><div class="stat"><b>24×7</b><small>Self Learning</small></div></div></div>
 <div class="section"><h2>आप क्या सीखेंगे?</h2><div class="grid">
-<div class="card"><div class="icon">📘</div><h3>Basic to Advanced Grammar</h3><p>Tenses, articles, prepositions, modals, voice, narration और sentence structure.</p></div>
-<div class="card"><div class="icon">🗣️</div><h3>Spoken English</h3><p>रोज़मर्रा की बातचीत, सवाल-जवाब, परिचय, फोन और इंटरव्यू की अंग्रेज़ी.</p></div>
-<div class="card"><div class="icon">📝</div><h3>1000+ Mock Questions</h3><p>MCQ, सही वाक्य चुनें, translation और grammar practice.</p></div>
-<div class="card"><div class="icon">📖</div><h3>Online Dictionary</h3><p>English शब्द खोजें, meaning, pronunciation और examples देखें.</p></div>
+<div class="card"><img class="topic-img" src="images/grammar.svg" alt="Grammar lesson illustration"><div class="icon">📘</div><h3>Basic to Advanced Grammar</h3><p>Tenses, articles, prepositions, modals, voice, narration और sentence structure.</p></div>
+<div class="card"><img class="topic-img" src="images/speaking.svg" alt="Speaking practice illustration"><div class="icon">🗣️</div><h3>Spoken English</h3><p>रोज़मर्रा की बातचीत, सवाल-जवाब, परिचय, फोन और इंटरव्यू की अंग्रेज़ी.</p></div>
+<div class="card"><img class="topic-img" src="images/mock-test.svg" alt="Mock test illustration"><div class="icon">📝</div><h3>1000+ Mock Questions</h3><p>MCQ, सही वाक्य चुनें, translation और grammar practice.</p></div>
+<div class="card"><img class="topic-img" src="images/dictionary.svg" alt="English Hindi dictionary illustration"><div class="icon">📖</div><h3>Online Dictionary</h3><p>English शब्द खोजें, meaning, pronunciation और examples देखें.</p></div>
 <div class="card"><div class="icon">🎧</div><h3>Speaking Practice</h3><p>वाक्य ज़ोर से बोलें, सुनें और अपनी आवाज़ रिकॉर्ड करके अभ्यास करें.</p></div>
 <div class="card"><div class="icon">📊</div><h3>Progress Tracker</h3><p>किए गए टेस्ट, सही उत्तर और सीखने की प्रगति इसी डिवाइस पर सेव होगी.</p></div></div></div>
 </section>

@@ -25,3 +25,14 @@ GITHUB PAGES पर लगाने के चरण:
 - यह frontend learning website है। इसमें अभी user accounts, cloud sync, teacher dashboard, certificate verification या payment system नहीं जुड़े हैं।
 - Mock test question bank में 1,200 generated practice entries हैं, जो कुछ core grammar/vocabulary templates को repeat करके बनती हैं; इसे editorially reviewed 1,200 unique questions न समझें। आगे विस्तृत unique question bank जोड़ी जा सकती है।
 - Online dictionary के लिए dictionaryapi.dev public API का उपयोग होता है। यह मुख्यतः English definitions/pronunciation देता है, हर शब्द का Hindi translation guaranteed नहीं है।
+
+
+IMAGES:
+- images/hero-learning.svg: homepage hero illustration
+- images/grammar.svg: grammar learning illustration
+- images/speaking.svg: spoken English illustration
+- images/dictionary.svg: dictionary illustration
+- images/mock-test.svg: mock test illustration
+
+IMPORTANT:
+Images are stored locally in the images folder. Keep the images folder alongside index.html when uploading to GitHub. Do not upload only index.html or the pictures will not appear.
