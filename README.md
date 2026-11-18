@@ -19,3 +19,6 @@ Open `index.html` in a modern browser. No build step or paid service is required
 4. Wait for GitHub Pages to publish the site.
 
 Progress is saved in the visitor's browser using localStorage. The dictionary contains built-in starter words; its web-search button opens a Google search in a new tab. Speech uses the browser's speech synthesis when available.
+
+## Visual refresh
+The design now uses a polished purple/teal gradient identity, glass-style sticky navigation, elevated cards, responsive layouts and a new locally stored hero illustration.

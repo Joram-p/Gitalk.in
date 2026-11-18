@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 480">
+<defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8174ff"/><stop offset="1" stop-color="#20c8b2"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="14"/></filter></defs>
+<rect width="720" height="480" rx="36" fill="#f0efff"/><circle cx="570" cy="90" r="90" fill="#d8d3ff"/><circle cx="120" cy="390" r="95" fill="#c9f5e9"/>
+<ellipse cx="360" cy="390" rx="230" ry="28" fill="#c6c8e9" opacity=".5" filter="url(#s)"/>
+<rect x="170" y="65" width="390" height="285" rx="25" fill="#fff" stroke="#e3e1ff" stroke-width="8"/>
+<rect x="195" y="90" width="340" height="205" rx="16" fill="url(#a)"/>
+<text x="365" y="180" text-anchor="middle" font-family="Arial" font-size="72" font-weight="800" fill="#fff">ABC</text>
+<text x="365" y="225" text-anchor="middle" font-family="Arial" font-size="23" font-weight="600" fill="#edfffc">Learn • Practice • Speak</text>
+<rect x="305" y="350" width="120" height="17" rx="8" fill="#7370c9"/><path d="M260 367h210l25 22H235z" fill="#55558f"/>
+<rect x="45" y="155" width="145" height="82" rx="18" fill="#fff"/><text x="117" y="190" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#6557e8">DAY 01</text><text x="117" y="215" text-anchor="middle" font-family="Arial" font-size="15" fill="#65708a">Start here</text>
+<rect x="520" y="285" width="155" height="82" rx="18" fill="#fff"/><text x="597" y="320" text-anchor="middle" font-family="Arial" font-size="18" font-weight="700" fill="#0d9d8b">1000+</text><text x="597" y="345" text-anchor="middle" font-family="Arial" font-size="15" fill="#65708a">Practice Qs</text>
+<circle cx="610" cy="175" r="27" fill="#ffcf70"/><path d="M600 175l8 8 15-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
