@@ -1,19 +1,21 @@
-# Gitalk.in — Complete 3D Digital Services & Business Frontend
+# Gitalk English Academy
 
-## Open
-Extract the ZIP and open `index.html` in Chrome/Edge/Safari.
+A free, responsive static Hindi-to-English learning website.
 
-## Included
-- 16-colour 3D-style Gitalk logo built in CSS
-- Neon digital/glassmorphism UI
-- Responsive desktop/tablet/mobile layout
-- Home dashboard
-- Services, Business, Shopping, Travel, Booking
-- Recharge & Bills, Banking & Finance
-- Technology, Media, Jobs, Property, Health, Education, Auto, Food
-- Search/filter UI
-- Login/Register demo modal
-- Modular `assets/style.css` and `assets/app.js`
+## Files
+- `index.html` — all site pages and navigation
+- `style.css` — responsive styling
+- `app.js` — lesson navigation, progress, dictionary, speech and quiz logic
+- `data.js` — 30-day curriculum, 250 dictionary entries and 1,000 generated vocabulary practice questions
+- `assets/` — local SVG illustrations
 
-## Production integrations still required
-Payments, mobile recharge, live travel/booking, banking APIs, user authentication, business database, orders, notifications and admin dashboard need secure server-side/API integrations.
+## Run locally
+Open `index.html` in a modern browser. No build step or paid service is required.
+
+## Publish on GitHub Pages
+1. Download and extract this ZIP.
+2. Open your GitHub repository and upload all files/folders from this package to the repository root.
+3. In repository Settings → Pages, choose Deploy from a branch, select `main` and `/ (root)`, then Save.
+4. Wait for GitHub Pages to publish the site.
+
+Progress is saved in the visitor's browser using localStorage. The dictionary contains built-in starter words; its web-search button opens a Google search in a new tab. Speech uses the browser's speech synthesis when available.
