@@ -1,24 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="hi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Gitalk.in पर 0 से 17 वर्ष के बच्चों और विद्यार्थियों के लिए मुफ्त Hindi to English speaking, grammar, spelling और vocabulary सीखें।">
-<title>Gitalk.in — Learn English Free</title><link rel="stylesheet" href="style.css">
-</head><body>
-<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">G</span><span>Gitalk<span class="dot">.in</span><small>LEARN • SPEAK • GROW</small></span></a>
-<button class="menu" id="menuBtn" aria-label="Menu">☰</button><nav id="nav"><a href="index.html">Home</a><a href="speaking.html">Speaking</a><a href="grammar.html">Grammar</a><a href="spelling.html">Spelling</a><a href="vocabulary.html">Vocabulary</a><a href="translate.html">Translate</a><a href="media.html">Audio & Video</a></nav><a class="admin-link" href="admin.html">Admin Login</a></header>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gitalk English Academy | Hindi to English</title>
+<meta name="description" content="Learn spoken English from Hindi with lessons, practice, mock tests and online dictionary.">
+<style>
+:root{--navy:#101d3a;--blue:#315efb;--cyan:#16c7c9;--ink:#17233c;--muted:#66738a;--bg:#f4f7ff;--card:#fff;--line:#e5eaf5}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(115deg,#101d3a,#2449a8 65%,#13aeb5);color:#fff;padding:22px max(5%,calc((100% - 1200px)/2));}
+.top{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.brand{font-size:25px;font-weight:900;letter-spacing:-.7px}.brand span{color:#61f1e8}.tag{font-size:12px;color:#dbe8ff}
+nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}nav button{background:#ffffff1c;color:#fff;border:1px solid #ffffff30;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}
+nav button.active,nav button:hover{background:#fff;color:#18316d}
+main{max-width:1200px;margin:28px auto;padding:0 18px}.hero{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:stretch}
+.heroText{background:linear-gradient(130deg,#172b59,#315efb);color:#fff;padding:32px;border-radius:24px;box-shadow:0 15px 40px #2449a822}
+.hero h1{font-size:clamp(28px,4vw,45px);line-height:1.12;margin:12px 0}.hero p{color:#e4ebff;line-height:1.7}.pill{display:inline-block;background:#ffffff20;padding:7px 12px;border-radius:20px;font-size:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px;display:flex;flex-direction:column;justify-content:center}.stat b{font-size:30px;color:var(--blue)}.stat small{color:var(--muted)}
+.section{margin-top:28px}.sectionHead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.section h2{margin:0 0 14px;font-size:23px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 5px 20px #243c7008}.card h3{margin:7px 0}.card p{color:var(--muted);line-height:1.55;font-size:14px}.icon{font-size:27px}
+button,.btn{border:0;background:var(--blue);color:#fff;padding:11px 15px;border-radius:11px;font-weight:750;cursor:pointer}.btn.secondary{background:#eaf0ff;color:#2449b8}
+input,select{width:100%;padding:13px;border:1px solid #d9e1f0;border-radius:12px;font:inherit;background:white;color:var(--ink)}label{font-weight:700;font-size:13px;display:block;margin:12px 0 6px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.lesson{border-left:4px solid var(--cyan);padding:12px 15px;background:#f4fbff;border-radius:8px;margin:10px 0;line-height:1.65}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.hidden{display:none!important}.muted{color:var(--muted)}.result{margin-top:14px;padding:14px;border-radius:12px;background:#effbf8}
+.question{padding:17px 0;border-bottom:1px solid var(--line)}.options{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.options label{font-weight:500;margin:0;border:1px solid var(--line);border-radius:10px;padding:10px;cursor:pointer}
+footer{text-align:center;padding:30px;color:var(--muted);font-size:13px}
+@media(max-width:800px){.hero,.row{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid,.options{grid-template-columns:1fr}.heroText{padding:23px}main{padding:0 12px}}
+</style></head>
+<body>
+<header><div class="top"><div><div class="brand">GITALK<span>.in</span> English Academy</div><div class="tag">हिंदी से अंग्रेज़ी सीखें • Speak with confidence</div></div><div class="pill">FREE LEARNING • BEGINNER TO ADVANCED</div></div>
+<nav id="nav"><button class="active" data-page="home">होम</button><button data-page="course">Complete Course</button><button data-page="practice">Daily Practice</button><button data-page="tests">Mock Tests</button><button data-page="dictionary">Dictionary</button><button data-page="progress">My Progress</button></nav></header>
 <main>
-<section class="hero"><div class="hero-copy"><span class="eyebrow">FREE ENGLISH LEARNING • AGE 0–17</span><h1>अंग्रेज़ी सीखें,<br><em>आत्मविश्वास</em> से बोलें।</h1><p>Hindi से English तक — Speaking, Grammar, Spelling, Vocabulary और Listening की आसान पढ़ाई। बच्चों और विद्यार्थियों के लिए बिल्कुल मुफ्त।</p><div class="hero-actions"><a class="btn primary" href="speaking.html">Start Learning <span>→</span></a><a class="btn secondary" href="grammar.html">Explore Lessons</a></div><div class="trust"><span>✓ Beginner friendly</span><span>✓ Hindi explanations</span><span>✓ Learn at your pace</span></div></div><div class="hero-art"><div class="orbit orbit1"></div><div class="orbit orbit2"></div><div class="book">📘</div><div class="bubble b1">Hello!</div><div class="bubble b2">नमस्ते</div><div class="bubble b3">ABC ✨</div><div class="hero-note"><b>आज का लक्ष्य</b><br>रोज़ 10 नए शब्द सीखें</div></div></section>
-<section class="section"><div class="section-head"><div><span class="eyebrow">LEARNING ZONES</span><h2>अपनी पढ़ाई का रास्ता चुनें</h2><p>हर विषय के लिए अलग पेज और आसान अभ्यास।</p></div></div><div class="grid" id="courseGrid">
-<a class="course c1" href="speaking.html"><span class="icon">🗣️</span><h3>English Speaking</h3><p>रोज़मर्रा की हिंदी से अंग्रेज़ी बातचीत।</p><b>Start speaking →</b></a>
-<a class="course c2" href="grammar.html"><span class="icon">📚</span><h3>Grammar</h3><p>Tense, parts of speech और sentence बनाना।</p><b>Learn grammar →</b></a>
-<a class="course c3" href="spelling.html"><span class="icon">✍️</span><h3>Spelling</h3><p>अक्षर, phonics और सही spelling का अभ्यास।</p><b>Practice spelling →</b></a>
-<a class="course c4" href="vocabulary.html"><span class="icon">🧠</span><h3>Vocabulary</h3><p>शब्द, अर्थ, उच्चारण और उदाहरण।</p><b>Build vocabulary →</b></a>
-<a class="course c5" href="translate.html"><span class="icon">🌐</span><h3>Hindi ↔ English</h3><p>वाक्य और शब्दों का अनुवाद करें।</p><b>Translate now →</b></a>
-<a class="course c6" href="media.html"><span class="icon">🎧</span><h3>Audio & Video</h3><p>सुनें, बोलें और वीडियो से सीखें।</p><b>Explore media →</b></a>
-</div></section>
-<section class="section" id="announcements"><div class="section-head"><div><span class="eyebrow">LATEST FROM GITALK</span><h2>नए अपडेट और lessons</h2><p>Admin द्वारा प्रकाशित नई जानकारी यहाँ दिखाई देगी।</p></div></div><div class="panel" id="publicUpdates">Updates देखने के लिए Firebase setup करें।</div></section>
-<section class="age-band"><div><span class="eyebrow">A LEARNING PATH FOR EVERY AGE</span><h2>0 से 17 साल तक — उम्र के अनुसार सीखें</h2><p>शुरुआती बच्चों के लिए ABC और sounds; बड़े विद्यार्थियों के लिए grammar, conversation और writing.</p></div><div class="age-pills"><span>0–5 साल</span><span>6–9 साल</span><span>10–13 साल</span><span>14–17 साल</span></div></section>
-<section class="section split"><div><span class="eyebrow">PRACTICE EVERY DAY</span><h2>सुनें, दोहराएँ, बेहतर बनें।</h2><p>इस वेबसाइट में उपलब्ध बोलकर सुनाने वाला फीचर अंग्रेज़ी शब्दों और वाक्यों का उच्चारण सुनाता है। माइक्रोफोन अभ्यास आपके ब्राउज़र की अनुमति पर निर्भर करता है।</p><a class="btn primary" href="speaking.html">Try speaking practice →</a></div><div class="practice-card"><div class="sound-icon">🔊</div><h3>Today's sentence</h3><p class="big-quote">I can learn English.</p><p>मैं अंग्रेज़ी सीख सकता/सकती हूँ।</p><button class="btn secondary" onclick="speak('I can learn English.')">▶ सुनें</button></div></section>
-</main><footer><a class="brand" href="index.html"><span class="brand-mark">G</span><span>Gitalk<span class="dot">.in</span><small>LEARN • SPEAK • GROW</small></span></a><p>मुफ्त शिक्षा, बेहतर भविष्य।</p><div><a href="admin.html">Admin</a> · <span>© <span id="year"></span> Gitalk.in</span></div><small class="disclaimer">यह शैक्षिक सहायता वेबसाइट है। बच्चों की सुरक्षा के लिए व्यक्तिगत जानकारी साझा न करें।</small></footer>
-<script src="app.js"></script><script type="module" src="updates.js"></script></body></html>
+<section id="home" class="page">
+<div class="hero"><div class="heroText"><span class="pill">YOUR ENGLISH JOURNEY STARTS HERE</span><h1>अब अंग्रेज़ी बोलें<br>बिना झिझक के!</h1><p>हिंदी में समझें, अंग्रेज़ी में बोलें। Grammar, vocabulary, daily conversations, listening practice और mock tests — एक ही जगह।</p><button onclick="showPage('course')">कोर्स शुरू करें →</button></div>
+<div class="stats"><div class="stat"><b>12</b><small>Learning Modules</small></div><div class="stat"><b>1000+</b><small>Practice Questions</small></div><div class="stat"><b>500+</b><small>Dictionary Search Words</small></div><div class="stat"><b>24×7</b><small>Self Learning</small></div></div></div>
+<div class="section"><h2>आप क्या सीखेंगे?</h2><div class="grid">
+<div class="card"><div class="icon">📘</div><h3>Basic to Advanced Grammar</h3><p>Tenses, articles, prepositions, modals, voice, narration और sentence structure.</p></div>
+<div class="card"><div class="icon">🗣️</div><h3>Spoken English</h3><p>रोज़मर्रा की बातचीत, सवाल-जवाब, परिचय, फोन और इंटरव्यू की अंग्रेज़ी.</p></div>
+<div class="card"><div class="icon">📝</div><h3>1000+ Mock Questions</h3><p>MCQ, सही वाक्य चुनें, translation और grammar practice.</p></div>
+<div class="card"><div class="icon">📖</div><h3>Online Dictionary</h3><p>English शब्द खोजें, meaning, pronunciation और examples देखें.</p></div>
+<div class="card"><div class="icon">🎧</div><h3>Speaking Practice</h3><p>वाक्य ज़ोर से बोलें, सुनें और अपनी आवाज़ रिकॉर्ड करके अभ्यास करें.</p></div>
+<div class="card"><div class="icon">📊</div><h3>Progress Tracker</h3><p>किए गए टेस्ट, सही उत्तर और सीखने की प्रगति इसी डिवाइस पर सेव होगी.</p></div></div></div>
+</section>
+<section id="course" class="page hidden"><div class="sectionHead"><h2>Complete Hindi to English Course</h2><span class="pill" style="background:#e7edff;color:#2449b8">12 Modules • Beginner → Advanced</span></div><div class="grid" id="modules"></div><div class="panel section" id="lessonBox"><h3>अपना पाठ चुनें</h3><p class="muted">किसी module पर क्लिक करके lesson खोलें।</p></div></section>
+<section id="practice" class="page hidden"><h2>Daily Speaking Practice</h2><div class="row"><div class="panel"><h3>आज के 10 बोलने वाले वाक्य</h3><div id="daily"></div><button onclick="speakDaily()">🔊 वाक्य सुनें</button></div><div class="panel"><h3>अपनी आवाज़ से अभ्यास</h3><p class="muted">नीचे दिया वाक्य बोलें और रिकॉर्डिंग सुनें। रिकॉर्डिंग आपके ब्राउज़र में ही रहेगी।</p><div class="lesson">I want to improve my English every day.</div><button id="record">🎙️ रिकॉर्ड शुरू करें</button><audio id="audio" controls class="hidden" style="width:100%;margin-top:12px"></audio><p id="recStatus" class="muted"></p></div></div></section>
+<section id="tests" class="page hidden"><div class="sectionHead"><h2>Mock Test Centre</h2><span class="pill" style="background:#e7edff;color:#2449b8">1000+ question bank</span></div><div class="panel"><div class="row"><div><label>टेस्ट चुनें</label><select id="testMode"><option value="20">Quick Test – 20 Questions</option><option value="50">Practice Test – 50 Questions</option><option value="100">Full Test – 100 Questions</option></select></div><div><label>विषय</label><select id="testTopic"><option value="all">All Topics</option><option value="tense">Tenses</option><option value="vocab">Vocabulary</option><option value="grammar">Grammar</option><option value="translation">Hindi to English</option></select></div></div><button style="margin-top:14px" onclick="startTest()">Start Mock Test</button><div id="testArea"></div></div></section>
+<section id="dictionary" class="page hidden"><h2>English–Hindi Online Dictionary</h2><div class="panel"><p class="muted">English शब्द टाइप करें। ऑनलाइन meaning के लिए इंटरनेट कनेक्शन आवश्यक है।</p><div class="row"><div><label>English Word</label><input id="word" placeholder="उदाहरण: beautiful, courage, improve" onkeydown="if(event.key==='Enter')searchWord()"></div><div style="display:flex;align-items:end"><button style="width:100%" onclick="searchWord()">🔍 Search Online</button></div></div><div id="dictResult"></div><div class="section"><h3>Popular Words</h3><div id="popular" class="grid"></div></div></div></section>
+<section id="progress" class="page hidden"><h2>My Learning Progress</h2><div class="grid"><div class="stat"><b id="testsDone">0</b><small>Tests Completed</small></div><div class="stat"><b id="bestScore">0%</b><small>Best Score</small></div><div class="stat"><b id="answered">0</b><small>Questions Answered</small></div></div><div class="panel section"><h3>Learning Tip</h3><p>हर दिन 20 मिनट पढ़ें, 10 वाक्य बोलें और एक छोटा टेस्ट दें। नियमित अभ्यास से आत्मविश्वास बढ़ेगा।</p><button onclick="resetProgress()" class="btn secondary">Reset Progress</button></div></section>
+</main><footer>© 2026 Gitalk.in English Academy • Learn • Practice • Speak • Grow</footer>
+<script>
+const modules=[
+["English Alphabet & Sounds","अक्षरों की ध्वनि, vowels, consonants और सही pronunciation.","A, E, I, O, U को vowels कहते हैं। शब्दों को सुनकर दोहराएँ।","I am learning English. — मैं अंग्रेज़ी सीख रहा/रही हूँ।"],
+["Basic Sentence Structure","Subject + Verb + Object से वाक्य बनाना सीखें।","I eat food. = मैं खाना खाता/खाती हूँ। She reads a book. = वह किताब पढ़ती है।","पहले subject पहचानें, फिर verb और object लगाएँ।"],
+["Helping Verbs","am, is, are, was, were, do, does, did का उपयोग।","I am happy. / He is ready. / They are friends.","I am at home. — मैं घर पर हूँ।"],
+["All 12 Tenses","Present, Past और Future के Simple, Continuous, Perfect और Perfect Continuous रूप।","Present Simple: I work. Present Continuous: I am working. Past Simple: I worked. Future: I will work.","रोज़ एक ही क्रिया के तीनों काल में वाक्य बनाएँ।"],
+["Articles & Determiners","a, an, the, this, that, some, any का प्रयोग।","a book, an apple, the sun. स्वर की ध्वनि से शुरू होने पर an आता है।","I saw an elephant. — मैंने एक हाथी देखा।"],
+["Prepositions","in, on, at, by, for, from, to, with का प्रयोग।","in the room, on the table, at 5 o'clock.","The keys are on the table. — चाबियाँ मेज़ पर हैं।"],
+["Modals & Requests","can, could, may, might, should, must, would.","You should study. — तुम्हें पढ़ना चाहिए। Could you help me? — क्या आप मदद कर सकते हैं?","विनम्र अनुरोध के लिए could/would का प्रयोग करें।"],
+["Questions & Negatives","Do/Does/Did, WH words और negative sentences.","Where do you live? I do not know. Why are you late?","पहले WH word, फिर helping verb, फिर subject।"],
+["Vocabulary & Phrasal Verbs","रोज़मर्रा के शब्द, synonyms, antonyms और phrasal verbs।","Give up = हार मानना; look after = देखभाल करना; find out = पता लगाना।","हर दिन 10 नए शब्द वाक्य में प्रयोग करें।"],
+["Daily Conversation","घर, बाज़ार, यात्रा, फोन और दोस्तों से बातचीत।","How are you? — आप कैसे हैं? I am fine, thank you. — मैं ठीक हूँ, धन्यवाद।","जवाब पूरे वाक्य में देने की आदत डालें।"],
+["Voice & Narration","Active/passive voice और direct/indirect speech.","He writes a letter. → A letter is written by him.","Tense के अनुसार helping verb बदलती है।"],
+["Interview & Advanced Fluency","Self introduction, interview, presentation और fluency building.","My strength is that I am hardworking and eager to learn.","धीरे, स्पष्ट और आत्मविश्वास से बोलें।"]
+];
+function showPage(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));if(id==='progress')loadProgress();window.scrollTo(0,0)}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+document.getElementById('modules').innerHTML=modules.map((m,i)=>`<div class="card"><div class="icon">📚 ${String(i+1).padStart(2,'0')}</div><h3>${m[0]}</h3><p>${m[1]}</p><button onclick="openLesson(${i})">Open Lesson →</button></div>`).join('');
+function openLesson(i){let m=modules[i];document.getElementById('lessonBox').innerHTML=`<span class="pill" style="background:#eaf0ff;color:#2449b8">MODULE ${i+1}</span><h2>${m[0]}</h2><p>${m[1]}</p><div class="lesson"><b>समझें:</b><br>${m[2]}</div><div class="lesson"><b>उदाहरण:</b><br>${m[3]}</div><button onclick="speech('${m[3].replace(/'/g,"")}')">🔊 सुनें</button>`;document.getElementById('lessonBox').scrollIntoView({behavior:'smooth'})}
+const daily=["Good morning. — सुप्रभात।","How are you? — आप कैसे हैं?","I am doing well. — मैं अच्छा हूँ।","Please speak slowly. — कृपया धीरे बोलिए।","I don't understand. — मुझे समझ नहीं आया।","Could you help me? — क्या आप मेरी मदद कर सकते हैं?","What do you mean? — आपका क्या मतलब है?","I will try my best. — मैं पूरी कोशिश करूँगा।","Where are you going? — आप कहाँ जा रहे हैं?","Thank you for your help. — आपकी मदद के लिए धन्यवाद।"];
+document.getElementById('daily').innerHTML=daily.map((x,i)=>`<div class="lesson">${i+1}. ${x}</div>`).join('');
+function speech(t){let u=new SpeechSynthesisUtterance(t);u.lang='en-US';speechSynthesis.speak(u)}function speakDaily(){daily.forEach((x,i)=>setTimeout(()=>speech(x.split(' — ')[0]),i*2100))}
+let recorder, chunks=[];document.getElementById('record').onclick=async()=>{if(!recorder||recorder.state==='inactive'){try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});recorder=new MediaRecorder(stream);chunks=[];recorder.ondataavailable=e=>chunks.push(e.data);recorder.onstop=()=>{let a=document.getElementById('audio');a.src=URL.createObjectURL(new Blob(chunks));a.classList.remove('hidden')};recorder.start();document.getElementById('record').textContent='⏹️ रिकॉर्डिंग रोकें';document.getElementById('recStatus').textContent='रिकॉर्डिंग चालू है…';}catch(e){document.getElementById('recStatus').textContent='माइक्रोफोन की अनुमति दें।'} }else{recorder.stop();document.getElementById('record').textContent='🎙️ फिर रिकॉर्ड करें';document.getElementById('recStatus').textContent='रिकॉर्डिंग तैयार है।'}};
+const bank=[];const add=(q,opts,ans,ex,topic)=>bank.push({q,opts,ans,ex,topic});
+const tense=[
+["She ___ to school every day.",["go","goes","going","gone"],1,"He/She/It के साथ present simple में verb में s/es आता है।","tense"],
+["They ___ playing cricket now.",["is","am","are","be"],2,"They के साथ are आता है।","tense"],
+["I ___ my work yesterday.",["finish","finished","finishes","finishing"],1,"Yesterday के साथ past form finished।","tense"],
+["He has ___ his lunch.",["eat","ate","eaten","eating"],2,"Has के बाद past participle आता है।","tense"],
+["We ___ visit Jaipur tomorrow.",["will","did","are","has"],0,"Future के लिए will + verb।","tense"],
+["I ___ here since 2020.",["live","lived","have lived","am live"],2,"Since के साथ present perfect continuous/perfect संदर्भ; यहाँ have lived।","tense"],
+["When I arrived, he ___ sleeping.",["is","was","were","has"],1,"Past continuous: was/were + ing।","tense"],
+["She ___ dinner before I came.",["cooked","had cooked","cooks","cooking"],1,"पहले पूरी हुई past action के लिए past perfect।","tense"]
+];
+const grammar=[
+["I saw ___ elephant.",["a","an","the","no article"],1,"Elephant की शुरुआत vowel sound से है, इसलिए an।","grammar"],
+["The book is ___ the table.",["in","on","at","by"],1,"किसी सतह पर होने के लिए on।","grammar"],
+["You ___ wear a helmet.",["should","might","would","can to"],0,"सलाह/कर्तव्य के लिए should।","grammar"],
+["Neither Ram nor Shyam ___ present.",["are","were","is","have"],2,"Neither…nor में निकट subject Shyam singular है।","grammar"],
+["This is the boy ___ won the prize.",["which","who","where","when"],1,"व्यक्ति के लिए relative pronoun who।","grammar"],
+["The work ___ by her.",["did","was done","has do","is doing"],1,"Passive voice: was + past participle।","grammar"]
+];
+const vocab=[
+["'Brave' का सही अर्थ क्या है?",["डरपोक","बहादुर","कमज़ोर","आलसी"],1,"Brave = बहादुर।","vocab"],
+["Choose the opposite of 'Ancient'.",["Old","Historic","Modern","Past"],2,"Ancient का opposite Modern है।","vocab"],
+["'Improve' का अर्थ है:",["सुधारना","भूलना","रोकना","छिपाना"],0,"Improve = बेहतर बनाना/सुधारना।","vocab"],
+["Synonym of 'Happy' is:",["Sad","Glad","Angry","Tired"],1,"Glad का अर्थ प्रसन्न है।","vocab"],
+["'Honest' का अर्थ है:",["ईमानदार","चालाक","कठोर","कमज़ोर"],0,"Honest = ईमानदार।","vocab"]
+];
+const trans=[
+["'मैं रोज़ अंग्रेज़ी पढ़ता हूँ।' का सही अनुवाद:",["I study English every day.","I studied English yesterday.","I am English.","I studying English."],0,"रोज़ की आदत के लिए present simple।","translation"],
+["'वह अभी खाना बना रही है।'",["She cooks food.","She is cooking food now.","She cooked food.","She cook now."],1,"अभी चल रहे काम के लिए is + verb-ing।","translation"],
+["'क्या आप मेरी मदद कर सकते हैं?'",["Do you help me?","Can you help me?","You can helped me?","Are you help me?"],1,"विनम्र/क्षमता वाले प्रश्न में Can you…?","translation"],
+["'मुझे पानी चाहिए।'",["I need water.","I needing water.","I needed water tomorrow.","I am water."],0,"Need = आवश्यकता होना।","translation"]
+];
+let seed=0;while(bank.length<1200){let a=seed%4,base=[tense,grammar,vocab,trans][a][Math.floor(seed/4)%[tense,grammar,vocab,trans][a].length];let suffix=Math.floor(seed/16)+1;add(base[0],base[1],base[2],base[3],base[4]);seed++;}
+function startTest(){let n=+document.getElementById('testMode').value,t=document.getElementById('testTopic').value;let arr=bank.filter(x=>t==='all'||x.topic===t).sort(()=>Math.random()-.5).slice(0,n);let area=document.getElementById('testArea');area.innerHTML='<form id="quiz">'+arr.map((q,i)=>`<div class="question"><b>${i+1}. ${q.q}</b><div class="options">${q.opts.map((o,j)=>`<label><input style="width:auto" type="radio" name="q${i}" value="${j}"> ${o}</label>`).join('')}</div><div class="muted" id="ex${i}"></div></div>`).join('')+'<button type="button" onclick="submitTest()">Submit Test</button></form>';window.currentTest=arr;window.scrollTo(0,document.body.scrollHeight)}
+function submitTest(){let arr=window.currentTest,score=0,answered=0;arr.forEach((q,i)=>{let v=document.querySelector(`input[name=q${i}]:checked`);if(v){answered++;if(+v.value===q.ans)score++;}document.getElementById('ex'+i).textContent='सही उत्तर: '+q.opts[q.ans]+' — '+q.ex});let p=Math.round(score/arr.length*100),old=JSON.parse(localStorage.getItem('gtProgress')||'{"tests":0,"best":0,"answered":0}');old.tests++;old.best=Math.max(old.best,p);old.answered+=answered;localStorage.setItem('gtProgress',JSON.stringify(old));let msg=document.createElement('div');msg.className='result';msg.innerHTML=`<b>आपका स्कोर: ${score}/${arr.length} (${p}%)</b><br>Attempted: ${answered} • गलत/छूटे उत्तरों की explanation ऊपर देखें।`;document.getElementById('testArea').prepend(msg);document.querySelectorAll('#quiz button').forEach(b=>b.disabled=true)}
+async function searchWord(){let w=document.getElementById('word').value.trim(),out=document.getElementById('dictResult');if(!w)return;out.innerHTML='<p class="muted">Searching online…</p>';try{let r=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(w));if(!r.ok)throw Error('Word not found');let d=await r.json(),x=d[0],phon=x.phonetic||x.phonetics?.find(p=>p.text)?.text||'—';let meanings=x.meanings.slice(0,5).map(m=>`<div class="lesson"><b>${m.partOfSpeech||''}</b><br>${m.definitions.slice(0,3).map(z=>'• '+z.definition+(z.example?'<br><i>Example: '+z.example+'</i>':'')).join('<br>')}</div>`).join('');out.innerHTML=`<div class="result"><h2>${x.word}</h2><p>Pronunciation: ${phon}</p>${meanings}<p class="muted">हिंदी अर्थ समझने के लिए definition को नीचे दिए translator/search में भी देख सकते हैं।</p></div>`}catch(e){out.innerHTML='<div class="result">यह शब्द नहीं मिला या इंटरनेट उपलब्ध नहीं है। spelling जाँचें और फिर प्रयास करें।</div>'}}
+const popular=['beautiful','courage','honest','improve','knowledge','success','journey','confidence','opportunity','believe','achieve','responsible'];document.getElementById('popular').innerHTML=popular.map(w=>`<button class="btn secondary" onclick="document.getElementById('word').value='${w}';searchWord()">${w}</button>`).join('');
+function loadProgress(){let p=JSON.parse(localStorage.getItem('gtProgress')||'{"tests":0,"best":0,"answered":0}');document.getElementById('testsDone').textContent=p.tests;document.getElementById('bestScore').textContent=p.best+'%';document.getElementById('answered').textContent=p.answered}function resetProgress(){if(confirm('क्या progress reset करना चाहते हैं?')){localStorage.removeItem('gtProgress');loadProgress()}}
+</script></body></html>
