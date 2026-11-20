@@ -70,3 +70,25 @@ This is a functional starter, not a security-audited production service. Before 
 - Quiz answer validation currently runs in the browser for this starter; secure graded attempts should be implemented server-side before using scores for certificates or rankings.
 - Teacher can manage courses they own; admins can manage users and access teacher tools.
 - No media upload endpoint is included. Teachers can add trusted media URLs.
+
+## V2 additions — Speaking, pronunciation and certificates
+Import `database/v2_upgrade.sql` after the original schema when upgrading an existing installation.
+
+### Speaking Tutor
+- `speaking.php` uses browser Web Speech API recognition (`SpeechRecognition` / `webkitSpeechRecognition`) where supported.
+- It shows the speech transcript, gives a simple transcript-overlap practice indicator and saves practice attempts to MySQL.
+- Browser recognition support and quality vary by browser, operating system, locale and network. Some browsers send audio to their own speech service.
+- This is a guided speaking practice feature, not a true generative AI tutor or validated phoneme-level pronunciation scoring. For a true AI tutor, connect a server-side AI provider with a private API key, explicit consent, audio/data retention controls and cost limits. Never expose provider API keys in JavaScript.
+
+### Audio Pronunciation
+- `pronunciation.php` uses browser `speechSynthesis` for built-in phrase playback and custom text.
+- Voice availability varies by device. This is not a recorded native-speaker audio library.
+
+### Certificates
+- Students unlock `certificate.php?course_id=ID` after completing every published lesson in an enrolled course.
+- A unique certificate code is stored in the `certificates` table and can be checked at `verify.php?code=...`.
+- Use Print → Save as PDF to create a PDF copy. Certificates are platform completion records, not accredited qualifications.
+
+### Bilingual interface
+- Header language switch changes the preferred interface language to English or Hindi.
+- Core V2 tutor and pronunciation screens include English/Hindi copy. Some older pages and teacher/admin authoring areas still contain English-only labels; complete localization requires translating every remaining string.
