@@ -1,47 +1,31 @@
-# English Speaking Academy — V2
+# LinguaFree — Free Language Learning Website
 
-A modern, responsive bilingual (English/Hindi) online English-learning platform starter.
+A responsive front-end starter website for a free language learning platform.
 
 ## Included
-- Responsive learning dashboard and sidebar navigation
-- Course catalogue with search and level filter
-- Video lesson area and lesson completion demo
-- Vocabulary, speaking-topic and writing practice
-- Interactive English quiz with score feedback
-- Live class schedule (sample data)
-- Student progress view
-- Demo admin panel and enquiry export to CSV
-- Hindi/English interface toggle
-- Contact/enquiry form stored in browser localStorage
+- Responsive landing page for desktop, tablet and mobile
+- 12 sample language course cards
+- Search, level filter and category filter
+- Sample lesson view with vocabulary and a multiple-choice quiz
+- Local progress tracking using browser localStorage
+- Demo sign-up/login modal (not secure production authentication)
+- Mobile navigation and toast notifications
+- Course data kept in `app.js` for easy editing
 
 ## Run locally
 1. Extract the ZIP.
-2. Open `index.html` in a modern browser.
-3. For best results, use VS Code with the Live Server extension.
-
-No build tools or package installation are required.
+2. Open `index.html` in a modern browser, or use VS Code Live Server.
+3. No build tools are required.
 
 ## Important: demo vs production
-This ZIP is a front-end starter/demo. It does **not** include secure user authentication, a server, a real database, paid enrolment, video hosting, live video conferencing, email delivery, or role-based admin authorization. Enquiries and lesson completion are stored only in the current browser using localStorage. The sample student numbers, progress and live class timetable are illustrative.
+This package is a working front-end prototype. Login/profile and progress are stored only in the current browser and are not synced across devices. The sample course lessons are starter content, not complete accredited courses. A production A-to-Z platform still needs:
+- Backend/API and database (e.g. Supabase)
+- Secure authentication, password reset and email verification
+- Admin dashboard and role-based permissions
+- Full lesson content, audio/video hosting and subtitles
+- Real speech recognition/pronunciation assessment (where supported)
+- Certificate verification, reporting, backups and privacy/terms pages
+- Payment is not required for the free-course model, but optional donations can be added
 
-Before accepting real students or payments, connect a backend such as Supabase:
-- Supabase Auth for student/admin sign-in and role checks
-- Postgres tables for profiles, courses, lessons, enrolments, progress and enquiries
-- Supabase Storage or a video hosting provider for lesson media
-- A trusted payment gateway integration for fees
-- A video meeting provider for live classes
-- Server-side validation, access policies, backups and privacy/terms pages
-
-Never put service-role keys, payment secrets or admin passwords in browser JavaScript.
-
-## Project structure
-```
-English_Speaking_Academy_V2/
-├── index.html
-├── README.md
-├── css/
-│   └── style.css
-└── js/
-    ├── data.js
-    └── app.js
-```
+## Customize courses
+Edit the `courses` array near the top of `app.js`. Each course has an id, name, flag, level, category, lesson count, description and sample phrase.
