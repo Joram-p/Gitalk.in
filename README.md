@@ -1,24 +1,38 @@
-# Gitalk English Academy
+# English Speaking Academy
 
-A free, responsive static Hindi-to-English learning website.
-
-## Files
-- `index.html` — all site pages and navigation
-- `style.css` — responsive styling
-- `app.js` — lesson navigation, progress, dictionary, speech and quiz logic
-- `data.js` — 30-day curriculum, 250 dictionary entries and 1,000 generated vocabulary practice questions
-- `assets/` — local SVG illustrations
+A responsive bilingual (English/Hindi) academy website starter with a student demo dashboard and admin demo panel.
 
 ## Run locally
-Open `index.html` in a modern browser. No build step or paid service is required.
+1. Extract the ZIP.
+2. Open `index.html` in a modern browser.
+3. No build step or package installation is required.
 
-## Publish on GitHub Pages
-1. Download and extract this ZIP.
-2. Open your GitHub repository and upload all files/folders from this package to the repository root.
-3. In repository Settings → Pages, choose Deploy from a branch, select `main` and `/ (root)`, then Save.
-4. Wait for GitHub Pages to publish the site.
+## Demo features
+- Responsive landing page, course cards, vocabulary practice and mini quiz.
+- English/Hindi language switch.
+- Enquiry form stores entries in the current browser's localStorage.
+- Student demo login: enter any name and phone number.
+- Admin demo password: `admin123`.
+- Admin can view saved enquiries, export CSV, and clear demo entries.
 
-Progress is saved in the visitor's browser using localStorage. The dictionary contains built-in starter words; its web-search button opens a Google search in a new tab. Speech uses the browser's speech synthesis when available.
+## Important before publishing
+This is a front-end starter/demo, not a production learning management system.
+- Admin password and student login are demo-only and are not secure authentication.
+- Enquiries are stored only in the visitor's browser; they are not sent to the academy.
+- For a real public website, connect a backend such as Supabase or your own API.
+- Add secure authentication, database tables, role-based access rules, server-side validation, backups, privacy policy and HTTPS.
+- Replace academy contact details and course information with your real details.
+- Change the demo admin password only after implementing server-side authentication; changing the value in `app.js` alone is not secure.
 
-## Visual refresh
-The design now uses a polished purple/teal gradient identity, glass-style sticky navigation, elevated cards, responsive layouts and a new locally stored hero illustration.
+## Suggested production database tables
+- `profiles`: id, full_name, phone, role
+- `courses`: id, title_en, title_hi, description_en, description_hi, duration, level, active
+- `enquiries`: id, name, phone, course_id, created_at, status
+- `lessons`: id, course_id, title, content, lesson_order
+- `quiz_questions`: id, lesson_id, question, options, correct_option
+- `student_progress`: id, student_id, lesson_id, completed_at, score
+
+## Customization
+- Edit text and course content in `index.html`.
+- Change colors and layout in `style.css`.
+- Update practice questions, demo login and admin demo logic in `app.js`.

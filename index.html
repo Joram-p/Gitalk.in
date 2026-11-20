@@ -1,81 +1,68 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Gitalk English Academy: 30 दिन में English सीखें — Hindi explanations, speaking, grammar, dictionary and mock tests.">
-<title>Gitalk English Academy | Hindi to English</title>
-<link rel="icon" href="assets/grammar.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a43">
+  <title>English Speaking Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="topbar">
-  <a class="brand" href="#" data-page="home"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.in</span><small>ENGLISH ACADEMY</small></span></a>
-  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
-  <nav id="mainNav">
-    <a href="#" data-page="home">Home</a><a href="#" data-page="course">30-Day Course</a>
-    <a href="#" data-page="grammar">Grammar</a><a href="#" data-page="speaking">Speaking</a>
-    <a href="#" data-page="dictionary">Dictionary</a><a href="#" data-page="test">Mock Test</a>
-  </nav>
-  <button class="btn btn-small" data-page="course">Start Learning →</button>
+  <a class="brand" href="#home"><span class="brand-mark">E</span><span>English Speaking <b>Academy</b></span></a>
+  <nav id="nav"><a href="#home" data-en="Home" data-hi="होम">Home</a><a href="#courses" data-en="Courses" data-hi="कोर्स">Courses</a><a href="#practice" data-en="Practice" data-hi="अभ्यास">Practice</a><a href="#about" data-en="About" data-hi="हमारे बारे में">About</a><a href="#contact" data-en="Contact" data-hi="संपर्क">Contact</a></nav>
+  <div class="nav-actions"><button class="lang-btn" id="langBtn">हिंदी</button><button class="btn btn-outline" id="loginOpen" data-en="Student Login" data-hi="स्टूडेंट लॉगिन">Student Login</button><button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button></div>
 </header>
+
 <main>
-<section class="page active" id="home">
-  <div class="hero wrap">
-    <div class="hero-copy">
-      <span class="eyebrow">FREE • HINDI TO ENGLISH • BEGINNER FRIENDLY</span>
-      <h1>अंग्रेज़ी बोलना सीखें,<br><em>आत्मविश्वास</em> के साथ।</h1>
-      <p>एक आसान, step-by-step 30 दिन का English course। Grammar से Speaking तक — हर दिन नया lesson, अभ्यास और test.</p>
-      <div class="hero-actions"><button class="btn" data-page="course">30 दिन का कोर्स शुरू करें <b>→</b></button><button class="btn btn-ghost" data-page="test">Mock Test दें</button></div>
-      <div class="hero-stats"><div><b>30</b><span>Daily Lessons</span></div><div><b>1000+</b><span>Practice Questions</span></div><div><b>250+</b><span>Dictionary Words</span></div></div>
-    </div>
-    <div class="hero-art"><img src="assets/learning-path.svg" alt="English learning illustration"><div class="floating-chip chip-one">✦ Learn daily</div><div class="floating-chip chip-two">ABC → Fluency</div></div>
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <span class="eyebrow"><span class="dot"></span><span data-en="YOUR JOURNEY TO CONFIDENT ENGLISH STARTS HERE" data-hi="आत्मविश्वास के साथ अंग्रेज़ी सीखने की शुरुआत यहाँ से">YOUR JOURNEY TO CONFIDENT ENGLISH STARTS HERE</span></span>
+    <h1 data-en="Speak English.<br><em>Change your world.</em>" data-hi="अंग्रेज़ी बोलें।<br><em>अपनी दुनिया बदलें।</em>">Speak English.<br><em>Change your world.</em></h1>
+    <p data-en="Learn practical English for everyday conversations, interviews and career growth — one confident sentence at a time." data-hi="रोज़मर्रा की बातचीत, इंटरव्यू और करियर में आगे बढ़ने के लिए आसान और उपयोगी अंग्रेज़ी सीखें।">Learn practical English for everyday conversations, interviews and career growth — one confident sentence at a time.</p>
+    <div class="hero-actions"><a class="btn btn-primary" href="#courses" data-en="Explore Courses ↗" data-hi="कोर्स देखें ↗">Explore Courses ↗</a><a class="text-link" href="#practice" data-en="Try free practice →" data-hi="मुफ़्त अभ्यास करें →">Try free practice →</a></div>
+    <div class="hero-proof"><div class="avatars"><span>R</span><span>A</span><span>S</span><span>+</span></div><div><strong data-en="Learn at your pace" data-hi="अपनी गति से सीखें">Learn at your pace</strong><small data-en="Beginner-friendly lessons" data-hi="शुरुआती विद्यार्थियों के लिए आसान पाठ">Beginner-friendly lessons</small></div></div>
   </div>
-  <div class="wrap section">
-    <div class="section-heading"><span class="eyebrow">YOUR LEARNING PATH</span><h2>एक ही जगह पर पूरी English practice</h2><p>अपनी गति से सीखें। आपकी progress इसी device में save होगी।</p></div>
-    <div class="feature-grid">
-      <article class="feature-card"><img src="assets/grammar.svg" alt=""><h3>Grammar made easy</h3><p>हिंदी में नियम, उदाहरण और आसान अभ्यास।</p><button class="text-btn" data-page="grammar">Grammar खोलें →</button></article>
-      <article class="feature-card"><img src="assets/speaking.svg" alt=""><h3>Speak with confidence</h3><p>Daily conversation और बोलने के छोटे tasks।</p><button class="text-btn" data-page="speaking">Speaking खोलें →</button></article>
-      <article class="feature-card"><img src="assets/dictionary.svg" alt=""><h3>English Dictionary</h3><p>English या Hindi शब्द खोजें और अर्थ जानें।</p><button class="text-btn" data-page="dictionary">Dictionary खोलें →</button></article>
-    </div>
+  <div class="hero-art">
+    <div class="art-orbit"></div><div class="art-card card-main"><div class="lesson-tag">TODAY'S SPEAKING TIP</div><div class="speech-icon">“</div><h3>Practice makes<br>progress.</h3><p>अभ्यास से सुधार होता है।</p><div class="sound-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="float-card float-one">✦ <b>Speak with confidence</b></div><div class="float-card float-two"><span class="check">✓</span><div><b>Daily practice</b><small>10 minutes a day</small></div></div>
+    <div class="art-label">LEARN · SPEAK · GROW</div>
   </div>
-  <div class="cta-band wrap"><div><span class="eyebrow">YOUR FIRST STEP</span><h2>आज का lesson पूरा करें।</h2><p>छोटे-छोटे daily steps से बेहतर communication बनाइए।</p></div><button class="btn btn-light" data-page="course">Day 1 से शुरू करें →</button></div>
 </section>
 
-<section class="page wrap section" id="course">
-  <div class="section-heading left"><span class="eyebrow">30 DAYS • STEP BY STEP</span><h1>Complete English Course</h1><p>हर lesson के बाद “Complete & Next” दबाएँ। आपकी progress अपने आप save होगी।</p></div>
-  <div class="progress-panel"><div class="progress-top"><div><b id="progressLabel">0 / 30 lessons completed</b><small>Keep going — रोज़ थोड़ा अभ्यास करें।</small></div><strong id="progressPercent">0%</strong></div><div class="progress-track"><span id="progressBar"></span></div></div>
-  <div class="course-layout"><aside class="day-list" id="dayList"></aside><article class="lesson-card" id="lessonCard"></article></div>
-</section>
+<section class="stats"><div><strong>3</strong><span data-en="Learning levels" data-hi="सीखने के स्तर">Learning levels</span></div><div><strong>10+</strong><span data-en="Practice topics" data-hi="अभ्यास के विषय">Practice topics</span></div><div><strong>Daily</strong><span data-en="Speaking habit" data-hi="रोज़ बोलने का अभ्यास">Speaking habit</span></div><div><strong>2</strong><span data-en="Languages supported" data-hi="भाषाओं का विकल्प">Languages supported</span></div></section>
 
-<section class="page wrap section" id="grammar">
-  <div class="section-heading left"><span class="eyebrow">GRAMMAR LIBRARY</span><h1>English Grammar आसान हिंदी में</h1><p>इन topics को 30-day course के साथ पढ़ें।</p></div>
-  <div class="topic-grid" id="grammarTopics"></div>
-</section>
-
-<section class="page wrap section" id="speaking">
-  <div class="section-heading left"><span class="eyebrow">SPEAK EVERY DAY</span><h1>Speaking Practice Studio</h1><p>नीचे दिए dialogues को ज़ोर से पढ़ें। पहले धीरे, फिर natural speed में बोलें।</p></div>
-  <div class="practice-grid">
-    <article class="practice-card"><h3>1. Self Introduction</h3><p><b>A:</b> What is your name?</p><p><b>B:</b> My name is Rahul.</p><p><b>A:</b> Where do you live?</p><p><b>B:</b> I live in Rajasthan.</p><p><b>A:</b> What do you do?</p><p><b>B:</b> I am learning English.</p><button class="sound-btn" data-speak="What is your name? My name is Rahul. Where do you live? I live in Rajasthan.">🔊 Listen</button></article>
-    <article class="practice-card"><h3>2. At the Market</h3><p><b>A:</b> How much is this?</p><p><b>B:</b> It is one hundred rupees.</p><p><b>A:</b> Can you give me a discount?</p><p><b>B:</b> Yes, I can.</p><button class="sound-btn" data-speak="How much is this? It is one hundred rupees. Can you give me a discount?">🔊 Listen</button></article>
-    <article class="practice-card"><h3>3. Asking for Help</h3><p><b>A:</b> Excuse me, can you help me?</p><p><b>B:</b> Of course. What do you need?</p><p><b>A:</b> I am looking for the bus station.</p><p><b>B:</b> Go straight and turn left.</p><button class="sound-btn" data-speak="Excuse me, can you help me? Of course. What do you need? I am looking for the bus station.">🔊 Listen</button></article>
-    <article class="practice-card"><h3>4. Daily Routine</h3><p>I wake up early.</p><p>I brush my teeth.</p><p>I have breakfast.</p><p>I go to work.</p><p>I practice English every day.</p><button class="sound-btn" data-speak="I wake up early. I brush my teeth. I have breakfast. I go to work. I practice English every day.">🔊 Listen</button></article>
+<section class="section" id="courses">
+  <div class="section-heading"><div><span class="eyebrow">LEARN YOUR WAY</span><h2 data-en="Courses that build <em>confidence</em>" data-hi="आत्मविश्वास बढ़ाने वाले <em>कोर्स</em>">Courses that build <em>confidence</em></h2></div><p data-en="Start from the basics or polish the skills you already have." data-hi="बुनियाद से शुरुआत करें या अपनी मौजूदा अंग्रेज़ी को बेहतर बनाएं।">Start from the basics or polish the skills you already have.</p></div>
+  <div class="course-grid" id="courseGrid">
+    <article class="course-card"><div class="course-top peach"><span>01 / FOUNDATION</span><span class="course-icon">Aa</span></div><h3 data-en="Basic English" data-hi="बेसिक इंग्लिश">Basic English</h3><p data-en="Build strong foundations with everyday words, simple sentences and essential grammar." data-hi="रोज़मर्रा के शब्द, आसान वाक्य और ज़रूरी ग्रामर सीखें।">Build strong foundations with everyday words, simple sentences and essential grammar.</p><div class="course-meta"><span>4 weeks</span><span>Beginner</span></div><button class="course-join" data-course="Basic English" data-en="Enquire now ↗" data-hi="जानकारी लें ↗">Enquire now ↗</button></article>
+    <article class="course-card featured"><div class="course-top blue"><span>02 / CONVERSATION</span><span class="course-icon">↗</span></div><h3 data-en="Spoken English" data-hi="स्पोकन इंग्लिश">Spoken English</h3><p data-en="Speak naturally in daily situations, group discussions and real-life conversations." data-hi="रोज़मर्रा की स्थितियों, ग्रुप डिस्कशन और बातचीत में आत्मविश्वास से बोलें।">Speak naturally in daily situations, group discussions and real-life conversations.</p><div class="course-meta"><span>8 weeks</span><span>All levels</span></div><button class="course-join" data-course="Spoken English" data-en="Enquire now ↗" data-hi="जानकारी लें ↗">Enquire now ↗</button></article>
+    <article class="course-card"><div class="course-top green"><span>03 / CAREER</span><span class="course-icon">✧</span></div><h3 data-en="Interview & Advanced" data-hi="इंटरव्यू और एडवांस्ड">Interview & Advanced</h3><p data-en="Improve fluency, vocabulary, presentation and job interview communication." data-hi="फ्लुएंसी, शब्दावली, प्रेज़ेंटेशन और नौकरी के इंटरव्यू की तैयारी करें।">Improve fluency, vocabulary, presentation and job interview communication.</p><div class="course-meta"><span>6 weeks</span><span>Intermediate</span></div><button class="course-join" data-course="Interview & Advanced" data-en="Enquire now ↗" data-hi="जानकारी लें ↗">Enquire now ↗</button></article>
   </div>
-  <div class="tip-box"><b>Speaking challenge:</b> आज 60 seconds तक अपने बारे में English में बोलें। Phone में recording करें और दोबारा सुनें।</div>
 </section>
 
-<section class="page wrap section" id="dictionary">
-  <div class="section-heading left"><span class="eyebrow">WORD EXPLORER</span><h1>Hindi ⇄ English Dictionary</h1><p>English या हिंदी में शब्द लिखें। नीचे दिए गए built-in words में खोजें।</p></div>
-  <div class="search-box"><span>⌕</span><input id="dictionarySearch" type="search" placeholder="जैसे: water, पानी, beautiful..." autocomplete="off"><button class="btn" id="clearSearch">Clear</button></div>
-  <p class="result-count" id="dictCount">250+ words available</p><div class="word-grid" id="wordResults"></div>
-  <p class="small-note">नोट: यह built-in starter dictionary है। Online search के लिए नीचे “Search web” बटन शब्द को नए browser tab में खोजता है।</p>
-  <button class="btn btn-ghost" id="webSearch">Search this word on web ↗</button>
+<section class="practice-section" id="practice"><div class="practice-intro"><span class="eyebrow">A LITTLE PRACTICE EVERY DAY</span><h2 data-en="Make English a <em>daily habit.</em>" data-hi="अंग्रेज़ी को <em>रोज़ की आदत</em> बनाएं।">Make English a <em>daily habit.</em></h2><p data-en="Try a quick vocabulary challenge and test what you know. Your progress starts with one small step." data-hi="शब्दावली का छोटा अभ्यास करें और अपना ज्ञान जांचें। आपकी प्रगति एक छोटे कदम से शुरू होती है।">Try a quick vocabulary challenge and test what you know. Your progress starts with one small step.</p><a href="#quiz" class="btn btn-light" data-en="Take the mini quiz ↗" data-hi="मिनी क्विज़ दें ↗">Take the mini quiz ↗</a></div>
+  <div class="vocab-panel"><div class="panel-head"><span>✦ DAILY VOCABULARY</span><span class="pill">WORD 01</span></div><h3 id="word">Confident</h3><p id="meaning">आत्मविश्वासी</p><div class="example"><small>EXAMPLE SENTENCE</small><p id="example">I feel confident when I practise every day.</p></div><button id="nextWord" class="next-word">Next word <span>→</span></button></div>
 </section>
 
-<section class="page wrap section" id="test">
-  <div class="section-heading left"><span class="eyebrow">PRACTICE • REVIEW • IMPROVE</span><h1>1000+ Question Mock Test</h1><p>Vocabulary आधारित 1,000 questions का question bank। हर बार 10 प्रश्नों का नया set हल करें।</p></div>
-  <div class="test-panel" id="testPanel"><div class="test-start"><div class="test-icon">✍️</div><h2>Ready for a quick test?</h2><p>10 सवाल • तुरंत score • सही उत्तर की explanation</p><button class="btn" id="startTest">Start 10-question test →</button></div></div>
-</section>
+<section class="section quiz-section" id="quiz"><div class="section-heading"><div><span class="eyebrow">CHECK YOUR LEARNING</span><h2 data-en="Quick English <em>quiz</em>" data-hi="छोटी इंग्लिश <em>क्विज़</em>">Quick English <em>quiz</em></h2></div><p data-en="Choose the correct answer. Learn from every question." data-hi="सही उत्तर चुनें और हर सवाल से सीखें।">Choose the correct answer. Learn from every question.</p></div><div class="quiz-box"><div class="quiz-count" id="quizCount">QUESTION 1 OF 3</div><h3 id="question">What is the meaning of “Beautiful”?</h3><div class="quiz-options" id="options"><button>सुंदर</button><button>तेज़</button><button>कमज़ोर</button></div><div class="quiz-feedback" id="feedback" aria-live="polite"></div><button class="btn btn-primary" id="nextQuestion" disabled>Next question →</button></div></section>
+
+<section class="about-section" id="about"><div class="about-visual"><div class="about-circle">A<br><small>NEW YOU</small></div><div class="about-note">Small steps.<br><b>Big confidence.</b></div></div><div class="about-copy"><span class="eyebrow">WHY LEARN WITH US</span><h2 data-en="English is a skill.<br><em>Confidence is your superpower.</em>" data-hi="अंग्रेज़ी एक कौशल है।<br><em>आत्मविश्वास आपकी ताकत है।</em>">English is a skill.<br><em>Confidence is your superpower.</em></h2><p data-en="Our learning approach focuses on useful communication, consistent practice and a supportive learning environment. No fear of mistakes — just keep speaking." data-hi="हमारा तरीका उपयोगी बातचीत, नियमित अभ्यास और सहयोगी माहौल पर आधारित है। गलती करने से न डरें — बस बोलते रहें।">Our learning approach focuses on useful communication, consistent practice and a supportive learning environment. No fear of mistakes — just keep speaking.</p><ul><li>✓ Practical, everyday English</li><li>✓ Grammar explained simply</li><li>✓ Speaking and confidence practice</li><li>✓ Hindi + English learning support</li></ul></div></section>
+
+<section class="contact-section" id="contact"><div><span class="eyebrow">TAKE THE FIRST STEP</span><h2 data-en="Ready to speak with <em>confidence?</em>" data-hi="आत्मविश्वास से अंग्रेज़ी बोलने के लिए <em>तैयार हैं?</em>">Ready to speak with <em>confidence?</em></h2><p data-en="Send an enquiry and our academy team will get in touch." data-hi="जानकारी के लिए फॉर्म भरें, हमारी टीम आपसे संपर्क करेगी।">Send an enquiry and our academy team will get in touch.</p></div><form id="enquiryForm" class="enquiry-form"><label data-en="Your name" data-hi="आपका नाम">Your name<input name="name" required placeholder="Enter your name"></label><label data-en="Mobile number" data-hi="मोबाइल नंबर">Mobile number<input name="phone" required inputmode="tel" pattern="[0-9+() -]{8,16}" placeholder="Your phone number"></label><label data-en="Interested course" data-hi="पसंदीदा कोर्स">Interested course<select name="course"><option>Spoken English</option><option>Basic English</option><option>Interview & Advanced</option></select></label><button class="btn btn-primary" type="submit" data-en="Submit enquiry ↗" data-hi="जानकारी भेजें ↗">Submit enquiry ↗</button><small id="enquiryMessage" aria-live="polite"></small></form></section>
 </main>
-<footer><div class="wrap footer-inner"><a class="brand" href="#" data-page="home"><span class="brand-mark">G</span><span>gitalk<span class="brand-dot">.in</span><small>ENGLISH ACADEMY</small></span></a><p>Learn a little. Practice daily. Speak confidently.</p><span>© <span id="year"></span> Gitalk.in</span></div></footer>
-<script src="data.js"></script><script src="app.js"></script>
+
+<footer><a class="brand footer-brand" href="#home"><span class="brand-mark">E</span><span>English Speaking <b>Academy</b></span></a><p data-en="Learn · Speak · Grow" data-hi="सीखें · बोलें · आगे बढ़ें">Learn · Speak · Grow</p><span>© <span id="year"></span> English Speaking Academy</span><button id="adminOpen" class="admin-link">Admin panel</button></footer>
+
+<!-- Student login modal -->
+<div class="modal" id="loginModal"><div class="modal-card"><button class="modal-close" data-close="loginModal">×</button><span class="eyebrow">STUDENT AREA</span><h2>Welcome back</h2><p>Sign in to view your learning dashboard.</p><form id="studentForm"><label>Full name<input name="name" required placeholder="Your name"></label><label>Mobile number<input name="phone" required placeholder="Your mobile number"></label><button class="btn btn-primary" type="submit">Continue to dashboard</button></form><small class="demo-note">Demo login: enter any name and phone number.</small></div></div>
+
+<!-- Student dashboard -->
+<div class="modal" id="studentModal"><div class="modal-card wide"><button class="modal-close" data-close="studentModal">×</button><span class="eyebrow">STUDENT DASHBOARD</span><h2 id="studentWelcome">Welcome!</h2><div class="dashboard-grid"><div class="dash-tile"><b>3</b><span>Practice topics</span></div><div class="dash-tile"><b>01</b><span>Current level</span></div><div class="dash-tile"><b>10 min</b><span>Daily goal</span></div></div><h3>Your learning plan</h3><ul><li>Review 10 vocabulary words</li><li>Speak for 5 minutes about your day</li><li>Complete the mini quiz</li></ul><button class="btn btn-outline" id="studentLogout">Log out</button></div></div>
+
+<!-- Admin panel -->
+<div class="modal" id="adminModal"><div class="modal-card wide admin-card"><button class="modal-close" data-close="adminModal">×</button><span class="eyebrow">ACADEMY MANAGEMENT</span><h2>Admin dashboard</h2><div class="admin-login" id="adminLogin"><p>Enter the demo admin password to continue.</p><form id="adminForm"><label>Admin password<input name="password" type="password" required placeholder="Enter password"></label><button class="btn btn-primary">Open dashboard</button></form><small class="demo-note">Demo password: <b>admin123</b> — change before deployment.</small></div><div id="adminContent" hidden><div class="admin-stats"><div><b id="leadCount">0</b><span>Enquiries</span></div><div><b>3</b><span>Courses</span></div><div><b>Active</b><span>Website</span></div></div><h3>Recent enquiries</h3><div class="table-wrap"><table><thead><tr><th>Name</th><th>Mobile</th><th>Course</th><th>Date</th></tr></thead><tbody id="leadRows"></tbody></table></div><button class="btn btn-outline" id="exportLeads">Export enquiries CSV</button><button class="btn btn-outline" id="clearLeads">Clear demo enquiries</button></div></div></div>
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
 </body></html>
