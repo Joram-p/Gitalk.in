@@ -92,3 +92,46 @@ Import `database/v2_upgrade.sql` after the original schema when upgrading an exi
 ### Bilingual interface
 - Header language switch changes the preferred interface language to English or Hindi.
 - Core V2 tutor and pronunciation screens include English/Hindi copy. Some older pages and teacher/admin authoring areas still contain English-only labels; complete localization requires translating every remaining string.
+
+## V3 — International conversation and credential platform
+
+### Upgrade an existing V2 installation
+1. Back up your database and website files.
+2. Replace the old project files with this V3 folder (keep a copy of `config/config.php` and re-apply your DB settings and `BASE_URL`).
+3. In phpMyAdmin, select the `linguafree` database and import `database/v3_upgrade.sql`.
+4. Run the language/course/lesson seeder from a terminal in the project directory: `php scripts/seed_v3.php`.
+5. Set the environment variables below on the server, then sign in and open AI Tutor / Pronunciation.
+
+For a fresh install, import `database/schema.sql`, then `database/v2_upgrade.sql`, then `database/v3_upgrade.sql`, and run the V3 seeder.
+
+### V3 modules
+- **AI Conversation Partner:** server-side conversation endpoint, persistent conversation/message history, target language, CEFR-style learner level and topic controls. It uses an OpenAI-compatible Chat Completions endpoint when configured. Without a key it displays a clearly labelled demo response; it is not silently pretending to be AI.
+- **Live voice conversation:** browser speech recognition captures one learner turn, sends the transcript to the tutor, and browser speech synthesis reads the reply. This is turn-based voice interaction, not continuous full-duplex WebRTC/telephone calling. Browser and language support varies.
+- **50 languages:** `scripts/seed_v3.php` seeds a 50-language catalogue and 50 published language courses. It is safe to run more than once.
+- **1,000 structured lesson records:** the seeder creates 20 ordered lesson templates per language (50 × 20 = 1,000). They include learning objective, vocabulary, model language, grammar pattern, guided practice and self-check sections. These are structured templates, not 1,000 fully authored native-speaker lessons. Teachers should localize examples, add translations/audio and publish validated quizzes before claiming full curriculum quality.
+- **Pronunciation practice scoring:** browser microphone recording plus speech transcript. Without an assessment provider, the result is a text/transcript similarity indicator and is not a phoneme/accent score. An optional trusted speech assessment adapter can return audio-based scoring.
+- **Public certificate verification:** completion credentials have unique IDs, a server-side HMAC fingerprint and a public verification page. They are verifiable against this LinguaFree database, not blockchain credentials and not government/university/CEFR accreditation. Legacy V2 certificates receive their V3 fingerprint the next time the learner opens their certificate page.
+
+### Server configuration (keep secrets out of public files)
+Set these as server environment variables in Apache/PHP-FPM or your hosting control panel:
+
+```text
+LINGUAFREE_AI_API_URL=https://api.openai.com/v1/chat/completions
+LINGUAFREE_AI_API_KEY=YOUR_PRIVATE_SERVER_SIDE_KEY
+LINGUAFREE_AI_MODEL=gpt-4o-mini
+LINGUAFREE_CERT_SECRET=GENERATE_A_LONG_RANDOM_SECRET_AT_LEAST_32_BYTES
+LINGUAFREE_PUBLIC_URL=https://your-domain.example/LinguaFree
+LINGUAFREE_SPEECH_ASSESSMENT_URL=https://your-trusted-speech-adapter.example/assess
+LINGUAFREE_SPEECH_ASSESSMENT_KEY=YOUR_PRIVATE_SPEECH_ADAPTER_KEY
+```
+
+The AI endpoint must accept an OpenAI-compatible JSON body and return `choices[0].message.content`. The optional speech adapter contract is a trusted HTTPS POST accepting JSON `{audio_base64, mime_type, reference_text, language}` and returning `{score: 0..100, feedback: "..."}`. Do not use an unknown third-party adapter with learner recordings. Obtain consent, disclose processing/retention, use HTTPS, limit recording length, and review local privacy requirements. If no speech adapter is configured, the UI clearly labels the fallback as transcript similarity.
+
+### V3 deployment and quality notes
+- Use PHP 8.1+, MySQL 8/MariaDB, PDO MySQL, mbstring and cURL.
+- Set a unique `LINGUAFREE_CERT_SECRET`; the development fallback is not suitable for production.
+- Configure `LINGUAFREE_PUBLIC_URL` to the canonical HTTPS URL to avoid host-header-derived verification links.
+- Use a restrictive database account, HTTPS, secure session cookies, login throttling, backups and security review.
+- Speech recognition and synthesis are browser/device services. Availability, accents, locale support and data handling depend on the browser/vendor.
+- The 50-language catalogue and lesson templates do not guarantee that every browser has a voice or speech recognizer for all 50 languages.
+- International public verification means a third party can check a record online. It does not mean external accreditation, identity proofing or formal examination standards.

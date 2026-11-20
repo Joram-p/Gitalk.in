@@ -49,3 +49,11 @@ function site_lang(): string {
 function tr(string $en, string $hi): string {
     return site_lang() === 'hi' ? $hi : $en;
 }
+
+function certificate_secret(): string {
+    $secret = getenv('LINGUAFREE_CERT_SECRET') ?: 'CHANGE-THIS-SECRET-BEFORE-PRODUCTION-LINGUAFREE';
+    return $secret;
+}
+function certificate_signature(string $code, int $userId, int $courseId, string $issuedAt): string {
+    return hash_hmac('sha256', $code.'|'.$userId.'|'.$courseId.'|'.$issuedAt, certificate_secret());
+}
