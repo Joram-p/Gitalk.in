@@ -1,0 +1,4 @@
+Options -Indexes
+<FilesMatch "^(config\.php|schema\.sql|README\.md)$">
+  Require all denied
+</FilesMatch>

@@ -1,0 +1,13 @@
+<?php
+require_once __DIR__.'/config/config.php';require_login();$u=current_user();$id=(int)($_GET['id']??0);
+$q=db()->prepare("SELECT l.*,c.id course_id,c.title course_title FROM lessons l JOIN courses c ON c.id=l.course_id JOIN enrollments e ON e.course_id=c.id AND e.user_id=? WHERE l.id=? AND l.is_published=1 AND c.is_published=1");$q->execute([$u['id'],$id]);$lesson=$q->fetch();if(!$lesson){http_response_code(403);exit('Lesson unavailable. Enroll in the course first.');}
+if($_SERVER['REQUEST_METHOD']==='POST'){verify_csrf();$s=db()->prepare("INSERT IGNORE INTO lesson_progress(user_id,lesson_id) VALUES(?,?)");$s->execute([$u['id'],$id]);flash('Lesson marked complete. Great work!');redirect('/course.php?id='.$lesson['course_id']);}
+$q=db()->prepare("SELECT * FROM quizzes WHERE lesson_id=?");$q->execute([$id]);$quizzes=$q->fetchAll();$page_title=$lesson['title'].' — LinguaFree';include __DIR__.'/includes/header.php'; ?>
+<div class="page-head"><div><span class="eyebrow"><?= e($lesson['course_title']) ?></span><h1><?= e($lesson['title']) ?></h1><p>Read the lesson, practice the examples and test what you learned.</p></div></div>
+<article class="lesson-content"><?= nl2br(e($lesson['content']??'')) ?></article>
+<?php if($lesson['video_url']): ?><div class="media-box"><h3>Lesson video</h3><a href="<?= e($lesson['video_url']) ?>" target="_blank" rel="noopener">Open lesson video ↗</a></div><?php endif; ?>
+<?php if($lesson['audio_url']): ?><div class="media-box"><h3>Listen and practice</h3><audio controls src="<?= e($lesson['audio_url']) ?>">Audio not supported.</audio></div><?php endif; ?>
+<?php foreach($quizzes as $i=>$quiz): ?><div class="quiz-card"><b>Question <?= $i+1 ?></b><p><?= e($quiz['question']) ?></p><?php foreach(['a','b','c','d'] as $opt): ?><label class="quiz-option"><input type="radio" name="q<?= (int)$quiz['id'] ?>" value="<?= $opt ?>"> <?= e($quiz['option_'.$opt]) ?></label><?php endforeach; ?><button class="btn btn-outline quiz-check" data-quiz="<?= (int)$quiz['id'] ?>">Check answer</button><span class="quiz-result" id="result-<?= (int)$quiz['id'] ?>"></span></div><?php endforeach; ?>
+<form method="post" class="complete-form"><input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><button class="btn btn-primary">Mark lesson complete →</button></form>
+<script>window.LF_QUIZZES=<?= json_encode(array_map(fn($q)=>['id'=>(int)$q['id'],'correct'=>$q['correct_option'],'explanation'=>$q['explanation']],$quizzes),JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP) ?>;</script>
+<?php include __DIR__.'/includes/footer.php'; ?>

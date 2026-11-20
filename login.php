@@ -1,0 +1,8 @@
+<?php
+require_once __DIR__.'/config/config.php';
+if(current_user()) redirect('/dashboard.php');
+$page_title='Log in — LinguaFree'; $error='';
+if($_SERVER['REQUEST_METHOD']==='POST'){verify_csrf();$email=strtolower(trim($_POST['email']??''));$pass=$_POST['password']??'';$s=db()->prepare("SELECT id,name,email,password_hash,role,preferred_language,status FROM users WHERE email=? LIMIT 1");$s->execute([$email]);$u=$s->fetch();if($u && password_verify($pass,$u['password_hash']) && $u['status']==='active'){session_regenerate_id(true);unset($u['password_hash'],$u['status']);$_SESSION['user']=$u;redirect('/dashboard.php');}else{$error='Email or password is incorrect, or the account is inactive.';}}
+include __DIR__.'/includes/header.php'; ?>
+<div class="auth-wrap"><form class="auth-card" method="post"><span class="eyebrow">WELCOME BACK</span><h1>Log in</h1><p>Continue your learning journey.</p><?php if($error): ?><div class="notice error"><?= e($error) ?></div><?php endif; ?><input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>"><label>Email address<input name="email" type="email" required autocomplete="username"></label><label>Password<input name="password" type="password" required autocomplete="current-password"></label><button class="btn btn-primary full">Log in →</button><small>New to LinguaFree? <a href="<?= BASE_URL ?>/register.php">Create a free account</a></small></form></div>
+<?php include __DIR__.'/includes/footer.php'; ?>
