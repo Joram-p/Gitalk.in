@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded',()=>{
+ const menuButton=document.querySelector('.mobile-menu-toggle');
+ const primaryNav=document.getElementById('primaryNav');
+ if(menuButton && primaryNav){menuButton.addEventListener('click',()=>{const open=primaryNav.classList.toggle('is-open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Close navigation':'Open navigation');menuButton.textContent=open?'✕':'☰';});primaryNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{primaryNav.classList.remove('is-open');menuButton.setAttribute('aria-expanded','false');menuButton.textContent='☰';}));}
  const search=document.getElementById('courseSearch');
  if(search) search.addEventListener('input',()=>{const term=search.value.toLowerCase();document.querySelectorAll('.course-card').forEach(card=>card.hidden=!card.dataset.search.includes(term));});
  document.querySelectorAll('.quiz-check').forEach(btn=>btn.addEventListener('click',()=>{const id=Number(btn.dataset.quiz);const item=(window.LF_QUIZZES||[]).find(q=>q.id===id);const chosen=document.querySelector(`input[name="q${id}"]:checked`);const out=document.getElementById(`result-${id}`);if(!chosen){out.textContent=' Choose an answer first.';return;}out.textContent=chosen.value===item.correct?' Correct! '+(item.explanation||'Well done.'):' Not quite. Try again.';out.className='quiz-result '+(chosen.value===item.correct?'good':'bad');}));
