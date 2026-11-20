@@ -1,27 +1,29 @@
-GITALK DIWALI WISHES WEBSITE
+LINGUAFREE FULL COURSE SYSTEM (PHP + MySQL)
 
-Files:
-- index.html: complete responsive Diwali-themed multi-page-in-page website
-- diwali-video.mp4: put your supplied video here (rename the uploaded video to this exact name)
-- 404.html: friendly not-found page
+FEATURES
+- Responsive homepage
+- Student registration and login (passwords hashed)
+- Four learning levels and sample lessons
+- Lesson reading pages
+- Mark lesson complete and track progress
+- Basic admin dashboard
+- Hindi explanations and English examples in starter lessons
 
-VIDEO SETUP:
-1. Copy your uploaded 1000426627.mp4 file into the same folder as index.html.
-2. Rename it to diwali-video.mp4.
-3. Upload index.html, 404.html and diwali-video.mp4 to the ROOT of your GitHub Pages repository.
-4. Commit changes and wait for GitHub Pages deployment.
-5. Open your site. Video is configured autoplay + muted + loop + playsinline. Browsers usually block autoplay with sound, so users must tap controls to unmute.
+INSTALLATION
+1. Upload the project folder to your PHP hosting (PHP 8.0+ recommended).
+2. Create a MySQL database, or import database/schema.sql (it creates linguafree).
+3. Import database/seed.sql into the linguafree database.
+4. Edit config.php and enter your database host, database name, username and password.
+5. Open index.php in your browser and register a learner account.
 
-If your video file is too large for GitHub's browser upload limit, use Git LFS or host the video using a service that provides a stable direct MP4 URL and replace src="diwali-video.mp4" with that URL.
+MAKE AN ADMIN
+For safety, registration never creates admins. After registering, run this SQL in phpMyAdmin:
+UPDATE users SET role='admin' WHERE email='your-email@example.com';
+Then log out and log in again.
 
-Features:
-- Diwali theme with animated logo, diya flame and sparkles
-- Autoplaying muted looping video on home page
-- Home, Wishes, Gallery, Activities, About and Share sections
-- Personal greeting generator and native share support
-- Round auto-moving gallery and pause control
-- Responsive mobile navigation
-- 404.html fallback page
-- Online gallery images need internet
-
-Note: This is a static website; no database/login or actual AI generator is included.
+IMPORTANT
+- This is a functional starter course platform, not a production-hardened commercial LMS.
+- The sample course contains 12 starter lessons. Add your complete lesson content in the lessons table.
+- Admin dashboard currently provides overview only; content editing is done through phpMyAdmin.
+- Use HTTPS in production. Add CSRF protection, rate limiting, email verification, password reset and backups before public launch.
+- No AI service is connected in this package.
