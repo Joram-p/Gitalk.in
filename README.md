@@ -1,38 +1,47 @@
-# English Speaking Academy
+# English Speaking Academy — V2
 
-A responsive bilingual (English/Hindi) academy website starter with a student demo dashboard and admin demo panel.
+A modern, responsive bilingual (English/Hindi) online English-learning platform starter.
+
+## Included
+- Responsive learning dashboard and sidebar navigation
+- Course catalogue with search and level filter
+- Video lesson area and lesson completion demo
+- Vocabulary, speaking-topic and writing practice
+- Interactive English quiz with score feedback
+- Live class schedule (sample data)
+- Student progress view
+- Demo admin panel and enquiry export to CSV
+- Hindi/English interface toggle
+- Contact/enquiry form stored in browser localStorage
 
 ## Run locally
 1. Extract the ZIP.
 2. Open `index.html` in a modern browser.
-3. No build step or package installation is required.
+3. For best results, use VS Code with the Live Server extension.
 
-## Demo features
-- Responsive landing page, course cards, vocabulary practice and mini quiz.
-- English/Hindi language switch.
-- Enquiry form stores entries in the current browser's localStorage.
-- Student demo login: enter any name and phone number.
-- Admin demo password: `admin123`.
-- Admin can view saved enquiries, export CSV, and clear demo entries.
+No build tools or package installation are required.
 
-## Important before publishing
-This is a front-end starter/demo, not a production learning management system.
-- Admin password and student login are demo-only and are not secure authentication.
-- Enquiries are stored only in the visitor's browser; they are not sent to the academy.
-- For a real public website, connect a backend such as Supabase or your own API.
-- Add secure authentication, database tables, role-based access rules, server-side validation, backups, privacy policy and HTTPS.
-- Replace academy contact details and course information with your real details.
-- Change the demo admin password only after implementing server-side authentication; changing the value in `app.js` alone is not secure.
+## Important: demo vs production
+This ZIP is a front-end starter/demo. It does **not** include secure user authentication, a server, a real database, paid enrolment, video hosting, live video conferencing, email delivery, or role-based admin authorization. Enquiries and lesson completion are stored only in the current browser using localStorage. The sample student numbers, progress and live class timetable are illustrative.
 
-## Suggested production database tables
-- `profiles`: id, full_name, phone, role
-- `courses`: id, title_en, title_hi, description_en, description_hi, duration, level, active
-- `enquiries`: id, name, phone, course_id, created_at, status
-- `lessons`: id, course_id, title, content, lesson_order
-- `quiz_questions`: id, lesson_id, question, options, correct_option
-- `student_progress`: id, student_id, lesson_id, completed_at, score
+Before accepting real students or payments, connect a backend such as Supabase:
+- Supabase Auth for student/admin sign-in and role checks
+- Postgres tables for profiles, courses, lessons, enrolments, progress and enquiries
+- Supabase Storage or a video hosting provider for lesson media
+- A trusted payment gateway integration for fees
+- A video meeting provider for live classes
+- Server-side validation, access policies, backups and privacy/terms pages
 
-## Customization
-- Edit text and course content in `index.html`.
-- Change colors and layout in `style.css`.
-- Update practice questions, demo login and admin demo logic in `app.js`.
+Never put service-role keys, payment secrets or admin passwords in browser JavaScript.
+
+## Project structure
+```
+English_Speaking_Academy_V2/
+├── index.html
+├── README.md
+├── css/
+│   └── style.css
+└── js/
+    ├── data.js
+    └── app.js
+```
